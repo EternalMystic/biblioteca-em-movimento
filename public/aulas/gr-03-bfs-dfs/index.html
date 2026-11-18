@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Percursos: BFS e DFS · Biblioteca em Movimento</title>
+<meta name="description" content="Fila para alargar, pilha para aprofundar: os dois percursos visitam o mesmo grafo com estratégias opostas e o mesmo custo O(V + E).">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Percursos: BFS e DFS · Biblioteca em Movimento">
+<meta property="og:description" content="Fila para alargar, pilha para aprofundar: os dois percursos visitam o mesmo grafo com estratégias opostas e o mesmo custo O(V + E).">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/gr-03-bfs-dfs/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/gr-03-bfs-dfs/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Grafos</span><span>/</span><span>Aula 3</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--grafos">Grafos</span><span class="badge">pp. 2–9</span></div>
+    <h1>Percursos: BFS e DFS</h1>
+    <p class="page-head__lead">Fila para alargar, pilha para aprofundar: os dois percursos visitam o mesmo grafo com estratégias opostas e o mesmo custo O(V + E).</p>
+    <div class="page-head__meta"><span class="mono">aula4 (1).pdf — Percursos em Grafos</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/grafos/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#002F2D"><p>Um grafo guardado em memória não responde nada sozinho: é preciso percorrê-lo. A biblioteca faz isso quando quer saber quais obras estão a duas gavetas de distância, ou quando segue a cadeia de um empréstimo até a devolução. Percurso é a regra que garante visita completa sem repetição, e as duas regras clássicas são a busca em largura e a busca em profundidade.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Explicar por que a marcação de visitados é obrigatória.</li><li>Executar BFS com fila e ler os níveis produzidos.</li><li>Executar DFS com pilha ou recursão e identificar o retrocesso.</li><li>Justificar o custo O(V + E) em lista de adjacência.</li></ul></div>
+<h2 id="navegacao-sistematica-e-necessidade-de-marcacao">Navegação sistemática e necessidade de marcação</h2>
+<p>Caminhar ao acaso em um grafo com ciclo não termina: o percurso volta ao mesmo vértice e recomeça. A solução é manter um conjunto de visitados e uma ordem explícita de exploração, de modo que cada vértice seja descoberto uma vez e cada aresta seja examinada um número limitado de vezes.</p>
+<p>A marcação é o que separa percurso de passeio. Ela também define o que o algoritmo entrega: na BFS, a distância em número de arestas; na DFS, a ordem de descoberta e de finalização, que mais tarde sustenta detecção de ciclo e ordenação topológica.</p>
+<h2 id="bfs-com-fila-niveis-e-menor-numero-de-saltos-sem-pesos">BFS com fila, níveis e menor número de saltos sem pesos</h2>
+<p>A busca em largura usa fila, isto é, retira sempre o vértice que entrou primeiro. O efeito é a expansão em ondas: primeiro o vértice de origem, depois todos os vizinhos a um salto, depois os de dois saltos. Por isso, em grafo sem pesos, a BFS encontra o caminho com o menor número de arestas.</p>
+<p>Exemplo com arestas A–B, A–C, B–D, C–E, D–E, E–F. Partindo de A, a fila recebe B e C, depois D, depois E e, por fim, F, com distâncias 0, 1, 1, 2, 2 e 3. Note que D e E aparecem em ordens diferentes conforme a lista de vizinhos, mas a distância não muda. Esse é o uso típico em descoberta de rede: varrer primeiro o que está perto do administrador.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form2.cs · AplicarFiltroEBusca (linhas 36–115)</span></div>
+  <p style="margin:0;font-size:.9rem">A paginação com LIMIT e OFFSET percorre o conjunto em blocos sem repetir nem pular linhas; é varredura sistemática, não BFS.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">rotinas/grafos · Estantes conectadas</span></div>
+  <p style="margin:0;font-size:.9rem">O simulador roda BFS sobre o mapa de gavetas e mostra a fronteira crescendo em níveis.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--future">Proposta / evolução</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula4 (1).pdf pp. 6–8</span></div>
+  <p style="margin:0;font-size:.9rem">Uma DFS sobre empréstimo, devolução e histórico permitiria rastrear dependências; o sistema só consulta por junção.</p>
+</div></div></section><h2 id="dfs-com-pilharecursao-retrocesso-e-dependencias">DFS com pilha/recursão, retrocesso e dependências</h2>
+<p>A busca em profundidade usa pilha, explícita ou implícita na recursão. Ela escolhe um vizinho e avança até não poder mais; ao encontrar beco sem saída, retrocede e tenta a próxima ramificação. O caminho pode ficar longo antes de a exploração voltar.</p>
+<p>No mesmo grafo, partindo de A e visitando vizinhos em ordem alfabética, a DFS desce A, B, D, E, C e depois F. Ao chegar em C, o vizinho A está ativo na pilha, e essa aresta de retorno prova a existência do ciclo A–B–D–E–C–A. A DFS não garante caminho mais curto: garante exploração completa e a ordem de finalização, que é a matéria-prima da análise de dependências.</p>
+<h2 id="custo-com-lista-de-adjacencia-ove">Custo com lista de adjacência O(V+E)</h2>
+<p>Com lista de adjacência, cada vértice entra e sai da estrutura uma vez, e cada aresta é examinada no máximo duas vezes no grafo não orientado. O custo é O(V + E), tanto para BFS quanto para DFS. Com matriz, o mesmo percurso custa O(V²), porque cada vértice precisa varrer a linha inteira para descobrir seus vizinhos.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Critério</th>
+<th>BFS</th>
+<th>DFS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estrutura</td>
+<td>fila (FIFO)</td>
+<td>pilha (LIFO) ou recursão</td>
+</tr>
+<tr>
+<td>Estratégia</td>
+<td>alarga por níveis</td>
+<td>aprofunda e retrocede</td>
+</tr>
+<tr>
+<td>Caminho mínimo sem pesos</td>
+<td>garante</td>
+<td>não garante</td>
+</tr>
+<tr>
+<td>Uso típico</td>
+<td>distância, descoberta de rede</td>
+<td>ciclo, dependências, ordenação</td>
+</tr>
+<tr>
+<td>Custo em lista</td>
+<td>O(V + E)</td>
+<td>O(V + E)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>Nenhum dos dois percursos está implementado no código revisado: a busca do acervo é SQL com <code>LIKE</code> e junção, e a listagem usa paginação com <code>LIMIT</code> e <code>OFFSET</code> em <code>Form2.cs</code> (linhas 36–115). Essa paginação é varredura sistemática — percorre o resultado em blocos sem repetir linha —, mas não é BFS, e chamá-la assim seria impreciso.</p>
+<p>O que existe de grafo no PI é modelo didático: a rotina Estantes conectadas usa o mapa de trinta gavetas como grafo e mostra a fronteira da BFS crescendo. A DFS aparece como perspectiva: seguir empréstimo, devolução e histórico como cadeia de dependências exigiria percurso sobre registros, e o sistema hoje resolve isso com junções. A ordem de exclusão em <code>Form3.Designer.cs</code> (linhas 364–405), que apaga vínculos antes do livro, é o germe dessa ideia e será tratada como ordenação topológica na próxima aula.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Grafo: A–B, A–C, B–D, C–E, D–E, E–F, com vizinhos em ordem alfabética.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Fila após retirar</th>
+<th>Visitados</th>
+<th>Distância de A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>B, C</td>
+<td>A</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>C, D</td>
+<td>A, B</td>
+<td>B = 1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>D, E</td>
+<td>A, B, C</td>
+<td>C = 1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>E</td>
+<td>A, B, C, D</td>
+<td>D = 2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>F</td>
+<td>A, B, C, D, E</td>
+<td>E = 2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>vazia</td>
+<td>todos</td>
+<td>F = 3</td>
+</tr>
+</tbody>
+</table></div>
+<p>Na DFS, a pilha de chamadas segue A, B, D, E, C e detecta a aresta C–A com A ativo, fechando o ciclo de comprimento 5. A ordem de finalização é C, F, E, D, B, A.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p>Por que a BFS não serve para achar o caminho mais barato quando as arestas têm peso? Porque ela conta saltos, não soma pesos: um caminho de três arestas baratas pode custar menos que um de duas arestas caras, e a BFS não vê essa diferença. Ela resolve o caso sem pesos, que é o da distância entre gavetas. Com pesos, o problema passa para Dijkstra, na aula 7. Confundir os dois é o erro mais comum em prova.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Execute BFS e DFS a partir de A no grafo A–B, A–C, B–C, C–D, D–E, indicando ordem de visita, distâncias e se há ciclo. Considere vizinhos em ordem alfabética.</p>
+<details><summary>Ver resposta</summary>
+<p>BFS: fila começa com A; visitam-se B e C (distância 1), depois D (2) e E (3). Ordem A, B, C, D, E. DFS: A desce para B, depois C, D e E; a aresta B–C encontra C já ativo, provando o ciclo A–B–C–A. Ordem de visita A, B, C, D, E; finalização E, D, C, B, A. O custo é O(V + E) nos dois casos, com lista de adjacência.</p>
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="gr-03-bfs-dfs-0" data-track="grafos">
+  <div class="quiz__q">1. Qual estrutura de dados caracteriza a BFS?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-03-bfs-dfs-0" data-i="0" data-answer="1"><span class="mark">A</span><span>Pilha, LIFO</span></button><button class="quiz__opt" data-q="gr-03-bfs-dfs-0" data-i="1" data-answer="1"><span class="mark">B</span><span>Fila, FIFO</span></button><button class="quiz__opt" data-q="gr-03-bfs-dfs-0" data-i="2" data-answer="1"><span class="mark">C</span><span>Heap mínimo</span></button><button class="quiz__opt" data-q="gr-03-bfs-dfs-0" data-i="3" data-answer="1"><span class="mark">D</span><span>Árvore binária</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A BFS retira sempre o vértice enfileirado há mais tempo, o que produz a expansão em níveis.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="gr-03-bfs-dfs-1" data-track="grafos">
+  <div class="quiz__q">2. Em grafo sem pesos, a BFS garante...</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-03-bfs-dfs-1" data-i="0" data-answer="1"><span class="mark">A</span><span>o caminho de menor soma de pesos</span></button><button class="quiz__opt" data-q="gr-03-bfs-dfs-1" data-i="1" data-answer="1"><span class="mark">B</span><span>o caminho com menos arestas</span></button><button class="quiz__opt" data-q="gr-03-bfs-dfs-1" data-i="2" data-answer="1"><span class="mark">C</span><span>a maior distância</span></button><button class="quiz__opt" data-q="gr-03-bfs-dfs-1" data-i="3" data-answer="1"><span class="mark">D</span><span>todos os caminhos</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Sem pesos, menos arestas é o critério; com pesos, é preciso Dijkstra.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="gr-03-bfs-dfs-2" data-track="grafos">
+  <div class="quiz__q">3. Por que a marcação de visitados é indispensável?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-03-bfs-dfs-2" data-i="0" data-answer="1"><span class="mark">A</span><span>Para economizar memória</span></button><button class="quiz__opt" data-q="gr-03-bfs-dfs-2" data-i="1" data-answer="1"><span class="mark">B</span><span>Para impedir que ciclos façam o percurso repetir vértices indefinidamente</span></button><button class="quiz__opt" data-q="gr-03-bfs-dfs-2" data-i="2" data-answer="1"><span class="mark">C</span><span>Para ordenar os vizinhos</span></button><button class="quiz__opt" data-q="gr-03-bfs-dfs-2" data-i="3" data-answer="1"><span class="mark">D</span><span>Para calcular o grau</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Sem marcação, um ciclo devolve o algoritmo ao mesmo vértice em loop.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–9</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="gr-03-bfs-dfs" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#navegacao-sistematica-e-necessidade-de-marcacao">Navegação sistemática e necessidade de marcação</a></li><li><a href="#bfs-com-fila-niveis-e-menor-numero-de-saltos-sem-pesos">BFS com fila, níveis e menor número de saltos sem pesos</a></li><li><a href="#dfs-com-pilharecursao-retrocesso-e-dependencias">DFS com pilha/recursão, retrocesso e dependências</a></li><li><a href="#custo-com-lista-de-adjacencia-ove">Custo com lista de adjacência O(V+E)</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

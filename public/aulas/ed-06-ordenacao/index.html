@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algoritmos de ordenação simples · Biblioteca em Movimento</title>
+<meta name="description" content="Troca com variável temporária, ordenação no próprio vetor e os traços de Bubble, Selection e Insertion com comparações, escritas e escolha por cenário.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Algoritmos de ordenação simples · Biblioteca em Movimento">
+<meta property="og:description" content="Troca com variável temporária, ordenação no próprio vetor e os traços de Bubble, Selection e Insertion com comparações, escritas e escolha por cenário.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-06-ordenacao/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-06-ordenacao/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Estruturas de Dados</span><span>/</span><span>Aula 6</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--ed">Estruturas de Dados</span><span class="badge">pp. 2–13</span></div>
+    <h1>Algoritmos de ordenação simples</h1>
+    <p class="page-head__lead">Troca com variável temporária, ordenação no próprio vetor e os traços de Bubble, Selection e Insertion com comparações, escritas e escolha por cenário.</p>
+    <div class="page-head__meta"><span class="mono">aula6 (1).pdf — Algoritmos de Ordenação Simples</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/historico/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#28407F"><p>A biblioteca mostra o histórico de devoluções do mais recente para o mais antigo. Ninguém escreveu um algoritmo de ordenação para isso: a ordem vem do <code>ORDER BY</code> da consulta. Mesmo assim, entender Bubble, Selection e Insertion é o que permite avaliar o que o banco faz, por que ele escolhe certos planos e quando ordenar em memória seria aceitável.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Explicar a troca in-place e por que ela exige variável temporária.</li><li>Traçar Bubble, Selection e Insertion contando comparações e escritas.</li><li>Distinguir melhor e pior caso de cada algoritmo.</li><li>Escolher algoritmo por custo de escrita, quase ordenação e estabilidade.</li></ul></div>
+<h2 id="ordenacao-in-place-e-swap">Ordenação in-place e swap</h2>
+<p>Ordenar in-place significa reorganizar os elementos dentro do próprio vetor, sem criar uma cópia completa. Isso economiza memória, mas exige trocar posições, e a troca correta usa uma variável temporária: guarda o primeiro valor, copia o segundo para a primeira posição e devolve o temporário para a segunda.</p>
+<p>Sem o temporário, a primeira atribuição destrói o valor que a segunda precisava. É o erro clássico de quem tenta economizar uma variável e acaba com dois elementos iguais. Em C, a função <code>swap</code> recebe ponteiros justamente para alterar as posições originais.</p>
+<h2 id="bubble-sort-traco-comparacoes-e-escritas">Bubble Sort: traço, comparações e escritas</h2>
+<p>O Bubble percorre o vetor comparando vizinhos e trocando quando estão fora de ordem. A cada passada, o maior elemento da parte não ordenada sobe até o fim. Com [5, 3, 4, 2], a primeira passada faz três comparações e três trocas, terminando em [3, 4, 2, 5].</p>
+<p>O custo é O(n²) em comparações e em escritas, porque cada troca grava três vezes. É o algoritmo com mais escrita na memória e, por isso, quase obsoleto na indústria; sobrevive como exercício de manipulação de índices.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">historico_devolucao.cs · consulta do histórico</span></div>
+  <p style="margin:0;font-size:.9rem">A ordenação do histórico é feita por ORDER BY d.data_devolucao DESC, d.id DESC, não por algoritmo em C#.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">FormDevolucao.cs · consulta de empréstimos abertos</span></div>
+  <p style="margin:0;font-size:.9rem">ORDER BY e.vencimento ASC, e.id ASC ordena no banco e usa o id como desempate estável.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula6 (1).pdf pp. 2–13</span></div>
+  <p style="margin:0;font-size:.9rem">Os traços com [5, 3, 4, 2] e a tabela de custos vêm dos slides; o PI não implementa os três algoritmos.</p>
+</div></div></section><h2 id="selection-sort-minimo-e-troca-por-passada">Selection Sort: mínimo e troca por passada</h2>
+<p>O Selection divide o vetor em parte ordenada e parte não ordenada, varre a parte não ordenada para achar o menor e faz uma única troca, colocando-o no fim da parte ordenada. As comparações continuam O(n²), mas as trocas caem para no máximo n − 1.</p>
+<p>Esse perfil interessa a hardware com memória Flash ou EEPROM, onde ler é barato e regravar desgasta o componente. No PI, o equivalente é evitar atualizações desnecessárias no banco: cada <code>UPDATE</code> tem custo real de I/O.</p>
+<h2 id="insertion-sort-deslocamento-e-quase-ordenado">Insertion Sort: deslocamento e quase ordenado</h2>
+<p>O Insertion simula a mão que organiza cartas: pega o elemento atual, desloca para a direita os maiores e insere a cópia na lacuna. Não há troca, há deslocamento e uma escrita final. Com [5, 3, 4, 2], o 3 desloca o 5, o 4 desloca o 5 e o 2 desloca três elementos.</p>
+<p>No pior caso, ordem inversa, o custo é O(n²). Em vetor quase ordenado, o laço interno quase não roda e o custo se aproxima de O(n). É o quadrático de melhor desempenho na prática, e aparece dentro de bibliotecas modernas em blocos pequenos.</p>
+<h2 id="melhorpior-caso-estabilidade-e-escolhas-de-engenharia">Melhor/pior caso, estabilidade e escolhas de engenharia</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Algoritmo</th>
+<th>Comparações</th>
+<th>Escritas no pior caso</th>
+<th>Ponto forte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bubble</td>
+<td>O(n²)</td>
+<td>O(n²)</td>
+<td>Simplicidade didática</td>
+</tr>
+<tr>
+<td>Selection</td>
+<td>O(n²)</td>
+<td>O(n)</td>
+<td>Minimiza gravações</td>
+</tr>
+<tr>
+<td>Insertion</td>
+<td>O(n²)</td>
+<td>O(n²)</td>
+<td>Rápido em quase ordenado e em blocos pequenos</td>
+</tr>
+</tbody>
+</table></div>
+<p>Estabilidade é manter a ordem relativa de elementos iguais. O Insertion é estável; o Selection, na implementação com troca, não é. Por isso o histórico do PI ordena por data e usa o <code>id</code> como desempate: sem critério secundário, duas devoluções do mesmo dia poderiam trocar de lugar entre execuções.</p>
+<div class="code"><div class="code__bar"><span class="dot"></span><span>trecho do material</span><span class="lang">SQL</span></div><pre><code><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">data_devolucao</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
+</code></pre></div>
+<p>Essa linha, extraída da consulta do histórico em historico_devolucao.cs, é a versão declarativa do que os três algoritmos fazem imperativamente. O banco pode usar índice, ordenação em memória ou arquivo temporário, mas o contrato é o mesmo: primeiro a data, depois o id como desempate.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>O sistema é WinForms .NET 8 com MySQL local, abre direto no painel e não tem login. Confirmado no código: não existe chamada a <code>Sort</code>, <code>OrderBy</code> ou <code>Array.Sort</code> em nenhum arquivo do projeto. Toda ordenação visível nas telas vem do <code>ORDER BY</code> das consultas.</p>
+<p>Isso tem consequência prática. A ordem das linhas na grade de empréstimos é a ordem de inserção na <code>List&lt;Item&gt;</code>, que por sua vez é a ordem de leitura do <code>DataReader</code>. Se a consulta mudar, a tela muda; não há camada de ordenação no cliente.</p>
+<p>Modelo didático: os traços com [5, 3, 4, 2], a contagem de comparações e a tabela de custos vêm dos slides. O PI não implementa Bubble, Selection nem Insertion; a comparação serve para explicar por que a ordenação foi delegada ao banco.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Vetor inicial [5, 3, 4, 2], contando comparações e escritas de cada algoritmo.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Algoritmo</th>
+<th>Passadas</th>
+<th>Comparações</th>
+<th>Trocas/deslocamentos</th>
+<th>Vetor final</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bubble</td>
+<td>3</td>
+<td>3 + 2 + 1 = 6</td>
+<td>5 trocas (15 escritas)</td>
+<td>[2, 3, 4, 5]</td>
+</tr>
+<tr>
+<td>Selection</td>
+<td>3</td>
+<td>3 + 2 + 1 = 6</td>
+<td>1 troca (3 escritas)</td>
+<td>[2, 3, 4, 5]</td>
+</tr>
+<tr>
+<td>Insertion</td>
+<td>3</td>
+<td>1 + 2 + 3 = 6</td>
+<td>5 deslocamentos</td>
+<td>[2, 3, 4, 5]</td>
+</tr>
+</tbody>
+</table></div>
+<p>Os três chegam ao mesmo resultado com o mesmo número de comparações nesse vetor pequeno. A diferença está nas escritas: o Selection grava três vezes, contra quinze do Bubble. Em memória que desgasta, essa diferença decide.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>Se o banco já ordena, por que estudar Bubble, Selection e Insertion?</strong></p>
+<p>Porque o <code>ORDER BY</code> não é mágica: ele escolhe entre usar índice, ordenar em memória ou criar arquivo temporário, e essa escolha depende de custo de comparação e de escrita. Entender que o Selection minimiza gravações e que o Insertion brilha em dados quase ordenados explica por que certos planos são rápidos em um caso e lentos em outro. Além disso, se o projeto precisar ordenar algo que não está no banco, como uma lista de candidatos já carregada, a decisão volta para o código. Estudar os três também fixa a noção de que n² vem de laços aninhados, base para reconhecer o mesmo padrão em qualquer linguagem.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Aplique o Insertion Sort em [4, 1, 3, 2] e informe o vetor após cada inserção, além do total de comparações.</p>
+<details><summary>Ver resposta</summary>
+
+Alvo 1: compara com 4, desloca, vetor [1, 4, 3, 2], 1 comparação. Alvo 3: compara com 4, desloca; compara com 1, para, vetor [1, 3, 4, 2], 2 comparações. Alvo 2: compara com 4, 3 e 1, desloca os três, vetor [1, 2, 3, 4], 3 comparações. Total: 6 comparações e 6 deslocamentos, resultado ordenado.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="ed-06-ordenacao-0" data-track="ed">
+  <div class="quiz__q">1. Por que a troca de dois elementos exige uma variável temporária?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-06-ordenacao-0" data-i="0" data-answer="0"><span class="mark">A</span><span>Porque a primeira atribuição sobrescreveria o valor que a segunda precisa</span></button><button class="quiz__opt" data-q="ed-06-ordenacao-0" data-i="1" data-answer="0"><span class="mark">B</span><span>Porque o compilador não permite atribuição entre posições do vetor</span></button><button class="quiz__opt" data-q="ed-06-ordenacao-0" data-i="2" data-answer="0"><span class="mark">C</span><span>Porque a troca precisa ser feita no heap</span></button><button class="quiz__opt" data-q="ed-06-ordenacao-0" data-i="3" data-answer="0"><span class="mark">D</span><span>Porque sem ela o algoritmo deixa de ser in-place</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Sem a cópia temporária, o primeiro valor se perde ao receber o segundo. Atribuição entre posições é permitida, e a troca continua no próprio vetor.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-06-ordenacao-1" data-track="ed">
+  <div class="quiz__q">2. Qual algoritmo faz no máximo n − 1 trocas, independentemente da entrada?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-06-ordenacao-1" data-i="0" data-answer="0"><span class="mark">A</span><span>Selection Sort</span></button><button class="quiz__opt" data-q="ed-06-ordenacao-1" data-i="1" data-answer="0"><span class="mark">B</span><span>Bubble Sort</span></button><button class="quiz__opt" data-q="ed-06-ordenacao-1" data-i="2" data-answer="0"><span class="mark">C</span><span>Insertion Sort</span></button><button class="quiz__opt" data-q="ed-06-ordenacao-1" data-i="3" data-answer="0"><span class="mark">D</span><span>Merge Sort</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O Selection faz uma troca por passada, no máximo n − 1. Bubble troca muitas vezes e Insertion desloca; Merge não é dos três simples.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-06-ordenacao-2" data-track="ed">
+  <div class="quiz__q">3. Em qual cenário o Insertion Sort chega perto de O(n)?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-06-ordenacao-2" data-i="0" data-answer="0"><span class="mark">A</span><span>Vetor quase ordenado, com poucos elementos fora de lugar</span></button><button class="quiz__opt" data-q="ed-06-ordenacao-2" data-i="1" data-answer="0"><span class="mark">B</span><span>Vetor em ordem decrescente completa</span></button><button class="quiz__opt" data-q="ed-06-ordenacao-2" data-i="2" data-answer="0"><span class="mark">C</span><span>Vetor com elementos aleatórios e muitos repetidos</span></button><button class="quiz__opt" data-q="ed-06-ordenacao-2" data-i="3" data-answer="0"><span class="mark">D</span><span>Vetor vazio ou com um único elemento apenas</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Com poucos deslocamentos por elemento, o laço interno quase não roda. Ordem inversa é o pior caso; aleatório fica no caso médio quadrático.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–13</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="ed-06-ordenacao" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#ordenacao-in-place-e-swap">Ordenação in-place e swap</a></li><li><a href="#bubble-sort-traco-comparacoes-e-escritas">Bubble Sort: traço, comparações e escritas</a></li><li><a href="#selection-sort-minimo-e-troca-por-passada">Selection Sort: mínimo e troca por passada</a></li><li><a href="#insertion-sort-deslocamento-e-quase-ordenado">Insertion Sort: deslocamento e quase ordenado</a></li><li><a href="#melhorpior-caso-estabilidade-e-escolhas-de-engenharia">Melhor/pior caso, estabilidade e escolhas de engenharia</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

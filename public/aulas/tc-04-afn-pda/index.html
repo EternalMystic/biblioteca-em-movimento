@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do não-determinismo à memória estruturada · Biblioteca em Movimento</title>
+<meta name="description" content="O AFN facilita o desenho, mas não aumenta o poder da máquina: a construção de subconjuntos devolve um AFD equivalente. Quando o problema exige contar e descontar aninhamento, entra a pilha e nasce o autômato de pilha.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Do não-determinismo à memória estruturada · Biblioteca em Movimento">
+<meta property="og:description" content="O AFN facilita o desenho, mas não aumenta o poder da máquina: a construção de subconjuntos devolve um AFD equivalente. Quando o problema exige contar e descontar aninhamento, entra a pilha e nasce o autômato de pilha.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-04-afn-pda/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-04-afn-pda/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Teoria da Computação</span><span>/</span><span>Aula 4</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--tc">Teoria da Computação</span><span class="badge">pp. 2–15</span></div>
+    <h1>Do não-determinismo à memória estruturada</h1>
+    <p class="page-head__lead">O AFN facilita o desenho, mas não aumenta o poder da máquina: a construção de subconjuntos devolve um AFD equivalente. Quando o problema exige contar e descontar aninhamento, entra a pilha e nasce o autômato de pilha.</p>
+    <div class="page-head__meta"><span class="mono">aula4.pdf — Do Não-Determinismo à Memória Estruturada</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/validacao/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#955300"><p>O formulário do PI monta consultas SQL concatenando texto, e em um ponto precisa de parênteses: o bloco de busca tem três condições ligadas por OR e deve ser avaliado como um conjunto, não misturado ao filtro de status. Quem escreveu aquela linha resolveu um problema de aninhamento. A aula 4 mostra por que esse tipo de problema escapa do autômato finito e exige uma memória com disciplina de pilha.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Totalizar um AFD com estado de erro e explicar por que todo par estado-símbolo precisa de destino.</li><li>Aplicar a construção de subconjuntos com fecho-ε e eliminar estados inalcançáveis.</li><li>Justificar o limite da análise léxica diante de blocos aninhados.</li><li>Descrever a sêxtupla do autômato de pilha e simular push e pop no balanceamento de delimitadores.</li></ul></div>
+<h2 id="afd-completo-e-estado-de-erro">AFD completo e estado de erro</h2>
+<p>Um AFD de projeto precisa de destino para todo par (estado, símbolo). Quando o desenho deixa lacunas, a implementação real inventa um comportamento — e quase sempre inventa errado. A solução é explícita: um estado de erro, também chamado de poço ou buraco negro, que recebe todas as transições não previstas e nunca sai dele.</p>
+<p>Totalizar δ custa estados e clareza, mas compra uma propriedade valiosa: a máquina nunca fica indefinida. Em termos de código, é a diferença entre uma tabela de transição completa e uma cadeia de <code>if</code> que pode cair no <code>else</code> sem tratamento. O erro comum é totalizar só o caminho de sucesso e descobrir a lacuna em produção, com uma exceção de índice ou um valor nulo.</p>
+<h2 id="afn-transicoes-multiplas-ausentes-e-vazias-aceitacao-existencial">AFN: transições múltiplas, ausentes e vazias; aceitação existencial</h2>
+<p>O autômato finito não determinístico nasce para simplificar o desenho. Ele permite três flexibilizações: várias transições para o mesmo símbolo, ausência de transição para certos símbolos (caminhos mortos) e transições ε, que mudam de estado sem consumir entrada. Desenhar o “caminho feliz” em um AFN é muito mais rápido do que prever todas as falhas em um AFD.</p>
+<p>A aceitação é existencial: a palavra é aceita se ao menos um caminho chega a um estado final após consumir toda a entrada, e só é rejeitada se todos os caminhos falham. Isso não é execução paralela real; é uma descrição compacta de um conjunto de possibilidades.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form2.cs · linhas 40–60</span></div>
+  <p style="margin:0;font-size:.9rem">A cláusula WHERE é montada por concatenação, com parênteses em volta do bloco de busca: (l.titulo LIKE @busca OR a.nome_guerra LIKE @busca OR e.status LIKE @busca). O aninhamento é escrito à mão, não validado por parser.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">regitro_livros.cs · linhas 341–347</span></div>
+  <p style="margin:0;font-size:.9rem">A lista de gavetas é gerada por dois laços aninhados — fileiras dentro de colunas —, o caso mais simples de aninhamento no código do PI.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula4.pdf pp. 11–15</span></div>
+  <p style="margin:0;font-size:.9rem">O autômato de pilha que valida (n)n e o traço com [A[T]B] são construções didáticas sobre a sêxtupla M = (Q, Σ, Γ, δ, q₀, F).</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--future">Proposta / evolução</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula4.pdf pp. 8–11</span></div>
+  <p style="margin:0;font-size:.9rem">Uma gramática livre de contexto para a ficha de importação, com AST, é proposta de evolução; o sistema lê campos de formulário, não texto estruturado.</p>
+</div></div></section><h2 id="construcao-dos-subconjuntos-com-fecho-e-eliminacao-de-inalcancaveis">Construção dos subconjuntos com fecho-ε e eliminação de inalcançáveis</h2>
+<p>A conversão para AFD trata cada conjunto de estados do AFN como um único estado. Se n estados existem, o AFD pode ter até 2ⁿ. O fecho-ε entra antes de cada passo: a partir de um conjunto, acrescentam-se todos os estados alcançáveis por transições vazias, porque elas não consomem entrada e podem ser tomadas “de graça”.</p>
+<p>O procedimento é mecânico: começa pelo fecho-ε de {q₀}; para cada símbolo, calcula o fecho-ε dos destinos; repete até não surgir conjunto novo. Ao final, elimina-se o que não é alcançável a partir do inicial, o que costuma reduzir bastante a tabela. O erro frequente é esquecer o fecho-ε na primeira linha, gerando um AFD que rejeita cadeias que o AFN aceita.</p>
+<h2 id="limite-da-analise-lexica-e-aninhamento">Limite da análise léxica e aninhamento</h2>
+<p>O Nível 3 encerra seu escopo nos autômatos finitos e nas expressões regulares. Na arquitetura de compiladores, ele faz a análise léxica: reconhece padrões curtos como <code>int</code>, <code>while</code> ou nomes de variáveis. O problema aparece quando a linguagem tem blocos aninhados: é preciso garantir que chaves e parênteses sejam abertos e fechados na ordem e na quantidade corretas.</p>
+<p>Um autômato finito não tem contador. Ele pode aceitar até k níveis de aninhamento com k estados, mas não “qualquer número”. Por isso a sintaxe muda de nível. O mesmo raciocínio vale para o PI: a consulta com um par de parênteses é simples, mas uma expressão gerada dinamicamente com vários níveis exigiria validação estrutural, não concatenação de strings.</p>
+<h2 id="linguagens-e-gramaticas-livres-de-contexto-analise-sintatica-e-ast">Linguagens e gramáticas livres de contexto; análise sintática e AST</h2>
+<p>No Nível 2, a linguagem é gerada por gramática livre de contexto, uma quádrupla G = (V, Σ, P, S), em que V são os não terminais, Σ os terminais, P as produções e S o símbolo inicial. As produções têm a forma A → α, com um único não terminal à esquerda — é essa restrição que dá o nome “livre de contexto” e permite derivar árvores.</p>
+<p>A análise sintática consome os tokens da fase léxica e verifica se existe derivação. O resultado é a Árvore de Sintaxe Abstrata, que preserva a estrutura e descarta detalhes como parênteses redundantes. É a AST que permite avaliar precedência: em <code>2 + 3 * 4</code>, a árvore decide a ordem, não a leitura da esquerda para a direita.</p>
+<h2 id="automato-de-pilha-lifo-pushpop-e-balanceamento-de-parenteses">Autômato de pilha, LIFO, push/pop e balanceamento de parênteses</h2>
+<p>O autômato de pilha herda estados e transições do autômato finito e acrescenta uma fita com política LIFO. A formalização passa da quíntupla à sêxtupla M = (Q, Σ, Γ, δ, q₀, F), com Γ como alfabeto da pilha. A transição passa a considerar três informações e pode devolver um conjunto de pares:</p>
+<p>δ : Q × (Σ ∪ {ε}) × (Γ ∪ {ε}) → P(Q × (Γ ∪ {ε}))</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Entrada</th>
+<th>Topo</th>
+<th>Novo estado</th>
+<th>Escreve no topo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>q₀</td>
+<td><code>[</code></td>
+<td>Z ou vazio</td>
+<td>q₀</td>
+<td>X (push)</td>
+</tr>
+<tr>
+<td>q₀</td>
+<td><code>]</code></td>
+<td>X</td>
+<td>q₀</td>
+<td>ε (pop)</td>
+</tr>
+<tr>
+<td>q₀</td>
+<td>fim</td>
+<td>Z</td>
+<td>q₁</td>
+<td>Z (aceita)</td>
+</tr>
+<tr>
+<td>q₀</td>
+<td><code>]</code></td>
+<td>Z</td>
+<td>q₂</td>
+<td>Z (rejeita)</td>
+</tr>
+</tbody>
+</table></div>
+<p>A linguagem L = {(ⁿ)ⁿ | n ≥ 0} mostra o mecanismo. Cada abertura empilha um marcador; cada fechamento desempilha. Se a entrada termina e a pilha está vazia, o balanceamento está correto. Se sobra marcador, falta fechar; se aparece fechamento com pilha vazia, sobra fechamento.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>Confirmado no código: a busca em <code>Form2.cs</code> monta a cláusula com parênteses explícitos em volta das três condições <code>LIKE</code>, e a lista de gavetas é produzida por dois laços aninhados. Não há parser, nem validação de expressão, nem AST: o aninhamento existe apenas como texto escrito por quem programou.</p>
+<p>Modelo didático: a sêxtupla, a tabela de transição do autômato de pilha e o traço de <code>[A[T]B]</code>. Ementa/proposta: uma gramática para a ficha de importação, com árvore sintática, que permitiria ler um arquivo de fichas em vez de preencher campos. O sistema usa MySQL local; não há login, OCR, API pública nem banco em nuvem.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Valide <code>[A[T]B]</code> com pilha inicial vazia, tratando <code>[</code> e <code>]</code> como delimitadores e A, T, B como conteúdo ignorado.</p>
+<ol>
+<li>Lê <code>[</code>: push. Pilha: [X].</li>
+<li>Lê A: símbolo de conteúdo, nenhuma operação. Pilha: [X].</li>
+<li>Lê <code>[</code>: push. Pilha: [X, X].</li>
+<li>Lê T: conteúdo. Pilha: [X, X].</li>
+<li>Lê <code>]</code>: pop. Pilha: [X].</li>
+<li>Lê B: conteúdo. Pilha: [X].</li>
+<li>Lê <code>]</code>: pop. Pilha: vazia.</li>
+<li>Fim da entrada com pilha vazia: aceita.</li>
+</ol>
+<p>Se a cadeia fosse <code>[A[T]B</code>, o passo 7 não existiria e restaria um X na pilha ao fim da leitura — rejeitada. O teste também revela o custo: cada símbolo é lido uma vez, mas o acesso ao fundo exigiria desempilhar tudo.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>“Por que não validar a consulta SQL com um autômato finito?”</strong></p>
+<p>Porque a consulta tem aninhamento e o autômato finito não conta. Um AFD aceitaria um número fixo de níveis, não qualquer número, e a diferença só aparece quando o texto cresce. Além disso, validar estrutura não resolve o problema principal da concatenação, que é a injeção de trecho malicioso: a solução correta é parametrizar a consulta, como o código já faz com <code>@busca</code>. A teoria explica o limite; a prática recomenda não construir a consulta por texto.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Acrescente à tabela do autômato de pilha a transição que rejeita o fechamento sem abertura e explique por que ela precisa existir mesmo que a cadeia “pareça” válida no fim.</p>
+<details><summary>Ver resposta</summary>
+
+A transição é (q₀, `]`, Z) → (q₂, Z), com q₂ fora de F: lê fechamento com pilha vazia e vai para o estado de rejeição, sem alterar a pilha. Ela é necessária porque, sem ela, a leitura de `]` no estado inicial ficaria indefinida, e a implementação poderia simplesmente ignorar o símbolo. Cadeias como `]` ou `][` seguidas de `[` terminariam com pilha vazia e seriam aceitas por engano. A rejeição explícita fecha o caminho inválido no momento em que ele ocorre, e não depois.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="tc-04-afn-pda-0" data-track="tc">
+  <div class="quiz__q">1. Como um AFN aceita uma cadeia?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-04-afn-pda-0" data-i="0" data-answer="1"><span class="mark">A</span><span>Se todos os caminhos chegarem a um estado final.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-0" data-i="1" data-answer="1"><span class="mark">B</span><span>Se ao menos um caminho chegar a um estado final após consumir toda a entrada.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-0" data-i="2" data-answer="1"><span class="mark">C</span><span>Se o caminho mais curto não passar por estado de erro.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-0" data-i="3" data-answer="1"><span class="mark">D</span><span>Se a pilha terminar vazia.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A aceitação é existencial. A rejeição é que exige que todos os caminhos falhem.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-04-afn-pda-1" data-track="tc">
+  <div class="quiz__q">2. Para que serve o fecho-ε na conversão de AFN para AFD?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-04-afn-pda-1" data-i="0" data-answer="1"><span class="mark">A</span><span>Para eliminar estados finais.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-1" data-i="1" data-answer="1"><span class="mark">B</span><span>Para incluir os estados alcançáveis sem consumir símbolos.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-1" data-i="2" data-answer="1"><span class="mark">C</span><span>Para contar o número de caminhos.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-1" data-i="3" data-answer="1"><span class="mark">D</span><span>Para transformar o autômato em Máquina de Turing.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Transições vazias não consomem entrada e podem ser tomadas de graça, então entram no conjunto antes de cada passo.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-04-afn-pda-2" data-track="tc">
+  <div class="quiz__q">3. Por que um AFD não valida parênteses aninhados em qualquer profundidade?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-04-afn-pda-2" data-i="0" data-answer="1"><span class="mark">A</span><span>Porque não tem alfabeto suficiente.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-2" data-i="1" data-answer="1"><span class="mark">B</span><span>Porque não possui contador nem memória auxiliar.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-2" data-i="2" data-answer="1"><span class="mark">C</span><span>Porque não pode ter estados finais.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-2" data-i="3" data-answer="1"><span class="mark">D</span><span>Porque a entrada é lida da direita para a esquerda.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Com |Q| estados, o autômato distingue no máximo |Q| níveis. Para qualquer profundidade é preciso uma pilha.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-04-afn-pda-3" data-track="tc">
+  <div class="quiz__q">4. Na sêxtupla do autômato de pilha, o que é Γ?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-04-afn-pda-3" data-i="0" data-answer="1"><span class="mark">A</span><span>O alfabeto da fita de entrada.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-3" data-i="1" data-answer="1"><span class="mark">B</span><span>O alfabeto da pilha.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-3" data-i="2" data-answer="1"><span class="mark">C</span><span>O conjunto de estados finais.</span></button><button class="quiz__opt" data-q="tc-04-afn-pda-3" data-i="3" data-answer="1"><span class="mark">D</span><span>A função de transição.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Γ reúne os símbolos permitidos na pilha, que podem ser diferentes dos símbolos lidos na entrada.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–15</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="tc-04-afn-pda" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#afd-completo-e-estado-de-erro">AFD completo e estado de erro</a></li><li><a href="#afn-transicoes-multiplas-ausentes-e-vazias-aceitacao-existencial">AFN: transições múltiplas, ausentes e vazias; aceitação existencial</a></li><li><a href="#construcao-dos-subconjuntos-com-fecho-e-eliminacao-de-inalcancaveis">Construção dos subconjuntos com fecho-ε e eliminação de inalcançáveis</a></li><li><a href="#limite-da-analise-lexica-e-aninhamento">Limite da análise léxica e aninhamento</a></li><li><a href="#linguagens-e-gramaticas-livres-de-contexto-analise-sintatica-e-ast">Linguagens e gramáticas livres de contexto; análise sintática e AST</a></li><li><a href="#automato-de-pilha-lifo-pushpop-e-balanceamento-de-parenteses">Autômato de pilha, LIFO, push/pop e balanceamento de parênteses</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

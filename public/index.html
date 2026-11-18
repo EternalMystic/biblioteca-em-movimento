@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biblioteca em Movimento · PI Biblioteca TG</title>
+<meta name="description" content="Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra: Estruturas de Dados, Grafos e Teoria da Computação com 15 simuladores.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Biblioteca em Movimento · PI Biblioteca TG">
+<meta property="og:description" content="Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra: Estruturas de Dados, Grafos e Teoria da Computação com 15 simuladores.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<link rel="apple-touch-icon" href="assets/img/logo.png">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/search-index.js" defer></script>
+<script src="assets/js/site.js" defer></script>
+<script src="assets/js/home.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="" aria-current="page">Início</a><a href="mapa/">Mapa de aulas</a><a href="jornada/">Jornada do PI</a><a href="rotinas/">Simuladores</a><a href="exercicios/">Exercícios</a><a href="revisao/">Revisão</a><a href="defesa/">Defesa</a><a href="fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="page-home">
+
+<section class="hero">
+  <div class="wrap hero__in">
+    <div>
+      <span class="hero__eyebrow">Projeto Integrador · Engenharia da Computação · UNISAL 2026</span>
+      <h1>A biblioteca que aprende <em>em movimento</em>.</h1>
+      <p class="hero__lead">Um livro, três pontos de vista e quinze rotinas para entender como Estruturas de Dados e Teoria da Computação sustentam o sistema da biblioteca do Tiro de Guerra.</p>
+      <div class="btn-row">
+        <a class="btn btn--light" href="mapa/">Começar pelo mapa de aulas <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn--outline-light" href="jornada/">Seguir o LIV123</a>
+      </div>
+      <div class="hero__meta">
+        <div><strong>23</strong>aulas rastreáveis</div>
+        <div><strong>15</strong>simuladores</div>
+        <div><strong>3</strong>trilhas integradas</div>
+      </div>
+    </div>
+    <div>
+      <div class="scene" id="scene" data-step="0">
+        <div class="cabinet" style="position:absolute;inset:0;background:linear-gradient(160deg,#0d4a44,#06332f);border:10px solid #0a3f3a;border-radius:14px;box-shadow:inset 0 0 60px rgba(0,0,0,.5);padding:14px;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;color:#9ecbb9;font:600 .62rem var(--font-mono);letter-spacing:.12em">
+            <span>ACERVO · TG AMERICANA</span><span>6 × 5</span>
+          </div>
+          <div class="drawers" style="flex:1;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(6,1fr)"><button class="drawer-cell" data-drawer="1A" aria-label="Gaveta 1A">1A</button><button class="drawer-cell" data-drawer="1B" aria-label="Gaveta 1B">1B</button><button class="drawer-cell" data-drawer="1C" aria-label="Gaveta 1C">1C</button><button class="drawer-cell" data-drawer="1D" aria-label="Gaveta 1D">1D</button><button class="drawer-cell" data-drawer="1E" aria-label="Gaveta 1E">1E</button><button class="drawer-cell" data-drawer="2A" aria-label="Gaveta 2A">2A</button><button class="drawer-cell" data-drawer="2B" aria-label="Gaveta 2B">2B</button><button class="drawer-cell" data-drawer="2C" aria-label="Gaveta 2C">2C</button><button class="drawer-cell" data-drawer="2D" aria-label="Gaveta 2D">2D</button><button class="drawer-cell" data-drawer="2E" aria-label="Gaveta 2E">2E</button><button class="drawer-cell" data-drawer="3A" aria-label="Gaveta 3A">3A</button><button class="drawer-cell" data-drawer="3B" aria-label="Gaveta 3B">3B</button><button class="drawer-cell is-target" data-drawer="3C" aria-label="Gaveta 3C">3C</button><button class="drawer-cell" data-drawer="3D" aria-label="Gaveta 3D">3D</button><button class="drawer-cell" data-drawer="3E" aria-label="Gaveta 3E">3E</button><button class="drawer-cell" data-drawer="4A" aria-label="Gaveta 4A">4A</button><button class="drawer-cell" data-drawer="4B" aria-label="Gaveta 4B">4B</button><button class="drawer-cell" data-drawer="4C" aria-label="Gaveta 4C">4C</button><button class="drawer-cell" data-drawer="4D" aria-label="Gaveta 4D">4D</button><button class="drawer-cell" data-drawer="4E" aria-label="Gaveta 4E">4E</button><button class="drawer-cell" data-drawer="5A" aria-label="Gaveta 5A">5A</button><button class="drawer-cell" data-drawer="5B" aria-label="Gaveta 5B">5B</button><button class="drawer-cell" data-drawer="5C" aria-label="Gaveta 5C">5C</button><button class="drawer-cell" data-drawer="5D" aria-label="Gaveta 5D">5D</button><button class="drawer-cell" data-drawer="5E" aria-label="Gaveta 5E">5E</button><button class="drawer-cell" data-drawer="6A" aria-label="Gaveta 6A">6A</button><button class="drawer-cell" data-drawer="6B" aria-label="Gaveta 6B">6B</button><button class="drawer-cell" data-drawer="6C" aria-label="Gaveta 6C">6C</button><button class="drawer-cell" data-drawer="6D" aria-label="Gaveta 6D">6D</button><button class="drawer-cell" data-drawer="6E" aria-label="Gaveta 6E">6E</button></div>
+        </div>
+        <div class="hero-ficha" id="hero-ficha" aria-live="polite">
+          <span class="hero-ficha__stamp" id="ficha-stamp">FÍSICA</span>
+          <div class="hero-ficha__code" id="ficha-code">LIV123</div>
+          <div class="hero-ficha__title" id="ficha-title">Manual das Estrelas</div>
+          <div class="hero-ficha__meta"><span>Gaveta 3C</span><span>2 autores</span></div>
+          <div class="hero-ficha__lines"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="scene-caption" id="scene-caption" aria-live="polite">
+        <span class="mono" style="color:#7fd1ae">01</span>
+        <span><strong>Uma ficha na gaveta 3C.</strong> Clique na gaveta ou avance para retirar o LIV123.</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:.7rem;margin-top:.4rem">
+        <div class="scene-steps" id="scene-steps" role="tablist" aria-label="Etapas da abertura">
+          <button data-go="0" aria-label="Etapa 1" aria-current="true"></button><button data-go="1" aria-label="Etapa 2" aria-current="false"></button><button data-go="2" aria-label="Etapa 3" aria-current="false"></button><button data-go="3" aria-label="Etapa 4" aria-current="false"></button><button data-go="4" aria-label="Etapa 5" aria-current="false"></button>
+        </div>
+        <button class="btn btn--sm btn--outline-light" id="scene-next" style="margin-left:auto">Avançar</button>
+        <a class="btn btn--sm btn--outline-light" href="mapa/">Pular</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Três trilhas, um sistema</div>
+      <h2>O conteúdo do semestre inteiro, amarrado ao mesmo software.</h2>
+      <p>As aulas não estão soltas: cada tópico aponta para um arquivo, uma consulta ou uma decisão do Projeto Integrador — e para um simulador onde você pode mexer.</p>
+    </div>
+    <div class="grid grid--3">
+<a class="card card--track card--hover card--link" href="mapa/#ed" style="--track:#28407F">
+  <div class="card__kicker">ED · 9 aulas</div>
+  <h3>Estruturas de Dados</h3>
+  <p>Como a informação é guardada, percorrida e transformada: memória, listas, ordenação, busca, hash e árvores.</p>
+  <div class="card__foot"><span>Entrar na trilha</span><span style="margin-left:auto">→</span></div>
+</a>
+<a class="card card--track card--hover card--link" href="mapa/#grafos" style="--track:#002F2D">
+  <div class="card__kicker">Grafos · 7 aulas</div>
+  <h3>Grafos</h3>
+  <p>Relações como vértices e arestas: percursos, árvores geradoras, circuitos e caminhos mínimos.</p>
+  <div class="card__foot"><span>Entrar na trilha</span><span style="margin-left:auto">→</span></div>
+</a>
+<a class="card card--track card--hover card--link" href="mapa/#tc" style="--track:#955300">
+  <div class="card__kicker">TC · 7 aulas</div>
+  <h3>Teoria da Computação</h3>
+  <p>O que uma máquina pode reconhecer, decidir e calcular — e a que custo.</p>
+  <div class="card__foot"><span>Entrar na trilha</span><span style="margin-left:auto">→</span></div>
+</a></div>
+  </div>
+</section>
+
+<section class="section section--paper2">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">O fio condutor</div>
+      <h2>Cadastrar → buscar → emprestar → devolver → consultar.</h2>
+      <p>O mesmo <code>LIV123</code> atravessa todas as etapas. Em cada uma, você pode olhar pela tela, pelos dados ou pelo modelo teórico.</p>
+    </div>
+    <div class="grid grid--4" style="margin-bottom:1.2rem">
+      <a class="card card--hover card--link" href="jornada/#entrada">
+        <div class="card__kicker">Etapa 1</div><h3>Entrada e arquitetura</h3><p>O dashboard abre direto; cada ação do bibliotecário revela tela, função e consulta.</p>
+        <div class="card__foot"><span class="mono">Program.cs → Form1</span></div></a><a class="card card--hover card--link" href="jornada/#cadastro">
+        <div class="card__kicker">Etapa 2</div><h3>Cadastro e modelagem</h3><p>Autores em lista, relação muitos-para-muitos e chave composta.</p>
+        <div class="card__foot"><span class="mono">listaAutoresTags</span></div></a><a class="card card--hover card--link" href="jornada/#busca">
+        <div class="card__kicker">Etapa 3</div><h3>Busca e acervo</h3><p>LIKE, junções, contagem e paginação no mesmo fluxo.</p>
+        <div class="card__foot"><span class="mono">Form2.cs</span></div></a><a class="card card--hover card--link" href="jornada/#devolucao">
+        <div class="card__kicker">Etapa 4</div><h3>Devolução e histórico</h3><p>Duas escritas, um commit — e filtros em memória.</p>
+        <div class="card__foot"><span class="mono">FormDevolucao.cs</span></div></a>
+    </div>
+    <a class="btn btn--ghost" href="jornada/">Ver a jornada completa <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head section-head--wide" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:end;max-width:none">
+      <div style="flex:1 1 420px">
+        <div class="eyebrow">Simuladores</div>
+        <h2>Doze rotinas que só fazem sentido neste projeto.</h2>
+        <p>Gaveta que vira registro, devolução que reverte, autômato que carimba, grafo que se reconecta. Cada uma tem passo a passo, estado e métrica.</p>
+      </div>
+      <a class="btn btn--ghost" href="rotinas/">Ver as 15 atividades <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="grid grid--3">
+<a class="card routine-card card--hover card--link" href="rotinas/gaveteiro/">
+  <span class="routine-card__num">01</span>
+  <div class="card__kicker">Rotina interativa</div>
+  <h3>Gaveteiro de 30 posições</h3>
+  <p>Da ficha de papel à linha do banco, sem perder a identidade do LIV123.</p>
+  <div class="card__foot"><span>4 casos</span><span style="margin-left:auto">Abrir →</span></div>
+</a>
+<a class="card routine-card card--hover card--link" href="rotinas/busca/">
+  <span class="routine-card__num">02</span>
+  <div class="card__kicker">Rotina interativa</div>
+  <h3>Bancada de busca em paralelo</h3>
+  <p>Varredura, busca binária e hash na mesma chave e no mesmo catálogo.</p>
+  <div class="card__foot"><span>3 casos</span><span style="margin-left:auto">Abrir →</span></div>
+</a>
+<a class="card routine-card card--hover card--link" href="rotinas/devolucao/">
+  <span class="routine-card__num">03</span>
+  <div class="card__kicker">Rotina interativa</div>
+  <h3>Mesa de devolução reversível</h3>
+  <p>Duas escritas, um commit — e um botão para falhar no meio.</p>
+  <div class="card__foot"><span>4 casos</span><span style="margin-left:auto">Abrir →</span></div>
+</a>
+<a class="card routine-card card--hover card--link" href="rotinas/validacao/">
+  <span class="routine-card__num">04</span>
+  <div class="card__kicker">Rotina interativa</div>
+  <h3>Carimbos de validação e ficha aninhada</h3>
+  <p>AFD consumindo caracteres e uma pilha conferindo colchetes.</p>
+  <div class="card__foot"><span>6 casos</span><span style="margin-left:auto">Abrir →</span></div>
+</a>
+<a class="card routine-card card--hover card--link" href="rotinas/grafos/">
+  <span class="routine-card__num">05</span>
+  <div class="card__kicker">Rotina interativa</div>
+  <h3>Estantes conectadas</h3>
+  <p>Gavetas viram vértices: BFS, Dijkstra, Bellman-Ford e Floyd–Warshall.</p>
+  <div class="card__foot"><span>6 casos</span><span style="margin-left:auto">Abrir →</span></div>
+</a>
+<a class="card routine-card card--hover card--link" href="rotinas/versoes/">
+  <span class="routine-card__num">06</span>
+  <div class="card__kicker">Rotina interativa</div>
+  <h3>Linha do tempo de versões</h3>
+  <p>Três revisões, duas formas de gravar e uma pergunta: o que sobra se falhar?</p>
+  <div class="card__foot"><span>2 casos</span><span style="margin-left:auto">Abrir →</span></div>
+</a></div>
+  </div>
+</section>
+
+<section class="section section--green">
+  <div class="wrap">
+    <div class="grid grid--2" style="gap:clamp(1.5rem,4vw,3.5rem);align-items:center">
+      <div>
+        <div class="eyebrow">Como estudar aqui</div>
+        <h2>Cinco movimentos para cada assunto.</h2>
+        <p style="max-width:52ch">O site não entrega só texto: ele organiza a leitura em segmentos curtos, pede uma previsão antes da animação, mostra o passo, explica a pré-condição e cobra a recuperação depois. Você controla quando a próxima cena começa.</p>
+        <a class="btn btn--light" href="sobre/#metodo">Como o método aparece no site</a>
+      </div>
+      <ol class="method-list"><li><strong>Preveja</strong><span>Antes de rodar, arrisque um resultado. O erro explícito vale mais que a leitura passiva.</span></li><li><strong>Execute</strong><span>Avance passo a passo e observe estado, operação e métricas no mesmo quadro.</span></li><li><strong>Explique</strong><span>Diga em voz alta por que aquele passo aconteceu. Se travar, o site mostra a pré-condição.</span></li><li><strong>Recupere</strong><span>Feche a página e responda à checagem. A lembrança difícil é a que fixa.</span></li><li><strong>Aplique</strong><span>Leve o mesmo mecanismo para outro caso: outra chave, outro grafo, outra cadeia.</span></li></ol>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="grid grid--2" style="align-items:center;gap:2rem">
+      <div>
+        <div class="eyebrow">Para a banca</div>
+        <h2>Dez minutos de apresentação, com as três pontes da disciplina.</h2>
+        <p>O modo defesa percorre o problema, a solução, as decisões de engenharia e as três pontes com a disciplina: o léxico do <code>LIV</code>, a sintaxe da ficha de importação e a tratabilidade do roteiro de inventário. Cada passo diz o que mostrar e o que <em>não</em> afirmar.</p>
+        <div class="btn-row"><a class="btn" href="defesa/">Abrir modo defesa</a><a class="btn btn--ghost" href="fontes/">Ver matriz de cobertura</a></div>
+      </div>
+      <div class="card" style="background:#fdfcf8">
+        <div class="card__kicker">Três pontes</div>
+        <div class="timeline" style="margin:.4rem 0 0">
+          <div class="timeline__item"><div class="timeline__when">Nível 3 · Chomsky</div><h3>LIV[0-9]3 e [1-6][A-E]</h3><p>Expressão regular, AFD totalizado e o ponto exato de rejeição.</p></div>
+          <div class="timeline__item timeline__item--green"><div class="timeline__when">Nível 2 · Chomsky</div><h3>Ficha de importação com colchetes</h3><p>Gramática, árvore sintática e pilha com empilhar/desempilhar visíveis.</p></div>
+          <div class="timeline__item timeline__item--amber"><div class="timeline__when">Complexidade</div><h3>Certificado, decisão e otimização</h3><p>Verificar uma rota é barato; decidir se existe dentro do orçamento é NP-completo.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight section--paper2">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;justify-content:space-between">
+    <div>
+      <div class="eyebrow">Fontes</div>
+      <h3 style="margin:0">20 PDFs de aula, 2 atividades, 5 documentos e 3 revisões de código — todos rastreados.</h3>
+    </div>
+    <a class="btn" href="fontes/">Abrir a matriz de cobertura</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="rotinas/">15 simuladores</a></li>
+          <li><a href="exercicios/">Exercícios e desafios</a></li>
+          <li><a href="revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="jornada/">Jornada do PI</a></li>
+          <li><a href="defesa/">Modo defesa</a></li>
+          <li><a href="fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

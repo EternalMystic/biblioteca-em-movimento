@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linguagens formais e expressões regulares · Biblioteca em Movimento</title>
+<meta name="description" content="Alfabeto, cadeia e linguagem dão o vocabulário mínimo para descrever o que o sistema aceita. As expressões regulares escrevem esses conjuntos de forma finita, e três desafios práticos mostram onde elas acertam e onde param.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Linguagens formais e expressões regulares · Biblioteca em Movimento">
+<meta property="og:description" content="Alfabeto, cadeia e linguagem dão o vocabulário mínimo para descrever o que o sistema aceita. As expressões regulares escrevem esses conjuntos de forma finita, e três desafios práticos mostram onde elas acertam e onde param.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-02-linguagens/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-02-linguagens/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Teoria da Computação</span><span>/</span><span>Aula 2</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--tc">Teoria da Computação</span><span class="badge">pp. 2–29</span></div>
+    <h1>Linguagens formais e expressões regulares</h1>
+    <p class="page-head__lead">Alfabeto, cadeia e linguagem dão o vocabulário mínimo para descrever o que o sistema aceita. As expressões regulares escrevem esses conjuntos de forma finita, e três desafios práticos mostram onde elas acertam e onde param.</p>
+    <div class="page-head__meta"><span class="mono">aula2.pdf — Nivelamento e Fundamentos de Linguagens Formais</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/validacao/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#955300"><p>O formulário de cadastro oferece uma lista fechada de gavetas: 1A, 1B, até 6E. Quem observa o sistema vê um combo; quem observa a teoria vê uma linguagem finita, com trinta cadeias, imposta pela interface. A aula 2 constrói o vocabulário que permite dizer isso com precisão — alfabeto, cadeia, linguagem — e a notação que descreve padrões de forma compacta.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Reescrever uma pilha como TAD formal, com conjunto de estados S e alfabeto E, antes de pensar em vetores e ponteiros.</li><li>Ler as assinaturas Push : S × E → S e Pop : S → S × E identificando domínio e contradomínio.</li><li>Definir alfabeto, cadeia, comprimento, cadeia vazia e linguagem, e classificar exemplos finitos e infinitos.</li><li>Construir expressões regulares com união, concatenação e fecho de Kleene e explicar por que elas reconhecem exatamente as linguagens regulares.</li></ul></div>
+<p>Antes disso, há um desvio deliberado pela pilha, para treinar a tradução de uma estrutura conhecida para a linguagem dos conjuntos e funções.</p>
+<h2 id="algoritmo-formal-finito-e-inequivoco-tad-formal-e-estado-da-pilha-s">Algoritmo formal finito e inequívoco; TAD formal e estado da pilha S</h2>
+<p>Algoritmo, aqui, é procedimento formal, finito e não ambíguo, executável em princípio por uma Máquina de Turing. Um <code>for</code> que percorre as trinta gavetas é algoritmo; “escolha uma gaveta adequada” não é, porque deixa a decisão em aberto.</p>
+<p>O Tipo Abstrato de Dados apaga o hardware. Define-se S como o conjunto de todos os estados possíveis da pilha — s₀ para a vazia, s₁ para “um elemento no topo” — e E como o conjunto de elementos válidos, o alfabeto da pilha. O erro comum é começar pelo código: quem não define S e E acaba com métodos que aceitam desempilhar do vazio.</p>
+<h2 id="produto-cartesiano-funcaodominiocontradominio-push-e-pop">Produto cartesiano, função/domínio/contradomínio; push e pop</h2>
+<p>O produto cartesiano S × E forma pares ordenados. A função transforma esse par em resultado, e a seta separa o que a máquina exige do que ela devolve.</p>
+<p><code>Push : S × E → S</code> e <code>Pop : S → S × E</code>. <code>Push(s₀, x) = s₁</code> diz que, no estado vazio com o elemento x, a máquina passa ao estado que tem x no topo. <code>Pop(s₁) = (s₀, x)</code> diz que ela volta ao estado anterior e devolve o elemento. O pop devolve um par porque informa duas coisas: novo estado e dado extraído.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Operação</th>
+<th>Assinatura</th>
+<th>Entrada exigida</th>
+<th>Saída produzida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Push</td>
+<td>S × E → S</td>
+<td>Estado atual e elemento</td>
+<td>Novo estado com o elemento no topo</td>
+</tr>
+<tr>
+<td>Pop</td>
+<td>S → S × E</td>
+<td>Apenas o estado atual</td>
+<td>Estado anterior e elemento removido</td>
+</tr>
+</tbody>
+</table></div>
+<p>O pop não se aplica ao estado vazio, porque não há elemento a devolver. Retornar <code>null</code> ou zero inventa um valor fora de E; em produção, isso vira exceção ou verificação explícita.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">regitro_livros.cs · linhas 341–347</span></div>
+  <p style="margin:0;font-size:.9rem">A gaveta é montada por dois laços sobre fileiras {"1".."6"} e colunas {"A".."E"}, gerando as 30 etiquetas de 1A a 6E — uma linguagem finita embutida no formulário.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">regitro_livros.cs · linha 91</span></div>
+  <p style="margin:0;font-size:.9rem">O código é gerado por concatenação de "LIV" com Random().Next(100, 999); não há expressão regular nem teste de pertinência antes de gravar.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula2.pdf pp. 27–29</span></div>
+  <p style="margin:0;font-size:.9rem">As expressões ^[01]*00$, ([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2}) e (Error|Failed).*port \d+ são exercícios de sala no RegExr, não código do PI.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--future">Proposta / evolução</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula2.pdf pp. 24–26</span></div>
+  <p style="margin:0;font-size:.9rem">Validar o padrão LIV### com regex no cadastro é proposta de melhoria: hoje a coluna aceita qualquer texto de até 10 caracteres.</p>
+</div></div></section><h2 id="teste-de-mesa-e-ponte-para-automato-de-pilha">Teste de mesa e ponte para autômato de pilha</h2>
+<p>Com E = {x, y}, partindo de s₀: <code>Push(s₀, x) = s₁</code>; <code>Push(s₁, y) = s₂</code>, com y no topo e x abaixo; <code>Pop(s₂) = (s₁, y)</code> devolve y; <code>Pop(s₁) = (s₀, x)</code> devolve x e esvazia. Quatro transições, nenhum acesso ao fundo sem remover o topo.</p>
+<p>É essa observação que faz a ponte. O computador não sabe o que é uma pilha física; entende transições de estado. Acoplando a pilha a um autômato finito, obtém-se o autômato de pilha, modelo do Nível 2 e base da análise sintática. O limite é estrutural: ler o fundo exige destruir o topo.</p>
+<h2 id="alfabeto-cadeias-comprimento-e-linguagens">Alfabeto Σ, cadeias, comprimento, ε e linguagens</h2>
+<p>Alfabeto é conjunto finito e não vazio de símbolos indivisíveis: Σ₁ = {0, 1}, Σ₂ = {a, …, z}. Cadeia é sequência finita de símbolos de Σ; |w| conta os símbolos; ε é a cadeia vazia, de comprimento zero. Linguagem é qualquer conjunto de cadeias sobre Σ, finito ou infinito, com pertinência definida por regra clara.</p>
+<p>L₁ = {0, 10, 11} é finita; L₂ = {w | w possui número par de 1s} é infinita, e a pertinência se decide pela paridade: 0101 ∈ L₂, 0111 ∉ L₂. No PI, a lista de gavetas é uma linguagem finita de trinta cadeias, enquanto a coluna <code>codigo_livro</code> aceita qualquer texto de até dez caracteres. Essa assimetria entre interface restrita e coluna permissiva é o que a noção de linguagem torna visível.</p>
+<h2 id="er-uniao-concatenacao-fecho-de-kleene-e-exemplos-binarios">ER, união, concatenação, fecho de Kleene e exemplos binários</h2>
+<p>Expressão regular é a notação algébrica das linguagens regulares, construída com união (A ∪ B), concatenação (A ◦ B) e fecho de Kleene (A*), que repete zero ou mais vezes e sempre inclui ε.</p>
+<p>Com Σ = {0, 1}, <code>0*10*</code> descreve as cadeias com exatamente um 1; <code>(0 ∪ 1)*</code> descreve todas as binárias, inclusive a vazia; <code>1(0 ∪ 1)*0</code> descreve as que começam com 1 e terminam com 0.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Operação</th>
+<th>Notação</th>
+<th>Efeito sobre o conjunto</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>União</td>
+<td>A ∪ B</td>
+<td>Pertence a A ou a B</td>
+<td>{0} ∪ {11} = {0, 11}</td>
+</tr>
+<tr>
+<td>Concatenação</td>
+<td>A ◦ B</td>
+<td>Cadeia de A seguida de B</td>
+<td 00_ 10>{0, 1}{0} =</td>
+</tr>
+<tr>
+<td>Fecho de Kleene</td>
+<td>A*</td>
+<td>Zero ou mais repetições</td>
+<td 00_ 0_ _ ε_>{0}* =</td>
+</tr>
+</tbody>
+</table></div>
+<p>O erro frequente é ler a estrela como “uma ou mais”. Ela inclui a cadeia vazia, e isso muda o conjunto: <code>0*1</code> aceita “1”, porque <code>0*</code> pode ser vazio.</p>
+<h2 id="equivalencia-erautomato-motores-regex-e-regexr">Equivalência ER–autômato, motores regex e RegExr</h2>
+<p>A validação em tempo de execução é feita por autômatos finitos. Um teorema garante que toda expressão regular se converte em autômato finito e vice-versa; a expressão é a notação, o autômato é o mecanismo que lê símbolo por símbolo sem voltar atrás.</p>
+<p>Motores reais, como o PCRE, oferecem atalhos sintáticos, mas o poder nos bastidores continua restrito às linguagens regulares — com a ressalva de que retroreferências e recursão de grupo extrapolam esse modelo. O RegExr serve de bancada: expressão em cima, texto embaixo, destaque em tempo real, o que mostra rapidamente quando uma expressão “quase certa” aceita o caso errado.</p>
+<h2 id="tres-desafios-de-regex-00-mac-e-logs-errorfailed-com-porta">Três desafios de regex: 00, MAC e logs Error/Failed com porta</h2>
+<p>O primeiro desafio valida log de catraca que termina em “00”: <code>^[01]*00$</code>, com âncoras para não aceitar subcadeia no meio. O segundo extrai endereço MAC, seis blocos hexadecimais separados por dois pontos: <code>([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})</code>. O terceiro filtra erro crítico e porta: <code>(Error|Failed).*port \d+</code>, onde a união aparece como o “ou” do padrão.</p>
+<p>Nenhum desses padrões está no PI. O sistema não usa expressões regulares: a busca em <code>Form2.cs</code> usa <code>LIKE '%…%'</code> no SQL, e o cadastro valida apenas “título não vazio”. Os desafios são modelo didático; a proposta natural é aplicar <code>^LIV\d{3}$</code> ao código e <code>^[1-6][A-E]$</code> à gaveta, com mensagem antes do INSERT.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>Confirmado no código: a gaveta vem de dois laços aninhados sobre seis fileiras e cinco colunas, produzindo trinta opções e um item inicial “Selecione uma gaveta…”. O código é “LIV” mais inteiro aleatório entre 100 e 998. O <code>banco.sql</code> declara <code>codigo_livro varchar(10)</code> e <code>gaveta varchar(50)</code>, sem restrição de formato.</p>
+<p>Modelo didático: as três expressões, o alfabeto da gaveta e a linguagem dos códigos válidos. Ementa/proposta: levar a validação por regex ao formulário e à importação de fichas. O sistema usa MySQL local; não há login, OCR, API pública nem banco em nuvem.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Avalie <code>^[01]*00$</code>. “10100”: as âncoras prendem início e fim, <code>[01]*</code> consome “101” e o par final fecha — aceita. “00”: a estrela casa com zero símbolos e o par fecha — aceita. “1001”: termina em “01”, o par final não casa — rejeita. “111”: não há “00” no fim — rejeita. “010100”: a estrela consome “0101” e o par fecha — aceita.</p>
+<p>Sem as âncoras, o motor encontraria “00” no meio de “1001” e aprovaria uma cadeia inválida. A âncora é o que separa “contém o padrão” de “é o padrão”.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>“Por que a gaveta é um problema de linguagem formal e não apenas uma caixa de texto?”</strong></p>
+<p>Porque a localização física só tem trinta valores possíveis, e esse conjunto cabe numa expressão regular simples. Com campo livre, o banco aceitaria “3C”, “3c”, “gaveta 3” e “C3”, e toda consulta por localização passaria a exigir normalização. A interface resolve o problema oferecendo apenas cadeias da linguagem, o que é mais barato do que corrigir depois. O mesmo raciocínio vale para o código da obra, hoje gerado sem verificação.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Escreva a expressão regular que descreve exatamente as trinta gavetas e explique por que <code>^[A-E][1-6]$</code> está errada.</p>
+<details><summary>Ver resposta</summary>
+
+`^[1-6][A-E]$`: fileira de 1 a 6 seguida de coluna de A a E, sem espaços. Aceita 6 × 5 = 30 cadeias, as mesmas geradas pelos dois laços do formulário. `^[A-E][1-6]$` inverte a ordem e descreve outro conjunto: aceitaria “A3” e rejeitaria “3A”. Falta ainda decidir se minúsculas são normalizadas antes da comparação, o que pede `^[1-6][A-Ea-e]$` ou conversão prévia.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="tc-02-linguagens-0" data-track="tc">
+  <div class="quiz__q">1. Qual é o comprimento da cadeia vazia ε?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-02-linguagens-0" data-i="0" data-answer="0"><span class="mark">A</span><span>0</span></button><button class="quiz__opt" data-q="tc-02-linguagens-0" data-i="1" data-answer="0"><span class="mark">B</span><span>1</span></button><button class="quiz__opt" data-q="tc-02-linguagens-0" data-i="2" data-answer="0"><span class="mark">C</span><span>Depende do alfabeto</span></button><button class="quiz__opt" data-q="tc-02-linguagens-0" data-i="3" data-answer="0"><span class="mark">D</span><span>Indefinido</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A cadeia vazia não contém símbolos, então |ε| = 0. Ela pertence a A* por definição do fecho de Kleene.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-02-linguagens-1" data-track="tc">
+  <div class="quiz__q">2. Qual assinatura corresponde à operação de desempilhar?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-02-linguagens-1" data-i="0" data-answer="1"><span class="mark">A</span><span>Push : S × E → S</span></button><button class="quiz__opt" data-q="tc-02-linguagens-1" data-i="1" data-answer="1"><span class="mark">B</span><span>Pop : S → S × E</span></button><button class="quiz__opt" data-q="tc-02-linguagens-1" data-i="2" data-answer="1"><span class="mark">C</span><span>Pop : S × E → S</span></button><button class="quiz__opt" data-q="tc-02-linguagens-1" data-i="3" data-answer="1"><span class="mark">D</span><span>Push : E → S × E</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O pop recebe apenas o estado atual e devolve um par: o estado anterior e o elemento removido do topo.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-02-linguagens-2" data-track="tc">
+  <div class="quiz__q">3. A expressão 0*1, sobre Σ = {0, 1}, aceita a cadeia “1”?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-02-linguagens-2" data-i="0" data-answer="0"><span class="mark">A</span><span>Sim, porque 0* pode casar com zero símbolos.</span></button><button class="quiz__opt" data-q="tc-02-linguagens-2" data-i="1" data-answer="0"><span class="mark">B</span><span>Não, porque falta pelo menos um zero antes do 1.</span></button><button class="quiz__opt" data-q="tc-02-linguagens-2" data-i="2" data-answer="0"><span class="mark">C</span><span>Não, porque a estrela exige repetição.</span></button><button class="quiz__opt" data-q="tc-02-linguagens-2" data-i="3" data-answer="0"><span class="mark">D</span><span>Somente se a cadeia tiver comprimento par.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O fecho de Kleene inclui a repetição zero vezes. Ler a estrela como “uma ou mais” é o erro mais comum do assunto.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-02-linguagens-3" data-track="tc">
+  <div class="quiz__q">4. Por que ^[01]*00$ precisa das âncoras de início e fim?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-02-linguagens-3" data-i="0" data-answer="1"><span class="mark">A</span><span>Para permitir que o motor use índices.</span></button><button class="quiz__opt" data-q="tc-02-linguagens-3" data-i="1" data-answer="1"><span class="mark">B</span><span>Sem elas, o padrão casaria com qualquer cadeia que contenha “00” no meio.</span></button><button class="quiz__opt" data-q="tc-02-linguagens-3" data-i="2" data-answer="1"><span class="mark">C</span><span>Para aceitar a cadeia vazia.</span></button><button class="quiz__opt" data-q="tc-02-linguagens-3" data-i="3" data-answer="1"><span class="mark">D</span><span>Para tornar a expressão uma linguagem livre de contexto.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Sem ^ e $, o motor encontra “00” dentro de “1001” e aprova uma cadeia que não termina em duplo zero.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–29</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="tc-02-linguagens" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#algoritmo-formal-finito-e-inequivoco-tad-formal-e-estado-da-pilha-s">Algoritmo formal finito e inequívoco; TAD formal e estado da pilha S</a></li><li><a href="#produto-cartesiano-funcaodominiocontradominio-push-e-pop">Produto cartesiano, função/domínio/contradomínio; push e pop</a></li><li><a href="#teste-de-mesa-e-ponte-para-automato-de-pilha">Teste de mesa e ponte para autômato de pilha</a></li><li><a href="#alfabeto-cadeias-comprimento-e-linguagens">Alfabeto Σ, cadeias, comprimento, ε e linguagens</a></li><li><a href="#er-uniao-concatenacao-fecho-de-kleene-e-exemplos-binarios">ER, união, concatenação, fecho de Kleene e exemplos binários</a></li><li><a href="#equivalencia-erautomato-motores-regex-e-regexr">Equivalência ER–autômato, motores regex e RegExr</a></li><li><a href="#tres-desafios-de-regex-00-mac-e-logs-errorfailed-com-porta">Três desafios de regex: 00, MAC e logs Error/Failed com porta</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

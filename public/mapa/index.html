@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa de aulas · Biblioteca em Movimento</title>
+<meta name="description" content="Mapa das 23 aulas de Estruturas de Dados, Grafos e Teoria da Computação com páginas dos PDFs e simuladores.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Mapa de aulas · Biblioteca em Movimento">
+<meta property="og:description" content="Mapa das 23 aulas de Estruturas de Dados, Grafos e Teoria da Computação com páginas dos PDFs e simuladores.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/mapa/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/mapa/">
+<link rel="icon" type="image/png" href="../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../assets/img/logo.png">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script src="../assets/js/search-index.js" defer></script>
+<script src="../assets/js/site.js" defer></script>
+<script>window.PI_TOTAL_LESSONS=23;</script><script src="../assets/js/mapa.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../">Início</a><a href="../mapa/" aria-current="page">Mapa de aulas</a><a href="../jornada/">Jornada do PI</a><a href="../rotinas/">Simuladores</a><a href="../exercicios/">Exercícios</a><a href="../revisao/">Revisão</a><a href="../defesa/">Defesa</a><a href="../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui"><a href="../">Início</a><span>/</span><span>Mapa de aulas</span></nav>
+    <div class="eyebrow">Percurso completo</div>
+    <h1>Mapa das 23 aulas</h1>
+    <p class="page-head__lead">Cada linha corresponde a uma apresentação do professor, com o PDF, as páginas e o simulador que transforma o conceito em operação. A ordem é uma sugestão: a trilha de Teoria começa pelo mesmo problema que a de Estruturas resolve.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;margin-top:1.4rem">
+      <div style="flex:1 1 320px;max-width:420px">
+        <div class="progress-bar"><i data-total-progress style="width:0%"></i></div>
+        <div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--ink-3);margin-top:.35rem"><span data-total-label>0 de 23 aulas estudadas</span><span>salvo neste navegador</span></div>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--sm btn--ghost" href="../revisao/">Revisar</a>
+        <a class="btn btn--sm btn--ghost" href="../jornada/">Jornada do PI</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrap section--tight">
+  <div class="pill-list" role="group" aria-label="Filtrar aulas" style="margin-bottom:1.6rem">
+    <button class="chip" data-filter="all" aria-pressed="true">Todas</button>
+    <button class="chip" data-filter="ed" aria-pressed="false">Estruturas de Dados</button>
+    <button class="chip" data-filter="grafos" aria-pressed="false">Grafos</button>
+    <button class="chip" data-filter="tc" aria-pressed="false">Teoria da Computação</button>
+    <button class="chip" data-filter="done" aria-pressed="false">Estudadas</button>
+    <button class="chip" data-filter="todo" aria-pressed="false">Pendentes</button>
+    <button class="chip" data-filter="sim" aria-pressed="false">Com simulador</button>
+  </div>
+  
+<section class="track-block" id="ed" data-track-block="ed">
+  <div class="track-head" style="--track:#28407F">
+    <h2>Estruturas de Dados</h2>
+    <span class="badge badge--ed">9 aulas</span>
+    <span class="count">Comece pela aula 01 ou use os filtros acima</span>
+  </div>
+  <div class="lesson-list">
+<a class="lesson-row" href="../aulas/ed-01-fundamentos/" data-track="ed" data-slug="ed-01-fundamentos" style="--track:#28407F">
+  <span class="lesson-row__num">01</span>
+  <span>
+    <span class="lesson-row__t">Fundamentos, memória e visão geral</span>
+    <span class="lesson-row__s">Por que estruturas de dados existem e o que a disciplina cobre.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–18</span>
+    <span>Simulador 1</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/ed-02-complexidade/" data-track="ed" data-slug="ed-02-complexidade" style="--track:#28407F">
+  <span class="lesson-row__num">02</span>
+  <span>
+    <span class="lesson-row__t">Classes de complexidade e notação Big-O</span>
+    <span class="lesson-row__s">Custo de um algoritmo não é a mesma coisa que dificuldade de um problema.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–12</span>
+    <span>Simulador 7</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/ed-03-ponteiros/" data-track="ed" data-slug="ed-03-ponteiros" style="--track:#28407F">
+  <span class="lesson-row__num">03</span>
+  <span>
+    <span class="lesson-row__t">Gerenciamento dinâmico e ponteiros</span>
+    <span class="lesson-row__s">Endereço, valor e o contrato de quem libera a memória.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–8</span>
+    <span>Simulador 8</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/ed-04-pilhas-filas/" data-track="ed" data-slug="ed-04-pilhas-filas" style="--track:#28407F">
+  <span class="lesson-row__num">04</span>
+  <span>
+    <span class="lesson-row__t">Pilhas, filas e listas lineares</span>
+    <span class="lesson-row__s">LIFO e FIFO: duas disciplinas de acesso, dois invariantes.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">aula3 pp. 9–13; aula5 (1) pp. 2–12</span>
+    <span>Simulador 15</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/ed-05-listas/" data-track="ed" data-slug="ed-05-listas" style="--track:#28407F">
+  <span class="lesson-row__num">05</span>
+  <span>
+    <span class="lesson-row__t">Listas dinâmicas e o List&lt;T&gt; do projeto</span>
+    <span class="lesson-row__s">O vetor que cresce: capacidade, cópia e custo amortizado.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">aula5 (1) pp. 2–12; aula1 (1) pp. 15–18</span>
+    <span>Simulador 8</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/ed-06-ordenacao/" data-track="ed" data-slug="ed-06-ordenacao" style="--track:#28407F">
+  <span class="lesson-row__num">06</span>
+  <span>
+    <span class="lesson-row__t">Algoritmos de ordenação simples</span>
+    <span class="lesson-row__s">Bubble, Selection e Insertion contados passo a passo.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–13</span>
+    <span>Simulador 9</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/ed-07-merge-busca/" data-track="ed" data-slug="ed-07-merge-busca" style="--track:#28407F">
+  <span class="lesson-row__num">07</span>
+  <span>
+    <span class="lesson-row__t">Merge Sort e busca binária</span>
+    <span class="lesson-row__s">Dividir para ordenar; ordenar para poder descartar metade.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–15</span>
+    <span>Simulador 2</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/ed-08-hash/" data-track="ed" data-slug="ed-08-hash" style="--track:#28407F">
+  <span class="lesson-row__num">08</span>
+  <span>
+    <span class="lesson-row__t">Tabelas hash</span>
+    <span class="lesson-row__s">Acesso direto com uma promessa: O(1) médio, O(n) no pior caso.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–11</span>
+    <span>Simulador 2</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/ed-09-arvores/" data-track="ed" data-slug="ed-09-arvores" style="--track:#28407F">
+  <span class="lesson-row__num">09</span>
+  <span>
+    <span class="lesson-row__t">Introdução a árvores e BST</span>
+    <span class="lesson-row__s">Hierarquia, altura e o preço de inserir em ordem.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 12–17</span>
+    <span>Simulador 14</span>
+  </span>
+</a></div>
+</section>
+<section class="track-block" id="grafos" data-track-block="grafos">
+  <div class="track-head" style="--track:#002F2D">
+    <h2>Grafos</h2>
+    <span class="badge badge--grafos">7 aulas</span>
+    <span class="count">Comece pela aula 01 ou use os filtros acima</span>
+  </div>
+  <div class="lesson-list">
+<a class="lesson-row" href="../aulas/gr-01-fundamentos/" data-track="grafos" data-slug="gr-01-fundamentos" style="--track:#002F2D">
+  <span class="lesson-row__num">01</span>
+  <span>
+    <span class="lesson-row__t">Grafos: fundamentos e representações</span>
+    <span class="lesson-row__s">Vértices, arestas e a escolha entre matriz e lista.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–15</span>
+    <span>Simulador 5</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/gr-02-subgrafos/" data-track="grafos" data-slug="gr-02-subgrafos" style="--track:#002F2D">
+  <span class="lesson-row__num">02</span>
+  <span>
+    <span class="lesson-row__t">Subgrafos, cliques e independência</span>
+    <span class="lesson-row__s">O que sobra quando você escolhe parte das conexões.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–6</span>
+    <span>Simulador 5</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/gr-03-bfs-dfs/" data-track="grafos" data-slug="gr-03-bfs-dfs" style="--track:#002F2D">
+  <span class="lesson-row__num">03</span>
+  <span>
+    <span class="lesson-row__t">Percursos: BFS e DFS</span>
+    <span class="lesson-row__s">Fila para alargar, pilha para aprofundar.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–9</span>
+    <span>Simulador 5</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/gr-04-dag-scc/" data-track="grafos" data-slug="gr-04-dag-scc" style="--track:#002F2D">
+  <span class="lesson-row__num">04</span>
+  <span>
+    <span class="lesson-row__t">Ciclos, DAG e componentes fortemente conexas</span>
+    <span class="lesson-row__s">Ordem de dependências e o que se desfaz ao transpor o grafo.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 10–15</span>
+    <span>Simulador 3</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/gr-05-mst/" data-track="grafos" data-slug="gr-05-mst" style="--track:#002F2D">
+  <span class="lesson-row__num">05</span>
+  <span>
+    <span class="lesson-row__t">Árvores geradoras e MST</span>
+    <span class="lesson-row__s">Conectar tudo gastando o mínimo.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–11</span>
+    <span>Simulador 5</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/gr-06-circuitos/" data-track="grafos" data-slug="gr-06-circuitos" style="--track:#002F2D">
+  <span class="lesson-row__num">06</span>
+  <span>
+    <span class="lesson-row__t">Circuitos, Euler e Hamilton</span>
+    <span class="lesson-row__s">Percorrer arestas ou vértices muda tudo — inclusive a classe do problema.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–9</span>
+    <span>Simulador 12</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/gr-07-caminhos/" data-track="grafos" data-slug="gr-07-caminhos" style="--track:#002F2D">
+  <span class="lesson-row__num">07</span>
+  <span>
+    <span class="lesson-row__t">Caminhos mínimos e roteamento</span>
+    <span class="lesson-row__s">Relaxar arestas até não haver mais melhoria.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–12</span>
+    <span>Simulador 5</span>
+  </span>
+</a></div>
+</section>
+<section class="track-block" id="tc" data-track-block="tc">
+  <div class="track-head" style="--track:#955300">
+    <h2>Teoria da Computação</h2>
+    <span class="badge badge--tc">7 aulas</span>
+    <span class="count">Comece pela aula 01 ou use os filtros acima</span>
+  </div>
+  <div class="lesson-list">
+<a class="lesson-row" href="../aulas/tc-01-fundamentos/" data-track="tc" data-slug="tc-01-fundamentos" style="--track:#955300">
+  <span class="lesson-row__num">01</span>
+  <span>
+    <span class="lesson-row__t">Teoria da Computação: o papel do engenheiro</span>
+    <span class="lesson-row__s">Provar o que a máquina pode fazer — e a que custo.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–21</span>
+    <span>Simulador 11</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/tc-02-linguagens/" data-track="tc" data-slug="tc-02-linguagens" style="--track:#955300">
+  <span class="lesson-row__num">02</span>
+  <span>
+    <span class="lesson-row__t">Linguagens formais e expressões regulares</span>
+    <span class="lesson-row__s">Alfabeto, cadeia, linguagem — e três desafios de regex.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–29</span>
+    <span>Simulador 4</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/tc-03-chomsky-afd/" data-track="tc" data-slug="tc-03-chomsky-afd" style="--track:#955300">
+  <span class="lesson-row__num">03</span>
+  <span>
+    <span class="lesson-row__t">Hierarquia de Chomsky e autômatos finitos</span>
+    <span class="lesson-row__s">Quatro níveis, quatro memórias — e um AFD de cinco partes.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–19</span>
+    <span>Simulador 4</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/tc-04-afn-pda/" data-track="tc" data-slug="tc-04-afn-pda" style="--track:#955300">
+  <span class="lesson-row__num">04</span>
+  <span>
+    <span class="lesson-row__t">Do não-determinismo à memória estruturada</span>
+    <span class="lesson-row__s">Quando o autômato precisa lembrar, entra a pilha.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–15</span>
+    <span>Simulador 4</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/tc-05-computabilidade/" data-track="tc" data-slug="tc-05-computabilidade" style="--track:#955300">
+  <span class="lesson-row__num">05</span>
+  <span>
+    <span class="lesson-row__t">Computabilidade e a Máquina de Turing</span>
+    <span class="lesson-row__s">Memória sem limite muda o que é possível reconhecer.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–19</span>
+    <span>Simulador 11</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/tc-06-turing/" data-track="tc" data-slug="tc-06-turing" style="--track:#955300">
+  <span class="lesson-row__num">06</span>
+  <span>
+    <span class="lesson-row__t">A Máquina de Turing em detalhe</span>
+    <span class="lesson-row__s">Sétupla, fita, branco e a máquina que simula máquinas.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–19</span>
+    <span>Simulador 11</span>
+  </span>
+</a>
+<a class="lesson-row" href="../aulas/tc-07-complexidade/" data-track="tc" data-slug="tc-07-complexidade" style="--track:#955300">
+  <span class="lesson-row__num">07</span>
+  <span>
+    <span class="lesson-row__t">Decidibilidade, complexidade e tratabilidade</span>
+    <span class="lesson-row__s">Do “existe algoritmo?” ao “quanto custa?” — e quando a resposta é cara.</span>
+  </span>
+  <span class="lesson-row__meta">
+    <span class="mono">pp. 2–14</span>
+    <span>Simulador 12</span>
+  </span>
+</a></div>
+</section>
+  <div class="callout callout--green" style="margin-top:2rem">
+    <div class="callout__title">Trilha sugerida para a primeira semana</div>
+    <p>Comece por <a href="../aulas/ed-01-fundamentos/">Fundamentos</a> e <a href="../aulas/ed-02-complexidade/">Big-O</a>, faça a rotina <a href="../rotinas/gaveteiro/">Gaveteiro</a> e depois leia <a href="../aulas/tc-02-linguagens/">Linguagens formais</a> com a rotina <a href="../rotinas/validacao/">Validação</a>. Em duas horas você cobre a base que a banca cobra.</p>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../rotinas/">15 simuladores</a></li>
+          <li><a href="../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../jornada/">Jornada do PI</a></li>
+          <li><a href="../defesa/">Modo defesa</a></li>
+          <li><a href="../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

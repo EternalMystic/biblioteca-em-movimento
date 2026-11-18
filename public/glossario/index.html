@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossário · Biblioteca em Movimento</title>
+<meta name="description" content="Glossário de estruturas de dados, grafos, autômatos e complexidade com links para as aulas.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Glossário · Biblioteca em Movimento">
+<meta property="og:description" content="Glossário de estruturas de dados, grafos, autômatos e complexidade com links para as aulas.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/glossario/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/glossario/">
+<link rel="icon" type="image/png" href="../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../assets/img/logo.png">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script src="../assets/js/search-index.js" defer></script>
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/glossario.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../">Início</a><a href="../mapa/">Mapa de aulas</a><a href="../jornada/">Jornada do PI</a><a href="../rotinas/">Simuladores</a><a href="../exercicios/">Exercícios</a><a href="../revisao/">Revisão</a><a href="../defesa/">Defesa</a><a href="../fontes/" aria-current="page">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui"><a href="../">Início</a><span>/</span><span>Glossário</span></nav>
+    <div class="eyebrow">Léxico do semestre</div>
+    <h1>Glossário</h1>
+    <p class="page-head__lead">75 verbetes curtos, com sinônimos para busca e link para a aula onde o conceito é desenvolvido. Quando o termo aparece no PI, a definição diz exatamente onde.</p>
+  </div>
+</div>
+<div class="wrap section--tight">
+  <div class="pill-list" style="margin-bottom:1.4rem" role="group" aria-label="Filtrar glossário"><button class="chip" data-gfilter="todas" aria-pressed="true">Todas</button><button class="chip" data-gfilter="estruturas" aria-pressed="false">Estruturas</button><button class="chip" data-gfilter="complexidade" aria-pressed="false">Complexidade</button><button class="chip" data-gfilter="grafos" aria-pressed="false">Grafos</button><button class="chip" data-gfilter="automatos" aria-pressed="false">Autômatos</button><button class="chip" data-gfilter="pi" aria-pressed="false">No PI</button></div>
+  <div class="gloss-list"><div class="gloss-item" id="automato-de-pilha" data-group="automatos">
+  <h3>Autômato de pilha <span class="muted" style="font-weight:400;font-size:.85rem">Autômato Finito com Pilha</span></h3>
+  <p>Modelo de reconhecimento que combina controle finito com uma pilha, permitindo memória LIFO potencialmente ilimitada. Autômatos de pilha reconhecem exatamente as linguagens livres de contexto quando usados no modelo não determinístico. A pilha do modelo é memória formal, não a pilha de execução de um programa.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-04-afn-pda/">Ver aula</a> · <span class="muted">também: AP, PDA, pushdown automaton</span></div>
+</div><div class="gloss-item" id="avl" data-group="estruturas">
+  <h3>AVL <span class="muted" style="font-weight:400;font-size:.85rem">Árvore AVL</span></h3>
+  <p>Árvore binária de busca autoequilibrada em que a diferença entre as alturas das subárvores de qualquer nó permanece limitada, usualmente por um. Rotações simples ou duplas restauram o equilíbrio após atualizações. Assim, busca, inserção e remoção têm custo assintótico logarítmico.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-09-arvores/">Ver aula</a> · <span class="muted">também: árvore AVL, árvore balanceada</span></div>
+</div><div class="gloss-item" id="bellman-ford" data-group="grafos">
+  <h3>Bellman-Ford <span class="muted" style="font-weight:400;font-size:.85rem">Algoritmo de Bellman-Ford</span></h3>
+  <p>Algoritmo de caminhos mínimos de uma origem que relaxa todas as arestas repetidamente. Aceita pesos negativos e consegue detectar ciclo negativo alcançável a partir da origem. Em sua implementação clássica, requer O(VE) tempo, sendo mais geral e mais lento que Dijkstra.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-07-caminhos/">Ver aula</a> · <span class="muted">também: Bellman Ford, caminhos com pesos negativos</span></div>
+</div><div class="gloss-item" id="bfs" data-group="grafos">
+  <h3>BFS <span class="muted" style="font-weight:400;font-size:.85rem">Busca em Largura</span></h3>
+  <p>Percurso de grafo que visita primeiro os vértices a menor distância em número de arestas a partir da origem. Usa uma fila para organizar a fronteira. Em grafos não ponderados, calcula distâncias mínimas em número de arestas e uma árvore de predecessores, com custo O(V+E).</p>
+  <div class="gloss-meta"><a href="../aulas/gr-03-bfs-dfs/">Ver aula</a> · <span class="muted">também: busca em largura, breadth-first search</span></div>
+</div><div class="gloss-item" id="big-o" data-group="complexidade">
+  <h3>Big-O <span class="muted" style="font-weight:400;font-size:.85rem">Notação O Grande</span></h3>
+  <p>Notação que fornece um limite assintótico superior, em sentido formal, para o crescimento de uma função a partir de constantes positivas e de um limiar. Em análise de algoritmos, `O(f(n))` descreve uma classe de crescimento e não necessariamente o tempo exato de execução.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-02-complexidade/">Ver aula</a> · <span class="muted">também: O grande, O(f(n)), ordem de</span></div>
+</div><div class="gloss-item" id="bst" data-group="estruturas">
+  <h3>BST <span class="muted" style="font-weight:400;font-size:.85rem">Árvore Binária de Busca</span></h3>
+  <p>Árvore binária em que, para cada nó, as chaves da subárvore esquerda respeitam uma ordem menor e as da direita uma ordem maior, conforme a política para duplicatas. Busca, inserção e remoção custam proporcionalmente à altura: podem ser logarítmicas ou lineares.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-09-arvores/">Ver aula</a> · <span class="muted">também: árvore binária de busca, ABB, binary search tree</span></div>
+</div><div class="gloss-item" id="busca-binaria" data-group="complexidade">
+  <h3>Busca binária <span class="muted" style="font-weight:400;font-size:.85rem">Busca Binária</span></h3>
+  <p>Algoritmo de busca em uma sequência ordenada que compara a chave com o elemento central e descarta metade do intervalo a cada passo. Sua versão iterativa usa espaço constante e realiza O(log n) comparações no pior caso, desde que o acesso ao meio seja eficiente.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-07-merge-busca/">Ver aula</a> · <span class="muted">também: binary search, pesquisa binária</span></div>
+</div><div class="gloss-item" id="busca-linear" data-group="complexidade">
+  <h3>Busca linear <span class="muted" style="font-weight:400;font-size:.85rem">Busca Linear</span></h3>
+  <p>Algoritmo que examina os elementos sequencialmente até encontrar a chave ou alcançar o fim. Funciona sem exigir ordenação e usa espaço auxiliar constante na versão iterativa. No pior caso, compara todos os n elementos, resultando em custo O(n); a posição encontrada determina o custo em casos favoráveis.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-07-merge-busca/">Ver aula</a> · <span class="muted">também: busca sequencial, linear search</span></div>
+</div><div class="gloss-item" id="caminho-e-circuito-euleriano" data-group="grafos">
+  <h3>Caminho e circuito euleriano <span class="muted" style="font-weight:400;font-size:.85rem">Caminho e Circuito Euleriano</span></h3>
+  <p>Caminho euleriano percorre cada aresta exatamente uma vez; circuito euleriano também retorna ao vértice inicial. A condição de existência depende da conectividade e dos graus: em grafo não direcionado, circuito exige todos os graus pares, enquanto caminho aberto exige exatamente zero ou dois graus ímpares.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-06-circuitos/">Ver aula</a> · <span class="muted">também: Euleriano, trilha euleriana, circuito de Euler</span></div>
+</div><div class="gloss-item" id="caminho-hamiltoniano-e-tsp" data-group="grafos">
+  <h3>Caminho hamiltoniano e TSP <span class="muted" style="font-weight:400;font-size:.85rem">Caminho Hamiltoniano e Problema do Caixeiro-Viajante</span></h3>
+  <p>Caminho hamiltoniano visita cada vértice exatamente uma vez; um circuito hamiltoniano retorna à origem. O TSP procura um circuito de menor custo que visite todos os vértices, em uma formulação de otimização. Diferentemente do caso euleriano, a existência não possui critério simples geral baseado apenas em graus.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-06-circuitos/">Ver aula</a> · <span class="muted">também: Hamiltoniano, TSP, caixeiro viajante</span></div>
+</div><div class="gloss-item" id="caso-medio-e-pior-caso" data-group="complexidade">
+  <h3>Caso médio e pior caso <span class="muted" style="font-weight:400;font-size:.85rem">Análise de Caso Médio e Pior Caso</span></h3>
+  <p>O pior caso mede o maior custo entre entradas de determinado tamanho. O caso médio calcula um custo esperado segundo uma distribuição de entradas explicitada. O segundo não pode ser inferido apenas do pior caso: depende do modelo probabilístico e das hipóteses sobre os dados.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-02-complexidade/">Ver aula</a> · <span class="muted">também: average case, worst case, caso médio</span></div>
+</div><div class="gloss-item" id="certificado-e-reducao" data-group="complexidade">
+  <h3>Certificado e redução <span class="muted" style="font-weight:400;font-size:.85rem">Certificado Verificável e Redução Polinomial</span></h3>
+  <p>Certificado é uma evidência que permite verificar uma resposta afirmativa em tempo polinomial, como uma atribuição satisfatória ou um caminho. Redução transforma instâncias de um problema em outro preservando a resposta. Reduções polinomiais fundamentam comparações de dificuldade e provas de NP-completude.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-07-complexidade/">Ver aula</a> · <span class="muted">também: witness, redução polinomial, certificate</span></div>
+</div><div class="gloss-item" id="church-turing" data-group="automatos">
+  <h3>Church-Turing <span class="muted" style="font-weight:400;font-size:.85rem">Tese de Church-Turing</span></h3>
+  <p>Tese segundo a qual toda função efetivamente calculável pode ser computada por uma máquina de Turing, ou por qualquer dos modelos equivalentes conhecidos. Ela conecta uma noção informal de algoritmo a modelos formais, mas é uma tese metodológica, não um teorema que defina sozinho o significado de computação.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-05-computabilidade/">Ver aula</a> · <span class="muted">também: tese Church-Turing, Church Turing thesis</span></div>
+</div><div class="gloss-item" id="ciclo-negativo" data-group="grafos">
+  <h3>Ciclo negativo <span class="muted" style="font-weight:400;font-size:.85rem">Ciclo de Peso Negativo</span></h3>
+  <p>Ciclo direcionado cuja soma dos pesos é negativa. Ao ser alcançável a partir da origem, permite diminuir indefinidamente o custo de um caminho que o percorra, portanto não existe distância mínima finita para seus vértices alcançáveis. Bellman-Ford pode detectar essa situação.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-07-caminhos/">Ver aula</a> · <span class="muted">também: ciclo negativo, negative cycle</span></div>
+</div><div class="gloss-item" id="colisao" data-group="estruturas">
+  <h3>Colisão <span class="muted" style="font-weight:400;font-size:.85rem">Colisão em Tabelas Hash</span></h3>
+  <p>Ocorre quando duas chaves distintas são mapeadas pela função de espalhamento para a mesma posição inicial ou para uma posição já ocupada. A tabela precisa resolver o conflito, por encadeamento separado ou endereçamento aberto. Colisões são inevitáveis em geral e não indicam necessariamente uma implementação incorreta.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-08-hash/">Ver aula</a> · <span class="muted">também: conflito hash, hash collision</span></div>
+</div><div class="gloss-item" id="completude-de-turing" data-group="automatos">
+  <h3>Completude de Turing <span class="muted" style="font-weight:400;font-size:.85rem">Completude de Turing</span></h3>
+  <p>Propriedade de um sistema formal ou linguagem capaz de simular uma máquina de Turing, considerando memória e tempo suficientes. Ser Turing-completo indica poder computacional geral, não eficiência, decidibilidade ou facilidade de programação. Uma linguagem pode ser completa mesmo tendo restrições práticas de recursos.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-06-turing/">Ver aula</a> · <span class="muted">também: Turing-complete, Turing completeness, universalidade</span></div>
+</div><div class="gloss-item" id="complexidade-assintotica" data-group="complexidade">
+  <h3>Complexidade assintótica <span class="muted" style="font-weight:400;font-size:.85rem">Complexidade Assintótica</span></h3>
+  <p>Análise do crescimento de recursos consumidos por um algoritmo quando o tamanho da entrada tende ao infinito. Ignora constantes multiplicativas e termos de menor ordem, concentrando-se em tempo, espaço ou outra medida. Permite comparar algoritmos independentemente de uma máquina específica.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-02-complexidade/">Ver aula</a> · <span class="muted">também: análise assintótica, complexidade</span></div>
+</div><div class="gloss-item" id="componente-fortemente-conexa" data-group="grafos">
+  <h3>Componente fortemente conexa <span class="muted" style="font-weight:400;font-size:.85rem">Componente Fortemente Conexa</span></h3>
+  <p>Em um dígrafo, é um conjunto maximal de vértices em que cada vértice alcança todos os demais seguindo as direções dos arcos. As componentes fortemente conexas particionam os vértices e podem ser contraídas em uma DAG. Algoritmos de Kosaraju e Tarjan calculam-nas linearmente.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-04-dag-scc/">Ver aula</a> · <span class="muted">também: CFC, SCC, strongly connected component</span></div>
+</div><div class="gloss-item" id="custo-amortizado" data-group="complexidade">
+  <h3>Custo amortizado <span class="muted" style="font-weight:400;font-size:.85rem">Análise de Custo Amortizado</span></h3>
+  <p>Método que distribui o custo de uma sequência de operações para obter um custo médio por operação na própria sequência, sem exigir probabilidades. Uma operação isolada pode ser cara, mas o custo amortizado permanece baixo quando operações baratas compensam esse pico, como em redimensionamento de vetores.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-02-complexidade/">Ver aula</a> · <span class="muted">também: análise amortizada, amortized cost</span></div>
+</div><div class="gloss-item" id="dag" data-group="grafos">
+  <h3>DAG <span class="muted" style="font-weight:400;font-size:.85rem">Grafo Acíclico Direcionado</span></h3>
+  <p>Dígrafo que não contém ciclo direcionado. Essa propriedade permite ordenar seus vértices topologicamente e modelar dependências sem circularidade, como tarefas, módulos ou expressões. Toda DAG finita possui ao menos um vértice de grau de entrada zero e uma ordenação topológica válida.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-04-dag-scc/">Ver aula</a> · <span class="muted">também: grafo acíclico direcionado, GAD, directed acyclic graph</span></div>
+</div><div class="gloss-item" id="dfs" data-group="grafos">
+  <h3>DFS <span class="muted" style="font-weight:400;font-size:.85rem">Busca em Profundidade</span></h3>
+  <p>Percurso que explora um caminho até não haver vizinhos não visitados, então retrocede. Pode ser implementado com recursão ou pilha explícita. Seus tempos de descoberta e finalização apoiam detecção de ciclos, componentes, ordenação topológica e outras análises, com custo O(V+E) usando listas de adjacência.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-03-bfs-dfs/">Ver aula</a> · <span class="muted">também: busca em profundidade, depth-first search</span></div>
+</div><div class="gloss-item" id="dictionary-string-image" data-group="pi">
+  <h3>Dictionary&lt;string, Image&gt; <span class="muted" style="font-weight:400;font-size:.85rem">Dicionário de Imagens do Projeto Integrador</span></h3>
+  <p>`Dictionary<string, Image>` associa chaves textuais a objetos de imagem por meio de uma tabela hash. A consulta média é constante quando a distribuição é adequada. No PI: essa estrutura aparece em `Form4.cs`, na linha 43, para relacionar identificadores textuais a imagens.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-08-hash/">Ver aula</a> · <span class="muted">também: dicionário de imagens, Dictionary, mapa string imagem</span></div>
+</div><div class="gloss-item" id="dijkstra" data-group="grafos">
+  <h3>Dijkstra <span class="muted" style="font-weight:400;font-size:.85rem">Algoritmo de Dijkstra</span></h3>
+  <p>Algoritmo de caminhos mínimos a partir de uma origem em grafos com pesos não negativos. Seleciona o vértice de menor distância provisória e relaxa suas arestas. Com fila de prioridade, é eficiente, mas não fornece respostas corretas quando existe aresta de peso negativo alcançável.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-07-caminhos/">Ver aula</a> · <span class="muted">também: Dijkstra, caminho mínimo</span></div>
+</div><div class="gloss-item" id="divisao-e-conquista" data-group="complexidade">
+  <h3>Divisão e conquista <span class="muted" style="font-weight:400;font-size:.85rem">Divisão e Conquista</span></h3>
+  <p>Paradigma algorítmico que divide uma instância em subproblemas menores, resolve-os recursivamente e combina seus resultados. A análise costuma ser expressa por uma recorrência. Merge sort e busca binária exemplificam a estratégia, embora seus custos dependam da divisão e da combinação escolhidas.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-07-merge-busca/">Ver aula</a> · <span class="muted">também: divide and conquer, dividir e conquistar</span></div>
+</div><div class="gloss-item" id="digrafo" data-group="grafos">
+  <h3>Dígrafo <span class="muted" style="font-weight:400;font-size:.85rem">Grafo Direcionado</span></h3>
+  <p>Grafo cujas conexões possuem orientação: um arco de u para v não implica necessariamente arco de v para u. Caminhos, alcançabilidade e graus devem respeitar essa direção. Um dígrafo pode, contudo, conter arcos recíprocos; quando todos os pares relevantes os possuem, sua matriz de adjacência pode ser simétrica.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-01-fundamentos/">Ver aula</a> · <span class="muted">também: grafo direcionado, digrafo, directed graph</span></div>
+</div><div class="gloss-item" id="encadeamento-separado" data-group="estruturas">
+  <h3>Encadeamento separado <span class="muted" style="font-weight:400;font-size:.85rem">Encadeamento Separado</span></h3>
+  <p>Técnica de resolução de colisões em que cada posição da tabela mantém uma coleção de entradas, frequentemente uma lista. As chaves que colidem compartilham o mesmo balde. Nesse modelo, o fator de carga α = n/m pode passar de 1, pois um balde pode conter vários elementos.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-08-hash/">Ver aula</a> · <span class="muted">também: separate chaining, encadeamento</span></div>
+</div><div class="gloss-item" id="estabilidade" data-group="complexidade">
+  <h3>Estabilidade <span class="muted" style="font-weight:400;font-size:.85rem">Estabilidade de uma Ordenação</span></h3>
+  <p>Propriedade de um algoritmo de ordenação que preserva a ordem relativa de elementos considerados iguais pela chave de comparação. É relevante quando os registros possuem várias chaves e uma ordenação anterior deve ser respeitada. Estabilidade não implica, por si só, menor tempo ou uso menor de memória.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-06-ordenacao/">Ver aula</a> · <span class="muted">também: ordenação estável, stable sort</span></div>
+</div><div class="gloss-item" id="expressao-regular-e-fecho-de-kleene" data-group="automatos">
+  <h3>Expressão regular e fecho de Kleene <span class="muted" style="font-weight:400;font-size:.85rem">Expressão Regular e Fecho de Kleene</span></h3>
+  <p>Expressão regular é uma notação algébrica para descrever linguagens regulares por símbolos, união, concatenação e estrela. O fecho de Kleene, escrito `L*`, reúne zero ou mais concatenações de palavras de L, incluindo a palavra vazia. Em software, a sintaxe concreta pode acrescentar recursos além do formal.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-02-linguagens/">Ver aula</a> · <span class="muted">também: regex, regular expression, estrela de Kleene</span></div>
+</div><div class="gloss-item" id="fator-de-carga" data-group="estruturas">
+  <h3>Fator de carga <span class="muted" style="font-weight:400;font-size:.85rem">Fator de Carga de uma Tabela Hash</span></h3>
+  <p>Medida de ocupação de uma tabela hash, geralmente α = n/m, em que n é o número de entradas e m o número de posições. Em encadeamento separado, α pode exceder 1; em endereçamento aberto, a ocupação deve permanecer abaixo de 1. Valores altos aumentam colisões.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-08-hash/">Ver aula</a> · <span class="muted">também: α, load factor</span></div>
+</div><div class="gloss-item" id="fila" data-group="estruturas">
+  <h3>Fila <span class="muted" style="font-weight:400;font-size:.85rem">Fila como Tipo Abstrato de Dados</span></h3>
+  <p>TAD linear que segue a disciplina FIFO: o primeiro elemento inserido é o primeiro removido. As operações usuais são enfileirar, desenfileirar e consultar as extremidades. Uma implementação adequada mantém referências ou índices para início e fim, evitando deslocar todos os elementos a cada remoção.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-04-pilhas-filas/">Ver aula</a> · <span class="muted">também: FIFO, queue</span></div>
+</div><div class="gloss-item" id="fila-circular" data-group="estruturas">
+  <h3>Fila circular <span class="muted" style="font-weight:400;font-size:.85rem">Fila Circular</span></h3>
+  <p>Implementação de fila em vetor na qual os índices avançam de modo modular e reutilizam posições liberadas no início. Ela evita deslocamentos e mantém enfileiramento e desenfileiramento constantes, desde que a representação controle corretamente os estados vazio e cheio, por exemplo usando contador ou uma posição reservada.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-04-pilhas-filas/">Ver aula</a> · <span class="muted">também: buffer circular, circular queue</span></div>
+</div><div class="gloss-item" id="floyd-warshall" data-group="grafos">
+  <h3>Floyd-Warshall <span class="muted" style="font-weight:400;font-size:.85rem">Algoritmo de Floyd-Warshall</span></h3>
+  <p>Algoritmo de programação dinâmica para caminhos mínimos entre todos os pares. Considera progressivamente conjuntos de vértices intermediários e atualiza uma matriz de distâncias. Suporta pesos negativos, desde que não haja ciclos negativos relevantes, e possui custo O(V³) e espaço O(V²).</p>
+  <div class="gloss-meta"><a href="../aulas/gr-07-caminhos/">Ver aula</a> · <span class="muted">também: Floyd Warshall, all-pairs shortest paths</span></div>
+</div><div class="gloss-item" id="funcao-de-espalhamento" data-group="estruturas">
+  <h3>Função de espalhamento <span class="muted" style="font-weight:400;font-size:.85rem">Função de Espalhamento</span></h3>
+  <p>Função que transforma uma chave em um valor usado para determinar uma posição, ou sequência de posições, em uma tabela hash. Deve ser determinística, eficiente e distribuir chaves uniformemente; não precisa ser injetiva, pois diferentes chaves podem produzir a mesma posição.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-08-hash/">Ver aula</a> · <span class="muted">também: função hash, hash function, dispersão</span></div>
+</div><div class="gloss-item" id="gavetas-6-5" data-group="pi">
+  <h3>Gavetas 6×5 <span class="muted" style="font-weight:400;font-size:.85rem">Arranjo de 30 Gavetas</span></h3>
+  <p>Representação física ou visual de trinta posições organizadas em seis linhas por cinco colunas. O produto 6×5 determina a quantidade total, mas não define sozinho a política de endereçamento ou ocupação. No PI: a interface da Biblioteca do Tiro de Guerra de Americana trabalha com 30 gavetas nesse arranjo.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-01-fundamentos/">Ver aula</a> · <span class="muted">também: 30 gavetas, 6x5, layout de gavetas</span></div>
+</div><div class="gloss-item" id="gerador-liv" data-group="pi">
+  <h3>Gerador LIV <span class="muted" style="font-weight:400;font-size:.85rem">Gerador de Identificadores LIV</span></h3>
+  <p>Procedimento que combina o prefixo textual `LIV` com um número pseudoaleatório para formar identificadores de livros. O intervalo e a possibilidade de repetição devem ser avaliados conforme o sistema. No PI: o gerador usa `LIV` + `Random.Next(100, 999)`, cujo limite superior do método é exclusivo.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-01-fundamentos/">Ver aula</a> · <span class="muted">também: LIV, identificador de livro, Random.Next</span></div>
+</div><div class="gloss-item" id="grafo" data-group="grafos">
+  <h3>Grafo <span class="muted" style="font-weight:400;font-size:.85rem">Grafo</span></h3>
+  <p>Modelo matemático formado por um conjunto de vértices e um conjunto de arestas ou arcos que relacionam pares de vértices. Pode ser direcionado ou não direcionado, ponderado ou não, simples ou possuir múltiplas conexões. É usado para representar redes, dependências, mapas e relações.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-01-fundamentos/">Ver aula</a> · <span class="muted">também: graph, rede</span></div>
+</div><div class="gloss-item" id="grafo-bipartido" data-group="grafos">
+  <h3>Grafo bipartido <span class="muted" style="font-weight:400;font-size:.85rem">Grafo Bipartido</span></h3>
+  <p>Grafo cujos vértices podem ser particionados em dois conjuntos disjuntos, com toda aresta ligando um conjunto ao outro, nunca dois vértices do mesmo conjunto. Um grafo é bipartido se, e somente se, não possui ciclo ímpar; uma coloração com duas cores fornece a partição.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-02-subgrafos/">Ver aula</a> · <span class="muted">também: bipartido, bipartite graph</span></div>
+</div><div class="gloss-item" id="gramatica-e-ast" data-group="automatos">
+  <h3>Gramática e AST <span class="muted" style="font-weight:400;font-size:.85rem">Gramática Formal e Árvore Sintática Abstrata</span></h3>
+  <p>Gramática formal define como símbolos podem ser combinados por produções para gerar palavras de uma linguagem. Uma AST representa a estrutura sintática essencial de uma expressão ou programa, omitindo detalhes superficiais como parênteses redundantes. Parsers normalmente constroem ASTs a partir de tokens conforme uma gramática.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-02-linguagens/">Ver aula</a> · <span class="muted">também: gramática formal, árvore sintática, abstract syntax tree</span></div>
+</div><div class="gloss-item" id="heap" data-group="estruturas">
+  <h3>Heap <span class="muted" style="font-weight:400;font-size:.85rem">Heap como Estrutura de Prioridade</span></h3>
+  <p>Árvore implícita, normalmente armazenada em vetor, que satisfaz a propriedade de heap: em um mínimo-heap, cada pai não excede os filhos; em um máximo-heap, não é menor. Suporta consulta da prioridade extrema e atualizações eficientes. Não é sinônimo da região de memória chamada heap.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-09-arvores/">Ver aula</a> · <span class="muted">também: fila de prioridade, min-heap, max-heap</span></div>
+</div><div class="gloss-item" id="heuristica" data-group="complexidade">
+  <h3>Heurística <span class="muted" style="font-weight:400;font-size:.85rem">Heurística Computacional</span></h3>
+  <p>Estratégia que busca soluções boas ou úteis com custo prático menor, sem garantir sempre a solução ótima ou mesmo uma solução correta para toda instância, salvo quando isso for demonstrado. Heurísticas são comuns em problemas difíceis, como TSP, e devem declarar suas limitações e critérios de avaliação.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-07-complexidade/">Ver aula</a> · <span class="muted">também: heuristic, método heurístico</span></div>
+</div><div class="gloss-item" id="hierarquia-de-chomsky" data-group="automatos">
+  <h3>Hierarquia de Chomsky <span class="muted" style="font-weight:400;font-size:.85rem">Hierarquia de Chomsky</span></h3>
+  <p>Classificação de gramáticas e linguagens em níveis crescentes de poder: regulares, livres de contexto, sensíveis ao contexto e irrestritas. Cada nível possui modelos de reconhecimento associados, como autômatos finitos, autômatos de pilha, autômatos linearmente limitados e máquinas de Turing.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-03-chomsky-afd/">Ver aula</a> · <span class="muted">também: Chomsky hierarchy, hierarquia formal</span></div>
+</div><div class="gloss-item" id="in-place" data-group="complexidade">
+  <h3>In-place <span class="muted" style="font-weight:400;font-size:.85rem">Algoritmo In-Place</span></h3>
+  <p>Característica de um algoritmo que usa espaço auxiliar adicional limitado, normalmente constante ou pequeno em relação à entrada, e modifica a própria estrutura armazenada. A definição exata varia conforme o modelo, e chamadas recursivas ou buffers temporários podem alterar a análise. In-place não significa necessariamente estável.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-06-ordenacao/">Ver aula</a> · <span class="muted">também: in situ, sem memória auxiliar</span></div>
+</div><div class="gloss-item" id="indecidibilidade-e-problema-da-parada" data-group="automatos">
+  <h3>Indecidibilidade e problema da parada <span class="muted" style="font-weight:400;font-size:.85rem">Indecidibilidade e Problema da Parada</span></h3>
+  <p>Um problema é indecidível quando não existe algoritmo que termine e responda corretamente para todas as entradas. O problema da parada pergunta se uma máquina de Turing para diante de uma entrada; Turing demonstrou que não há decisor geral para essa pergunta, por argumento diagonal.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-05-computabilidade/">Ver aula</a> · <span class="muted">também: halting problem, indecidível, problema de parada</span></div>
+</div><div class="gloss-item" id="kruskal" data-group="grafos">
+  <h3>Kruskal <span class="muted" style="font-weight:400;font-size:.85rem">Algoritmo de Kruskal</span></h3>
+  <p>Algoritmo guloso para MST que ordena as arestas por peso crescente e aceita uma aresta quando ela não cria ciclo. A estrutura Union-Find testa e une componentes eficientemente. O custo costuma ser dominado pela ordenação, O(E log E), para grafos não direcionados ponderados.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-05-mst/">Ver aula</a> · <span class="muted">também: Kruskal, algoritmo de Kruskal</span></div>
+</div><div class="gloss-item" id="lba" data-group="automatos">
+  <h3>LBA <span class="muted" style="font-weight:400;font-size:.85rem">Autômato Linearmente Limitado</span></h3>
+  <p>Modelo de máquina de Turing cuja área de fita utilizável é limitada linearmente pelo tamanho da entrada. Ele reconhece, sob definições formais apropriadas, linguagens sensíveis ao contexto. O limite espacial distingue o LBA da máquina de Turing geral e relaciona o modelo à hierarquia de Chomsky.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-06-turing/">Ver aula</a> · <span class="muted">também: autômato linearmente limitado, linear bounded automaton</span></div>
+</div><div class="gloss-item" id="like" data-group="pi">
+  <h3>LIKE <span class="muted" style="font-weight:400;font-size:.85rem">Predicado SQL LIKE</span></h3>
+  <p>Predicado SQL para comparar texto com padrões, usando curingas como `%` para qualquer sequência e `_` para um caractere. O padrão deve ser interpretado conforme o banco e a collation. No PI: consultas em `Form2` e `Form3` usam `LIKE '%termo%'` para localizar ocorrências parciais.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-07-merge-busca/">Ver aula</a> · <span class="muted">também: busca textual SQL, LIKE SQL, curinga</span></div>
+</div><div class="gloss-item" id="linguagem-livre-de-contexto" data-group="automatos">
+  <h3>Linguagem livre de contexto <span class="muted" style="font-weight:400;font-size:.85rem">Linguagem Livre de Contexto</span></h3>
+  <p>Linguagem gerada por uma gramática cujas produções têm um único não terminal no lado esquerdo. Pode ser reconhecida por autômato de pilha não determinístico e descreve aninhamento, como parênteses balanceados. A classe é mais expressiva que as linguagens regulares e menos que as sensíveis ao contexto.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-02-linguagens/">Ver aula</a> · <span class="muted">também: LLC, context-free language, CFL</span></div>
+</div><div class="gloss-item" id="linguagem-regular" data-group="automatos">
+  <h3>Linguagem regular <span class="muted" style="font-weight:400;font-size:.85rem">Linguagem Regular</span></h3>
+  <p>Linguagem reconhecida por um autômato finito, determinístico ou não determinístico, e também descrita por uma expressão regular ou gramática regular. Ela não dispõe de memória não limitada para contar estruturas arbitrárias. Fechos sob união, concatenação e complemento caracterizam importantes propriedades da classe.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-02-linguagens/">Ver aula</a> · <span class="muted">também: regular language, linguagem racional</span></div>
+</div><div class="gloss-item" id="linguagem-sensivel-ao-contexto" data-group="automatos">
+  <h3>Linguagem sensível ao contexto <span class="muted" style="font-weight:400;font-size:.85rem">Linguagem Sensível ao Contexto</span></h3>
+  <p>Linguagem gerada por gramática sensível ao contexto e reconhecida por um autômato linearmente limitado, sob as convenções formais usuais. Suas produções podem depender do contexto ao redor de um símbolo. A classe ocupa posição intermediária entre linguagens livres de contexto e linguagens decidíveis gerais.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-02-linguagens/">Ver aula</a> · <span class="muted">também: LSC, context-sensitive language, CSL</span></div>
+</div><div class="gloss-item" id="list-t-no-pi" data-group="pi">
+  <h3>List&lt;T&gt; no PI <span class="muted" style="font-weight:400;font-size:.85rem">List&lt;T&gt; no Projeto Integrador</span></h3>
+  <p>`List<T>` é uma coleção genérica redimensionável da biblioteca .NET, com acesso indexado e operações de inserção, remoção e busca. Seu custo depende da operação e da posição. No PI: `List<T>` é usada em vários formulários, conforme a implementação C# do sistema Biblioteca do Tiro de Guerra de Americana.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-05-listas/">Ver aula</a> · <span class="muted">também: lista genérica, List, coleção .NET</span></div>
+</div><div class="gloss-item" id="lista-de-adjacencia" data-group="grafos">
+  <h3>Lista de adjacência <span class="muted" style="font-weight:400;font-size:.85rem">Lista de Adjacência</span></h3>
+  <p>Representação que associa a cada vértice a coleção de seus vizinhos ou arcos incidentes. Usa espaço O(V+E) e favorece percursos em grafos esparsos, pois examina apenas conexões existentes. Em dígrafos, pode-se manter listas distintas para sucessores e predecessores.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-01-fundamentos/">Ver aula</a> · <span class="muted">também: adjacency list, listas de vizinhos</span></div>
+</div><div class="gloss-item" id="lista-encadeada" data-group="estruturas">
+  <h3>Lista encadeada <span class="muted" style="font-weight:400;font-size:.85rem">Lista Simplesmente ou Duplamente Encadeada</span></h3>
+  <p>Estrutura linear formada por nós ligados por referências. Na LSE, cada nó aponta para o próximo; na LDE, também aponta para o anterior. O acesso por posição é linear, enquanto inserções junto a um nó conhecido podem ser constantes. A memória dos nós não precisa ser contígua.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-05-listas/">Ver aula</a> · <span class="muted">também: LSE, LDE, lista ligada, linked list</span></div>
+</div><div class="gloss-item" id="matriz-de-adjacencia" data-group="grafos">
+  <h3>Matriz de adjacência <span class="muted" style="font-weight:400;font-size:.85rem">Matriz de Adjacência</span></h3>
+  <p>Representação de grafo por uma matriz em que a entrada da linha u e coluna v indica a existência, peso ou multiplicidade da ligação entre esses vértices. Em grafos direcionados, a matriz pode não ser simétrica; arcos recíprocos podem torná-la simétrica. Usa espaço O(V²).</p>
+  <div class="gloss-meta"><a href="../aulas/gr-01-fundamentos/">Ver aula</a> · <span class="muted">também: adjacency matrix, matriz de conexidade</span></div>
+</div><div class="gloss-item" id="maquina-de-turing" data-group="automatos">
+  <h3>Máquina de Turing <span class="muted" style="font-weight:400;font-size:.85rem">Máquina de Turing</span></h3>
+  <p>Modelo formal de computação composto por controle finito, fita potencialmente ilimitada dividida em células e cabeça que lê, escreve e se move. Apesar da simplicidade, pode expressar algoritmos gerais. Suas limitações fundamentam resultados de decidibilidade, computabilidade e complexidade.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-06-turing/">Ver aula</a> · <span class="muted">também: Turing machine, MT</span></div>
+</div><div class="gloss-item" id="np" data-group="complexidade">
+  <h3>NP <span class="muted" style="font-weight:400;font-size:.85rem">Nondeterministic Polynomial Time</span></h3>
+  <p>Classe de problemas de decisão para os quais uma solução candidata pode ser verificada em tempo polinomial por uma máquina determinística, usando um certificado apropriado. Equivalentemente, são problemas decidíveis em tempo polinomial por máquina não determinística. Ainda não se sabe se P = NP.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-07-complexidade/">Ver aula</a> · <span class="muted">também: tempo polinomial não determinístico, classe NP</span></div>
+</div><div class="gloss-item" id="np-completo" data-group="complexidade">
+  <h3>NP-completo <span class="muted" style="font-weight:400;font-size:.85rem">Problema NP-Completo</span></h3>
+  <p>Problema de decisão que pertence a NP e é NP-difícil por reduções polinomiais: todo problema de NP pode ser transformado nele em tempo polinomial. Se qualquer problema NP-completo tiver algoritmo polinomial, então P = NP; se P ≠ NP, nenhum terá tal algoritmo.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-07-complexidade/">Ver aula</a> · <span class="muted">também: NP-complete, NP completo</span></div>
+</div><div class="gloss-item" id="np-dificil" data-group="complexidade">
+  <h3>NP-difícil <span class="muted" style="font-weight:400;font-size:.85rem">Problema NP-Difícil</span></h3>
+  <p>Problema pelo menos tão difícil quanto todos os problemas de NP sob uma redução polinomial adequada. Não é obrigatório que pertença a NP nem que seja problema de decisão; por isso, um problema NP-difícil pode ser um problema de otimização ou até indecidível. NP-completude acrescenta pertencimento a NP.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-07-complexidade/">Ver aula</a> · <span class="muted">também: NP-hard, NP hard</span></div>
+</div><div class="gloss-item" id="ordenacao-topologica" data-group="grafos">
+  <h3>Ordenação topológica <span class="muted" style="font-weight:400;font-size:.85rem">Ordenação Topológica</span></h3>
+  <p>Sequência linear dos vértices de uma DAG em que, para todo arco u→v, u aparece antes de v. Pode ser obtida por DFS ou pelo algoritmo de Kahn. Se o grafo possuir ciclo direcionado, nenhuma ordenação topológica completa existe.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-04-dag-scc/">Ver aula</a> · <span class="muted">também: ordenação topológica, topological sort</span></div>
+</div><div class="gloss-item" id="order-by" data-group="pi">
+  <h3>ORDER BY <span class="muted" style="font-weight:400;font-size:.85rem">Cláusula ORDER BY</span></h3>
+  <p>Cláusula SQL que ordena as linhas do resultado por uma ou mais expressões, em ordem ascendente (`ASC`) ou descendente (`DESC`). Ela atua na apresentação do conjunto retornado e não deve ser confundida com uma estrutura de ordenação em memória. No PI: `ORDER BY` é usado no SQL do sistema.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-06-ordenacao/">Ver aula</a> · <span class="muted">também: ordenação SQL, ORDER BY SQL</span></div>
+</div><div class="gloss-item" id="p" data-group="complexidade">
+  <h3>P <span class="muted" style="font-weight:400;font-size:.85rem">Classe P</span></h3>
+  <p>Classe de problemas de decisão resolvíveis por uma máquina de Turing determinística em tempo polinomial no tamanho da entrada. Ela representa uma noção formal de tratabilidade computacional, embora um polinômio de grau alto possa ser impraticável. P está contida em NP.</p>
+  <div class="gloss-meta"><a href="../aulas/tc-07-complexidade/">Ver aula</a> · <span class="muted">também: tempo polinomial, classe P</span></div>
+</div><div class="gloss-item" id="pilha" data-group="estruturas">
+  <h3>Pilha <span class="muted" style="font-weight:400;font-size:.85rem">Pilha como Tipo Abstrato de Dados</span></h3>
+  <p>TAD linear que segue a disciplina LIFO: o último elemento inserido é o primeiro removido. Suas operações fundamentais são `push`, `pop` e consulta do topo, geralmente com custo constante. Não deve ser confundida com a pilha de execução nem com a pilha usada por um autômato de pilha.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-04-pilhas-filas/">Ver aula</a> · <span class="muted">também: LIFO, stack</span></div>
+</div><div class="gloss-item" id="prim" data-group="grafos">
+  <h3>Prim <span class="muted" style="font-weight:400;font-size:.85rem">Algoritmo de Prim</span></h3>
+  <p>Algoritmo guloso que constrói uma árvore geradora mínima iniciando em um vértice e adicionando repetidamente a aresta de menor peso que conecta a árvore atual a um vértice externo. Com fila de prioridade e listas de adjacência, alcança complexidade típica O(E log V).</p>
+  <div class="gloss-meta"><a href="../aulas/gr-05-mst/">Ver aula</a> · <span class="muted">também: Prim, algoritmo guloso de MST</span></div>
+</div><div class="gloss-item" id="recursao" data-group="complexidade">
+  <h3>Recursão <span class="muted" style="font-weight:400;font-size:.85rem">Recursão</span></h3>
+  <p>Técnica em que uma função resolve um problema chamando a si mesma para instâncias menores ou mais simples. Uma solução correta precisa de caso base e de progresso em direção a ele. Cada chamada ativa ocupa registros na pilha de execução, que é diferente do TAD pilha.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-03-ponteiros/">Ver aula</a> · <span class="muted">também: função recursiva, recursividade</span></div>
+</div><div class="gloss-item" id="relaxamento" data-group="grafos">
+  <h3>Relaxamento <span class="muted" style="font-weight:400;font-size:.85rem">Relaxamento de uma Aresta</span></h3>
+  <p>Operação central em algoritmos de caminhos mínimos: para uma aresta u→v de peso w, verifica-se se a distância conhecida até v pode ser reduzida por `dist[u] + w`. Se sim, atualiza-se a distância e o predecessor. Relaxamento repetido fundamenta Dijkstra, Bellman-Ford e Floyd-Warshall.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-07-caminhos/">Ver aula</a> · <span class="muted">também: relaxation, relaxar aresta</span></div>
+</div><div class="gloss-item" id="sondagem-linear" data-group="estruturas">
+  <h3>Sondagem linear <span class="muted" style="font-weight:400;font-size:.85rem">Sondagem Linear</span></h3>
+  <p>Método de endereçamento aberto que, após uma colisão, examina posições sucessivas segundo uma sequência modular até localizar a chave, uma posição vazia ou o elemento procurado. É simples e eficiente para cache, mas tende a produzir agrupamento primário e exige α menor que 1.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-08-hash/">Ver aula</a> · <span class="muted">também: linear probing, endereçamento aberto</span></div>
+</div><div class="gloss-item" id="tabela-hash" data-group="estruturas">
+  <h3>Tabela hash <span class="muted" style="font-weight:400;font-size:.85rem">Tabela de Dispersão</span></h3>
+  <p>Estrutura que associa chaves a valores usando uma função de espalhamento para escolher posições em uma tabela. Com distribuição adequada e fator de carga controlado, operações de busca, inserção e remoção têm custo esperado constante, embora colisões possam degradar o desempenho.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-08-hash/">Ver aula</a> · <span class="muted">também: hash table, tabela hash, mapa hash</span></div>
+</div><div class="gloss-item" id="tad" data-group="estruturas">
+  <h3>TAD <span class="muted" style="font-weight:400;font-size:.85rem">Tipo Abstrato de Dados</span></h3>
+  <p>Especificação de um conjunto de valores e operações, definida pelo comportamento observável e não pela representação interna. Um TAD separa interface e implementação, permitindo trocar estruturas sem alterar o código cliente. Exemplos incluem pilha, fila, conjunto, mapa e fila de prioridade.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-01-fundamentos/">Ver aula</a> · <span class="muted">também: tipo abstrato de dados, ADT</span></div>
+</div><div class="gloss-item" id="transacao" data-group="pi">
+  <h3>Transação <span class="muted" style="font-weight:400;font-size:.85rem">Transação de Banco de Dados</span></h3>
+  <p>Unidade lógica de operações que deve respeitar propriedades como atomicidade, consistência, isolamento e durabilidade, conforme o sistema de banco de dados. O commit confirma alterações e o rollback desfaz a transação. No PI: há uso de transação em `FormDevolucao.cs`, relacionado ao fluxo de devolução.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-01-fundamentos/">Ver aula</a> · <span class="muted">também: transaction, ACID, commit</span></div>
+</div><div class="gloss-item" id="union-find" data-group="grafos">
+  <h3>Union-Find <span class="muted" style="font-weight:400;font-size:.85rem">Estrutura de Conjuntos Disjuntos</span></h3>
+  <p>Estrutura que mantém uma partição dinâmica em conjuntos disjuntos e oferece `find`, para identificar o representante, e `union`, para unir conjuntos. Compressão de caminho e união por posto ou tamanho tornam o custo amortizado quase constante. É central no algoritmo de Kruskal.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-05-mst/">Ver aula</a> · <span class="muted">também: Disjoint Set Union, DSU, conjuntos disjuntos</span></div>
+</div><div class="gloss-item" id="vetor" data-group="estruturas">
+  <h3>Vetor <span class="muted" style="font-weight:400;font-size:.85rem">Vetor</span></h3>
+  <p>Estrutura linear que armazena elementos em posições consecutivas, normalmente acessadas por índice inteiro. O acesso direto custa tempo constante quando os elementos têm tamanho uniforme, mas inserções e remoções no meio exigem deslocamentos. Em C#, `List<T>` oferece uma abstração redimensionável baseada em armazenamento contíguo.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-01-fundamentos/">Ver aula</a> · <span class="muted">também: array, vetor</span></div>
+</div><div class="gloss-item" id="vertice-aresta-e-grau" data-group="grafos">
+  <h3>Vértice, aresta e grau <span class="muted" style="font-weight:400;font-size:.85rem">Vértice, Aresta e Grau</span></h3>
+  <p>Vértice é uma entidade do grafo; aresta é uma ligação entre entidades, enquanto arco designa usualmente ligação direcionada. O grau de um vértice é o número de incidentes; em dígrafos distingue-se grau de entrada e de saída. Em grafos não direcionados, o grau soma as incidências.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-01-fundamentos/">Ver aula</a> · <span class="muted">também: nó, edge, degree</span></div>
+</div><div class="gloss-item" id="arvore" data-group="estruturas">
+  <h3>Árvore <span class="muted" style="font-weight:400;font-size:.85rem">Árvore em Estruturas de Dados</span></h3>
+  <p>Estrutura hierárquica acíclica formada por nós e relações pai-filho. Há uma raiz, caminhos únicos entre a raiz e cada nó, folhas sem filhos e subárvores. Altura, profundidade e grau descrevem propriedades estruturais importantes para analisar armazenamento, percursos e custos de busca.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-09-arvores/">Ver aula</a> · <span class="muted">também: tree, estrutura hierárquica</span></div>
+</div><div class="gloss-item" id="arvore-geradora-e-mst" data-group="grafos">
+  <h3>Árvore geradora e MST <span class="muted" style="font-weight:400;font-size:.85rem">Árvore Geradora Mínima</span></h3>
+  <p>Uma árvore geradora conecta todos os vértices de um grafo não direcionado conexo sem ciclos. Uma MST é uma árvore geradora de peso total mínimo, podendo haver várias em caso de empates. Ela não é um caminho mínimo entre todos os pares.</p>
+  <div class="gloss-meta"><a href="../aulas/gr-05-mst/">Ver aula</a> · <span class="muted">também: MST, minimum spanning tree, árvore de cobertura mínima</span></div>
+</div><div class="gloss-item" id="" data-group="complexidade">
+  <h3>Θ <span class="muted" style="font-weight:400;font-size:.85rem">Notação Teta</span></h3>
+  <p>Notação assintótica usada quando existem simultaneamente limites superior e inferior proporcionais à mesma função. Assim, `Θ(f(n))` caracteriza o crescimento assintótico preciso dentro de constantes. Ela é mais informativa que apenas O ou Ω quando ambos os limites podem ser demonstrados.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-02-complexidade/">Ver aula</a> · <span class="muted">também: Theta, teta, Θ(f(n))</span></div>
+</div><div class="gloss-item" id="" data-group="complexidade">
+  <h3>Ω <span class="muted" style="font-weight:400;font-size:.85rem">Notação Ômega</span></h3>
+  <p>Notação assintótica que expressa um limite inferior de crescimento. Dizer que uma função pertence a Ω(f(n)) significa que, a partir de certo tamanho, ela é pelo menos uma constante vezes f(n), salvo condições formais do domínio. Pode representar uma garantia mínima ou um limite inferior teórico.</p>
+  <div class="gloss-meta"><a href="../aulas/ed-02-complexidade/">Ver aula</a> · <span class="muted">também: Omega, ômega, Ω(f(n))</span></div>
+</div></div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../rotinas/">15 simuladores</a></li>
+          <li><a href="../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../jornada/">Jornada do PI</a></li>
+          <li><a href="../defesa/">Modo defesa</a></li>
+          <li><a href="../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

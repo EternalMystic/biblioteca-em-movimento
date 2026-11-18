@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caminhos mínimos e roteamento · Biblioteca em Movimento</title>
+<meta name="description" content="Relaxar arestas até não haver melhoria: Dijkstra com heap, Bellman-Ford com V − 1 rodadas e Floyd-Warshall com matriz resolvem o mesmo problema com premissas diferentes.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Caminhos mínimos e roteamento · Biblioteca em Movimento">
+<meta property="og:description" content="Relaxar arestas até não haver melhoria: Dijkstra com heap, Bellman-Ford com V − 1 rodadas e Floyd-Warshall com matriz resolvem o mesmo problema com premissas diferentes.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/gr-07-caminhos/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/gr-07-caminhos/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Grafos</span><span>/</span><span>Aula 7</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--grafos">Grafos</span><span class="badge">pp. 2–12</span></div>
+    <h1>Caminhos mínimos e roteamento</h1>
+    <p class="page-head__lead">Relaxar arestas até não haver melhoria: Dijkstra com heap, Bellman-Ford com V − 1 rodadas e Floyd-Warshall com matriz resolvem o mesmo problema com premissas diferentes.</p>
+    <div class="page-head__meta"><span class="mono">aula8 (1).pdf — Problemas de Caminhos e Roteamento</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/grafos/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#002F2D"><p>Roteamento é a pergunta que a biblioteca faz sem perceber: qual é o caminho mais curto entre o balcão e a gaveta 4C, considerando corredores e portas? Quando as ligações têm custo, contar saltos não basta. A aula 8 mostra que todos os algoritmos de caminho mínimo compartilham uma única operação e diferem apenas em quantas vezes e em que ordem a aplicam.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Escolher o peso adequado ao objetivo de engenharia.</li><li>Aplicar a equação de relaxamento passo a passo.</li><li>Executar Dijkstra e justificar a exigência de pesos não negativos.</li><li>Usar Bellman-Ford para detectar ciclo negativo e Floyd-Warshall para todos os pares.</li></ul></div>
+<h2 id="pesos-e-objetivos-de-engenharia">Pesos e objetivos de engenharia</h2>
+<p>O peso é a tradução numérica do objetivo. Em telecomunicações, costuma ser latência em milissegundos ou número de saltos; em logística, distância ou consumo de bateria; no mercado financeiro, taxa de transação. Escolher o peso errado produz rota rápida que gasta mais, ou rota barata que atrasa a entrega.</p>
+<p>No acervo, o peso natural é a distância percorrida entre gavetas, e o prazo padrão de empréstimo, gravado em <code>prazo_padrao_dias</code>, é outro tipo de custo: dias até o vencimento. São pesos diferentes para problemas diferentes, e misturá-los na mesma soma não produz significado.</p>
+<h2 id="relaxamento-de-arestas">Relaxamento de arestas</h2>
+<p>Tudo se resume a uma comparação. Se o custo conhecido para chegar a v é maior que o custo para chegar a u somado ao peso de (u, v), então o valor de v melhora. A equação é Custo(v) = min(Custo(v), Custo(u) + Peso(u, v)), e cada melhoria é um relaxamento bem-sucedido.</p>
+<p>O algoritmo começa com zero na origem e infinito nos demais. Relaxar uma aresta cuja origem ainda está em infinito não muda nada, o que explica por que a ordem importa. Dijkstra e Bellman-Ford usam a mesma equação; a diferença está em quantas vezes e em que sequência a aplicam.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">FormDevolucao.cs · CalcularDiasAtraso (linhas 544–547)</span></div>
+  <p style="margin:0;font-size:.9rem">O atraso é max(0, dias entre datas): custo que nunca fica negativo, análogo à premissa de Dijkstra.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form3.Designer.cs · SubqueryAtiradorAtual (linhas 32–40)</span></div>
+  <p style="margin:0;font-size:.9rem">A subconsulta escolhe o empréstimo mais recente com ORDER BY id DESC LIMIT 1; é regra de recência, não caminho de menor custo.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">rotinas/grafos · casos Peso negativo e Ciclo negativo</span></div>
+  <p style="margin:0;font-size:.9rem">O simulador permite editar pesos e ver Dijkstra falhar onde Bellman-Ford acerta.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--future">Proposta / evolução</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula8 (1).pdf pp. 4–12</span></div>
+  <p style="margin:0;font-size:.9rem">Nenhum dos três algoritmos está implementado no PI; o roteamento é modelo didático.</p>
+</div></div></section><h2 id="dijkstra-guloso-variantes-vetormin-heap-pesos-nao-negativos">Dijkstra guloso; variantes vetor/min-heap; pesos não negativos</h2>
+<p>Dijkstra mantém dois conjuntos, processados e não processados, e a cada passo escolhe o não processado de menor custo, relaxa suas arestas de saída e o fecha. A garantia vale porque, sem pesos negativos, nenhum caminho futuro consegue baratear um vértice já fechado.</p>
+<p>Exemplo: A→B 4, A→C 2, B→C 1, B→D 5, C→D 8, C→E 10, D→E 2. A ordem de fechamento é C (2), B (4), D (9) e E (11). Note que D foi relaxado para 10 por C e depois melhorado para 9 por B: é o relaxamento em ação.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Estrutura</th>
+<th>Seleção do mínimo</th>
+<th>Custo total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vetor, varredura linear</td>
+<td>O(V) por passo</td>
+<td>O(V²)</td>
+</tr>
+<tr>
+<td>Min-heap binário</td>
+<td>O(log V) por extração</td>
+<td>O((V + E) log V)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Com peso negativo a garantia cai. No triângulo A→B 5, A→C 2, B→C −8, Dijkstra fecha C em 2 e B em 5; o desvio por B daria −3, mas C já estava fechado. O erro não é de implementação: é de premissa. Aula adentro, o exemplo com A→C 10 esconde a falha, porque B é fechado antes de C e o relaxamento acontece a tempo; trocar 10 por 2 revela o problema.</p>
+<h2 id="bellman-ford-v-1-rodadas-e-deteccao-de-ciclo-negativo">Bellman-Ford, V − 1 rodadas e detecção de ciclo negativo</h2>
+<p>Bellman-Ford não fecha vértices: percorre todas as arestas e repete o processo V − 1 vezes. O motivo do limite é que o caminho mais longo sem ciclo tem no máximo V − 1 arestas; depois disso, nenhuma melhoria é possível se não houver ciclo negativo.</p>
+<p>No mesmo triângulo, a primeira rodada já leva C de 2 para −3, e a segunda não muda nada, confirmando estabilidade. O custo é O(V·E), maior que Dijkstra, e essa é a troca: generalidade por tempo. Para detectar ciclo negativo, roda-se uma rodada extra; se ainda houver melhoria, existe ciclo alcançável de soma negativa, e o conceito de caminho mínimo deixa de fazer sentido.</p>
+<h2 id="origem-unica-e-todos-os-pares-floyd-warshall-e-matriz">Origem única e todos os pares; Floyd-Warshall e matriz</h2>
+<p>Dijkstra e Bellman-Ford resolvem origem única. Quando o problema é a matriz completa de distâncias, repetir Bellman-Ford para cada origem custa O(V²·E), o que em grafo denso chega a O(V⁴). Floyd-Warshall resolve com três laços e uma matriz, em O(V³), testando se passar por um intermediário k barateia o par (i, j).</p>
+<p>Com A–B 4, A–C 2, B–C 1, B–D 5, C–D 8, a matriz final tem A–B 3 (via C), A–D 8, C–D 6 e B–D 5. Se algum valor da diagonal ficar negativo, há ciclo negativo. O algoritmo é atraente por localidade de memória, o que favorece cache e processamento vetorial.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>Nenhum dos três algoritmos está no código revisado. A consulta que descobre quem está com o livro (<code>Form3.Designer.cs</code>, linhas 32–40) usa <code>ORDER BY e.id DESC LIMIT 1</code>, isto é, escolhe o empréstimo mais recente — regra de recência, não caminho de menor custo. Chamar isso de Dijkstra seria erro de leitura.</p>
+<p>O vínculo conceitual confirmado é o custo truncado em zero: <code>CalcularDiasAtraso</code> devolve <code>Math.Max(0, dias)</code> (FormDevolucao.cs, linhas 544–547), o mesmo tipo de garantia de não negatividade que sustenta a premissa de Dijkstra. O resto é modelo didático: a rotina Estantes conectadas permite editar pesos, criar peso zero, peso negativo e ciclo negativo, e comparar os três algoritmos.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Dijkstra a partir de A, com A→B 4, A→C 2, B→C 1, B→D 5, C→D 8, C→E 10, D→E 2.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Fechado</th>
+<th>Custo</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>0</td>
+<td>4</td>
+<td>2</td>
+<td>∞</td>
+<td>∞</td>
+</tr>
+<tr>
+<td>C</td>
+<td>2</td>
+<td>4</td>
+<td>2</td>
+<td>10</td>
+<td>12</td>
+</tr>
+<tr>
+<td>B</td>
+<td>4</td>
+<td>4</td>
+<td>2</td>
+<td>9</td>
+<td>12</td>
+</tr>
+<tr>
+<td>D</td>
+<td>9</td>
+<td>4</td>
+<td>2</td>
+<td>9</td>
+<td>11</td>
+</tr>
+<tr>
+<td>E</td>
+<td>11</td>
+<td>4</td>
+<td>2</td>
+<td>9</td>
+<td>11</td>
+</tr>
+</tbody>
+</table></div>
+<p>O caminho até E é A–B–D–E, com 4 + 5 + 2 = 11. Bellman-Ford, no triângulo negativo, gasta duas rodadas e chega a C = −3; Floyd-Warshall preenche a matriz em 4³ = 64 comparações.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p>Quando usar Dijkstra e quando usar Bellman-Ford? Dijkstra quando todos os pesos são não negativos, porque é mais rápido: O((V + E) log V) com heap contra O(V·E) de Bellman-Ford. Bellman-Ford quando há peso negativo ou quando é preciso detectar ciclo negativo, já que Dijkstra não tem mecanismo para reabrir vértice fechado. Se o problema pede todos os pares e o grafo é denso, Floyd-Warshall substitui as duas com O(V³). A escolha é de premissa e de tamanho, não de gosto.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Com A→B 2, A→C 7, B→C 3, B→D 5, C→D 1, calcule as distâncias mínimas de A a todos os vértices por Dijkstra e diga qual aresta poderia ser negativa sem quebrar o algoritmo.</p>
+<details><summary>Ver resposta</summary>
+<p>Dijkstra: fecha A (0); relaxa B para 2 e C para 7. Fecha B (2); C melhora para 5 e D para 7. Fecha C (5); D melhora para 6. Fecha D (6). Distâncias: A 0, B 2, C 5, D 6. Nenhuma aresta de saída de A poderia ser negativa sem risco: qualquer peso negativo viola a premissa e pode exigir reabrir vértice já fechado. Para peso negativo, o correto é Bellman-Ford.</p>
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="gr-07-caminhos-0" data-track="grafos">
+  <div class="quiz__q">1. A operação de relaxamento de (u, v) faz o quê?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-07-caminhos-0" data-i="0" data-answer="1"><span class="mark">A</span><span>Soma todos os pesos</span></button><button class="quiz__opt" data-q="gr-07-caminhos-0" data-i="1" data-answer="1"><span class="mark">B</span><span>Atualiza a distância de v se chegar por u for mais barato</span></button><button class="quiz__opt" data-q="gr-07-caminhos-0" data-i="2" data-answer="1"><span class="mark">C</span><span>Remove a aresta mais cara</span></button><button class="quiz__opt" data-q="gr-07-caminhos-0" data-i="3" data-answer="1"><span class="mark">D</span><span>Ordena os vizinhos</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Custo(v) = min(Custo(v), Custo(u) + Peso(u, v)); só há mudança quando o novo valor é menor.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="gr-07-caminhos-1" data-track="grafos">
+  <div class="quiz__q">2. Por que Dijkstra falha com peso negativo?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-07-caminhos-1" data-i="0" data-answer="1"><span class="mark">A</span><span>Porque não aceita heap</span></button><button class="quiz__opt" data-q="gr-07-caminhos-1" data-i="1" data-answer="1"><span class="mark">B</span><span>Porque assenta um vértice antes de considerar um desvio que o baratearia</span></button><button class="quiz__opt" data-q="gr-07-caminhos-1" data-i="2" data-answer="1"><span class="mark">C</span><span>Porque exige matriz</span></button><button class="quiz__opt" data-q="gr-07-caminhos-1" data-i="3" data-answer="1"><span class="mark">D</span><span>Porque não trata origem única</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O vértice fechado não é reaberto, e o desvio negativo chega tarde.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="gr-07-caminhos-2" data-track="grafos">
+  <div class="quiz__q">3. Floyd-Warshall executa em...</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-07-caminhos-2" data-i="0" data-answer="2"><span class="mark">A</span><span>O(V + E)</span></button><button class="quiz__opt" data-q="gr-07-caminhos-2" data-i="1" data-answer="2"><span class="mark">B</span><span>O(E log V)</span></button><button class="quiz__opt" data-q="gr-07-caminhos-2" data-i="2" data-answer="2"><span class="mark">C</span><span>O(V³)</span></button><button class="quiz__opt" data-q="gr-07-caminhos-2" data-i="3" data-answer="2"><span class="mark">D</span><span>O(V·E)</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Três laços aninhados sobre a matriz, independentemente do número de arestas.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–12</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="gr-07-caminhos" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#pesos-e-objetivos-de-engenharia">Pesos e objetivos de engenharia</a></li><li><a href="#relaxamento-de-arestas">Relaxamento de arestas</a></li><li><a href="#dijkstra-guloso-variantes-vetormin-heap-pesos-nao-negativos">Dijkstra guloso; variantes vetor/min-heap; pesos não negativos</a></li><li><a href="#bellman-ford-v-1-rodadas-e-deteccao-de-ciclo-negativo">Bellman-Ford, V − 1 rodadas e detecção de ciclo negativo</a></li><li><a href="#origem-unica-e-todos-os-pares-floyd-warshall-e-matriz">Origem única e todos os pares; Floyd-Warshall e matriz</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

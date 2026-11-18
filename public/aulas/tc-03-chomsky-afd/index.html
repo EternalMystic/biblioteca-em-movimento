@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hierarquia de Chomsky e autômatos finitos · Biblioteca em Movimento</title>
+<meta name="description" content="Quatro níveis, quatro tipos de memória e uma consequência prática: escolher o modelo mais restrito que ainda resolve o problema. O AFD é o primeiro deles, definido por uma quíntupla e por uma transição única para cada par estado-símbolo.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Hierarquia de Chomsky e autômatos finitos · Biblioteca em Movimento">
+<meta property="og:description" content="Quatro níveis, quatro tipos de memória e uma consequência prática: escolher o modelo mais restrito que ainda resolve o problema. O AFD é o primeiro deles, definido por uma quíntupla e por uma transição única para cada par estado-símbolo.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-03-chomsky-afd/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-03-chomsky-afd/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Teoria da Computação</span><span>/</span><span>Aula 3</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--tc">Teoria da Computação</span><span class="badge">pp. 2–19</span></div>
+    <h1>Hierarquia de Chomsky e autômatos finitos</h1>
+    <p class="page-head__lead">Quatro níveis, quatro tipos de memória e uma consequência prática: escolher o modelo mais restrito que ainda resolve o problema. O AFD é o primeiro deles, definido por uma quíntupla e por uma transição única para cada par estado-símbolo.</p>
+    <div class="page-head__meta"><span class="mono">aula3_1.pdf — Hierarquia de Chomsky e Autômatos Finitos</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/validacao/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#955300"><p>Toda vez que o formulário impede a digitação de uma gaveta inexistente, ele está aplicando, sem dizer o nome, uma restrição de linguagem. A aula 3 organiza essas restrições em quatro níveis e mostra que cada nível corresponde a uma quantidade diferente de memória. A escolha do nível não é acadêmica: ela determina se a validação pode ser feita por um autômato de estados, por uma pilha ou por uma fita.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Relacionar os quatro níveis da hierarquia ao tipo de memória que cada máquina oferece.</li><li>Justificar por que a análise de código-fonte é dividida em léxica (Nível 3) e sintática (Nível 2).</li><li>Descrever um AFD pela quíntupla Q, Σ, δ, q₀, F e simular sua execução símbolo a símbolo.</li><li>Explicar a diferença entre AFD e AFN e por que a construção de subconjuntos preserva a linguagem.</li></ul></div>
+<h2 id="tipos-3210-e-as-quatro-classes-de-linguagens">Tipos 3/2/1/0 e as quatro classes de linguagens</h2>
+<p>Em 1956, Noam Chomsky propôs uma classificação formal das linguagens. A hierarquia correlaciona a restrição matemática das regras de formação com a capacidade de memória exigida para reconhecê-las. Quanto menor o índice, maior o poder computacional — e menor a garantia de que a máquina pare.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Linguagem</th>
+<th>Máquina</th>
+<th>Memória</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>Regular</td>
+<td>Autômato finito</td>
+<td>Nenhuma</td>
+<td><code>^LIV[0-9]{3}$</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Livre de contexto</td>
+<td>Autômato de pilha</td>
+<td>Pilha LIFO</td>
+<td>parênteses balanceados</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Sensível ao contexto</td>
+<td>Autômato linearmente limitado</td>
+<td>Fita proporcional à entrada</td>
+<td>aⁿbⁿcⁿ</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Recursivamente enumerável</td>
+<td>Máquina de Turing</td>
+<td>Fita infinita</td>
+<td>programas em geral</td>
+</tr>
+</tbody>
+</table></div>
+<p>O nível 3 não conta nem pareia estruturas: só transita entre estados. O nível 2 ganha a pilha e resolve aninhamento, mas não dependências contextuais. O nível 1 avalia vizinhança e limita o espaço de trabalho ao tamanho da entrada. O nível 0 não impõe limite de espaço e define o teto do que é computável.</p>
+<h2 id="afdafn-ap-lba-e-mt-memoria-e-trade-offs">AFD/AFN, AP, LBA e MT: memória e trade-offs</h2>
+<p>O trade-off aparece na prova de terminação. A Máquina de Turing reconhece os padrões de todos os níveis anteriores, mas decidir se uma execução qualquer termina é justamente o problema indecidível da aula 1. Quanto mais poder se pede ao modelo, mais caro fica garantir que ele para.</p>
+<p>Daí a regra de projeto: mapear o problema e usar o modelo mais restrito capaz de processar a linguagem identificada. Um AFD termina sempre, porque consome a entrada uma vez. Um autômato de pilha pode ser verificado por análise sintática. Uma Máquina de Turing exige argumento de terminação separado — ou aceitação de que ele não existe.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">regitro_livros.cs · linhas 341–347</span></div>
+  <p style="margin:0;font-size:.9rem">As 30 gavetas de 1A a 6E formam uma linguagem finita; qualquer linguagem finita é regular e pode ser reconhecida por um AFD.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">regitro_livros.cs · linha 91 e banco.sql · livros.codigo_livro</span></div>
+  <p style="margin:0;font-size:.9rem">O código nasce de "LIV" + Random().Next(100, 999) e é gravado em varchar(10) sem teste de pertinência: nada no sistema reconhece a linguagem LIV###.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula3_1.pdf pp. 9–14</span></div>
+  <p style="margin:0;font-size:.9rem">O AFD de oito estados que reconhece LIV seguido de três dígitos é construção didática, não código do PI.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--future">Proposta / evolução</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula3_1.pdf pp. 17–19</span></div>
+  <p style="margin:0;font-size:.9rem">A cadeia ER → AFN → AFD → código é o desenho de um analisador léxico; o PI não tem compilador nem analisador.</p>
+</div></div></section><h2 id="afd-como-quintupla-q-q0-f-determinismo-e-aceitacao">AFD como quíntupla Q, Σ, δ, q₀, F; determinismo e aceitação</h2>
+<p>O autômato finito determinístico é uma máquina de estados sem memória auxiliar. Formalmente, M = (Q, Σ, δ, q₀, F): Q é o conjunto finito de estados; Σ é o alfabeto de entrada; δ : Q × Σ → Q é a função de transição; q₀ ∈ Q é o estado inicial; F ⊆ Q é o conjunto de aceitação. Símbolo fora de Σ causa parada e rejeição.</p>
+<p>O determinismo é a exigência de que, para cada par (estado, símbolo), exista exatamente um destino. Não há escolha nem indefinição. A cadeia é aceita se a leitura completa termina em estado de F.</p>
+<p>Para reconhecer LIV seguido de três dígitos, um AFD didático usa oito estados: q₀ inicial; q₁ após L; q₂ após LI; q₃ após LIV; q₄, q₅ e q₆ após um, dois e três dígitos; q₇ como estado de erro. F = {q₆}. A tabela resume δ para os símbolos que importam:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Lê L</th>
+<th>Lê I</th>
+<th>Lê V</th>
+<th>Lê dígito</th>
+<th>Lê outro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>q₀</td>
+<td>q₁</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+</tr>
+<tr>
+<td>q₁</td>
+<td>q₇</td>
+<td>q₂</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+</tr>
+<tr>
+<td>q₂</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₃</td>
+<td>q₇</td>
+<td>q₇</td>
+</tr>
+<tr>
+<td>q₃</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₄</td>
+<td>q₇</td>
+</tr>
+<tr>
+<td>q₄</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₅</td>
+<td>q₇</td>
+</tr>
+<tr>
+<td>q₅</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₆</td>
+<td>q₇</td>
+</tr>
+<tr>
+<td>q₆</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+</tr>
+<tr>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+<td>q₇</td>
+</tr>
+</tbody>
+</table></div>
+<p>O erro comum é desenhar o autômato só com o caminho feliz. Sem q₇, a leitura de um símbolo inesperado fica sem destino definido, e a implementação precisa inventar um comportamento — normalmente uma exceção em tempo de execução. Totalizar δ é o que garante que a máquina sempre saiba o que fazer.</p>
+<h2 id="afn-caminhos-paralelos-transicoes-e-equivalencia-afdafn">AFN, caminhos paralelos, transições ε e equivalência AFD/AFN</h2>
+<p>O autômato finito não determinístico relaxa três coisas: permite várias transições com o mesmo símbolo, permite ausência de transição e permite transição vazia ε, que muda de estado sem consumir entrada. A assinatura vira δ : Q × (Σ ∪ {ε}) → P(Q), com o conjunto das partes no contradomínio.</p>
+<p>A aceitação é existencial: basta um caminho terminar em F. O AFN não executa nada em paralelo de verdade; ele descreve um conjunto de possibilidades que o AFD simula carregando o conjunto de estados alcançáveis. A construção de subconjuntos gera até 2ⁿ estados para n estados do AFN, e depois se eliminam os inalcançáveis. O custo é exponencial no papel, mas o resultado é um AFD equivalente — e o determinismo é o que o hardware executa.</p>
+<h2 id="regex-e-analise-lexica-em-compiladores">Regex e análise léxica em compiladores</h2>
+<p>O compilador não usa a expressão regular diretamente na execução. A cadeia é: expressão regular descreve o padrão; um gerador constrói um AFN com transições ε para as concatenações; a construção de subconjuntos produz um AFD; o AFD é traduzido para código ou tabela. Na fase léxica, esse autômato identifica <code>int</code>, <code>while</code> e nomes de variáveis — padrões curtos, sem aninhamento.</p>
+<p>O limite aparece na etapa seguinte. Chaves e parênteses exigem contagem, e o Nível 3 não conta. Por isso a sintaxe vai para o Nível 2. É a resposta para a questão de síntese da aula: dividir a análise não é organização didática, é consequência matemática da hierarquia.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>Confirmado no código: a gaveta é uma lista fixa de trinta valores, e o código é gerado por concatenação com <code>Random().Next(100, 999)</code>. O <code>banco.sql</code> aceita qualquer <code>varchar(10)</code> em <code>codigo_livro</code>, então um código fora do padrão — “LIV”, “liv123”, “12345” — entraria sem resistência se outro caminho de gravação existisse.</p>
+<p>Modelo didático: o AFD de oito estados, a quíntupla e a construção de subconjuntos. Ementa/proposta: um analisador léxico para a ficha de importação, com expressão regular convertida em autômato. O PI não tem compilador, login, OCR, API pública nem banco em nuvem; o MySQL é local.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Percorra o AFD com a cadeia “LIV123”. Em q₀, lê L e vai a q₁. Lê I, vai a q₂. Lê V, vai a q₃. Lê 1, vai a q₄. Lê 2, vai a q₅. Lê 3, vai a q₆. A entrada termina em q₆ ∈ F: aceita.</p>
+<p>Agora “LIV12”: após L, I, V, 1 e 2, a máquina está em q₅ e a entrada acaba. q₅ não pertence a F, então a cadeia é rejeitada — faltou um dígito. Para “LIV1234”, a leitura do quarto dígito leva de q₆ a q₇, o estado de erro, e a rejeição é imediata: o autômato reconhece exatamente três dígitos, não “pelo menos três”.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>“Por que validar o código com um autômato e não com um <code>if</code> de tamanho?”</strong></p>
+<p>Porque o <code>if</code> verifica comprimento, não estrutura: “LIVABC” tem seis caracteres e passaria. O autômato verifica pertinência à linguagem símbolo por símbolo, com custo linear no tamanho da entrada e sem memória auxiliar. Além disso, a mesma construção serve para a gaveta e para qualquer padrão regular da ficha. O <code>if</code> de tamanho é uma aproximação; o autômato é a especificação.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Explique por que a linguagem das cadeias com a mesma quantidade de <code>(</code> e <code>)</code> não é regular, e indique o modelo mínimo da hierarquia que a reconhece.</p>
+<details><summary>Ver resposta</summary>
+
+Um autômato finito tem um número fixo de estados e não guarda contagem. Para aceitar n aberturas seguidas de n fechamentos, ele precisaria distinguir arbitrariamente muitos n, e com |Q| estados dois valores diferentes de n cairiam no mesmo estado — o autômato aceitaria uma cadeia desbalanceada. A demonstração formal usa o lema do bombeamento. O modelo mínimo é o autômato de pilha, no Nível 2, que empilha um marcador a cada abertura e desempilha a cada fechamento, aceitando se a pilha terminar vazia.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="tc-03-chomsky-afd-0" data-track="tc">
+  <div class="quiz__q">1. Qual máquina corresponde ao Nível 2 da hierarquia de Chomsky?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-03-chomsky-afd-0" data-i="0" data-answer="1"><span class="mark">A</span><span>Autômato finito determinístico</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-0" data-i="1" data-answer="1"><span class="mark">B</span><span>Autômato de pilha</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-0" data-i="2" data-answer="1"><span class="mark">C</span><span>Autômato linearmente limitado</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-0" data-i="3" data-answer="1"><span class="mark">D</span><span>Máquina de Turing</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O Nível 2 reúne as linguagens livres de contexto, reconhecidas pelo autômato de pilha, que acrescenta memória LIFO ao autômato finito.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-03-chomsky-afd-1" data-track="tc">
+  <div class="quiz__q">2. Em um AFD, o valor de δ(q, a) é:</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-03-chomsky-afd-1" data-i="0" data-answer="1"><span class="mark">A</span><span>Um conjunto de estados possíveis.</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-1" data-i="1" data-answer="1"><span class="mark">B</span><span>Um único estado de destino.</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-1" data-i="2" data-answer="1"><span class="mark">C</span><span>Um par (estado, símbolo).</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-1" data-i="3" data-answer="1"><span class="mark">D</span><span>Indefinido quando não há transição.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Determinismo significa exatamente um destino para cada par estado-símbolo. Sem destino previsto, o autômato está incompleto.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-03-chomsky-afd-2" data-track="tc">
+  <div class="quiz__q">3. Por que a análise léxica fica no Nível 3 e a sintática no Nível 2?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-03-chomsky-afd-2" data-i="0" data-answer="1"><span class="mark">A</span><span>Porque a léxica é mais rápida de executar.</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-2" data-i="1" data-answer="1"><span class="mark">B</span><span>Porque tokens são padrões sem aninhamento, enquanto a sintaxe exige contar e parear estruturas.</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-2" data-i="2" data-answer="1"><span class="mark">C</span><span>Porque a sintática não pode ser feita por máquina.</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-2" data-i="3" data-answer="1"><span class="mark">D</span><span>Porque o Nível 3 não aceita expressões regulares.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O autômato finito não conta. Identificar int ou while é regular; validar blocos aninhados exige pilha, isto é, Nível 2.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-03-chomsky-afd-3" data-track="tc">
+  <div class="quiz__q">4. O que a construção de subconjuntos garante?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-03-chomsky-afd-3" data-i="0" data-answer="1"><span class="mark">A</span><span>Que o AFN passa a ter menos estados que o AFD.</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-3" data-i="1" data-answer="1"><span class="mark">B</span><span>Que existe um AFD equivalente, com até 2^n estados.</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-3" data-i="2" data-answer="1"><span class="mark">C</span><span>Que a linguagem deixa de ser regular.</span></button><button class="quiz__opt" data-q="tc-03-chomsky-afd-3" data-i="3" data-answer="1"><span class="mark">D</span><span>Que o autômato passa a aceitar cadeias infinitas.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Cada conjunto de estados do AFN vira um estado do AFD. O limite é 2^n, e depois se eliminam os estados inalcançáveis.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–19</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="tc-03-chomsky-afd" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#tipos-3210-e-as-quatro-classes-de-linguagens">Tipos 3/2/1/0 e as quatro classes de linguagens</a></li><li><a href="#afdafn-ap-lba-e-mt-memoria-e-trade-offs">AFD/AFN, AP, LBA e MT: memória e trade-offs</a></li><li><a href="#afd-como-quintupla-q-q0-f-determinismo-e-aceitacao">AFD como quíntupla Q, Σ, δ, q₀, F; determinismo e aceitação</a></li><li><a href="#afn-caminhos-paralelos-transicoes-e-equivalencia-afdafn">AFN, caminhos paralelos, transições ε e equivalência AFD/AFN</a></li><li><a href="#regex-e-analise-lexica-em-compiladores">Regex e análise léxica em compiladores</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

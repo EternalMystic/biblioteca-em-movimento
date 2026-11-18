@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Merge Sort e busca binária · Biblioteca em Movimento</title>
+<meta name="description" content="Divisão e conquista aplicada à ordenação, a árvore de recursão, o custo da memória auxiliar e por que ordenar antes permite descartar metade a cada passo.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Merge Sort e busca binária · Biblioteca em Movimento">
+<meta property="og:description" content="Divisão e conquista aplicada à ordenação, a árvore de recursão, o custo da memória auxiliar e por que ordenar antes permite descartar metade a cada passo.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-07-merge-busca/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-07-merge-busca/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Estruturas de Dados</span><span>/</span><span>Aula 7</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--ed">Estruturas de Dados</span><span class="badge">pp. 2–15</span></div>
+    <h1>Merge Sort e busca binária</h1>
+    <p class="page-head__lead">Divisão e conquista aplicada à ordenação, a árvore de recursão, o custo da memória auxiliar e por que ordenar antes permite descartar metade a cada passo.</p>
+    <div class="page-head__meta"><span class="mono">aula7 (1).pdf — Ordenação e Busca Otimizada</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/busca/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#28407F"><p>A biblioteca identifica um livro pelo código, como LIV123, e o cadastro precisa recusar códigos repetidos e localizar obras por título. Quando o acervo é pequeno, qualquer varredura resolve. Quando cresce, a diferença entre percorrer tudo e descartar metade a cada passo passa a decidir se a tela responde ou trava. Esta aula constrói as duas metades dessa história: ordenar com divisão e conquista e buscar com descarte.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Descrever divisão, conquista e fusão com caso base explícito.</li><li>Traçar a árvore de recursão e o número de comparações da fusão.</li><li>Justificar a memória auxiliar O(n) do Merge Sort.</li><li>Comparar busca linear e binária e enunciar a pré-condição de ordenação.</li></ul></div>
+<h2 id="divisao-e-conquista-caso-base-e-fusao">Divisão e conquista; caso base e fusão</h2>
+<p>Divisão e conquista resolve um problema quebrando-o em instâncias menores, resolvendo cada uma e combinando os resultados. No Merge Sort, dividir é partir o vetor pela metade; conquistar é ordenar cada metade recursivamente; combinar é fundir as duas metades ordenadas em uma só.</p>
+<p>O caso base é o subvetor de zero ou um elemento, que já está ordenado. Sem esse caso, a recursão não termina. A fusão percorre as duas metades comparando os menores elementos e copiando para o destino, o que custa tempo proporcional ao total.</p>
+<h2 id="arvore-de-recursao-indices-e-alocacao-em-c">Árvore de recursão, índices e alocação em C</h2>
+<p>Com [38, 27, 43, 3], a primeira divisão gera [38, 27] e [43, 3]; a segunda gera quatro vetores de um elemento. A árvore tem altura log₂ n, e cada nível custa n operações de fusão, o que dá n log n.</p>
+<p>Em C, a recursão trabalha com índices <code>inicio</code>, <code>meio</code> e <code>fim</code>, sem duplicar o vetor. A fusão aloca um bloco temporário com <code>malloc</code> do tamanho da faixa, copia os elementos ordenados e devolve ao vetor original antes de <code>free</code>. Esse <code>malloc</code> é o custo espacial explícito.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">regitro_livros.cs · linha 576</span></div>
+  <p style="margin:0;font-size:.9rem">O cadastro evita autor repetido com listaAutoresTags.Contains, uma busca linear sobre a lista de tags.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">FormDevolucao.cs · consulta de atirador por termo</span></div>
+  <p style="margin:0;font-size:.9rem">A consulta combina igualdade de número com LIKE de nome e ordena por prioridade, LIMIT 15.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula7 (1).pdf pp. 2–15</span></div>
+  <p style="margin:0;font-size:.9rem">Recursão em C com índices, slicing em Python e o traço da busca binária são dos slides; o PI não tem Merge Sort.</p>
+</div></div></section><h2 id="slicing-e-copias-em-python-custo-temporal-e-memoria-auxiliar">Slicing e cópias em Python; custo temporal e memória auxiliar</h2>
+<p>Em Python, o fatiamento esconde a alocação: <code>vetor[:meio]</code> cria uma lista nova na memória. O código fica curto, mas cada nível da recursão copia dados, e o consumo de memória cresce além do vetor temporário da fusão.</p>
+<p>O custo temporal continua n log n; o que muda é a constante e o pico de memória. Em C, o pico é um bloco do tamanho da faixa fundida; em Python, somam-se as cópias das metades em cada nível. Para o PI, isso reforça uma escolha: ordenar no banco evita carregar e copiar listas no cliente.</p>
+<h2 id="busca-linear-e-binaria-em-cpython">Busca linear e binária em C/Python</h2>
+<p>A busca linear percorre do início até achar ou terminar, custando O(n). É o único método possível em lista encadeada ou vetor desordenado. No projeto, <code>listaAutoresTags.Contains(nomeAutor)</code> é exatamente isso: uma varredura sobre os autores já adicionados.</p>
+<p>A busca binária exige vetor ordenado e acesso por índice. Compara com o elemento do meio, descarta uma metade e repete. Em [2, 5, 8, 12, 16, 18, 23, 38, 56, 72], procurar 18 gasta três comparações: meio 16, depois 38, depois 18.</p>
+<h2 id="entrada-ordenada-e-acesso-indexado-comparacao-de-volume">Entrada ordenada e acesso indexado; comparação de volume</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Volume</th>
+<th>Busca linear</th>
+<th>Busca binária</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.000</td>
+<td>1.000 comparações</td>
+<td>~10</td>
+</tr>
+<tr>
+<td>1.000.000</td>
+<td>1.000.000</td>
+<td>~20</td>
+</tr>
+<tr>
+<td>1.000.000.000</td>
+<td>1.000.000.000</td>
+<td>~30</td>
+</tr>
+</tbody>
+</table></div>
+<p>A tabela mostra por que ordenar uma vez e buscar muitas vezes compensa: o custo n log n da ordenação se paga depois de poucas consultas. Mas a pré-condição é rígida: se o vetor não estiver ordenado, a binária devolve resultado errado sem avisar.</p>
+<div class="code"><div class="code__bar"><span class="dot"></span><span>trecho do material</span><span class="lang">C#</span></div><pre><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">listaAutoresTags</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">nomeAutor</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="n">listaAutoresTags</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">nomeAutor</span><span class="p">);</span>
+</code></pre></div>
+<p>Esse trecho de regitro_livros.cs mostra a busca linear em uso real: antes de adicionar um autor à lista de tags do livro, o código verifica se ele já está lá. Como um livro tem poucos autores, o custo é irrelevante, e a simplicidade vence.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>O sistema é WinForms .NET 8 com MySQL local, abre direto no painel e não tem login. Confirmado no código: não há Merge Sort, não há <code>BinarySearch</code> e não há ordenação em memória. A ordenação é feita pelo <code>ORDER BY</code> e a busca por igualdade ou <code>LIKE</code> no banco.</p>
+<p>O <code>LIKE '%termo%'</code> do cadastro de atiradores é uma varredura: o curinga à esquerda impede usar índice de prefixo. Já <code>WHERE numero = @num</code> usa a chave primária, que é indexada. A mesma tela mistura os dois regimes, e é isso que explica por que buscar por número é instantâneo e buscar por parte do nome custa mais.</p>
+<p>Modelo didático: a árvore de recursão, o <code>malloc</code> da fusão e o traço da binária vêm dos slides. O PI não implementa nenhum dos dois; a ponte é entender o que o banco faz por baixo.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Merge Sort em [38, 27, 43, 3], contando comparações em cada fusão.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Entrada</th>
+<th>Comparações</th>
+<th>Saída</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fusão 1</td>
+<td>[38] e [27]</td>
+<td>1</td>
+<td>[27, 38]</td>
+</tr>
+<tr>
+<td>Fusão 2</td>
+<td>[43] e [3]</td>
+<td>1</td>
+<td>[3, 43]</td>
+</tr>
+<tr>
+<td>Fusão 3</td>
+<td>[27, 38] e [3, 43]</td>
+<td>3</td>
+<td>[3, 27, 38, 43]</td>
+</tr>
+</tbody>
+</table></div>
+<p>A última fusão compara 27 com 3, copia 3; compara 27 com 43, copia 27; compara 38 com 43, copia 38; e copia o 43 restante. Total: 5 comparações para n = 4, dentro do limite de n log₂ n = 8.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>Por que não usar busca binária em vez do LIKE no cadastro de atiradores?</strong></p>
+<p>Porque a busca binária exige a coleção ordenada pelo campo pesquisado e acesso por índice, e a consulta procura um trecho no meio do nome, não um valor exato. Um <code>LIKE '%silva%'</code> não tem como descartar metade das linhas, porque o trecho pode estar em qualquer posição. Além disso, a consulta combina três critérios, incluindo igualdade de número. O caminho correto seria indexar o campo e usar prefixo, ou manter uma estrutura auxiliar de busca textual, o que o projeto não faz.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Aplique a busca binária para encontrar 7 no vetor ordenado [1, 3, 5, 7, 9, 11, 13] e liste os índices de meio visitados.</p>
+<details><summary>Ver resposta</summary>
+
+Início 0, fim 6, meio 3, valor 7: encontrado na primeira comparação. Se o alvo fosse 11, o meio 3 daria 7, menor que 11, então início vira 4; meio 5, valor 11, encontrado em duas comparações. O exemplo mostra que o número de passos depende de log₂ n, não da posição do elemento.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="ed-07-merge-busca-0" data-track="ed">
+  <div class="quiz__q">1. Qual é o caso base do Merge Sort?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-07-merge-busca-0" data-i="0" data-answer="0"><span class="mark">A</span><span>Subvetor com zero ou um elemento, que já está ordenado</span></button><button class="quiz__opt" data-q="ed-07-merge-busca-0" data-i="1" data-answer="0"><span class="mark">B</span><span>Subvetor com dois elementos trocados</span></button><button class="quiz__opt" data-q="ed-07-merge-busca-0" data-i="2" data-answer="0"><span class="mark">C</span><span>Vetor de tamanho par</span></button><button class="quiz__opt" data-q="ed-07-merge-busca-0" data-i="3" data-answer="0"><span class="mark">D</span><span>Vetor com todos os elementos iguais</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A recursão para quando não há o que ordenar. Tamanho par é irrelevante; elementos iguais ainda precisam de fusão.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-07-merge-busca-1" data-track="ed">
+  <div class="quiz__q">2. Por que o Merge Sort usa memória auxiliar O(n)?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-07-merge-busca-1" data-i="0" data-answer="0"><span class="mark">A</span><span>Porque a fusão precisa de um vetor temporário para combinar as metades</span></button><button class="quiz__opt" data-q="ed-07-merge-busca-1" data-i="1" data-answer="0"><span class="mark">B</span><span>Porque a recursão cria uma cópia de cada subvetor na pilha</span></button><button class="quiz__opt" data-q="ed-07-merge-busca-1" data-i="2" data-answer="0"><span class="mark">C</span><span>Porque ele ordena em um segundo vetor definitivo</span></button><button class="quiz__opt" data-q="ed-07-merge-busca-1" data-i="3" data-answer="0"><span class="mark">D</span><span>Porque o pivô precisa ser armazenado a cada chamada</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A fusão copia elementos para um bloco temporário antes de devolvê-los. A pilha guarda índices, não cópias; não há vetor definitivo nem pivô.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-07-merge-busca-2" data-track="ed">
+  <div class="quiz__q">3. Quantas comparações a busca binária faz, no pior caso, em 1.000.000 de elementos ordenados?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-07-merge-busca-2" data-i="0" data-answer="0"><span class="mark">A</span><span>Cerca de 20</span></button><button class="quiz__opt" data-q="ed-07-merge-busca-2" data-i="1" data-answer="0"><span class="mark">B</span><span>Cerca de 1.000</span></button><button class="quiz__opt" data-q="ed-07-merge-busca-2" data-i="2" data-answer="0"><span class="mark">C</span><span>Cerca de 10.000</span></button><button class="quiz__opt" data-q="ed-07-merge-busca-2" data-i="3" data-answer="0"><span class="mark">D</span><span>Cerca de 1.000.000</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="log₂ de 1.000.000 é aproximadamente 20. Mil comparações seriam ~n/1000, e um milhão é o custo da busca linear.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–15</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="ed-07-merge-busca" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#divisao-e-conquista-caso-base-e-fusao">Divisão e conquista; caso base e fusão</a></li><li><a href="#arvore-de-recursao-indices-e-alocacao-em-c">Árvore de recursão, índices e alocação em C</a></li><li><a href="#slicing-e-copias-em-python-custo-temporal-e-memoria-auxiliar">Slicing e cópias em Python; custo temporal e memória auxiliar</a></li><li><a href="#busca-linear-e-binaria-em-cpython">Busca linear e binária em C/Python</a></li><li><a href="#entrada-ordenada-e-acesso-indexado-comparacao-de-volume">Entrada ordenada e acesso indexado; comparação de volume</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

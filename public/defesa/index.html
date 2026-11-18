@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modo defesa · Biblioteca em Movimento</title>
+<meta name="description" content="Roteiro de defesa em 10 minutos, três pontes com a disciplina, perguntas de banca e checklist.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Modo defesa · Biblioteca em Movimento">
+<meta property="og:description" content="Roteiro de defesa em 10 minutos, três pontes com a disciplina, perguntas de banca e checklist.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/defesa/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/defesa/">
+<link rel="icon" type="image/png" href="../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../assets/img/logo.png">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script src="../assets/js/search-index.js" defer></script>
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/defesa.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../">Início</a><a href="../mapa/">Mapa de aulas</a><a href="../jornada/">Jornada do PI</a><a href="../rotinas/">Simuladores</a><a href="../exercicios/">Exercícios</a><a href="../revisao/">Revisão</a><a href="../defesa/" aria-current="page">Defesa</a><a href="../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui"><a href="../">Início</a><span>/</span><span>Defesa</span></nav>
+    <div class="eyebrow">Roteiro cronometrado</div>
+    <h1>Modo defesa</h1>
+    <p class="page-head__lead">Use este modo como um roteiro de defesa oral de dez minutos. Avance na ordem, usando o teclado para passar de etapa e mantendo o ritmo indicado em cada cartão. Leia as falas em voz alta, mostre apenas a evidência indicada e trate os rótulos de confirmação, modelo didático e proposta como limites do que pode ser afirmado. Reserve as perguntas finais para simular a banca.</p>
+    <div class="btn-row" style="margin-top:1rem">
+      <button class="btn" id="def-start">Iniciar apresentação</button>
+      <button class="btn btn--ghost" onclick="window.print()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 8V3h10v5"/><rect x="4" y="8" width="16" height="8" rx="2"/><path d="M7 16h10v5H7z"/></svg> Imprimir roteiro</button>
+      <a class="btn btn--ghost" href="../fontes/">Abrir fontes</a>
+    </div>
+  </div>
+</div>
+<div class="wrap section--tight">
+  <div class="def-layout">
+    <aside class="def-nav" aria-label="Passos da apresentação">
+      <div class="def-timer" id="def-timer" aria-live="off">
+        <span class="def-timer__label">Tempo</span>
+        <span class="def-timer__value" id="def-clock">00:00</span>
+        <div class="btn-row" style="margin-top:.4rem"><button class="btn btn--sm btn--ghost" id="def-play">Iniciar</button><button class="btn btn--sm btn--ghost" id="def-reset">Zerar</button></div>
+      </div>
+      <button class="def-step-btn is-active" data-def-go="0"><span>01</span>Abertura</button><button class="def-step-btn" data-def-go="1"><span>02</span>Solução e arquitetura</button><button class="def-step-btn" data-def-go="2"><span>03</span>Cadastro e modelo de dados</button><button class="def-step-btn" data-def-go="3"><span>04</span>Busca e acervo</button><button class="def-step-btn" data-def-go="4"><span>05</span>Empréstimo e estados</button><button class="def-step-btn" data-def-go="5"><span>06</span>Devolução transacional</button><button class="def-step-btn" data-def-go="6"><span>07</span>Histórico e filtros</button><button class="def-step-btn" data-def-go="7"><span>08</span>Ponte léxica</button><button class="def-step-btn" data-def-go="8"><span>09</span>Ponte sintática</button><button class="def-step-btn" data-def-go="9"><span>10</span>Ponte de complexidade</button><button class="def-step-btn" data-def-go="10"><span>11</span>Limites, próximos passos e encerramento</button>
+      <div class="def-progress"><i id="def-progress"></i></div>
+    </aside>
+    <div class="def-main">
+      
+<article class="def-step" data-def-step="0" >
+  <div class="def-step__meta"><span class="badge">Passo 1 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Abertura — o problema do acervo manual</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>Nós partimos de um problema concreto da Biblioteca do Tiro de Guerra de Americana: os registros manuais dificultavam localizar obras, controlar empréstimos e devoluções e acompanhar atrasos. Nosso Projeto Integrador busca transformar esse fluxo em uma aplicação desktop para organizar o acervo e dar mais visibilidade às operações. O escopo que defendemos é o que foi efetivamente revisado: cadastro e consulta de livros, controle de empréstimos, devolução, histórico e apoio à organização das obras. Não estamos apresentando um sistema genérico de biblioteca nem prometendo recursos que não aparecem no código. A proposta foi desenvolvida no contexto do UNISAL, Campus Maria Auxiliadora, em Americana-SP, por estudantes de Engenharia da Computação do quarto semestre de 2026.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Abrir a jornada do PI</p><a class="btn btn--sm" href="../jornada/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Contexto do projeto e banner da equipe; escopo funcional confirmado pela revisão de PI.rar/design teste/.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não afirmar que todos os processos reais da biblioteca foram automatizados ou que houve implantação em produção.</p></div>
+  </div>
+</article>
+<article class="def-step" data-def-step="1" hidden>
+  <div class="def-step__meta"><span class="badge">Passo 2 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Solução e arquitetura — desktop conectado ao banco</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>A solução é um sistema desktop desenvolvido em C# com .NET 8, usando Windows Forms na interface e MySQL para persistência. A interface é dividida em formulários com responsabilidades reconhecíveis: dashboard, cadastro, acervo, empréstimo, devolução e histórico. O banco organiza os dados em sete tabelas, conforme o arquivo banco.sql. Essa separação nos permite demonstrar a integração entre Estruturas de Dados e Teoria da Computação: de um lado, telas, consultas, estados e cache; de outro, formatos válidos, linguagens e análise de limites. É importante diferenciar arquitetura implementada de arquitetura idealizada: estamos defendendo o pacote revisado, e não uma versão futura com autenticação, OCR ou algoritmos que não foram encontrados.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Mostrar a arquitetura da solução</p><a class="btn btn--sm" href="../rotinas/versoes/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Confirmado no código: projeto C#/.NET 8 com WinForms e conexão MySQL; Form1 dashboard e demais formulários em PI.rar/design teste/; banco.sql contém 7 tabelas.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não chamar o sistema de web, distribuído ou multiplataforma; a evidência revisada é de uma aplicação desktop WinForms.</p></div>
+  </div>
+</article>
+<article class="def-step" data-def-step="2" hidden>
+  <div class="def-step__meta"><span class="badge">Passo 3 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Cadastro e modelo de dados — do livro à ficha</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>No cadastro, nós registramos as informações da obra e seus autores, e depois essas informações alimentam o acervo e as operações de circulação. O arquivo regitro_livros concentra o cadastro de livros e autores; o banco.sql representa a persistência relacional em sete tabelas. Na defesa, mostramos primeiro uma ficha com dados fictícios, porque o objetivo é demonstrar o fluxo sem expor dados reais. Também destacamos que foto e OCR não são a mesma coisa. O pacote revisado permite falar em foto e em um Form4 com cache de imagens, mas não encontramos implementação de OCR. Portanto, a leitura automática de texto deve ser tratada como proposta, não como funcionalidade entregue. O modelo de dados é o que está no dump, inclusive suas limitações.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Abrir o roteiro de cadastro</p><a class="btn btn--sm" href="../rotinas/gaveteiro/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Confirmado no código: regitro_livros trata cadastro e autores; banco.sql tem 7 tabelas; Form4.cs usa cache de fotos. Ausência de OCR no código analisado.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não afirmar que a câmera extrai texto automaticamente; foto e OCR são operações distintas.</p></div>
+  </div>
+</article>
+<article class="def-step" data-def-step="3" hidden>
+  <div class="def-step__meta"><span class="badge">Passo 4 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Busca e acervo — localizar antes de emprestar</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>Depois do cadastro, o acervo é o ponto de consulta. O Form3.Designer apresenta a tela de acervo e consultas SQL, enquanto o Form4 acrescenta paginação e um Dictionary&lt;string, Image&gt; para reutilizar imagens associadas aos registros. Esse detalhe é uma evidência importante: uma avaliação anterior dizia que Dictionary não havia sido identificado, mas a revisão do Form4.cs, na linha 43, mostra exatamente essa estrutura. Nós não devemos transformar esse cache em uma árvore B ou em uma prova de busca ótima. A busca efetiva deve ser explicada conforme a consulta e os índices existentes no banco. Em uma demonstração, usamos poucos registros fictícios, mostramos a paginação e verificamos visualmente disponibilidade, título e identificação da obra.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Mostrar acervo e paginação</p><a class="btn btn--sm" href="../rotinas/busca/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Confirmado no código: Form3.Designer contém acervo/SQL; Form4.cs linha 43 usa Dictionary&lt;string, Image&gt; e implementa paginação.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não afirmar que o sistema implementa árvore B, índice próprio ou busca binária sem evidência no pacote.</p></div>
+  </div>
+</article>
+<article class="def-step" data-def-step="4" hidden>
+  <div class="def-step__meta"><span class="badge">Passo 5 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Empréstimo e estados — disponibilidade com rastreabilidade</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>O empréstimo começa pela procura da obra e pela verificação de disponibilidade. O Form2 organiza empréstimos paginados, e o FormEmprestimo concentra busca, disponibilidade e status. Assim, nós conseguimos explicar o fluxo como uma mudança de estado: uma obra disponível pode ser associada a um empréstimo e deixar de aparecer como disponível até a devolução. O protótipo histórico 66fd8fb ajuda a entender uma versão anterior, que fazia INSERT do empréstimo e depois UPDATE do status em comandos separados, sem transação. Essa informação é útil, mas não deve ser confundida com a revisão final. Na apresentação, mostramos o comportamento implementado no pacote revisado e usamos o protótipo apenas para discutir evolução e risco de inconsistência.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Simular um empréstimo</p><a class="btn btn--sm" href="../rotinas/emprestimo/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Confirmado no código: Form2 trata empréstimos paginados e FormEmprestimo trata busca, disponibilidade e status. Protótipo 66fd8fb tinha INSERT e UPDATE separados, sem transação.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não dizer que o protótipo antigo e o pacote revisado têm exatamente o mesmo fluxo transacional.</p></div>
+  </div>
+</article>
+<article class="def-step" data-def-step="5" hidden>
+  <div class="def-step__meta"><span class="badge">Passo 6 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Devolução transacional — proteger a consistência</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>Na devolução, nós precisamos atualizar mais de uma informação de forma coerente: registrar a devolução e devolver a obra ao estado disponível. É justamente por isso que a transação é relevante. No FormDevolucao.cs revisado, o INSERT e o UPDATE são executados dentro de uma transação, com rollback em caso de falha. Se uma etapa não puder ser concluída, a operação pode ser desfeita em vez de deixar metade do estado gravado. Essa é uma melhoria em relação ao protótipo 66fd8fb, que fazia as duas operações em comandos separados. Ainda assim, transação não significa que todos os problemas do modelo estejam resolvidos: ela protege a unidade dessa operação, enquanto regras, chaves e validações continuam dependendo do banco e do código.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Demonstrar devolução e rollback</p><a class="btn btn--sm" href="../rotinas/devolucao/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Confirmado no código: FormDevolucao.cs usa transação com INSERT + UPDATE e rollback. O protótipo 66fd8fb não usava transação.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não afirmar que uma transação substitui validação, chave estrangeira, controle de concorrência ou testes de produção.</p></div>
+  </div>
+</article>
+<article class="def-step" data-def-step="6" hidden>
+  <div class="def-step__meta"><span class="badge">Passo 7 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Histórico e filtros — consultar o que aconteceu</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>O histórico de devoluções transforma registros isolados em uma visão de acompanhamento. No formulário historico_devolucao, nós encontramos as coleções _todos e _visiveis e filtros para controlar o que aparece na tela. Isso permite demonstrar uma distinção simples: todos os dados carregados podem ser preservados, enquanto a lista visível muda conforme o filtro. A ordenação, porém, precisa ser descrita com precisão. Ela é feita por ORDER BY na consulta SQL, e não por um algoritmo próprio implementado em C#. Essa ressalva evita atribuir ao projeto uma técnica que não está lá. Na defesa, usamos o histórico para mostrar resultado, filtro e ordenação, e explicamos que desempenho depende do banco, dos dados e de índices, não apenas do formulário.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Abrir histórico e filtros</p><a class="btn btn--sm" href="../rotinas/historico/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Confirmado no código: historico_devolucao usa _todos/_visiveis e filtros; a ordenação observada é ORDER BY no SQL.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não afirmar que existe algoritmo de ordenação próprio em C#; a evidência aponta para ORDER BY no banco.</p></div>
+  </div>
+</article>
+<article class="def-step" data-def-step="7" hidden>
+  <div class="def-step__meta"><span class="badge">Passo 8 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Ponte léxica — AFD e regex para códigos</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>A ponte com Teoria da Computação começa no nível léxico. Um código de livro pode seguir o formato LIV seguido de exatamente três algarismos; a expressão de validação proposta é ^LIV[0-9]{3}$. Um AFD reconhece esse conjunto porque lê L, depois I, depois V e, em seguida, três dígitos, aceitando somente ao final. Para as gavetas, o formato proposto é [1-6][A-E]: uma linha de 1 a 6 e uma coluna de A a E, totalizando trinta combinações, seis linhas vezes cinco colunas. Esses autômatos são modelos didáticos para especificar formatos. Eles não provam que toda validação está implementada exatamente assim no código. O gerador do protótipo sorteia 100 a 998, pois o limite superior é exclusivo, produzindo 899 códigos possíveis.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Executar a validação lexical</p><a class="btn btn--sm" href="../rotinas/validacao/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Modelo didático: AFD e regex ^LIV[0-9]{3}$; proposta de gaveta [1-6][A-E]. Confirmado no contexto: 30 gavetas e gerador 100..998 com 899 códigos possíveis.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não dizer que a regex ou o AFD são necessariamente a implementação atual se isso não estiver demonstrado no arquivo do formulário.</p></div>
+  </div>
+</article>
+<article class="def-step" data-def-step="8" hidden>
+  <div class="def-step__meta"><span class="badge">Passo 9 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Ponte sintática — ficha, gramática e pilha</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>No nível sintático, nós deixamos de validar apenas caracteres isolados e passamos a descrever a estrutura de uma ficha de importação. Uma gramática pode exigir colchetes, campos em ordem e separadores corretos; uma ficha fora dessa forma é rejeitada. O autômato de pilha entra quando precisamos acompanhar uma estrutura aninhada ou uma quantidade variável de símbolos, usando a pilha para lembrar aberturas e conferir fechamentos. Essa é uma ponte conceitual para o conteúdo de gramáticas e autômatos, não uma afirmação de que o aplicativo já contém um parser formal ou um autômato de pilha executável. Na apresentação, diferenciamos claramente a especificação didática da funcionalidade confirmada e mostramos como a regra poderia orientar uma futura importação segura.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Ver gramática da ficha</p><a class="btn btn--sm" href="../rotinas/validacao/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Modelo didático/proposta: gramática de ficha de importação com colchetes e autômato de pilha; não identificado como parser implementado no código revisado.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não afirmar que o sistema já importa fichas por uma gramática formal ou que possui AP implementado.</p></div>
+  </div>
+</article>
+<article class="def-step" data-def-step="9" hidden>
+  <div class="def-step__meta"><span class="badge">Passo 10 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Ponte de complexidade — P, NP e TSP</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>A ponte de complexidade aparece quando perguntamos quanto custa escolher uma rota para visitar pontos. No roteiro didático, usamos A(0,0), B(0,1), C(0,2), D(2,1) e E(3,3), distância Manhattan e orçamento 12. O vizinho mais próximo produz A-B-C-D-E-A, com custo 14, enquanto A-B-C-E-D-A alcança 12. Isso mostra que uma heurística pode falhar mesmo quando encontra uma rota válida. A decisão do TSP é NP-completa e a versão de otimização é NP-difícil; não estamos dizendo que o sistema implementa um solver de TSP. Também não usamos Dijkstra para qualquer problema: com pesos negativos, suas premissas deixam de valer, e pode ser necessário outro método, conforme o modelo do grafo.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Comparar as rotas do TSP</p><a class="btn btn--sm" href="../rotinas/custo/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Modelo didático: coordenadas, Manhattan, orçamento 12, rota gulosa 14 e rota de 12; classificação teórica padrão do TSP.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não afirmar que o PI resolve TSP, que a rota é ótima em geral ou que Dijkstra aceita pesos negativos.</p></div>
+  </div>
+</article>
+<article class="def-step" data-def-step="10" hidden>
+  <div class="def-step__meta"><span class="badge">Passo 11 de 11</span><span class="badge badge--warn">55 s</span></div>
+  <h2>Limites, próximos passos e encerramento</h2>
+  <div class="def-say"><div class="card__kicker">O que dizer</div><p>Para encerrar, nós apresentamos o que o projeto entrega e o que ainda precisa de validação. O pacote revisado confirma a aplicação desktop, o acervo, os fluxos de circulação, o histórico, o cache de imagens e a devolução transacional. Entre os limites, estão a divergência documental sobre login, a ausência de OCR identificado, a ausência de evidência de árvore B e a necessidade de esclarecer chaves e regras no banco. Como próximos passos, propomos autenticação realmente implementada e documentada, validações mais fortes, testes com concorrência, revisão das relações entre tabelas e uma política de importação formal. O resultado é uma base demonstrável para estudar dados e computação com honestidade técnica: nós distinguimos código confirmado, modelo didático e proposta futura.</p></div>
+  <div class="grid grid--2" style="margin-top:1rem">
+    <div class="card"><div class="card__kicker">O que mostrar</div><p style="margin-bottom:.6rem">Abrir o encerramento da jornada</p><a class="btn btn--sm" href="../jornada/" target="_blank" rel="noopener">Abrir recurso</a></div>
+    <div class="card"><div class="card__kicker">Evidência e limite</div><p style="font-size:.86rem">Síntese baseada na revisão de PI.rar/design teste/, banco.sql e nas divergências documentais listadas no escopo da defesa.</p><p style="font-size:.82rem;color:var(--amber)"><strong>Cuidado:</strong> Não prometer segurança, escala, implantação ou funcionalidades futuras como se já estivessem entregues.</p></div>
+  </div>
+</article>
+      <div class="def-controls">
+        <button class="btn btn--ghost" id="def-prev">← Anterior</button>
+        <span class="muted" style="font-size:.8rem">Use ← → para navegar, P para pausar o tempo</span>
+        <button class="btn" id="def-next">Próximo →</button>
+      </div>
+    </div>
+  </div>
+
+  <section style="margin-top:3rem">
+    <div class="section-head"><div class="eyebrow">Três pontes</div><h2>O que a disciplina entrega ao projeto</h2></div>
+    <div class="grid grid--3"><div class="card card--track" style="--track:var(--blue)">
+<div class="card__kicker">Nível 3 — léxico</div><h3>Formato do código como linguagem regular</h3><p>A validação de LIV seguido de três dígitos pode ser descrita por uma expressão regular e por um AFD, porque o reconhecimento depende apenas de uma sequência finita de posições. O mesmo raciocínio modela gavetas no formato [1-6][A-E]. A ponte conecta cadastro e acervo à ideia de linguagem regular, mas permanece modelo didático quando não há validação equivalente confirmada no código.</p>
+<div class="btn-row"><a class="btn btn--sm btn--ghost" href="/rotinas/validacao/">Abrir rotina</a><a class="btn btn--sm btn--ghost" href="../aulas/tc-03-chomsky-afd/">Ver aula</a></div></div><div class="card card--track" style="--track:var(--green)">
+<div class="card__kicker">Nível 4 — sintático</div><h3>Ficha estruturada com gramática e pilha</h3><p>Uma ficha de importação com colchetes, campos e separadores exige mais do que reconhecer caracteres: é preciso respeitar uma estrutura. Uma gramática descreve as produções válidas, e um autômato de pilha pode acompanhar aberturas e fechamentos ou quantidades aninhadas. Essa ponte orienta uma futura importação segura; no PI revisado, deve ser apresentada como proposta ou modelo didático, não como parser já implementado.</p>
+<div class="btn-row"><a class="btn btn--sm btn--ghost" href="/rotinas/validacao/">Abrir rotina</a><a class="btn btn--sm btn--ghost" href="../aulas/tc-04-afn-pda/">Ver aula</a></div></div><div class="card card--track" style="--track:var(--amber)">
+<div class="card__kicker">Nível 5 — complexidade</div><h3>Rotas, heurísticas e limites computacionais</h3><p>O exemplo do TSP mostra por que uma escolha local não garante a melhor solução: o vizinho mais próximo faz A-B-C-D-E-A com custo 14, enquanto A-B-C-E-D-A custa 12. A decisão é NP-completa e a otimização é NP-difícil. Essa ponte relaciona organização física e planejamento de rotas à complexidade, sem afirmar que o sistema implementa TSP ou um algoritmo de otimização.</p>
+<div class="btn-row"><a class="btn btn--sm btn--ghost" href="/rotinas/custo/">Abrir rotina</a><a class="btn btn--sm btn--ghost" href="../aulas/tc-07-complexidade/">Ver aula</a></div></div></div>
+  </section>
+
+  <section style="margin-top:3rem">
+    <div class="section-head"><div class="eyebrow">Perguntas prováveis</div><h2>Respostas curtas, com evidência</h2>
+    <p>Abra cada pergunta e ensaie em voz alta. Se a resposta começar com “eu acho”, volte ao código.</p></div>
+    <details class="accordion"><summary>O login existe no sistema?</summary>
+<div class="accordion__body"><p>Há uma divergência documental. Slides e banner citam login e mostram capturas, mas, no código revisado, o Program.cs abre FormDashboard diretamente e o dump não possui tabela de usuários. Portanto, não devemos defender autenticação implementada no pacote analisado. A resposta correta é que login aparece na documentação como intenção ou material visual, mas precisa ser implementado e documentado para ser considerado funcionalidade confirmada.</p><span class="badge">escopo</span></div></details><details class="accordion"><summary>O sistema usa IA ou OCR para cadastrar livros?</summary>
+<div class="accordion__body"><p>Não identificamos OCR no código analisado. Foto e OCR são operações diferentes: o projeto pode trabalhar com imagem, e o Form4 possui cache de fotos, mas isso não comprova leitura automática de texto. Assim, respondemos que OCR é uma proposta ou um recurso documental não confirmado, não uma funcionalidade entregue. Só devemos demonstrá-lo como implementação depois de existir código, dependência, fluxo de erro e teste correspondente.</p><span class="badge">evidência</span></div></details><details class="accordion"><summary>Por que não há FK em devolucoes?</summary>
+<div class="accordion__body"><p>A resposta deve partir do esquema efetivamente encontrado em banco.sql, sem inventar uma justificativa de negócio. Se a tabela devolucoes não declara a chave estrangeira esperada, isso é uma limitação do modelo relacional revisado. A transação do FormDevolucao.cs protege o conjunto INSERT + UPDATE durante a operação, mas não substitui integridade referencial. Como próximo passo, revisaríamos chaves, cardinalidades, migração dos dados e impacto nas consultas antes de adicionar uma FK.</p><span class="badge">banco</span></div></details><details class="accordion"><summary>O sistema implementa árvore B?</summary>
+<div class="accordion__body"><p>Não encontramos evidência de uma árvore B implementada no pacote. O Form4.cs, na linha 43, usa Dictionary&lt;string, Image&gt;, que é uma estrutura de acesso a valores por chave e serve, naquele contexto, ao cache de imagens. Isso não deve ser apresentado como árvore B, índice de banco ou estrutura de busca personalizada. A árvore B pode aparecer como conteúdo teórico ou como proposta para estudar índices, mas não como componente confirmado do sistema.</p><span class="badge">estruturas</span></div></details><details class="accordion"><summary>Qual é a complexidade da busca?</summary>
+<div class="accordion__body"><p>Não há uma única resposta sem especificar a busca, a consulta SQL, os índices e o tamanho dos dados. No formulário, a busca delega parte do trabalho ao MySQL; no cache do Form4, o Dictionary oferece acesso médio esperado por chave, sob as hipóteses usuais de uma tabela hash. Isso não autoriza declarar complexidade global O(1) para o sistema. A resposta tecnicamente segura é separar custo do formulário, da consulta e do banco, e medir ou inspecionar o plano para uma conclusão mais precisa.</p><span class="badge">complexidade</span></div></details><details class="accordion"><summary>Por que Dijkstra não serve com peso negativo?</summary>
+<div class="accordion__body"><p>Dijkstra fixa progressivamente o vértice com menor distância provisória, supondo que nenhum caminho posterior ficará menor por meio de uma aresta negativa. Um peso negativo quebra exatamente essa premissa: uma rota aparentemente fechada pode ser melhorada depois. Por isso, ele não é o algoritmo apropriado para grafos com pesos negativos. A escolha depende do problema; Bellman-Ford, por exemplo, trata esse cenário e ainda pode detectar ciclos negativos. No nosso roteiro do TSP usamos distâncias Manhattan positivas, não Dijkstra como solução do TSP.</p><span class="badge">teoria</span></div></details><details class="accordion"><summary>O que é NP-completo no TSP?</summary>
+<div class="accordion__body"><p>A versão de decisão: dado um conjunto de cidades, distâncias e um limite K, perguntar se existe um circuito que visita cada cidade uma vez e tem custo no máximo K. Ela está em NP porque uma rota pode ser verificada em tempo polinomial, e é NP-completa pela dificuldade conhecida dessa decisão. A versão de otimização, que procura a melhor rota, é NP-difícil. No exemplo didático, a rota gulosa custa 14 e outra rota custa 12, mas isso não significa que implementamos um solver no PI.</p><span class="badge">complexidade</span></div></details><details class="accordion"><summary>O site foi feito com que tecnologia?</summary>
+<div class="accordion__body"><p>É importante separar o produto defendido do site de estudos. O sistema do PI é desktop, em C#/.NET 8, com WinForms e MySQL. O site é a camada didática que organiza a jornada, as rotinas e o modo defesa; sua tecnologia deve ser descrita conforme a implementação publicada do próprio site, sem atribuí-la ao aplicativo desktop. Em qualquer caso, não devemos dizer que o site é o sistema da biblioteca. Eles têm finalidades diferentes: um demonstra e ensina; o outro executa os fluxos revisados do PI.</p><span class="badge">arquitetura</span></div></details><details class="accordion"><summary>Como vocês sabem que há trinta gavetas?</summary>
+<div class="accordion__body"><p>A contagem vem do arranjo informado: seis linhas vezes cinco colunas, totalizando trinta gavetas. Como modelo de nomenclatura, usamos uma linha de 1 a 6 e uma coluna de A a E, representada por [1-6][A-E]. Essa combinação descreve trinta códigos possíveis. Devemos chamar isso de regra de organização do projeto ou modelo didático, a menos que exista no código uma validação específica que a imponha. A contagem matemática é confirmada pelo enunciado da defesa; a implementação da regra deve ser verificada separadamente.</p><span class="badge">validação</span></div></details><details class="accordion"><summary>Por que o gerador tem 899 códigos se vai de 100 a 998?</summary>
+<div class="accordion__body"><p>Porque o limite superior é exclusivo. Os inteiros gerados são 100, 101, até 998; a quantidade é 998 menos 100 mais 1, ou 899. O prefixo LIV transforma esses números em códigos como LIV100 e LIV998. Isso descreve o gerador do protótipo revisado no contexto fornecido, não necessariamente uma regra definitiva de negócio. Se a validação proposta exigir exatamente três dígitos, a expressão ^LIV[0-9]{3}$ aceita o formato, enquanto o conjunto efetivamente gerado depende dos limites escolhidos.</p><span class="badge">código</span></div></details><details class="accordion"><summary>A ordenação do histórico usa um algoritmo de vocês?</summary>
+<div class="accordion__body"><p>Não. Na revisão, a ordenação aparece em ORDER BY na consulta SQL do histórico. O formulário historico_devolucao trabalha com _todos e _visiveis e filtros, mas isso não deve ser descrito como uma implementação própria de quicksort, mergesort ou outro algoritmo em C#. O banco pode usar seus próprios mecanismos internos, porém a responsabilidade observável no código é a consulta ordenada. Essa distinção é importante para não superestimar a contribuição algorítmica do formulário.</p><span class="badge">banco</span></div></details><details class="accordion"><summary>Qual foi a diferença entre o protótipo histórico e a revisão final na devolução?</summary>
+<div class="accordion__body"><p>No protótipo 66fd8fb, o empréstimo era gravado com INSERT e o status era atualizado depois com UPDATE, em comandos separados e sem transação. Na revisão do pacote, FormDevolucao.cs usa uma transação para agrupar INSERT e UPDATE e prevê rollback. Portanto, a versão revisada melhora a consistência desse fluxo. Ainda precisamos evitar uma generalização: essa evidência é específica da devolução revisada e não prova que todas as operações do sistema sejam transacionais.</p><span class="badge">evolução</span></div></details><details class="accordion"><summary>O que vocês fariam como próximos passos?</summary>
+<div class="accordion__body"><p>Priorizaríamos autenticação real e documentada, validações de entrada, revisão das chaves estrangeiras, testes de concorrência e tratamento de falhas de conexão. Também separaríamos claramente foto de OCR e, se necessário, projetaríamos uma importação com gramática e validação formal. Para o estudo de desempenho, mediríamos consultas com diferentes volumes e índices. Por fim, registraríamos casos de teste para empréstimo, devolução, rollback, filtros e estados. Essas ações são propostas: não devem ser apresentadas como funcionalidades já entregues pelo pacote revisado.</p><span class="badge">próximos-passos</span></div></details>
+  </section>
+
+  <section style="margin-top:3rem">
+    <div class="section-head"><div class="eyebrow">Antes de abrir o site</div><h2>Checklist da apresentação</h2></div>
+    <div class="checklist" id="checklist"><label class="check-item"><input type="checkbox" data-check="0"> <span>Executar a demonstração completa usando apenas dados fictícios e sem expor credenciais.</span></label><label class="check-item"><input type="checkbox" data-check="1"> <span>Testar previamente dashboard, cadastro, acervo, empréstimo, devolução e histórico.</span></label><label class="check-item"><input type="checkbox" data-check="2"> <span>Confirmar que o banco MySQL está acessível ou deixar um plano B offline com capturas e dados preparados.</span></label><label class="check-item"><input type="checkbox" data-check="3"> <span>Verificar o link publicado do site e abrir previamente /jornada/, /rotinas/ e /jornada/.</span></label><label class="check-item"><input type="checkbox" data-check="4"> <span>Cronometrar os 11 passos para manter o total próximo de 10 minutos.</span></label><label class="check-item"><input type="checkbox" data-check="5"> <span>Deixar o projeto e o dump banco.sql em cópia de segurança, sem depender de internet durante a fala.</span></label><label class="check-item"><input type="checkbox" data-check="6"> <span>Revisar as divergências sobre login, OCR, Dictionary e ORDER BY antes da apresentação.</span></label><label class="check-item"><input type="checkbox" data-check="7"> <span>Levar uma ficha com os limites numéricos: 30 gavetas, 899 códigos do protótipo e regex proposta.</span></label><label class="check-item"><input type="checkbox" data-check="8"> <span>Preparar o exemplo do TSP com as duas rotas, custos 14 e 12, e a ressalva de que é modelo didático.</span></label><label class="check-item"><input type="checkbox" data-check="9"> <span>Confirmar fonte legível, contraste, navegação por teclado e descrição oral das telas para acessibilidade.</span></label><label class="check-item"><input type="checkbox" data-check="10"> <span>Definir quem responde cada tema e uma pessoa reserva para operar a demonstração.</span></label><label class="check-item"><input type="checkbox" data-check="11"> <span>Encerrar repetindo o que é confirmado no código, o que é modelo didático e o que é proposta futura.</span></label></div>
+    <div class="btn-row" style="margin-top:1rem"><button class="btn btn--ghost btn--sm" id="check-reset">Limpar checklist</button><span class="muted" style="font-size:.78rem">Salvo neste navegador.</span></div>
+  </section>
+
+  <div class="callout callout--amber" style="margin-top:2.4rem">
+    <div class="callout__title">Regra de honestidade</div>
+    <p>Se a banca perguntar sobre login, OCR ou APIs, a resposta é: <strong>previsto na documentação, não comprovado nesta revisão do código</strong>. O site existe para você mostrar a diferença entre o que o sistema faz e o que o projeto imagina. Isso vale mais do que qualquer promessa.</p>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../rotinas/">15 simuladores</a></li>
+          <li><a href="../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../jornada/">Jornada do PI</a></li>
+          <li><a href="../defesa/">Modo defesa</a></li>
+          <li><a href="../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,580 @@
+{
+  "sets": [
+    {
+      "id": "a1",
+      "kind": "ava",
+      "title": "Atividade 1 — Arquitetura de Dados e o Controle da Memória",
+      "source": "atividades de estrutura de dados.pdf, p. 3",
+      "note": "Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.",
+      "lesson": "ed-01-fundamentos",
+      "exercises": [
+        {
+          "id": "a1e1",
+          "prompt": "Em um modelo didático para uma rotina que recebe um termo e cria a variável local `tentativas`, qual associação entre memória e duração é adequada? Uma referência para um objeto `Livro` pode apontar para dados alocados dinamicamente.",
+          "options": [
+            "A pilha guarda variáveis locais; o objeto referenciado pode estar no heap e sobreviver à chamada enquanto houver referência.",
+            "A pilha só guarda objetos e o heap só guarda primitivos.",
+            "O heap é apagado ao retornar de toda função, mesmo com referência.",
+            "Stack e heap são sinônimos."
+          ],
+          "answer": 0,
+          "explain": "A variável local acompanha o quadro da chamada, enquanto o objeto criado dinamicamente é tratado, no modelo didático, como dado da heap. A vida do objeto pode ultrapassar a chamada se outra referência continuar acessível.",
+          "hints": [
+            "Escopo e vida são conceitos diferentes.",
+            "Pergunte onde fica o nome e onde fica o objeto.",
+            "Uma chamada termina, mas uma referência ainda pode permanecer."
+          ],
+          "table": "| Elemento | Modelo |\n|---|---|\n| variável local | stack |\n| objeto | heap |",
+          "solution": "A variável `tentativas` é local, portanto seu armazenamento acompanha a chamada na stack. O objeto `Livro`, criado com `new`, é modelado como alocado na heap. Se uma referência for devolvida ou guardada em outro lugar, o objeto pode continuar acessível depois do retorno. Assim, **escopo** diz onde um nome pode ser usado, e **tempo de vida** diz até quando o dado existe. Em C#, não se deve concluir que o objeto é destruído imediatamente ao sair da função: a coleta depende de alcançabilidade e do runtime."
+        },
+        {
+          "id": "a1e2",
+          "prompt": "Uma equipe quer esconder a representação interna de uma coleção e expor apenas `Adicionar`, `Remover` e `BuscarPorCodigo`. O que caracteriza melhor esse TAD?",
+          "options": [
+            "Definir operações e comportamento observável sem obrigar o cliente a conhecer a representação.",
+            "Exigir acesso direto ao vetor interno.",
+            "Definir apenas o tipo físico de memória.",
+            "Trocar toda busca por regex."
+          ],
+          "answer": 0,
+          "explain": "Um TAD especifica valores, operações e comportamento observável. Vetor ou lista são escolhas de implementação, não parte obrigatória da interface.",
+          "hints": [
+            "Pense no contrato visto pelo cliente.",
+            "A representação é detalhe interno.",
+            "Operações e invariantes formam a abstração."
+          ],
+          "table": "",
+          "solution": "Um TAD descreve **o que** pode ser feito e quais resultados são esperados, não necessariamente **como** os dados são armazenados. A coleção pode trocar vetor por lista sem alterar o contrato, desde que `Adicionar`, `Remover` e `BuscarPorCodigo` continuem respeitando suas pré-condições e resultados. Encapsular a representação evita que o restante do sistema dependa de índices ou nós internos. Isso facilita manutenção e permite discutir complexidade separadamente: a interface continua a mesma, enquanto a implementação pode mudar de acordo com o custo desejado."
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "kind": "ava",
+      "title": "Atividade 2 — Construção e Rastreamento de Algoritmos de Busca",
+      "source": "atividades de estrutura de dados.pdf, p. 3",
+      "note": "Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.",
+      "lesson": "ed-02-busca",
+      "exercises": [
+        {
+          "id": "a2e1",
+          "prompt": "Em uma busca linear por código, a lista é `[LIV101, LIV204, LIV330, LIV402, LIV510]` e o alvo é `LIV330`. Quantas comparações de igualdade ocorrem até encontrar o alvo?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "5"
+          ],
+          "answer": 2,
+          "explain": "A busca linear testa do primeiro elemento em diante. O alvo está na terceira posição, portanto há três comparações, incluindo a bem-sucedida.",
+          "hints": [
+            "Conte testes, não posições começando em zero.",
+            "Pare quando a igualdade for verdadeira.",
+            "A posição zero-based 2 corresponde ao terceiro teste."
+          ],
+          "table": "A sequência de resultados é F, F, V.",
+          "solution": "A busca linear examina `LIV101` (primeira comparação), depois `LIV204` (segunda) e então `LIV330` (terceira). Como a comparação com o terceiro elemento é verdadeira, o algoritmo termina nesse ponto. Logo, o número de comparações é **3**. A posição zero-based do item é 2, mas isso não é o mesmo que a quantidade de testes. No pior caso, quando o item está no fim ou ausente, a busca faria cinco comparações; no melhor, apenas uma. Essa distinção é útil para rastrear o algoritmo: registre o estado antes e depois de cada passo, conte apenas a operação pedida e confirme a condição de parada. O resultado numérico não deve ser confundido com posição, quantidade de dados ou custo assintótico. "
+        },
+        {
+          "id": "a2e2",
+          "prompt": "Uma coleção ordenada contém `2, 5, 9, 14, 21, 30, 44`. Para buscar `21` por busca binária, contando cada teste `valor == alvo`, quantas comparações são feitas usando o meio inteiro?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "answer": 2,
+          "explain": "O primeiro meio é 14; depois 30; o terceiro teste encontra 21.",
+          "hints": [
+            "Calcule o meio de cada intervalo.",
+            "Após 14, descarte a metade esquerda.",
+            "Os testes são 14, 30 e 21."
+          ],
+          "table": "",
+          "solution": "A busca binária começa com o intervalo completo. O meio é `14`, menor que `21`; todos os itens à esquerda são descartados. No intervalo `[21,30,44]`, o meio é `30`, maior que o alvo, então resta `[21]`. O terceiro teste compara `21` com `21` e encerra. Assim, são **3 comparações**. A posição zero-based não deve ser confundida com a quantidade de testes, e a ordenação é uma pré-condição essencial para descartar metades com segurança. Essa distinção é útil para rastrear o algoritmo: registre o estado antes e depois de cada passo, conte apenas a operação pedida e confirme a condição de parada. O resultado numérico não deve ser confundido com posição, quantidade de dados ou custo assintótico. "
+        }
+      ]
+    },
+    {
+      "id": "a3",
+      "kind": "ava",
+      "title": "Atividade 3 — Arquitetura de Estruturas de Dados em Sistemas Reais",
+      "source": "atividades de estrutura de dados.pdf, p. 3",
+      "note": "Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.",
+      "lesson": "ed-03-sistemas-reais",
+      "exercises": [
+        {
+          "id": "a3e1",
+          "prompt": "Em um modelo didático inspirado no sistema, uma `List<Livro>` contém 120 livros e a aplicação precisa acessar repetidamente o item de índice 80. Qual é a propriedade relevante?",
+          "options": [
+            "Acesso por índice tende a ser direto, pois `List<T>` mantém uma sequência indexada.",
+            "Todo acesso exige percorrer 80 nós.",
+            "O índice é uma chave MySQL e dispensa a lista.",
+            "A lista garante busca por código em tempo constante."
+          ],
+          "answer": 0,
+          "explain": "`List<T>` é uma coleção indexada; isso não garante busca constante por código nem substitui as chaves do banco.",
+          "hints": [
+            "Diferencie posição de chave.",
+            "Índice de lista e código `LIV...` não são a mesma coisa.",
+            "A pergunta trata de acesso posicional."
+          ],
+          "table": "",
+          "solution": "No modelo didático, `List<T>` oferece acesso por posição e permite obter o elemento de índice 80 sem percorrer explicitamente todos os itens anteriores. Isso não significa que qualquer operação seja constante: localizar um livro pelo código pode exigir varredura, consulta indexada ao banco ou outra estrutura. Também não se deve atribuir ao código `LIV...` o significado de índice da lista. O sistema factual usa C#/.NET 8 e MySQL; esta questão abstrai o fluxo para destacar a escolha da estrutura em memória, sem afirmar um algoritmo não comprovado para cada tela."
+        },
+        {
+          "id": "a3e2",
+          "prompt": "No sistema real, qual afirmação está diretamente confirmada pelo contexto fornecido sobre consultas de livros?",
+          "options": [
+            "Há SQL com `LIKE`, `ORDER BY`, `LIMIT/OFFSET` e agregação `GROUP_CONCAT` em Form3/Form2.",
+            "Toda consulta usa busca binária em `List<Livro>`.",
+            "O cache de fotos é uma árvore AVL.",
+            "O código sempre carrega todos os livros e filtra apenas em memória."
+          ],
+          "answer": 0,
+          "explain": "Esses elementos SQL estão explicitamente confirmados. As demais alternativas inventam estruturas ou contradizem a presença de filtros, ordenação e paginação no SQL.",
+          "hints": [
+            "Procure os operadores citados no código.",
+            "Não confunda cache de imagens com índice de livros.",
+            "Separe fato observado de hipótese arquitetural."
+          ],
+          "table": "",
+          "solution": "A alternativa correta repete apenas o que foi confirmado: `Form3.Designer.cs`/`Form2.cs` contêm SQL com `LIKE '%termo%'`, ordenação, paginação por `LIMIT/OFFSET`, agregação `GROUP_CONCAT` e uma subconsulta de empréstimo ativo. Isso é diferente de dizer que a aplicação usa busca binária em uma lista. Também foi confirmado um `Dictionary<string, Image>` como cache de fotos em `Form4.cs`, mas isso não transforma o cache em árvore nem prova a estratégia de consulta de livros. A resposta separa observação factual de hipótese arquitetural. Essa distinção é útil para rastrear o algoritmo: registre o estado antes e depois de cada passo, conte apenas a operação pedida e confirme a condição de parada. O resultado numérico não deve ser confundido com posição, quantidade de dados ou custo assintótico. "
+        }
+      ]
+    },
+    {
+      "id": "a4",
+      "kind": "ava",
+      "title": "Atividade 4 — Laboratório Prático / Pitch Arquitetural de Listas Lineares",
+      "source": "atividades de estrutura de dados.pdf, p. 3",
+      "note": "Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.",
+      "lesson": "ed-04-listas-lineares",
+      "exercises": [
+        {
+          "id": "a4e1",
+          "prompt": "Em um vetor com itens `[A,B,C,D]`, deseja-se inserir `X` na posição 1, deslocando os itens para a direita. Qual sequência resulta?",
+          "options": [
+            "[A,X,B,C,D]",
+            "[X,A,B,C,D]",
+            "[A,B,X,C,D]",
+            "[A,B,C,D,X]"
+          ],
+          "answer": 0,
+          "explain": "A posição 1 fica ocupada por X; B, C e D avançam uma posição.",
+          "hints": [
+            "Numere posições a partir de zero.",
+            "Desloque de trás para frente para não sobrescrever dados.",
+            "A posição 1 é a segunda posição."
+          ],
+          "table": "",
+          "solution": "A posição 1 é a segunda posição, atualmente ocupada por `B`. Para preservar os dados, um algoritmo de vetor desloca `D` para a posição 4, `C` para 3 e `B` para 2; só então grava `X` na posição 1. O resultado é `[A,X,B,C,D]`. Em um vetor contíguo, essa inserção normalmente custa tempo proporcional ao número de itens deslocados. O deslocamento de trás para frente é importante quando se opera no mesmo vetor: mover da frente para trás poderia sobrescrever o valor que ainda seria necessário."
+        },
+        {
+          "id": "a4e2",
+          "prompt": "Em uma lista simplesmente encadeada, já se possui uma referência ao nó anterior ao ponto de inserção. Qual é a operação central para inserir um novo nó depois dele?",
+          "options": [
+            "Atualizar os enlaces para que o novo nó aponte para o sucessor e o anterior aponte para o novo nó.",
+            "Reindexar todos os nós como em um vetor.",
+            "Ordenar a lista antes de cada inserção.",
+            "Copiar obrigatoriamente todos os valores para outro vetor."
+          ],
+          "answer": 0,
+          "explain": "Com o predecessor conhecido, a inserção altera enlaces locais. A localização do ponto pode ser custosa, mas a ligação em si não exige deslocar todos os elementos.",
+          "hints": [
+            "Desenhe predecessor, novo nó e sucessor.",
+            "Faça duas atribuições de ponteiro na ordem segura.",
+            "A inserção local não elimina o custo de localizar."
+          ],
+          "table": "",
+          "solution": "Considere o trecho `anterior -> sucessor`. O novo nó deve receber `novo.proximo = anterior.proximo`; depois, `anterior.proximo = novo`. Assim a cadeia passa a ser `anterior -> novo -> sucessor`, sem perder a referência ao restante da lista. A inserção é local quando o predecessor já é conhecido. Isso não torna toda inserção constante: encontrar o ponto por posição ou valor pode exigir percorrer a lista. A vantagem em relação ao vetor é evitar deslocamento de vários elementos; a desvantagem é o custo de navegação e o armazenamento de enlaces."
+        }
+      ]
+    },
+    {
+      "id": "a5",
+      "kind": "ava",
+      "title": "Atividade 5 — Algoritmos de Ordenação",
+      "source": "atividades de estrutura de dados.pdf, p. 3",
+      "note": "Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.",
+      "lesson": "ed-05-ordenacao",
+      "exercises": [
+        {
+          "id": "a5e1",
+          "prompt": "No Bubble Sort ascendente sobre `[3,1,2]`, contando apenas trocas de vizinhos, quantas trocas ocorrem?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "answer": 1,
+          "explain": "O primeiro passe troca 3 com 1 e depois 3 com 2; o vetor fica `[1,2,3]`.",
+          "hints": [
+            "Simule cada par adjacente.",
+            "Troca somente quando o da esquerda é maior.",
+            "A próxima passada pode parar sem trocas."
+          ],
+          "table": "| Comparação | Troca? |\n|---|---|\n| 3,1 | sim |\n| 3,2 | sim |",
+          "solution": "No primeiro passe, compara-se `3` com `1`: como `3 > 1`, troca-se, produzindo `[1,3,2]`. Em seguida compara-se `3` com `2`, ocorre outra troca e chega-se a `[1,2,3]`. O próximo passe não encontra inversões e termina. Portanto, o contador de trocas vale **2**. A contagem de comparações seria diferente; a questão pede somente trocas. Em entradas já ordenadas, uma versão com sentinela pode encerrar cedo, enquanto o comportamento exato depende da implementação. Essa distinção é útil para rastrear o algoritmo: registre o estado antes e depois de cada passo, conte apenas a operação pedida e confirme a condição de parada. O resultado numérico não deve ser confundido com posição, quantidade de dados ou custo assintótico. "
+        },
+        {
+          "id": "a5e2",
+          "prompt": "Qual afirmação compara corretamente Selection Sort e Insertion Sort quanto à estabilidade, assumindo implementações usuais e registros com chaves iguais?",
+          "options": [
+            "Insertion Sort pode ser estável se desloca apenas chaves maiores; Selection Sort usual pode trocar iguais e perder estabilidade.",
+            "Selection Sort é sempre estável e Insertion Sort nunca é.",
+            "Ambos são sempre estáveis, independentemente da implementação.",
+            "Estabilidade depende apenas de a entrada estar ordenada."
+          ],
+          "answer": 0,
+          "explain": "Insertion Sort preserva a ordem relativa quando não desloca iguais; a troca distante do Selection Sort pode inverter registros equivalentes.",
+          "hints": [
+            "Acompanhe dois registros com a mesma chave.",
+            "Uma troca distante pode saltar sobre um igual.",
+            "Estabilidade é propriedade do algoritmo implementado."
+          ],
+          "table": "",
+          "solution": "Estabilidade significa preservar a ordem relativa de registros que possuem chaves iguais. No Insertion Sort usual, o elemento é deslocado enquanto a chave anterior é **maior**, não quando é igual; por isso, registros equivalentes não se cruzam e o algoritmo pode ser estável. No Selection Sort, selecionar o mínimo restante e trocá-lo com a posição atual pode transportar um registro para longe e ultrapassar outro de mesma chave. Logo, a implementação usual pode não ser estável. A propriedade não depende apenas da entrada; depende das regras de comparação e movimentação."
+        }
+      ]
+    },
+    {
+      "id": "a6",
+      "kind": "ava",
+      "title": "Atividade 6 — Ordenação e Busca",
+      "source": "atividades de estrutura de dados.pdf, p. 3",
+      "note": "Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.",
+      "lesson": "ed-06-ordenacao-busca",
+      "exercises": [
+        {
+          "id": "a6e1",
+          "prompt": "Por que Merge Sort costuma ser descrito com complexidade `O(n log n)` no pior caso?",
+          "options": [
+            "Ele divide em níveis logarítmicos e faz trabalho total proporcional a n em cada nível.",
+            "Ele compara cada item somente uma vez no total.",
+            "Ele usa busca binária para cada troca.",
+            "Ele sempre executa exatamente n trocas."
+          ],
+          "answer": 0,
+          "explain": "A divisão cria cerca de `log n` níveis; a intercalação percorre os elementos de cada nível, totalizando n por nível.",
+          "hints": [
+            "Pense em árvore de recursão.",
+            "Multiplique trabalho por nível pelo número de níveis.",
+            "A intercalação processa todos os itens do nível."
+          ],
+          "table": "",
+          "solution": "Merge Sort divide a sequência até obter subproblemas unitários e depois intercala as partes ordenadas. A árvore de recursão possui aproximadamente `log n` níveis, porque o tamanho é reduzido pela metade a cada divisão. Em cada nível, as intercalações processam, em conjunto, os `n` elementos. O trabalho total é, portanto, `n` vezes `log n`, resultando em `O(n log n)` no pior caso. A intercalação não é uma troca isolada nem uma busca binária. O algoritmo normalmente requer espaço auxiliar proporcional a `n`, embora detalhes dependam da implementação."
+        },
+        {
+          "id": "a6e2",
+          "prompt": "Uma busca binária recebe `[4,8,12,19,25]` em ordem decrescente. Qual decisão é correta antes de aplicá-la na versão que pressupõe ordem crescente?",
+          "options": [
+            "Rejeitar ou ordenar a entrada; a pré-condição de ordem crescente não foi satisfeita.",
+            "Aplicar normalmente, pois binária funciona em qualquer ordem.",
+            "Inverter apenas o alvo.",
+            "Usar `LIMIT/OFFSET` para corrigir a sequência."
+          ],
+          "answer": 0,
+          "explain": "A lógica de descartar metades depende da direção de ordenação. Sem ajustar o algoritmo ou ordenar os dados, o resultado não é garantido.",
+          "hints": [
+            "A eliminação de metade usa uma monotonicidade.",
+            "Pergunte qual lado contém valores maiores.",
+            "A pré-condição precisa estar explícita."
+          ],
+          "table": "",
+          "solution": "A busca binária depende de uma **pré-condição** de ordenação compatível com a regra de comparação. A sequência apresentada é decrescente, mas a versão assumida foi escrita para crescente. Nesse caso, deve-se ordenar a entrada, usar uma variante que raciocine em ordem decrescente ou rejeitar a chamada por contrato. Inverter somente o alvo não altera a ordem dos dados e não corrige a decisão sobre qual metade descartar. `LIMIT/OFFSET` são recursos de consulta SQL e não substituem a pré-condição do algoritmo."
+        }
+      ]
+    },
+    {
+      "id": "a7",
+      "kind": "ava",
+      "title": "Atividade 7 — Tabelas Hash e Introdução a Árvores",
+      "source": "atividades de estrutura de dados.pdf, p. 4",
+      "note": "Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.",
+      "lesson": "ed-07-hash-arvores",
+      "exercises": [
+        {
+          "id": "a7e1",
+          "prompt": "Uma tabela hash tem 10 posições e armazena 7 chaves. Qual é o fator de carga e qual risco ele sinaliza?",
+          "options": [
+            "0,7; mais colisões e degradação podem ocorrer conforme a tabela se aproxima da lotação.",
+            "7; a tabela está 7 vezes maior que a capacidade.",
+            "10/7; colisões são impossíveis.",
+            "0,07; a função hash deixa de ser necessária."
+          ],
+          "answer": 0,
+          "explain": "O fator de carga é `n/m = 7/10 = 0,7`. Ele não determina sozinho o número de colisões, mas indica ocupação e possível aumento de custo.",
+          "hints": [
+            "Use itens divididos por posições.",
+            "O fator é uma razão, não o inverso.",
+            "Mais ocupação tende a exigir mais tratamento de colisões."
+          ],
+          "table": "",
+          "solution": "Com `n = 7` elementos e `m = 10` posições, o fator de carga é `α = n/m = 7/10 = 0,7`. Ele representa a ocupação média da tabela. A função hash ainda pode produzir colisões mesmo com carga menor que 1, porque chaves diferentes podem cair no mesmo índice. À medida que `α` cresce, os métodos de endereçamento aberto ou encadeamento podem realizar mais sondagens ou percursos. Portanto, o fator não prova que haverá uma colisão específica; ele é um indicador para dimensionamento e análise de desempenho. A interpretação correta é a alternativa A."
+        },
+        {
+          "id": "a7e2",
+          "prompt": "Em uma BST sem balanceamento, ao inserir em ordem crescente `10,20,30`, qual forma resulta e qual observação é correta?",
+          "options": [
+            "Uma cadeia inclinada para a direita; a altura pode chegar a n e a busca pode degradar para O(n).",
+            "Uma árvore perfeitamente balanceada; toda busca custa O(log n).",
+            "Uma lista circular; a raiz é sempre 30.",
+            "Uma heap mínima; o menor fica em cada folha."
+          ],
+          "answer": 0,
+          "explain": "Inserções crescentes seguem sempre o ramo direito. Sem balanceamento, a árvore pode ficar degenerada e perder a altura logarítmica.",
+          "hints": [
+            "Compare cada nova chave com a raiz.",
+            "Todos os valores seguintes são maiores.",
+            "BST não implica balanceamento."
+          ],
+          "table": "",
+          "solution": "A raiz é `10`. Como `20 > 10`, ele entra à direita; como `30 > 10` e `30 > 20`, entra à direita de `20`. A árvore fica uma cadeia: `10 -> 20 -> 30`. Uma BST garante a propriedade de ordenação entre subárvores, mas não garante balanceamento. Nesse caso, a altura é proporcional a `n`, e uma busca pode visitar todos os nós, com custo `O(n)`. A complexidade `O(log n)` só é esperada quando a altura é mantida logarítmica por uma estratégia de balanceamento ou por uma entrada favorável."
+        }
+      ]
+    },
+    {
+      "id": "a8",
+      "kind": "ava",
+      "title": "Atividade 8 — Aula Invertida: Percursos em Grafos",
+      "source": "atividades de estrutura de dados.pdf, p. 4",
+      "note": "Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.",
+      "lesson": "ed-08-grafos-percursos",
+      "exercises": [
+        {
+          "id": "a8e1",
+          "prompt": "Em um grafo não ponderado, qual estrutura apoia BFS para visitar primeiro os vértices por menor número de arestas a partir da origem?",
+          "options": [
+            "Fila FIFO.",
+            "Pilha LIFO.",
+            "Tabela hash sem marcação.",
+            "Vetor ordenado por código."
+          ],
+          "answer": 0,
+          "explain": "BFS enfileira vizinhos e retira o vértice mais antigo, preservando camadas de distância em grafos não ponderados.",
+          "hints": [
+            "FIFO significa primeiro a entrar, primeiro a sair.",
+            "A origem gera a primeira camada.",
+            "Marque ao enfileirar para evitar duplicatas."
+          ],
+          "table": "",
+          "solution": "BFS usa uma **fila FIFO**. A origem é marcada e enfileirada; ao retirar o primeiro vértice, seus vizinhos ainda não visitados são marcados e colocados no fim da fila. Assim, todos os vértices a distância 1 tendem a ser processados antes dos de distância 2, e assim por diante. Essa propriedade permite obter menores distâncias em número de arestas quando o grafo não é ponderado. DFS, por contraste, usa a ideia de pilha ou recursão e prioriza aprofundar um ramo; não oferece automaticamente essas distâncias mínimas."
+        },
+        {
+          "id": "a8e2",
+          "prompt": "Para um grafo direcionado acíclico com dependências de disciplinas, qual procedimento produz uma ordem topológica?",
+          "options": [
+            "Remover iterativamente vértices de grau de entrada zero, atualizando os graus dos sucessores.",
+            "Executar Dijkstra e ordenar por peso.",
+            "Escolher sempre a aresta de maior peso.",
+            "Usar DFS sem marcar vértices."
+          ],
+          "answer": 0,
+          "explain": "Em um DAG, o processo de Kahn seleciona fontes e reduz os graus de entrada. Se todos forem removidos, a ordem respeita as dependências.",
+          "hints": [
+            "Uma disciplina sem pré-requisitos é uma fonte.",
+            "Ao remover uma fonte, atualize seus sucessores.",
+            "Um ciclo impede remover todos os vértices."
+          ],
+          "table": "",
+          "solution": "No algoritmo de Kahn, calcula-se o grau de entrada de cada vértice e coloca-se na fila cada vértice com grau zero. Retira-se uma fonte, adiciona-se ela à ordem e diminui-se o grau de entrada de seus sucessores; aqueles que chegam a zero entram na fila. O resultado respeita a regra de que todo pré-requisito aparece antes do dependente. Se restarem vértices com grau positivo, existe um ciclo e não há ordenação topológica completa. A técnica não depende de pesos e não deve ser substituída por Dijkstra, que resolve outro problema."
+        }
+      ]
+    },
+    {
+      "id": "a9",
+      "kind": "ava",
+      "title": "Lista de exercícios Grafo (10/11)",
+      "source": "atividades de estrutura de dados.pdf, p. 4",
+      "note": "Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.",
+      "lesson": "ed-09-grafos-algoritmos",
+      "exercises": [
+        {
+          "id": "a9e1",
+          "prompt": "Em um grafo ponderado com pesos não negativos, qual algoritmo é adequado para menores caminhos a partir de uma origem?",
+          "options": [
+            "Dijkstra, desde que não existam pesos negativos.",
+            "Bellman-Ford somente se todos os pesos forem positivos.",
+            "BFS sempre, ignorando os pesos.",
+            "Kruskal, pois MST é caminho entre origem e destino."
+          ],
+          "answer": 0,
+          "explain": "Dijkstra usa a seleção do menor rótulo e é correto com pesos não negativos. Bellman-Ford é necessário quando podem existir arestas negativas.",
+          "hints": [
+            "Verifique o sinal dos pesos.",
+            "Menor caminho e árvore geradora são problemas distintos.",
+            "BFS considera número de arestas, não peso geral."
+          ],
+          "table": "",
+          "solution": "Dijkstra mantém estimativas e escolhe iterativamente o vértice não finalizado com menor distância provisória. A escolha é segura quando todos os pesos são não negativos: uma rota futura não consegue reduzir o rótulo já finalizado por meio de uma aresta negativa. Se houver pesos negativos, Bellman-Ford é a alternativa geral e também pode detectar ciclos negativos alcançáveis. BFS só é apropriado para arestas com mesmo custo, como o caso não ponderado. Kruskal e Prim constroem uma árvore geradora mínima, que não é automaticamente o caminho mínimo entre dois vértices."
+        },
+        {
+          "id": "a9e2",
+          "prompt": "Qual associação está correta entre Bellman-Ford, MST e TSP?",
+          "options": [
+            "Bellman-Ford trata menores caminhos mesmo com pesos negativos; MST conecta todos com custo mínimo; TSP busca um tour mínimo que visita cada cidade.",
+            "Bellman-Ford constrói sempre MST; TSP aceita qualquer passeio; MST exige ciclo hamiltoniano.",
+            "MST detecta todos os ciclos negativos; Bellman-Ford ordena vértices; TSP é BFS.",
+            "Os três algoritmos resolvem exatamente o mesmo problema."
+          ],
+          "answer": 0,
+          "explain": "São problemas diferentes: caminhos a partir de uma origem, conexão global sem ciclos e circuito que visita cidades. A formulação correta distingue objetivos e restrições.",
+          "hints": [
+            "Leia o objetivo de cada sigla.",
+            "MST não precisa visitar vértices em um tour.",
+            "TSP impõe visita a cada cidade."
+          ],
+          "table": "",
+          "solution": "Bellman-Ford relaxa as arestas repetidamente e pode lidar com pesos negativos, além de sinalizar ciclo negativo alcançável. Uma **MST** (árvore geradora mínima) conecta os vértices de um grafo ponderado com custo total mínimo, sem ciclos; ela não representa necessariamente o caminho mínimo entre qualquer par. O **TSP** procura um circuito de custo mínimo que visite cada cidade, normalmente uma vez e retornando à origem, sob a formulação clássica. Como os objetivos são diferentes, não se pode trocar um algoritmo pelo outro apenas porque todos usam grafos ponderados."
+        }
+      ]
+    },
+    {
+      "id": "r1",
+      "kind": "regex",
+      "title": "Desafio de Regex 1 — Cadeias binárias terminadas em 00",
+      "source": "aula2.pdf, pp. 27–29",
+      "note": "Enunciado autoral baseado nos desafios de regex da aula; o PDF apresenta o desafio, não um exercício completo.",
+      "lesson": "tc-02-linguagens",
+      "exercises": [
+        {
+          "id": "r1e1",
+          "prompt": "Qual expressão exige que a cadeia inteira contenha apenas `0` e `1` e termine exatamente com `00`?",
+          "options": [
+            "`^[01]*00$`",
+            "`[01]*00`",
+            "`^00[01]*$`",
+            "`^[01]+0$`"
+          ],
+          "answer": 0,
+          "explain": "`^` e `$` ancoram a cadeia inteira; `[01]*` permite o prefixo e `00` fixa o final.",
+          "hints": [
+            "Observe início e fim.",
+            "A classe limita o alfabeto.",
+            "O sufixo literal é `00`."
+          ],
+          "table": "",
+          "solution": "A expressão correta é **`^[01]*00$`**. A âncora `^` exige início da entrada e `$` exige fim; entre elas, `[01]*` aceita qualquer quantidade, inclusive zero, de bits. Os dois zeros finais são literais e obrigatórios. Assim, `00`, `100` e `1100` são aceitas, enquanto `001` falha porque não termina em `00`, e `10200` falha porque contém `2`. Sem as âncoras, uma busca poderia localizar apenas um trecho válido dentro de uma cadeia maior, o que não corresponde ao requisito de validar a cadeia completa."
+        },
+        {
+          "id": "r1e2",
+          "prompt": "Qual cadeia é aceita por `^[01]*00$`?",
+          "options": [
+            "`10100`",
+            "`1001`",
+            "`10A00`",
+            "`00 0`"
+          ],
+          "answer": 0,
+          "explain": "A cadeia escolhida usa apenas bits e termina nos dois zeros exigidos. As demais falham no sufixo ou no alfabeto.",
+          "hints": [
+            "Confira todos os caracteres.",
+            "Verifique os dois últimos símbolos.",
+            "Âncoras impedem correspondência parcial."
+          ],
+          "table": "",
+          "solution": "A cadeia `10100` é aceita porque todos os símbolos pertencem à classe `[01]` e os dois últimos caracteres são `00`. A expressão começa com `^` e termina com `$`, portanto a correspondência precisa cobrir a cadeia inteira. `1001` falha porque termina em `01`; `10A00` contém `A`, que não pertence ao alfabeto binário; e `00 0` contém espaço. O quantificador `*` permite que o prefixo antes do sufixo tenha qualquer tamanho, inclusive zero. O requisito formal combina restrição de alfabeto, âncora inicial, âncora final e sufixo obrigatório."
+        }
+      ]
+    },
+    {
+      "id": "r2",
+      "kind": "regex",
+      "title": "Desafio de Regex 2 — Endereço MAC",
+      "source": "aula2.pdf, pp. 27–29",
+      "note": "Enunciado autoral baseado nos desafios de regex da aula; o PDF apresenta o desafio, não um exercício completo.",
+      "lesson": "tc-02-linguagens",
+      "exercises": [
+        {
+          "id": "r2e1",
+          "prompt": "Qual padrão reconhece seis grupos hexadecimais de dois dígitos separados por cinco dois-pontos?",
+          "options": [
+            "`([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})`",
+            "`([0-9A-Fa-f]:){6}`",
+            "`[0-9A-Fa-f]{12}`",
+            "`(00:){5}00`"
+          ],
+          "answer": 0,
+          "explain": "O grupo com dois dígitos e dois-pontos repete cinco vezes; o último grupo aparece sem dois-pontos final.",
+          "hints": [
+            "Seis grupos exigem cinco separadores.",
+            "Hexadecimal inclui 0–9 e A–F em ambos os casos.",
+            "Não deixe dois-pontos depois do sexto grupo."
+          ],
+          "table": "",
+          "solution": "O padrão correto é **`([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})`**. A classe `[0-9A-Fa-f]` aceita um dígito hexadecimal em maiúscula ou minúscula; `{2}` exige exatamente dois por grupo. O primeiro grupo entre parênteses inclui o separador e repete cinco vezes, produzindo os cinco primeiros blocos com dois-pontos. O último grupo exige mais dois dígitos, mas não adiciona separador ao final. Para validação da entrada inteira, pode-se envolver o padrão com âncoras, conforme a API e o requisito de correspondência completa. Essa distinção é útil para rastrear o algoritmo: registre o estado antes e depois de cada passo, conte apenas a operação pedida e confirme a condição de parada. O resultado numérico não deve ser confundido com posição, quantidade de dados ou custo assintótico. "
+        },
+        {
+          "id": "r2e2",
+          "prompt": "Qual endereço corresponde ao formato hexadecimal de seis blocos exigido pelo padrão de MAC?",
+          "options": [
+            "`0A:1b:2C:3d:4E:5f`",
+            "`0A:1b:2C:3d:4E`",
+            "`0A-1b-2C-3d-4E-5f`",
+            "`0A:1b:2C:3d:4E:5G`"
+          ],
+          "answer": 0,
+          "explain": "Há seis blocos de dois caracteres hexadecimais, cinco separadores `:` e somente símbolos permitidos.",
+          "hints": [
+            "Conte blocos e separadores.",
+            "Hexadecimal termina em F/f.",
+            "O separador esperado é dois-pontos."
+          ],
+          "table": "",
+          "solution": "`0A:1b:2C:3d:4E:5f` possui seis blocos: `0A`, `1b`, `2C`, `3d`, `4E` e `5f`. Cada bloco tem exatamente dois caracteres da classe hexadecimal, e os cinco intervalos são separados por `:`. A mistura de maiúsculas e minúsculas é permitida por `[0-9A-Fa-f]`. A segunda alternativa tem apenas cinco blocos; a terceira usa hífens; e a quarta termina em `G`, que não pertence ao conjunto hexadecimal. Se o sistema precisar validar somente o valor inteiro, âncoras ou uma API de correspondência completa devem ser usadas além do trecho-base."
+        }
+      ]
+    },
+    {
+      "id": "r3",
+      "kind": "regex",
+      "title": "Desafio de Regex 3 — Mensagens de Log",
+      "source": "aula2.pdf, pp. 27–29",
+      "note": "Enunciado autoral baseado nos desafios de regex da aula; o PDF apresenta o desafio, não um exercício completo.",
+      "lesson": "tc-02-linguagens",
+      "exercises": [
+        {
+          "id": "r3e1",
+          "prompt": "Qual expressão procura uma linha que contenha `Error` ou `Failed`, seguida em algum ponto por `port` e um ou mais dígitos?",
+          "options": [
+            "`(Error|Failed).*port \\d+`",
+            "`(Error|Failed)port`",
+            "`Error|Failed.*port`",
+            "`(Error|Failed).*port [0-9]`"
+          ],
+          "answer": 0,
+          "explain": "O grupo alternativo escolhe o marcador, `.*` permite texto intermediário, e `\\d+` exige uma sequência não vazia de dígitos.",
+          "hints": [
+            "Agrupe a alternativa.",
+            "Permita texto entre marcador e port.",
+            "Um ou mais dígitos é `\\d+`."
+          ],
+          "table": "",
+          "solution": "A expressão correta é **`(Error|Failed).*port \\d+`**. O grupo `(Error|Failed)` aceita um dos dois marcadores; `.*` permite qualquer sequência intermediária; `port ` exige a palavra seguida de espaço; e `\\d+` exige um ou mais dígitos. Assim, uma linha como `Error ao abrir port 8080` combina. O padrão apresentado procura o trecho dentro da linha. Se o requisito fosse validar a linha inteira, seria necessário acrescentar âncoras e definir o que pode aparecer antes ou depois. Também é importante lembrar que a forma de escapar a barra pode variar entre a regex e a string da linguagem."
+        },
+        {
+          "id": "r3e2",
+          "prompt": "Qual linha contém um trecho compatível com `(Error|Failed).*port \\d+`?",
+          "options": [
+            "`Failed: conexão em port 443`",
+            "`Warning em port 443`",
+            "`Error em port`",
+            "`Error em port X`"
+          ],
+          "answer": 0,
+          "explain": "A primeira linha traz o marcador `Failed`, texto intermediário, `port` e o número 443.",
+          "hints": [
+            "Procure Error ou Failed.",
+            "Depois deve aparecer `port`.",
+            "`\\d+` exige ao menos um dígito."
+          ],
+          "table": "",
+          "solution": "A linha `Failed: conexão em port 443` combina com o padrão. O grupo alternativo encontra `Failed`; `.*` absorve `: conexão em `; em seguida aparece `port ` e `\\d+` reconhece `443`. A linha com `Warning` não possui nenhum dos marcadores aceitos. A linha `Error em port` não apresenta dígitos depois de `port`, e `Error em port X` apresenta uma letra em vez de uma sequência numérica. Como o padrão não possui âncoras, ele procura um trecho compatível; para validar uma linha inteira, o enunciado teria de especificar também seus limites."
+        }
+      ]
+    }
+  ]
+}

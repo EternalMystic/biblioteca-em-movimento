@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grafos: fundamentos e representações · Biblioteca em Movimento</title>
+<meta name="description" content="Um grafo é um par (V, E); matriz e lista de adjacência guardam o mesmo conjunto com custos diferentes, e a escolha reaparece em toda a trilha.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Grafos: fundamentos e representações · Biblioteca em Movimento">
+<meta property="og:description" content="Um grafo é um par (V, E); matriz e lista de adjacência guardam o mesmo conjunto com custos diferentes, e a escolha reaparece em toda a trilha.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/gr-01-fundamentos/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/gr-01-fundamentos/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Grafos</span><span>/</span><span>Aula 1</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--grafos">Grafos</span><span class="badge">pp. 2–15</span></div>
+    <h1>Grafos: fundamentos e representações</h1>
+    <p class="page-head__lead">Um grafo é um par (V, E); matriz e lista de adjacência guardam o mesmo conjunto com custos diferentes, e a escolha reaparece em toda a trilha.</p>
+    <div class="page-head__meta"><span class="mono">aula2 (2).pdf — Fundamentos e Representações Computacionais</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/grafos/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#002F2D"><p>O acervo do Tiro de Guerra cabe em trinta gavetas, mas as perguntas da biblioteca não cabem em uma lista. Quem levou o manual de tiro? Quais obras do mesmo autor estão disponíveis? Toda pergunta trata de relação, não de item isolado. A trilha começa por como essa relação fica gravada.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Definir grafo simples, orientado e não orientado.</li><li>Aplicar o lema do aperto de mãos a uma lista de graus.</li><li>Reconhecer grafo bipartido pela ausência de ciclo ímpar.</li><li>Comparar matriz e lista de adjacência em espaço e tempo.</li></ul></div>
+<h2 id="g-v-e-vertices-arestas-grafo-simples-e-lacos">G = (V, E), vértices, arestas, grafo simples e laços</h2>
+<p>Um grafo é um par G = (V, E): V reúne os vértices e E as arestas, cada uma ligando dois vértices. No grafo simples, cada par tem no máximo uma aresta e não existe laço, a aresta que sai e volta ao mesmo vértice.</p>
+<p>Um modelo mínimo do acervo tem os livros L1 e L2 e os autores A1 e A2. Se L1 tem A1 e A2 e L2 tem A2, as arestas são {L1, A1}, {L1, A2} e {L2, A2}; nada liga L1 a L2, porque livro não é escrito por livro.</p>
+<h2 id="orientadonao-orientado-grau-e-lema-do-aperto-de-maos">Orientado/não orientado, grau e lema do aperto de mãos</h2>
+<p>Em grafo não orientado a aresta é conjunto sem ordem e a conexão vale nos dois sentidos. Em dígrafo ela é par ordenado, e (u, v) diferente de (v, u) significa ida sem volta.</p>
+<p>O grau é o número de arestas incidentes no vértice, e o lema do aperto de mãos garante que a soma dos graus é o dobro do número de arestas. Com E = {AB, AC, BC, CD}, os graus são 2, 2, 3 e 1, e a soma 8 confirma 2 × 4; soma ímpar denuncia contagem errada.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">banco.sql · livro_autores (linhas 176–183)</span></div>
+  <p style="margin:0;font-size:.9rem">Chave composta (codigo_livro, id_autor) e duas chaves estrangeiras: grafo bipartido livro–autor, sem aresta duplicada.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">regitro_livros.cs · cbGaveta (linhas 341–346)</span></div>
+  <p style="margin:0;font-size:.9rem">Dois laços geram 1A a 6E: trinta gavetas, lidas no site como grade.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form3.Designer.cs · CarregarDadosBanco (linhas 414–429)</span></div>
+  <p style="margin:0;font-size:.9rem">LEFT JOIN com GROUP_CONCAT monta a vizinhança de cada livro por junção, sem matriz em memória.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula2 (2).pdf pp. 8–11</span></div>
+  <p style="margin:0;font-size:.9rem">As quatro matrizes de caso são desenho didático; o sistema não as constrói.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--future">Proposta / evolução</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula2 (2).pdf pp. 11–15</span></div>
+  <p style="margin:0;font-size:.9rem">Recomendação e emparelhamento são ementa: não há motor de recomendação no PI.</p>
+</div></div></section><h2 id="biparticao-e-ciclos-impares">Bipartição e ciclos ímpares</h2>
+<p>Um grafo é bipartido quando V se divide em dois conjuntos disjuntos e não vazios, com toda aresta cruzando de um lado para o outro. O critério é exato: bipartido se, e somente se, não houver ciclo ímpar.</p>
+<p>No acervo, livros de um lado e autores do outro. O grafo de empréstimos também é bipartido, com atiradores e obras. A grade de gavetas só tem ciclos pares, logo é bipartida, mas não tem triângulo.</p>
+<h2 id="matriz-e-lista-de-adjacencia-simetria-sumidouro-e-densidade">Matriz e lista de adjacência; simetria, sumidouro e densidade</h2>
+<p>A matriz de adjacência é uma tabela n por n com 1 quando existe aresta; no grafo não orientado é simétrica; no dígrafo, uma linha de zeros denuncia sumidouro.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Critério</th>
+<th>Matriz</th>
+<th>Lista</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Espaço</td>
+<td>O(V²)</td>
+<td>O(V + E)</td>
+</tr>
+<tr>
+<td>Testar aresta</td>
+<td>O(1)</td>
+<td>O(grau de u)</td>
+</tr>
+<tr>
+<td>Listar vizinhos</td>
+<td>O(V)</td>
+<td>O(grau de u)</td>
+</tr>
+<tr>
+<td>1.000 vértices, 2.000 arestas</td>
+<td>1.000.000 de células</td>
+<td>4.000 registros</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="casos-nao-orientado-orientado-ponderado-e-bipartido">Casos: não orientado, orientado, ponderado e bipartido</h2>
+<p>As quatro matrizes da aula usam os mesmos vértices. No caso não orientado, simetria e diagonal zero; no orientado, linha é origem e coluna é destino, e vértice sem saída produz linha nula; no ponderado, ausência recebe infinito, nunca zero.</p>
+<p>No bipartido, usa-se matriz retangular de biadjacência: a junção livro–autor do PI é exatamente isso, esparsa, com autores nas colunas de cada livro. O banco guarda só as posições com 1.</p>
+<h2 id="ospf-rede-social-processonucleo-e-recomendacao">OSPF, rede social, processo–núcleo e recomendação</h2>
+<p>Roteadores OSPF formam malha com triângulos, e o triângulo é o que impede tratar a rede como bipartida. Redes sociais têm ciclos arbitrários porque as entidades são da mesma natureza. No escalonamento, processos e núcleos formam grafo bipartido; na recomendação, clientes e produtos ficam em lados opostos.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>O vínculo confirmado no código é <code>livro_autores</code>, com chave composta por <code>codigo_livro</code> e <code>id_autor</code> e duas chaves estrangeiras com <code>ON DELETE CASCADE</code> (banco.sql, linhas 176–183): grafo bipartido livro–autor, sem aresta duplicada. A consulta do acervo monta a vizinhança com <code>LEFT JOIN</code> e <code>GROUP_CONCAT</code> (Form3.Designer.cs, linhas 414–429), então a lista de adjacência existe na consulta, não em memória.</p>
+<p>Modelo didático é o gaveteiro de trinta posições (<code>regitro_livros.cs</code>, linhas 341–346), lido no site como grade; o sistema guarda a gaveta como texto e não conhece vizinhança. A ementa aparece na recomendação e no emparelhamento, que o PI não implementa.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Grafo da aula: V = {A, B, C, D}, E = {AB, AC, BC, CD}.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>grau</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>B</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>C</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr>
+<td>D</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table></div>
+<p>A soma 2 + 2 + 3 + 1 = 8 confirma 2 × 4 arestas; não há linha nula, logo não há sumidouro. A lista fica A: B, C; B: A, C; C: A, B, D; D: C, com oito registros contra dezesseis células. Densidade 4/6 = 0,67, e o triângulo A–B–C impede a bipartição.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p>Por que não manter uma matriz de adjacência no lugar das consultas? Porque o grafo é esparso e a matriz gastaria O(V²) para guardar quase só zeros. As perguntas chegam como SQL com junção e devolvem a vizinhança pedida. A matriz só entra quando o algoritmo exige acesso O(1) a qualquer par, como em Floyd–Warshall, e aí é construída para o cálculo.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Com V = {1, 2, 3, 4, 5} e as arestas 1–2, 2–3, 3–4, 4–5, 5–1 e 2–5, calcule os graus, confira o lema, informe a densidade e diga se o grafo é bipartido.</p>
+<details><summary>Ver resposta</summary>
+<p>Graus: 1 tem 2, 2 tem 3, 3 tem 2, 4 tem 2 e 5 tem 3. A soma 12 é 2 × 6, então o lema se confirma; a densidade é 6/10 = 0,6. Não é bipartido: 1, 2 e 5 formam o triângulo 1–2–5–1.</p>
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="gr-01-fundamentos-0" data-track="grafos">
+  <div class="quiz__q">1. Um grafo não orientado tem 5 arestas. Quanto vale a soma dos graus?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-01-fundamentos-0" data-i="0" data-answer="1"><span class="mark">A</span><span>5</span></button><button class="quiz__opt" data-q="gr-01-fundamentos-0" data-i="1" data-answer="1"><span class="mark">B</span><span>10</span></button><button class="quiz__opt" data-q="gr-01-fundamentos-0" data-i="2" data-answer="1"><span class="mark">C</span><span>25</span></button><button class="quiz__opt" data-q="gr-01-fundamentos-0" data-i="3" data-answer="1"><span class="mark">D</span><span>Depende do número de vértices</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O lema do aperto de mãos dá 2|E| = 10.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="gr-01-fundamentos-1" data-track="grafos">
+  <div class="quiz__q">2. Qual destes grafos de quatro vértices é bipartido?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-01-fundamentos-1" data-i="0" data-answer="1"><span class="mark">A</span><span>Triângulo A–B–C mais aresta C–D</span></button><button class="quiz__opt" data-q="gr-01-fundamentos-1" data-i="1" data-answer="1"><span class="mark">B</span><span>Ciclo A–B–C–D–A</span></button><button class="quiz__opt" data-q="gr-01-fundamentos-1" data-i="2" data-answer="1"><span class="mark">C</span><span>A–B, B–C, C–A</span></button><button class="quiz__opt" data-q="gr-01-fundamentos-1" data-i="3" data-answer="1"><span class="mark">D</span><span>A–B, B–C, C–D, D–A, A–C</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O ciclo de comprimento 4 é par; os outros contêm triângulo.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="gr-01-fundamentos-2" data-track="grafos">
+  <div class="quiz__q">3. Na matriz de um grafo ponderado, posição sem aresta recebe...</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-01-fundamentos-2" data-i="0" data-answer="1"><span class="mark">A</span><span>0</span></button><button class="quiz__opt" data-q="gr-01-fundamentos-2" data-i="1" data-answer="1"><span class="mark">B</span><span>infinito ou sentinela máximo</span></button><button class="quiz__opt" data-q="gr-01-fundamentos-2" data-i="2" data-answer="1"><span class="mark">C</span><span>1</span></button><button class="quiz__opt" data-q="gr-01-fundamentos-2" data-i="3" data-answer="1"><span class="mark">D</span><span>-1</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Com 0, um trajeto inexistente entraria na soma como custo zero.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–15</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="gr-01-fundamentos" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#g-v-e-vertices-arestas-grafo-simples-e-lacos">G = (V, E), vértices, arestas, grafo simples e laços</a></li><li><a href="#orientadonao-orientado-grau-e-lema-do-aperto-de-maos">Orientado/não orientado, grau e lema do aperto de mãos</a></li><li><a href="#biparticao-e-ciclos-impares">Bipartição e ciclos ímpares</a></li><li><a href="#matriz-e-lista-de-adjacencia-simetria-sumidouro-e-densidade">Matriz e lista de adjacência; simetria, sumidouro e densidade</a></li><li><a href="#casos-nao-orientado-orientado-ponderado-e-bipartido">Casos: não orientado, orientado, ponderado e bipartido</a></li><li><a href="#ospf-rede-social-processonucleo-e-recomendacao">OSPF, rede social, processo–núcleo e recomendação</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabelas hash · Biblioteca em Movimento</title>
+<meta name="description" content="Função modular, colisão inevitável, encadeamento separado, endereçamento aberto com sondagem linear, fator de carga e o cache de imagens do projeto.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Tabelas hash · Biblioteca em Movimento">
+<meta property="og:description" content="Função modular, colisão inevitável, encadeamento separado, endereçamento aberto com sondagem linear, fator de carga e o cache de imagens do projeto.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-08-hash/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-08-hash/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Estruturas de Dados</span><span>/</span><span>Aula 8</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--ed">Estruturas de Dados</span><span class="badge">pp. 2–11</span></div>
+    <h1>Tabelas hash</h1>
+    <p class="page-head__lead">Função modular, colisão inevitável, encadeamento separado, endereçamento aberto com sondagem linear, fator de carga e o cache de imagens do projeto.</p>
+    <div class="page-head__meta"><span class="mono">aula8.pdf — Tabelas Hash e Introdução a Árvores</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/busca/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#28407F"><p>O cadastro de atiradores mostra uma foto ao lado de cada nome. As imagens vêm do banco como bytes e são desenhadas na grade; converter tudo a cada pintura de tela seria lento. O projeto resolve isso com um dicionário em memória que associa o número do atirador à imagem já decodificada. Essa estrutura é uma tabela hash, e esta aula explica o que ela promete e quando a promessa falha.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Explicar por que a tabela hash troca comparação por cálculo de índice.</li><li>Calcular índice com aritmética modular e reconhecer colisão.</li><li>Comparar encadeamento separado e endereçamento aberto.</li><li>Interpretar fator de carga e o efeito do agrupamento primário.</li><li>Relacionar o cache Dictionary do projeto ao custo médio O(1).</li></ul></div>
+<h2 id="acesso-direto-busca-binaria">Acesso direto × busca binária</h2>
+<p>A busca binária reduz o espaço pela metade a cada comparação e chega a O(log n). É bom, mas ainda depende de percorrer uma sequência de posições. A pergunta seguinte é se dá para encontrar um elemento sem percorrer nada.</p>
+<p>A tabela hash faz isso: calcula o índice a partir da chave e vai direto à posição. Não é uma busca binária melhor, é outra estratégia de organização, em que a posição do dado é derivada do próprio dado.</p>
+<h2 id="funcao-modular-e-mapeamento-de-chaves-25-e-15-em-tabela-de-10">Função modular e mapeamento de chaves 25 e 15 em tabela de 10</h2>
+<p>A tabela é um vetor somado a uma função de espalhamento. A função recebe a chave, calcula um inteiro e devolve um índice. A forma mais comum usa aritmética modular: índice = chave % tamanho.</p>
+<p>Com tabela de 10 posições, a chave 25 cai em 25 % 10 = 5. A chave 15 cai em 15 % 10 = 5 também. Duas chaves distintas, um único índice: a colisão deixa de ser acidente e passa a ser consequência matemática, porque o conjunto de chaves possíveis é maior que o número de posições.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form4.cs · linha 43</span></div>
+  <p style="margin:0;font-size:.9rem">private readonly Dictionary<string, Image> _cacheImagens guarda a foto do atirador pela chave numero.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form4.cs · linhas 489 e 581</span></div>
+  <p style="margin:0;font-size:.9rem">A carga faz _cacheImagens[num] = Image.FromStream(ms); o desenho consulta TryGetValue por número.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form4.cs · linhas 461–462</span></div>
+  <p style="margin:0;font-size:.9rem">Antes de recarregar, o cache percorre os valores chamando Dispose e depois Clear, liberando handles GDI+.</p>
+</div></div></section><h2 id="colisao-encadeamento-separado-e-enderecamento-aberto">Colisão, encadeamento separado e endereçamento aberto</h2>
+<p>O encadeamento separado transforma cada posição em cabeça de uma lista encadeada: o índice 5 guarda 25 e, depois dele, 15. A estrutura passa a ser vetor mais função mais lista. A busca percorre só a cadeia daquele índice.</p>
+<p>O endereçamento aberto não usa listas: todos os elementos ficam no vetor principal. Ao colidir, o algoritmo sonda posições seguintes até achar espaço livre. Ganha-se localidade de memória e perde-se simplicidade na remoção, que exige marcação de posição excluída.</p>
+<h2 id="sondagem-linear-e-agrupamento-primario">Sondagem linear e agrupamento primário</h2>
+<p>Na sondagem linear, a colisão em i leva a testar i+1, i+2 e assim por diante, com retorno ao início. É simples e usa memória contígua, mas produz agrupamento primário: blocos ocupados crescem e atraem novas colisões, porque qualquer chave que caia dentro do bloco precisa percorrer até o fim dele.</p>
+<p>O efeito é visível. Inserindo 25, 15, 35 e 45 em uma tabela de 10, todas caem no índice 5 e ocupam 5, 6, 7 e 8. Uma quinta chave com resto 5 percorreria quatro posições antes de achar espaço, mesmo que a tabela tenha seis posições livres.</p>
+<h2 id="fator-de-carga-nm-custo-esperado-e-pior-caso">Fator de carga α = n/m, custo esperado e pior caso</h2>
+<p>O fator de carga é o número de elementos dividido pelo número de posições. Com 7 elementos em 10 posições, α = 0,7. Quanto maior α, maior a chance de colisão e maior o comprimento médio das cadeias ou das sondagens.</p>
+<p>Com boa função e α controlado, a busca fica em O(1) médio. O pior caso é O(n): basta que todas as chaves colidam no mesmo índice. Dizer que a tabela hash é O(1) sem qualificar é o erro mais comum em entrevista e em prova.</p>
+<div class="code"><div class="code__bar"><span class="dot"></span><span>trecho do material</span><span class="lang">C#</span></div><pre><code><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">Image</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_cacheImagens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">Image</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">...</span>
+<span class="n">_cacheImagens</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Image</span><span class="p">.</span><span class="n">FromStream</span><span class="p">(</span><span class="n">ms</span><span class="p">);</span>
+<span class="p">...</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_cacheImagens</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">numRow</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">Image</span><span class="w"> </span><span class="n">fotoImg</span><span class="p">))</span>
+</code></pre></div>
+<p>Os três trechos são de Form4.cs. A chave é o número do atirador, convertido para texto; a escrita acontece ao carregar a página e a leitura, a cada célula pintada. O <code>TryGetValue</code> evita exceção quando não há foto e resolve o caso comum em tempo médio constante.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>O sistema é WinForms .NET 8 com MySQL local, abre direto no painel e não tem login. O cache do Form4 é a única tabela hash explícita do código revisado, e ela existe por um motivo concreto: decodificar imagem é caro e a grade redesenha com frequência.</p>
+<p>Confirmado no código: a chave é o campo <code>numero</code>, que é a chave primária da tabela <code>atiradores</code>; o cache é limpo a cada recarga, com <code>Dispose</code> em cada imagem antes de <code>Clear</code>, para não acumular handles. A paginação de dez linhas limita o tamanho do cache a dez imagens por vez.</p>
+<p>Modelo didático: a função modular, o encadeamento e a sondagem linear vêm dos slides. O <code>Dictionary</code> do .NET não expõe a função de espalhamento nem o fator de carga usado, então os números desta aula são de laboratório, não do sistema.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Tabela de 10 posições, sondagem linear, inserindo 25, 15, 35, 45 e 55.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Chave</th>
+<th>chave % 10</th>
+<th>Sondagens</th>
+<th>Índice final</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>25</td>
+<td>5</td>
+<td>livre</td>
+<td>5</td>
+</tr>
+<tr>
+<td>15</td>
+<td>5</td>
+<td>6 livre</td>
+<td>6</td>
+</tr>
+<tr>
+<td>35</td>
+<td>5</td>
+<td>6 e 7 ocupados</td>
+<td>7</td>
+</tr>
+<tr>
+<td>45</td>
+<td>5</td>
+<td>6, 7 e 8 ocupados</td>
+<td>8</td>
+</tr>
+<tr>
+<td>55</td>
+<td>5</td>
+<td>6, 7, 8 e 9 ocupados</td>
+<td>9</td>
+</tr>
+</tbody>
+</table></div>
+<p>Com 5 elementos em 10 posições, α = 0,5. Ainda assim, a última inserção custou quatro sondagens: o agrupamento primário degrada o desempenho local mesmo com metade da tabela vazia.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>O cache de imagens do projeto é realmente O(1)?</strong></p>
+<p>No caso médio, sim: a chave é o número do atirador, o dicionário calcula o índice e resolve a leitura em tempo praticamente constante, com colisões raras distribuídas. No pior caso teórico, se todas as chaves caíssem no mesmo balde, a busca viraria uma varredura linear, O(n). No projeto isso não acontece porque o número é bem distribuído e o cache é pequeno, limitado às dez linhas da página. A afirmação honesta é custo médio constante com pior caso linear, e não garantia absoluta.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Em uma tabela de 7 posições com função modular e sondagem linear, insira 10, 17, 24 e 3. Informe o índice final de cada chave e o fator de carga.</p>
+<details><summary>Ver resposta</summary>
+
+10 % 7 = 3, índice 3. 17 % 7 = 3, colide, vai para 4. 24 % 7 = 3, colide, 4 ocupado, vai para 5. 3 % 7 = 3, colide, 4 e 5 ocupados, vai para 6. Fator de carga: 4/7 ≈ 0,57. As quatro chaves caem no mesmo resto, o que mostra por que a escolha do tamanho da tabela importa: usar um número primo reduz padrões de colisão.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="ed-08-hash-0" data-track="ed">
+  <div class="quiz__q">1. Em uma tabela de tamanho 10, onde cai a chave 25 com função modular?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-08-hash-0" data-i="0" data-answer="0"><span class="mark">A</span><span>Índice 5, porque 25 % 10 = 5</span></button><button class="quiz__opt" data-q="ed-08-hash-0" data-i="1" data-answer="0"><span class="mark">B</span><span>Índice 2, porque 25 / 10 = 2</span></button><button class="quiz__opt" data-q="ed-08-hash-0" data-i="2" data-answer="0"><span class="mark">C</span><span>Índice 0, porque a tabela começa em zero</span></button><button class="quiz__opt" data-q="ed-08-hash-0" data-i="3" data-answer="0"><span class="mark">D</span><span>Índice 15, porque 25 − 10 = 15</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A função usa o resto da divisão inteira. A divisão dá 2, mas o índice é o resto; zero é o início da tabela, não o resultado.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-08-hash-1" data-track="ed">
+  <div class="quiz__q">2. O que acontece ao inserir a chave 15 na mesma tabela depois da chave 25?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-08-hash-1" data-i="0" data-answer="0"><span class="mark">A</span><span>Ocorre colisão no índice 5 e alguma estratégia precisa resolver o conflito</span></button><button class="quiz__opt" data-q="ed-08-hash-1" data-i="1" data-answer="0"><span class="mark">B</span><span>A chave 15 substitui a 25 silenciosamente</span></button><button class="quiz__opt" data-q="ed-08-hash-1" data-i="2" data-answer="0"><span class="mark">C</span><span>A tabela dobra de tamanho automaticamente em qualquer implementação</span></button><button class="quiz__opt" data-q="ed-08-hash-1" data-i="3" data-answer="0"><span class="mark">D</span><span>A chave 15 é descartada porque o índice está ocupado</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="15 % 10 também dá 5. Substituir perderia dado, dobrar não é obrigatório e descartar violaria o contrato da estrutura.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-08-hash-2" data-track="ed">
+  <div class="quiz__q">3. O que o fator de carga α = n/m indica?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-08-hash-2" data-i="0" data-answer="0"><span class="mark">A</span><span>A ocupação da tabela, que aumenta a probabilidade de colisão</span></button><button class="quiz__opt" data-q="ed-08-hash-2" data-i="1" data-answer="0"><span class="mark">B</span><span>O tempo médio de busca em segundos</span></button><button class="quiz__opt" data-q="ed-08-hash-2" data-i="2" data-answer="0"><span class="mark">C</span><span>O número de colisões já ocorridas</span></button><button class="quiz__opt" data-q="ed-08-hash-2" data-i="3" data-answer="0"><span class="mark">D</span><span>A quantidade de memória livre no heap</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="α compara elementos e posições. Tempo depende de hardware e estratégia, colisões são consequência e memória livre é outro assunto.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–11</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="ed-08-hash" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#acesso-direto-busca-binaria">Acesso direto × busca binária</a></li><li><a href="#funcao-modular-e-mapeamento-de-chaves-25-e-15-em-tabela-de-10">Função modular e mapeamento de chaves 25 e 15 em tabela de 10</a></li><li><a href="#colisao-encadeamento-separado-e-enderecamento-aberto">Colisão, encadeamento separado e endereçamento aberto</a></li><li><a href="#sondagem-linear-e-agrupamento-primario">Sondagem linear e agrupamento primário</a></li><li><a href="#fator-de-carga-nm-custo-esperado-e-pior-caso">Fator de carga α = n/m, custo esperado e pior caso</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

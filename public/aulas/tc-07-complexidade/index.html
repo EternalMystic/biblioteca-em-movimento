@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decidibilidade, complexidade e tratabilidade · Biblioteca em Movimento</title>
+<meta name="description" content="Decidir se o problema tem solução é só o começo: entre dois algoritmos corretos, o custo decide qual sobrevive. A aula percorre a prova da Parada, as reduções e a análise assintótica até P, NP e NP-completo.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Decidibilidade, complexidade e tratabilidade · Biblioteca em Movimento">
+<meta property="og:description" content="Decidir se o problema tem solução é só o começo: entre dois algoritmos corretos, o custo decide qual sobrevive. A aula percorre a prova da Parada, as reduções e a análise assintótica até P, NP e NP-completo.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-07-complexidade/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-07-complexidade/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Teoria da Computação</span><span>/</span><span>Aula 7</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--tc">Teoria da Computação</span><span class="badge">pp. 2–14</span></div>
+    <h1>Decidibilidade, complexidade e tratabilidade</h1>
+    <p class="page-head__lead">Decidir se o problema tem solução é só o começo: entre dois algoritmos corretos, o custo decide qual sobrevive. A aula percorre a prova da Parada, as reduções e a análise assintótica até P, NP e NP-completo.</p>
+    <div class="page-head__meta"><span class="mono">aula7.pdf — Computabilidade e Complexidade</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/roteiro/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#955300"><p>A consulta que lista empréstimos responde em milissegundos com cinquenta registros e pode demorar com cinquenta mil. O código é o mesmo, o resultado é o mesmo, e a diferença está no crescimento do custo. A aula 7 fecha a trilha separando duas perguntas que costumam se misturar: se o problema tem solução algorítmica e quanto essa solução custa.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Distinguir problema decidível de indecidível e reconstruir a prova por contradição do Problema da Parada.</li><li>Usar redução para transferir indecidibilidade de um problema conhecido a um novo.</li><li>Medir custo em operações elementares, separando tempo de espaço auxiliar e adotando o pior caso.</li><li>Classificar trechos de código em O(1), O(log n), O(n), O(n log n) e O(n²), e situar P, NP e NP-completo.</li></ul></div>
+<h2 id="decidibilidade-e-indecidibilidade-parada-e-diagonalizacao">Decidibilidade e indecidibilidade; Parada e diagonalização</h2>
+<p>Um problema é decidível quando existe algoritmo que sempre para e devolve a resposta correta para qualquer entrada. É indecidível quando é impossível construir um algoritmo genérico com essa garantia. A indecidibilidade não é falta de RAM nem de velocidade: é limite da lógica, e o sintoma é o laço infinito em certas entradas.</p>
+<p>O Problema da Parada é o caso emblemático. Suponha um Auditor que recebe o código de qualquer programa e prevê se ele para, sem executá-lo. Construa o Paradoxo, que consulta o Auditor sobre si mesmo e inverte a resposta: se a previsão é “para”, entra em laço; se é “não para”, encerra. O Auditor erra nos dois ramos, logo não existe. A diagonalização é a versão formal da mesma ideia: enumerar todos os programas e construir um que discorde de cada um na sua própria posição.</p>
+<h2 id="reducoes-logicas-aplicacoes-a-analise-estatica-e-verificacao">Reduções lógicas; aplicações à análise estática e verificação</h2>
+<p>Reduzir A a B significa transformar uma solução de B em solução de A. Se A é indecidível e A se reduz a B, então B também é. A técnica evita provas novas: mapeia-se o problema desconhecido para um limite já conhecido.</p>
+<p>Na prática, isso explica por que ferramentas de análise estática não prometem tudo. Um antivírus não decide com certeza absoluta se qualquer arquivo é malicioso; um compilador não encontra todos os erros de lógica antes da execução; um verificador não prova equivalência entre dois programas arbitrários. A engenharia responde com heurísticas, análise de padrões e testes — aproximações declaradas como tais.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form2.cs · linhas 40–60</span></div>
+  <p style="margin:0;font-size:.9rem">A busca usa LIKE '%…%' em três colunas e uma consulta COUNT(*) separada da consulta paginada: duas passagens pelo conjunto filtrado e varredura que não aproveita índice.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">regitro_livros.cs · linhas 341–347</span></div>
+  <p style="margin:0;font-size:.9rem">A montagem da lista de gavetas executa 6 × 5 = 30 iterações, custo constante independente do tamanho do acervo.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">FormDevolucao.cs · linhas 544–547</span></div>
+  <p style="margin:0;font-size:.9rem">CalcularDiasAtraso faz uma subtração de datas e um Math.Max: O(1) em tempo e espaço.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula7.pdf pp. 12–14</span></div>
+  <p style="margin:0;font-size:.9rem">P, NP e NP-completo são classes teóricas; nenhuma rotina do PI foi classificada formalmente, e o sistema não resolve problema NP-completo.</p>
+</div></div></section><h2 id="custo-temporal-espaco-auxiliar-e-casos-de-entrada">Custo temporal, espaço auxiliar e casos de entrada</h2>
+<p>Complexidade de tempo conta operações elementares; complexidade de espaço conta memória auxiliar além da entrada. Não se mede em segundos, porque hardwares diferem: mede-se em função do tamanho n da entrada. Em sistemas críticos, o alvo é o pior caso, porque é ele que derruba o servidor sob estresse.</p>
+<p>A distinção entre melhor, médio e pior caso importa. Uma busca sequencial acha o item na primeira posição no melhor caso e na última no pior; o custo garantido é o pior. Dizer “é rápido no meu computador” não é análise de complexidade, é medição de um caso.</p>
+<h2 id="termos-dominantes-o-e">Termos dominantes; O, Ω e Θ</h2>
+<p>Quando n cresce, os termos menores viram ruído. Se o custo é 3n² + 5n + 10, com n igual a um milhão os termos 5n e 10 são irrelevantes, e a constante 3 também: fica n². A análise assintótica olha o termo de maior grau.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Notação</th>
+<th>Significado</th>
+<th>Leitura prática</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O(f)</td>
+<td>Limite superior</td>
+<td>No pior caso, não cresce mais rápido que f</td>
+</tr>
+<tr>
+<td>Ω(f)</td>
+<td>Limite inferior</td>
+<td>No melhor caso, exige ao menos f</td>
+</tr>
+<tr>
+<td>Θ(f)</td>
+<td>Limite exato</td>
+<td>Superior e inferior coincidem</td>
+</tr>
+</tbody>
+</table></div>
+<p>O é a notação do mercado, porque dá garantia de teto para dimensionar infraestrutura. Θ só se aplica quando os dois limites convergem. O erro comum é escrever Θ quando só se provou o teto.</p>
+<h2 id="sequencia-condicional-lacos-simples-logaritmicos-e-aninhados">Sequência, condicional, laços simples, logarítmicos e aninhados</h2>
+<p>O custo de um bloco é a soma das partes, e a soma é dominada pelo maior termo. Um trecho O(1) seguido de outro O(n) é O(n). No condicional, como a análise é de pior caso, soma-se o teste ao caminho mais caro entre os ramos.</p>
+<p>Nos laços, o custo é o número de iterações vezes o custo do corpo. Um <code>for</code> de 1 a n é O(n). Um laço que divide o índice pela metade a cada passo é O(log n). Dois laços aninhados de tamanho n dão O(n²). Um laço sobre n com outro sobre 30 fixo continua O(n), porque constante não altera a classe.</p>
+<h2 id="p-np-np-completo-e-tratabilidade">P, NP, NP-completo e tratabilidade</h2>
+<p>P reúne os problemas decidíveis em tempo polinomial. NP reúne os que têm certificado verificável em tempo polinomial — se alguém entrega a resposta, a conferência é rápida. P está contido em NP; se a inclusão é estrita, ninguém provou.</p>
+<p>NP-completo são os problemas mais difíceis de NP: todo problema de NP se reduz a eles em tempo polinomial. Se um deles tiver algoritmo polinomial, P = NP. Praticamente, tratar um problema como NP-completo significa abandonar a solução exata para toda entrada e escolher entre heurística, aproximação ou restrição do tamanho.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>Confirmado no código: a busca monta <code>LIKE '%…%'</code> sobre título, nome de guerra e status; o <code>%</code> à esquerda impede o uso de índice, então cada consulta varre as linhas filtradas. A paginação faz <code>COUNT(*)</code> em uma consulta e a página em outra. A lista de gavetas custa 30 iterações fixas, e o cálculo de atraso é O(1).</p>
+<p>Modelo didático: a classificação O/Θ dos trechos e o quadro de complexidades. Ementa/proposta: trocar a busca por texto livre em coluna indexada ou por busca full-text, e eliminar a contagem duplicada. O sistema usa MySQL local; não há login, OCR, API pública nem banco em nuvem, e nenhuma rotina resolve problema NP-completo.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Conte as operações de um inventário ingênuo com 5 obras e 30 gavetas: para cada gaveta, percorrer todas as obras comparando a etiqueta. São 30 × 5 = 150 comparações. Com 500 obras, 15.000 — o crescimento é 30n, isto é, O(n).</p>
+<p>A versão com índice percorre as obras uma vez e agrupa por gaveta: 5 operações de inserção em um mapa, mais 5 leituras. Com 500 obras, 500 operações. As duas produzem o mesmo relatório; a diferença aparece quando n cresce, e é exatamente isso que a notação assintótica registra. Se o inventário tivesse um terceiro laço aninhado sobre as obras, o custo passaria a O(n²) e 500 obras já custariam 250.000 comparações.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>“Por que a busca do sistema é aceitável hoje e problemática amanhã?”</strong></p>
+<p>Porque o custo cresce linearmente com o número de linhas e a varredura ignora índices, mas o acervo atual é pequeno. Com dezenas de milhares de empréstimos, cada consulta passa a varrer a tabela inteira, e a contagem duplicada dobra o trabalho. A correção não é reescrever a interface: é rever o padrão de busca e a paginação. É a diferença entre medir o caso e analisar a classe de crescimento.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Um trecho percorre as n obras e, para cada uma, executa uma busca binária em um vetor ordenado de tamanho n. Qual a complexidade e por que ela não é O(n)?</p>
+<details><summary>Ver resposta</summary>
+
+A busca binária custa O(log n), e ela é executada n vezes, uma por obra: o total é O(n log n). Não é O(n) porque o custo interno não é constante — cada iteração faz uma busca que cresce com o logaritmo do tamanho. Também não é O(n²), porque a busca binária descarta metade do espaço a cada comparação. Esse é o custo típico de ordenar e depois consultar: O(n log n) para ordenar, mais O(log n) por consulta. Se as consultas fossem muitas, valeria ordenar uma vez; se fosse uma só, a busca linear O(n) seria mais barata.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="tc-07-complexidade-0" data-track="tc">
+  <div class="quiz__q">1. Um problema é indecidível quando:</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-07-complexidade-0" data-i="0" data-answer="1"><span class="mark">A</span><span>Nenhum computador atual consegue resolvê-lo em tempo hábil.</span></button><button class="quiz__opt" data-q="tc-07-complexidade-0" data-i="1" data-answer="1"><span class="mark">B</span><span>É impossível criar um algoritmo que sempre pare com a resposta correta para toda entrada.</span></button><button class="quiz__opt" data-q="tc-07-complexidade-0" data-i="2" data-answer="1"><span class="mark">C</span><span>Só pode ser resolvido com memória infinita.</span></button><button class="quiz__opt" data-q="tc-07-complexidade-0" data-i="3" data-answer="1"><span class="mark">D</span><span>A resposta depende do hardware.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A limitação é lógica, não de velocidade ou memória. O sintoma é o laço infinito em certas entradas.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-07-complexidade-1" data-track="tc">
+  <div class="quiz__q">2. O custo 3n² + 5n + 10 é:</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-07-complexidade-1" data-i="0" data-answer="2"><span class="mark">A</span><span>O(n)</span></button><button class="quiz__opt" data-q="tc-07-complexidade-1" data-i="1" data-answer="2"><span class="mark">B</span><span>O(log n)</span></button><button class="quiz__opt" data-q="tc-07-complexidade-1" data-i="2" data-answer="2"><span class="mark">C</span><span>Θ(n²)</span></button><button class="quiz__opt" data-q="tc-07-complexidade-1" data-i="3" data-answer="2"><span class="mark">D</span><span>O(n³)</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O termo dominante é n². Constantes e termos menores são descartados, e o limite superior e o inferior coincidem, o que permite usar Θ.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-07-complexidade-2" data-track="tc">
+  <div class="quiz__q">3. Dois laços aninhados, cada um de 1 a n, com corpo O(1), custam:</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-07-complexidade-2" data-i="0" data-answer="2"><span class="mark">A</span><span>O(n)</span></button><button class="quiz__opt" data-q="tc-07-complexidade-2" data-i="1" data-answer="2"><span class="mark">B</span><span>O(n log n)</span></button><button class="quiz__opt" data-q="tc-07-complexidade-2" data-i="2" data-answer="2"><span class="mark">C</span><span>O(n²)</span></button><button class="quiz__opt" data-q="tc-07-complexidade-2" data-i="3" data-answer="2"><span class="mark">D</span><span>O(2ⁿ)</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O custo é o produto das iterações: n × n. Laços aninhados multiplicam; laços em sequência somam e ficam com o maior termo.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-07-complexidade-3" data-track="tc">
+  <div class="quiz__q">4. Dizer que um problema é NP-completo significa que:</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-07-complexidade-3" data-i="0" data-answer="1"><span class="mark">A</span><span>Ele não tem solução algorítmica.</span></button><button class="quiz__opt" data-q="tc-07-complexidade-3" data-i="1" data-answer="1"><span class="mark">B</span><span>Todo problema de NP se reduz a ele em tempo polinomial.</span></button><button class="quiz__opt" data-q="tc-07-complexidade-3" data-i="2" data-answer="1"><span class="mark">C</span><span>Ele é resolvido em tempo linear.</span></button><button class="quiz__opt" data-q="tc-07-complexidade-3" data-i="3" data-answer="1"><span class="mark">D</span><span>Ele pertence a P por definição.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="NP-completos são os mais difíceis de NP. Se um deles tiver algoritmo polinomial, então P = NP.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–14</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="tc-07-complexidade" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#decidibilidade-e-indecidibilidade-parada-e-diagonalizacao">Decidibilidade e indecidibilidade; Parada e diagonalização</a></li><li><a href="#reducoes-logicas-aplicacoes-a-analise-estatica-e-verificacao">Reduções lógicas; aplicações à análise estática e verificação</a></li><li><a href="#custo-temporal-espaco-auxiliar-e-casos-de-entrada">Custo temporal, espaço auxiliar e casos de entrada</a></li><li><a href="#termos-dominantes-o-e">Termos dominantes; O, Ω e Θ</a></li><li><a href="#sequencia-condicional-lacos-simples-logaritmicos-e-aninhados">Sequência, condicional, laços simples, logarítmicos e aninhados</a></li><li><a href="#p-np-np-completo-e-tratabilidade">P, NP, NP-completo e tratabilidade</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Máquina de Turing em detalhe · Biblioteca em Movimento</title>
+<meta name="description" content="A sétupla fixa estados, alfabetos, transição e os dois estados de parada. Sobre essa base, a máquina marca aⁿbⁿcⁿ, ganha fitas extras sem ganhar poder e chega à Máquina Universal, origem do programa armazenado.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="A Máquina de Turing em detalhe · Biblioteca em Movimento">
+<meta property="og:description" content="A sétupla fixa estados, alfabetos, transição e os dois estados de parada. Sobre essa base, a máquina marca aⁿbⁿcⁿ, ganha fitas extras sem ganhar poder e chega à Máquina Universal, origem do programa armazenado.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-06-turing/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-06-turing/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Teoria da Computação</span><span>/</span><span>Aula 6</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--tc">Teoria da Computação</span><span class="badge">pp. 2–19</span></div>
+    <h1>A Máquina de Turing em detalhe</h1>
+    <p class="page-head__lead">A sétupla fixa estados, alfabetos, transição e os dois estados de parada. Sobre essa base, a máquina marca aⁿbⁿcⁿ, ganha fitas extras sem ganhar poder e chega à Máquina Universal, origem do programa armazenado.</p>
+    <div class="page-head__meta"><span class="mono">aula6.pdf — A Máquina de Turing</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/lote/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#955300"><p>O sistema da biblioteca não muda de hardware quando passa do cadastro para a devolução. O mesmo executável, rodando na mesma máquina, assume comportamentos diferentes conforme o código que foi carregado. Essa separação entre máquina e programa tem origem matemática precisa, e a aula 6 a constrói a partir da definição formal da Máquina de Turing.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Ler a sétupla M = (Q, Σ, Γ, δ, q₀, qaceita, qrejeita) e explicar o papel do símbolo branco.</li><li>Simular a marcação de aabbcc identificando estado, símbolo lido, símbolo gravado e direção.</li><li>Justificar por que fitas adicionais e não-determinismo não alteram a classe de problemas.</li><li>Relacionar a Máquina Universal ao programa armazenado e à completude de Turing das linguagens comerciais.</li></ul></div>
+<h2 id="setupla-fita-e-branco-transicoes-e-aceitacaorejeicaoloop">Sétupla, fita e branco, transições e aceitação/rejeição/loop</h2>
+<p>A Máquina de Turing é definida por sete componentes: M = (Q, Σ, Γ, δ, q₀, qaceita, qrejeita). Q é o conjunto finito de estados; Σ é o alfabeto de entrada, sem o branco; Γ é o alfabeto da fita, que contém Σ, os símbolos auxiliares de marcação e o branco ⊔; q₀ é o estado inicial; qaceita e qrejeita são estados finais mutuamente exclusivos.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Papel</th>
+<th>Exemplo em aⁿbⁿcⁿ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q</td>
+<td>Estados do controle finito</td>
+<td>leitura, busca de b, busca de c, retorno</td>
+</tr>
+<tr>
+<td>Σ</td>
+<td>Entrada original</td>
+<td>{a, b, c}</td>
+</tr>
+<tr>
+<td>Γ</td>
+<td>Fita, com marcas e branco</td>
+<td>{a, b, c, X, Y, Z, ⊔}</td>
+</tr>
+<tr>
+<td>δ</td>
+<td>Regra de transição</td>
+<td L_ R>Q × Γ → Q × Γ ×</td>
+</tr>
+<tr>
+<td>q₀</td>
+<td>Início</td>
+<td>cabeçote no primeiro símbolo</td>
+</tr>
+<tr>
+<td>qaceita</td>
+<td>Parada com aceitação</td>
+<td>varredura final chegou ao branco</td>
+</tr>
+<tr>
+<td>qrejeita</td>
+<td>Parada com rejeição</td>
+<td>falta um c</td>
+</tr>
+</tbody>
+</table></div>
+<p>A fita começa com a cadeia nas primeiras células e brancos em todo o resto. A transição δ : Q × Γ → Q × Γ × {L, R} lê o estado e o símbolo sob o cabeçote e devolve novo estado, símbolo a gravar e direção. A máquina só para em qaceita ou qrejeita; se a configuração não tiver transição prevista ou levar a um ciclo, ela não para.</p>
+<h2 id="anbncn-por-marcacao">aⁿbⁿcⁿ por marcação</h2>
+<p>O problema pede quantidades iguais de três símbolos. Modelos com pilha falham porque perdem a referência depois de parear os dois primeiros grupos. A Máquina de Turing usa a fita como caderno: substitui um a por X, avança até o primeiro b e grava Y, avança até o primeiro c e grava Z, retrocede até o último X e repete.</p>
+<p>Cada ciclo consome exatamente um trio, e a ordem das marcas registra o que já foi conferido. A varredura final confirma que não sobrou letra sem marcar. O custo é o número de ciclos vezes o comprimento da fita — quadrático —, mas o resultado não depende de contador numérico.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form1.cs e Form2.cs · conexão MySQL</span></div>
+  <p style="margin:0;font-size:.9rem">A aplicação é um programa C# executado por um processador genérico: o comportamento do sistema está no código carregado, não no hardware — a versão prática da Máquina Universal.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">banco.sql · emprestimos e devolucoes</span></div>
+  <p style="margin:0;font-size:.9rem">As tabelas guardam dados e estado (status, dias_atraso), mas não instruções; o programa está nos arquivos .cs compilados.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula6.pdf pp. 2–9</span></div>
+  <p style="margin:0;font-size:.9rem">A sétupla e a máquina que marca aabbcc com X, Y e Z são construções didáticas; o PI não implementa Máquina de Turing.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--future">Proposta / evolução</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula6.pdf pp. 12–16</span></div>
+  <p style="margin:0;font-size:.9rem">A noção de programa armazenado explica a arquitetura do PI, mas não é funcionalidade do sistema; é leitura teórica do que já existe.</p>
+</div></div></section><h2 id="multifita-com-cabecotes-independentes-e-equivalencia-com-fita-unica">Multifita com cabeçotes independentes e equivalência com fita única</h2>
+<p>Com duas ou mais fitas e cabeçotes independentes, o engenheiro modela variáveis simultâneas com muito mais conforto: uma fita para a entrada, outra para o rascunho, outra para o resultado. O tempo cai, porque não é preciso caminhar até o fim da fita para anotar algo.</p>
+<p>O teorema da equivalência garante que qualquer máquina com k fitas é simulada por uma de fita única. A simulação reserva faixas na fita e usa marcadores para indicar a posição de cada cabeçote; cada passo original vira uma varredura. O ganho é de tempo, não de classe: nenhum problema novo se torna solúvel.</p>
+<h2 id="mt-nao-deterministica-e-simulacao-deterministica">MT não determinística e simulação determinística</h2>
+<p>A MT não determinística admite várias transições para a mesma leitura, ou seja, vários caminhos simultâneos. Como no par AFN–AFD, o não-determinismo não altera o limite matemático: toda MTND tem uma MT determinística equivalente que a simula, por busca em largura na árvore de configurações.</p>
+<p>A vantagem é de modelagem. Desenhar “escolha o próximo a não marcado” é muito mais simples do que descrever a varredura exata. O custo aparece na simulação, que pode ser exponencial em tempo. O erro comum é confundir facilidade de descrição com poder extra.</p>
+<h2 id="do-hardware-dedicado-a-mt-universal-programa-armazenado">Do hardware dedicado à MT universal; programa armazenado</h2>
+<p>Nas máquinas vistas até aqui, δ é fixa. Uma máquina projetada para reconhecer palíndromos não serve para balancear parênteses; trocar de problema exigia construir outra máquina. Foi o cenário dos primeiros computadores, programados reconectando cabos, em que o algoritmo era literalmente o hardware.</p>
+<p>A Máquina Universal de Turing muda isso ao tratar a tabela de regras como dado. Sua fita recebe dois blocos: a descrição codificada de uma máquina M e a entrada w. A máquina U lê as regras e simula M sobre w. Colocar instruções na fita é a gênese matemática do software, e a arquitetura de von Neumann adota a mesma ideia ao unificar dados e instruções na memória.</p>
+<h2 id="comparacao-com-computador-moderno-completude-de-turing-quadro-de-modelos">Comparação com computador moderno; completude de Turing; quadro de modelos</h2>
+<p>A CPU é a máquina universal: hardware genérico que não sabe calcular atraso nem renderizar tela. O aplicativo é a máquina M, traduzida em instruções e carregada na memória. Uma linguagem atinge a completude de Turing quando tem controle de fluxo e memória arbitrária — duas exigências que C#, Python, Java e Assembly cumprem.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>AFD</th>
+<th>AFN</th>
+<th>Autômato de pilha</th>
+<th>Máquina de Turing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nível de Chomsky</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Memória</td>
+<td>Nenhuma</td>
+<td>Nenhuma</td>
+<td>Pilha LIFO</td>
+<td>Fita infinita</td>
+</tr>
+<tr>
+<td>Cabeçote</td>
+<td>Só à direita</td>
+<td>Só à direita</td>
+<td>Só à direita</td>
+<td>Bidirecional</td>
+</tr>
+<tr>
+<td>Gravação</td>
+<td>Não</td>
+<td>Não</td>
+<td>Só no topo</td>
+<td>Apaga e reescreve</td>
+</tr>
+<tr>
+<td>Uso típico</td>
+<td>Análise léxica</td>
+<td>Conversão para AFD</td>
+<td>Análise sintática</td>
+<td>Hardware de uso geral</td>
+</tr>
+</tbody>
+</table></div>
+<p>A consequência matemática da completude é dura: toda linguagem Turing-completa sofre do Problema da Parada, e nenhum analisador garante, antes da execução, que o código termina.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>Confirmado no código: a aplicação é um programa C# com janelas e acesso a MySQL local; o comportamento está nos arquivos <code>.cs</code>, e o banco guarda dados e estados como <code>status</code> e <code>dias_atraso</code>. Não há instruções armazenadas nas tabelas.</p>
+<p>Modelo didático: a sétupla, a tabela de transição e a máquina que marca aabbcc. Ementa/proposta: descrever formalmente uma rotina do PI como Máquina de Turing para medir seu custo em passos. O sistema não tem login, OCR, API pública nem banco em nuvem.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Configuração inicial: fita <code>a a b b c c ⊔</code>, cabeçote no primeiro a, estado q₀.</p>
+<ol>
+<li>(q₀, a) → (q₁, X, R). Fita: X a b b c c.</li>
+<li>(q₁, a) → (q₁, a, R); (q₁, b) → (q₂, Y, R). Fita: X a Y b c c.</li>
+<li>(q₂, b) → (q₂, b, R); (q₂, c) → (q₃, Z, L). Fita: X a Y b Z c.</li>
+<li>(q₃, b) → (q₃, b, L); (q₃, Y) → (q₃, Y, L); (q₃, a) → (q₃, a, L); (q₃, X) → (q₀, X, R).</li>
+<li>Ciclo 2: (q₀, a) → (q₁, X, R); (q₁, Y) → (q₁, Y, R); (q₁, b) → (q₂, Y, R); (q₂, Z) → (q₂, Z, R); (q₂, c) → (q₃, Z, L). Fita: X X Y Y Z Z.</li>
+<li>Retorno, leitura de Y em q₀: não há mais a. Varredura final até ⊔ em qaceita.</li>
+</ol>
+<p>O ponto delicado é o passo 6: a máquina precisa de transição para “achei Y onde esperava a”, e essa transição é o que separa aceitação de laço infinito.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>“Se a Máquina de Turing é tão simples, por que ela representa qualquer computador?”</strong></p>
+<p>Porque a tese de Church-Turing identifica nela o limite do que é mecanicamente calculável, e porque a Máquina Universal mostra que uma máquina fixa pode simular qualquer outra quando recebe a descrição do programa na fita. O computador moderno é essa máquina com engenharia de desempenho: mais rápida, com hierarquia de memória, mas sem poder além. As linguagens comerciais são Turing-completas, o que também significa que carregam o Problema da Parada.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Explique por que a máquina de aⁿbⁿcⁿ precisa gravar X, Y e Z em vez de apagar os símbolos lidos.</p>
+<details><summary>Ver resposta</summary>
+
+Apagar perderia a informação de quantos trios já foram conferidos e de onde a varredura deve parar. As marcas funcionam como memória externa: X indica posições já processadas de a, Y e Z fazem o mesmo para b e c, e a varredura final verifica que só restaram marcas. Se os símbolos fossem apagados para branco, a fita ficaria indistinguível de espaço não usado, e a máquina não conseguiria decidir se terminou ou se ainda há símbolo por marcar. A marcação troca um contador — que a fita não tem — por símbolos distintos no alfabeto Γ.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="tc-06-turing-0" data-track="tc">
+  <div class="quiz__q">1. Por que Γ é diferente de Σ na sétupla da Máquina de Turing?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-06-turing-0" data-i="0" data-answer="1"><span class="mark">A</span><span>Porque Σ inclui o símbolo branco.</span></button><button class="quiz__opt" data-q="tc-06-turing-0" data-i="1" data-answer="1"><span class="mark">B</span><span>Porque Γ inclui Σ, os símbolos auxiliares de marcação e o branco.</span></button><button class="quiz__opt" data-q="tc-06-turing-0" data-i="2" data-answer="1"><span class="mark">C</span><span>Porque Γ é sempre binário.</span></button><button class="quiz__opt" data-q="tc-06-turing-0" data-i="3" data-answer="1"><span class="mark">D</span><span>Porque Σ é o alfabeto da fita.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Σ é o alfabeto da palavra de entrada; Γ é o alfabeto completo da fita, com marcas como X, Y, Z e o branco.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-06-turing-1" data-track="tc">
+  <div class="quiz__q">2. O que acontece ao acrescentar fitas a uma Máquina de Turing?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-06-turing-1" data-i="0" data-answer="1"><span class="mark">A</span><span>Aumenta a classe de problemas reconhecíveis.</span></button><button class="quiz__opt" data-q="tc-06-turing-1" data-i="1" data-answer="1"><span class="mark">B</span><span>Reduz o tempo de processamento, mas não altera a classe.</span></button><button class="quiz__opt" data-q="tc-06-turing-1" data-i="2" data-answer="1"><span class="mark">C</span><span>Elimina a necessidade de estados finais.</span></button><button class="quiz__opt" data-q="tc-06-turing-1" data-i="3" data-answer="1"><span class="mark">D</span><span>Permite decidir o Problema da Parada.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O teorema da equivalência mostra que k fitas são simuladas por uma fita única, com custo maior de tempo.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-06-turing-2" data-track="tc">
+  <div class="quiz__q">3. A Máquina de Turing Universal recebe na fita:</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-06-turing-2" data-i="0" data-answer="1"><span class="mark">A</span><span>Apenas a cadeia de entrada.</span></button><button class="quiz__opt" data-q="tc-06-turing-2" data-i="1" data-answer="1"><span class="mark">B</span><span>A descrição codificada de uma máquina M e a entrada w.</span></button><button class="quiz__opt" data-q="tc-06-turing-2" data-i="2" data-answer="1"><span class="mark">C</span><span>Somente o estado inicial.</span></button><button class="quiz__opt" data-q="tc-06-turing-2" data-i="3" data-answer="1"><span class="mark">D</span><span>O resultado já calculado.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="É essa separação entre descrição e dados que origina o conceito de programa armazenado e a arquitetura de von Neumann.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-06-turing-3" data-track="tc">
+  <div class="quiz__q">4. Uma linguagem é Turing-completa quando:</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-06-turing-3" data-i="0" data-answer="1"><span class="mark">A</span><span>Tem tipagem forte e orientação a objetos.</span></button><button class="quiz__opt" data-q="tc-06-turing-3" data-i="1" data-answer="1"><span class="mark">B</span><span>Tem controle de fluxo e memória arbitrária, podendo simular uma Máquina Universal.</span></button><button class="quiz__opt" data-q="tc-06-turing-3" data-i="2" data-answer="1"><span class="mark">C</span><span>Compila para código nativo.</span></button><button class="quiz__opt" data-q="tc-06-turing-3" data-i="3" data-answer="1"><span class="mark">D</span><span>Executa em tempo polinomial.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="As duas exigências bastam: decisão e salto simulam o controle finito; memória expansível simula a fita.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–19</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="tc-06-turing" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#setupla-fita-e-branco-transicoes-e-aceitacaorejeicaoloop">Sétupla, fita e branco, transições e aceitação/rejeição/loop</a></li><li><a href="#anbncn-por-marcacao">aⁿbⁿcⁿ por marcação</a></li><li><a href="#multifita-com-cabecotes-independentes-e-equivalencia-com-fita-unica">Multifita com cabeçotes independentes e equivalência com fita única</a></li><li><a href="#mt-nao-deterministica-e-simulacao-deterministica">MT não determinística e simulação determinística</a></li><li><a href="#do-hardware-dedicado-a-mt-universal-programa-armazenado">Do hardware dedicado à MT universal; programa armazenado</a></li><li><a href="#comparacao-com-computador-moderno-completude-de-turing-quadro-de-modelos">Comparação com computador moderno; completude de Turing; quadro de modelos</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

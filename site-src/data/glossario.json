@@ -1,0 +1,604 @@
+{
+  "terms": [
+    {
+      "term": "TAD",
+      "full": "Tipo Abstrato de Dados",
+      "def": "Especificação de um conjunto de valores e operações, definida pelo comportamento observável e não pela representação interna. Um TAD separa interface e implementação, permitindo trocar estruturas sem alterar o código cliente. Exemplos incluem pilha, fila, conjunto, mapa e fila de prioridade.",
+      "syn": ["tipo abstrato de dados", "ADT"],
+      "lesson": "ed-01-fundamentos",
+      "group": "estruturas"
+    },
+    {
+      "term": "Vetor",
+      "full": "Vetor",
+      "def": "Estrutura linear que armazena elementos em posições consecutivas, normalmente acessadas por índice inteiro. O acesso direto custa tempo constante quando os elementos têm tamanho uniforme, mas inserções e remoções no meio exigem deslocamentos. Em C#, `List<T>` oferece uma abstração redimensionável baseada em armazenamento contíguo.",
+      "syn": ["array", "vetor"],
+      "lesson": "ed-01-fundamentos",
+      "group": "estruturas"
+    },
+    {
+      "term": "Lista encadeada",
+      "full": "Lista Simplesmente ou Duplamente Encadeada",
+      "def": "Estrutura linear formada por nós ligados por referências. Na LSE, cada nó aponta para o próximo; na LDE, também aponta para o anterior. O acesso por posição é linear, enquanto inserções junto a um nó conhecido podem ser constantes. A memória dos nós não precisa ser contígua.",
+      "syn": ["LSE", "LDE", "lista ligada", "linked list"],
+      "lesson": "ed-05-listas",
+      "group": "estruturas"
+    },
+    {
+      "term": "Pilha",
+      "full": "Pilha como Tipo Abstrato de Dados",
+      "def": "TAD linear que segue a disciplina LIFO: o último elemento inserido é o primeiro removido. Suas operações fundamentais são `push`, `pop` e consulta do topo, geralmente com custo constante. Não deve ser confundida com a pilha de execução nem com a pilha usada por um autômato de pilha.",
+      "syn": ["LIFO", "stack"],
+      "lesson": "ed-04-pilhas-filas",
+      "group": "estruturas"
+    },
+    {
+      "term": "Fila",
+      "full": "Fila como Tipo Abstrato de Dados",
+      "def": "TAD linear que segue a disciplina FIFO: o primeiro elemento inserido é o primeiro removido. As operações usuais são enfileirar, desenfileirar e consultar as extremidades. Uma implementação adequada mantém referências ou índices para início e fim, evitando deslocar todos os elementos a cada remoção.",
+      "syn": ["FIFO", "queue"],
+      "lesson": "ed-04-pilhas-filas",
+      "group": "estruturas"
+    },
+    {
+      "term": "Fila circular",
+      "full": "Fila Circular",
+      "def": "Implementação de fila em vetor na qual os índices avançam de modo modular e reutilizam posições liberadas no início. Ela evita deslocamentos e mantém enfileiramento e desenfileiramento constantes, desde que a representação controle corretamente os estados vazio e cheio, por exemplo usando contador ou uma posição reservada.",
+      "syn": ["buffer circular", "circular queue"],
+      "lesson": "ed-04-pilhas-filas",
+      "group": "estruturas"
+    },
+    {
+      "term": "Árvore",
+      "full": "Árvore em Estruturas de Dados",
+      "def": "Estrutura hierárquica acíclica formada por nós e relações pai-filho. Há uma raiz, caminhos únicos entre a raiz e cada nó, folhas sem filhos e subárvores. Altura, profundidade e grau descrevem propriedades estruturais importantes para analisar armazenamento, percursos e custos de busca.",
+      "syn": ["tree", "estrutura hierárquica"],
+      "lesson": "ed-09-arvores",
+      "group": "estruturas"
+    },
+    {
+      "term": "BST",
+      "full": "Árvore Binária de Busca",
+      "def": "Árvore binária em que, para cada nó, as chaves da subárvore esquerda respeitam uma ordem menor e as da direita uma ordem maior, conforme a política para duplicatas. Busca, inserção e remoção custam proporcionalmente à altura: podem ser logarítmicas ou lineares.",
+      "syn": ["árvore binária de busca", "ABB", "binary search tree"],
+      "lesson": "ed-09-arvores",
+      "group": "estruturas"
+    },
+    {
+      "term": "AVL",
+      "full": "Árvore AVL",
+      "def": "Árvore binária de busca autoequilibrada em que a diferença entre as alturas das subárvores de qualquer nó permanece limitada, usualmente por um. Rotações simples ou duplas restauram o equilíbrio após atualizações. Assim, busca, inserção e remoção têm custo assintótico logarítmico.",
+      "syn": ["árvore AVL", "árvore balanceada"],
+      "lesson": "ed-09-arvores",
+      "group": "estruturas"
+    },
+    {
+      "term": "Heap",
+      "full": "Heap como Estrutura de Prioridade",
+      "def": "Árvore implícita, normalmente armazenada em vetor, que satisfaz a propriedade de heap: em um mínimo-heap, cada pai não excede os filhos; em um máximo-heap, não é menor. Suporta consulta da prioridade extrema e atualizações eficientes. Não é sinônimo da região de memória chamada heap.",
+      "syn": ["fila de prioridade", "min-heap", "max-heap"],
+      "lesson": "ed-09-arvores",
+      "group": "estruturas"
+    },
+    {
+      "term": "Tabela hash",
+      "full": "Tabela de Dispersão",
+      "def": "Estrutura que associa chaves a valores usando uma função de espalhamento para escolher posições em uma tabela. Com distribuição adequada e fator de carga controlado, operações de busca, inserção e remoção têm custo esperado constante, embora colisões possam degradar o desempenho.",
+      "syn": ["hash table", "tabela hash", "mapa hash"],
+      "lesson": "ed-08-hash",
+      "group": "estruturas"
+    },
+    {
+      "term": "Função de espalhamento",
+      "full": "Função de Espalhamento",
+      "def": "Função que transforma uma chave em um valor usado para determinar uma posição, ou sequência de posições, em uma tabela hash. Deve ser determinística, eficiente e distribuir chaves uniformemente; não precisa ser injetiva, pois diferentes chaves podem produzir a mesma posição.",
+      "syn": ["função hash", "hash function", "dispersão"],
+      "lesson": "ed-08-hash",
+      "group": "estruturas"
+    },
+    {
+      "term": "Colisão",
+      "full": "Colisão em Tabelas Hash",
+      "def": "Ocorre quando duas chaves distintas são mapeadas pela função de espalhamento para a mesma posição inicial ou para uma posição já ocupada. A tabela precisa resolver o conflito, por encadeamento separado ou endereçamento aberto. Colisões são inevitáveis em geral e não indicam necessariamente uma implementação incorreta.",
+      "syn": ["conflito hash", "hash collision"],
+      "lesson": "ed-08-hash",
+      "group": "estruturas"
+    },
+    {
+      "term": "Encadeamento separado",
+      "full": "Encadeamento Separado",
+      "def": "Técnica de resolução de colisões em que cada posição da tabela mantém uma coleção de entradas, frequentemente uma lista. As chaves que colidem compartilham o mesmo balde. Nesse modelo, o fator de carga α = n/m pode passar de 1, pois um balde pode conter vários elementos.",
+      "syn": ["separate chaining", "encadeamento"],
+      "lesson": "ed-08-hash",
+      "group": "estruturas"
+    },
+    {
+      "term": "Sondagem linear",
+      "full": "Sondagem Linear",
+      "def": "Método de endereçamento aberto que, após uma colisão, examina posições sucessivas segundo uma sequência modular até localizar a chave, uma posição vazia ou o elemento procurado. É simples e eficiente para cache, mas tende a produzir agrupamento primário e exige α menor que 1.",
+      "syn": ["linear probing", "endereçamento aberto"],
+      "lesson": "ed-08-hash",
+      "group": "estruturas"
+    },
+    {
+      "term": "Fator de carga",
+      "full": "Fator de Carga de uma Tabela Hash",
+      "def": "Medida de ocupação de uma tabela hash, geralmente α = n/m, em que n é o número de entradas e m o número de posições. Em encadeamento separado, α pode exceder 1; em endereçamento aberto, a ocupação deve permanecer abaixo de 1. Valores altos aumentam colisões.",
+      "syn": ["α", "load factor"],
+      "lesson": "ed-08-hash",
+      "group": "estruturas"
+    },
+    {
+      "term": "Complexidade assintótica",
+      "full": "Complexidade Assintótica",
+      "def": "Análise do crescimento de recursos consumidos por um algoritmo quando o tamanho da entrada tende ao infinito. Ignora constantes multiplicativas e termos de menor ordem, concentrando-se em tempo, espaço ou outra medida. Permite comparar algoritmos independentemente de uma máquina específica.",
+      "syn": ["análise assintótica", "complexidade"],
+      "lesson": "ed-02-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "Big-O",
+      "full": "Notação O Grande",
+      "def": "Notação que fornece um limite assintótico superior, em sentido formal, para o crescimento de uma função a partir de constantes positivas e de um limiar. Em análise de algoritmos, `O(f(n))` descreve uma classe de crescimento e não necessariamente o tempo exato de execução.",
+      "syn": ["O grande", "O(f(n))", "ordem de"],
+      "lesson": "ed-02-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "Ω",
+      "full": "Notação Ômega",
+      "def": "Notação assintótica que expressa um limite inferior de crescimento. Dizer que uma função pertence a Ω(f(n)) significa que, a partir de certo tamanho, ela é pelo menos uma constante vezes f(n), salvo condições formais do domínio. Pode representar uma garantia mínima ou um limite inferior teórico.",
+      "syn": ["Omega", "ômega", "Ω(f(n))"],
+      "lesson": "ed-02-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "Θ",
+      "full": "Notação Teta",
+      "def": "Notação assintótica usada quando existem simultaneamente limites superior e inferior proporcionais à mesma função. Assim, `Θ(f(n))` caracteriza o crescimento assintótico preciso dentro de constantes. Ela é mais informativa que apenas O ou Ω quando ambos os limites podem ser demonstrados.",
+      "syn": ["Theta", "teta", "Θ(f(n))"],
+      "lesson": "ed-02-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "Caso médio e pior caso",
+      "full": "Análise de Caso Médio e Pior Caso",
+      "def": "O pior caso mede o maior custo entre entradas de determinado tamanho. O caso médio calcula um custo esperado segundo uma distribuição de entradas explicitada. O segundo não pode ser inferido apenas do pior caso: depende do modelo probabilístico e das hipóteses sobre os dados.",
+      "syn": ["average case", "worst case", "caso médio"],
+      "lesson": "ed-02-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "Custo amortizado",
+      "full": "Análise de Custo Amortizado",
+      "def": "Método que distribui o custo de uma sequência de operações para obter um custo médio por operação na própria sequência, sem exigir probabilidades. Uma operação isolada pode ser cara, mas o custo amortizado permanece baixo quando operações baratas compensam esse pico, como em redimensionamento de vetores.",
+      "syn": ["análise amortizada", "amortized cost"],
+      "lesson": "ed-02-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "Recursão",
+      "full": "Recursão",
+      "def": "Técnica em que uma função resolve um problema chamando a si mesma para instâncias menores ou mais simples. Uma solução correta precisa de caso base e de progresso em direção a ele. Cada chamada ativa ocupa registros na pilha de execução, que é diferente do TAD pilha.",
+      "syn": ["função recursiva", "recursividade"],
+      "lesson": "ed-03-ponteiros",
+      "group": "complexidade"
+    },
+    {
+      "term": "Divisão e conquista",
+      "full": "Divisão e Conquista",
+      "def": "Paradigma algorítmico que divide uma instância em subproblemas menores, resolve-os recursivamente e combina seus resultados. A análise costuma ser expressa por uma recorrência. Merge sort e busca binária exemplificam a estratégia, embora seus custos dependam da divisão e da combinação escolhidas.",
+      "syn": ["divide and conquer", "dividir e conquistar"],
+      "lesson": "ed-07-merge-busca",
+      "group": "complexidade"
+    },
+    {
+      "term": "Estabilidade",
+      "full": "Estabilidade de uma Ordenação",
+      "def": "Propriedade de um algoritmo de ordenação que preserva a ordem relativa de elementos considerados iguais pela chave de comparação. É relevante quando os registros possuem várias chaves e uma ordenação anterior deve ser respeitada. Estabilidade não implica, por si só, menor tempo ou uso menor de memória.",
+      "syn": ["ordenação estável", "stable sort"],
+      "lesson": "ed-06-ordenacao",
+      "group": "complexidade"
+    },
+    {
+      "term": "In-place",
+      "full": "Algoritmo In-Place",
+      "def": "Característica de um algoritmo que usa espaço auxiliar adicional limitado, normalmente constante ou pequeno em relação à entrada, e modifica a própria estrutura armazenada. A definição exata varia conforme o modelo, e chamadas recursivas ou buffers temporários podem alterar a análise. In-place não significa necessariamente estável.",
+      "syn": ["in situ", "sem memória auxiliar"],
+      "lesson": "ed-06-ordenacao",
+      "group": "complexidade"
+    },
+    {
+      "term": "Busca linear",
+      "full": "Busca Linear",
+      "def": "Algoritmo que examina os elementos sequencialmente até encontrar a chave ou alcançar o fim. Funciona sem exigir ordenação e usa espaço auxiliar constante na versão iterativa. No pior caso, compara todos os n elementos, resultando em custo O(n); a posição encontrada determina o custo em casos favoráveis.",
+      "syn": ["busca sequencial", "linear search"],
+      "lesson": "ed-07-merge-busca",
+      "group": "complexidade"
+    },
+    {
+      "term": "Busca binária",
+      "full": "Busca Binária",
+      "def": "Algoritmo de busca em uma sequência ordenada que compara a chave com o elemento central e descarta metade do intervalo a cada passo. Sua versão iterativa usa espaço constante e realiza O(log n) comparações no pior caso, desde que o acesso ao meio seja eficiente.",
+      "syn": ["binary search", "pesquisa binária"],
+      "lesson": "ed-07-merge-busca",
+      "group": "complexidade"
+    },
+    {
+      "term": "Grafo",
+      "full": "Grafo",
+      "def": "Modelo matemático formado por um conjunto de vértices e um conjunto de arestas ou arcos que relacionam pares de vértices. Pode ser direcionado ou não direcionado, ponderado ou não, simples ou possuir múltiplas conexões. É usado para representar redes, dependências, mapas e relações.",
+      "syn": ["graph", "rede"],
+      "lesson": "gr-01-fundamentos",
+      "group": "grafos"
+    },
+    {
+      "term": "Vértice, aresta e grau",
+      "full": "Vértice, Aresta e Grau",
+      "def": "Vértice é uma entidade do grafo; aresta é uma ligação entre entidades, enquanto arco designa usualmente ligação direcionada. O grau de um vértice é o número de incidentes; em dígrafos distingue-se grau de entrada e de saída. Em grafos não direcionados, o grau soma as incidências.",
+      "syn": ["nó", "edge", "degree"],
+      "lesson": "gr-01-fundamentos",
+      "group": "grafos"
+    },
+    {
+      "term": "Dígrafo",
+      "full": "Grafo Direcionado",
+      "def": "Grafo cujas conexões possuem orientação: um arco de u para v não implica necessariamente arco de v para u. Caminhos, alcançabilidade e graus devem respeitar essa direção. Um dígrafo pode, contudo, conter arcos recíprocos; quando todos os pares relevantes os possuem, sua matriz de adjacência pode ser simétrica.",
+      "syn": ["grafo direcionado", "digrafo", "directed graph"],
+      "lesson": "gr-01-fundamentos",
+      "group": "grafos"
+    },
+    {
+      "term": "DAG",
+      "full": "Grafo Acíclico Direcionado",
+      "def": "Dígrafo que não contém ciclo direcionado. Essa propriedade permite ordenar seus vértices topologicamente e modelar dependências sem circularidade, como tarefas, módulos ou expressões. Toda DAG finita possui ao menos um vértice de grau de entrada zero e uma ordenação topológica válida.",
+      "syn": ["grafo acíclico direcionado", "GAD", "directed acyclic graph"],
+      "lesson": "gr-04-dag-scc",
+      "group": "grafos"
+    },
+    {
+      "term": "Grafo bipartido",
+      "full": "Grafo Bipartido",
+      "def": "Grafo cujos vértices podem ser particionados em dois conjuntos disjuntos, com toda aresta ligando um conjunto ao outro, nunca dois vértices do mesmo conjunto. Um grafo é bipartido se, e somente se, não possui ciclo ímpar; uma coloração com duas cores fornece a partição.",
+      "syn": ["bipartido", "bipartite graph"],
+      "lesson": "gr-02-subgrafos",
+      "group": "grafos"
+    },
+    {
+      "term": "Matriz de adjacência",
+      "full": "Matriz de Adjacência",
+      "def": "Representação de grafo por uma matriz em que a entrada da linha u e coluna v indica a existência, peso ou multiplicidade da ligação entre esses vértices. Em grafos direcionados, a matriz pode não ser simétrica; arcos recíprocos podem torná-la simétrica. Usa espaço O(V²).",
+      "syn": ["adjacency matrix", "matriz de conexidade"],
+      "lesson": "gr-01-fundamentos",
+      "group": "grafos"
+    },
+    {
+      "term": "Lista de adjacência",
+      "full": "Lista de Adjacência",
+      "def": "Representação que associa a cada vértice a coleção de seus vizinhos ou arcos incidentes. Usa espaço O(V+E) e favorece percursos em grafos esparsos, pois examina apenas conexões existentes. Em dígrafos, pode-se manter listas distintas para sucessores e predecessores.",
+      "syn": ["adjacency list", "listas de vizinhos"],
+      "lesson": "gr-01-fundamentos",
+      "group": "grafos"
+    },
+    {
+      "term": "BFS",
+      "full": "Busca em Largura",
+      "def": "Percurso de grafo que visita primeiro os vértices a menor distância em número de arestas a partir da origem. Usa uma fila para organizar a fronteira. Em grafos não ponderados, calcula distâncias mínimas em número de arestas e uma árvore de predecessores, com custo O(V+E).",
+      "syn": ["busca em largura", "breadth-first search"],
+      "lesson": "gr-03-bfs-dfs",
+      "group": "grafos"
+    },
+    {
+      "term": "DFS",
+      "full": "Busca em Profundidade",
+      "def": "Percurso que explora um caminho até não haver vizinhos não visitados, então retrocede. Pode ser implementado com recursão ou pilha explícita. Seus tempos de descoberta e finalização apoiam detecção de ciclos, componentes, ordenação topológica e outras análises, com custo O(V+E) usando listas de adjacência.",
+      "syn": ["busca em profundidade", "depth-first search"],
+      "lesson": "gr-03-bfs-dfs",
+      "group": "grafos"
+    },
+    {
+      "term": "Ordenação topológica",
+      "full": "Ordenação Topológica",
+      "def": "Sequência linear dos vértices de uma DAG em que, para todo arco u→v, u aparece antes de v. Pode ser obtida por DFS ou pelo algoritmo de Kahn. Se o grafo possuir ciclo direcionado, nenhuma ordenação topológica completa existe.",
+      "syn": ["ordenação topológica", "topological sort"],
+      "lesson": "gr-04-dag-scc",
+      "group": "grafos"
+    },
+    {
+      "term": "Componente fortemente conexa",
+      "full": "Componente Fortemente Conexa",
+      "def": "Em um dígrafo, é um conjunto maximal de vértices em que cada vértice alcança todos os demais seguindo as direções dos arcos. As componentes fortemente conexas particionam os vértices e podem ser contraídas em uma DAG. Algoritmos de Kosaraju e Tarjan calculam-nas linearmente.",
+      "syn": ["CFC", "SCC", "strongly connected component"],
+      "lesson": "gr-04-dag-scc",
+      "group": "grafos"
+    },
+    {
+      "term": "Árvore geradora e MST",
+      "full": "Árvore Geradora Mínima",
+      "def": "Uma árvore geradora conecta todos os vértices de um grafo não direcionado conexo sem ciclos. Uma MST é uma árvore geradora de peso total mínimo, podendo haver várias em caso de empates. Ela não é um caminho mínimo entre todos os pares.",
+      "syn": ["MST", "minimum spanning tree", "árvore de cobertura mínima"],
+      "lesson": "gr-05-mst",
+      "group": "grafos"
+    },
+    {
+      "term": "Union-Find",
+      "full": "Estrutura de Conjuntos Disjuntos",
+      "def": "Estrutura que mantém uma partição dinâmica em conjuntos disjuntos e oferece `find`, para identificar o representante, e `union`, para unir conjuntos. Compressão de caminho e união por posto ou tamanho tornam o custo amortizado quase constante. É central no algoritmo de Kruskal.",
+      "syn": ["Disjoint Set Union", "DSU", "conjuntos disjuntos"],
+      "lesson": "gr-05-mst",
+      "group": "grafos"
+    },
+    {
+      "term": "Prim",
+      "full": "Algoritmo de Prim",
+      "def": "Algoritmo guloso que constrói uma árvore geradora mínima iniciando em um vértice e adicionando repetidamente a aresta de menor peso que conecta a árvore atual a um vértice externo. Com fila de prioridade e listas de adjacência, alcança complexidade típica O(E log V).", 
+      "syn": ["Prim", "algoritmo guloso de MST"],
+      "lesson": "gr-05-mst",
+      "group": "grafos"
+    },
+    {
+      "term": "Kruskal",
+      "full": "Algoritmo de Kruskal",
+      "def": "Algoritmo guloso para MST que ordena as arestas por peso crescente e aceita uma aresta quando ela não cria ciclo. A estrutura Union-Find testa e une componentes eficientemente. O custo costuma ser dominado pela ordenação, O(E log E), para grafos não direcionados ponderados.",
+      "syn": ["Kruskal", "algoritmo de Kruskal"],
+      "lesson": "gr-05-mst",
+      "group": "grafos"
+    },
+    {
+      "term": "Dijkstra",
+      "full": "Algoritmo de Dijkstra",
+      "def": "Algoritmo de caminhos mínimos a partir de uma origem em grafos com pesos não negativos. Seleciona o vértice de menor distância provisória e relaxa suas arestas. Com fila de prioridade, é eficiente, mas não fornece respostas corretas quando existe aresta de peso negativo alcançável.",
+      "syn": ["Dijkstra", "caminho mínimo"],
+      "lesson": "gr-07-caminhos",
+      "group": "grafos"
+    },
+    {
+      "term": "Bellman-Ford",
+      "full": "Algoritmo de Bellman-Ford",
+      "def": "Algoritmo de caminhos mínimos de uma origem que relaxa todas as arestas repetidamente. Aceita pesos negativos e consegue detectar ciclo negativo alcançável a partir da origem. Em sua implementação clássica, requer O(VE) tempo, sendo mais geral e mais lento que Dijkstra.",
+      "syn": ["Bellman Ford", "caminhos com pesos negativos"],
+      "lesson": "gr-07-caminhos",
+      "group": "grafos"
+    },
+    {
+      "term": "Floyd-Warshall",
+      "full": "Algoritmo de Floyd-Warshall",
+      "def": "Algoritmo de programação dinâmica para caminhos mínimos entre todos os pares. Considera progressivamente conjuntos de vértices intermediários e atualiza uma matriz de distâncias. Suporta pesos negativos, desde que não haja ciclos negativos relevantes, e possui custo O(V³) e espaço O(V²).", 
+      "syn": ["Floyd Warshall", "all-pairs shortest paths"],
+      "lesson": "gr-07-caminhos",
+      "group": "grafos"
+    },
+    {
+      "term": "Relaxamento",
+      "full": "Relaxamento de uma Aresta",
+      "def": "Operação central em algoritmos de caminhos mínimos: para uma aresta u→v de peso w, verifica-se se a distância conhecida até v pode ser reduzida por `dist[u] + w`. Se sim, atualiza-se a distância e o predecessor. Relaxamento repetido fundamenta Dijkstra, Bellman-Ford e Floyd-Warshall.",
+      "syn": ["relaxation", "relaxar aresta"],
+      "lesson": "gr-07-caminhos",
+      "group": "grafos"
+    },
+    {
+      "term": "Ciclo negativo",
+      "full": "Ciclo de Peso Negativo",
+      "def": "Ciclo direcionado cuja soma dos pesos é negativa. Ao ser alcançável a partir da origem, permite diminuir indefinidamente o custo de um caminho que o percorra, portanto não existe distância mínima finita para seus vértices alcançáveis. Bellman-Ford pode detectar essa situação.",
+      "syn": ["ciclo negativo", "negative cycle"],
+      "lesson": "gr-07-caminhos",
+      "group": "grafos"
+    },
+    {
+      "term": "Caminho e circuito euleriano",
+      "full": "Caminho e Circuito Euleriano",
+      "def": "Caminho euleriano percorre cada aresta exatamente uma vez; circuito euleriano também retorna ao vértice inicial. A condição de existência depende da conectividade e dos graus: em grafo não direcionado, circuito exige todos os graus pares, enquanto caminho aberto exige exatamente zero ou dois graus ímpares.",
+      "syn": ["Euleriano", "trilha euleriana", "circuito de Euler"],
+      "lesson": "gr-06-circuitos",
+      "group": "grafos"
+    },
+    {
+      "term": "Caminho hamiltoniano e TSP",
+      "full": "Caminho Hamiltoniano e Problema do Caixeiro-Viajante",
+      "def": "Caminho hamiltoniano visita cada vértice exatamente uma vez; um circuito hamiltoniano retorna à origem. O TSP procura um circuito de menor custo que visite todos os vértices, em uma formulação de otimização. Diferentemente do caso euleriano, a existência não possui critério simples geral baseado apenas em graus.",
+      "syn": ["Hamiltoniano", "TSP", "caixeiro viajante"],
+      "lesson": "gr-06-circuitos",
+      "group": "grafos"
+    },
+    {
+      "term": "P",
+      "full": "Classe P",
+      "def": "Classe de problemas de decisão resolvíveis por uma máquina de Turing determinística em tempo polinomial no tamanho da entrada. Ela representa uma noção formal de tratabilidade computacional, embora um polinômio de grau alto possa ser impraticável. P está contida em NP.",
+      "syn": ["tempo polinomial", "classe P"],
+      "lesson": "tc-07-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "NP",
+      "full": "Nondeterministic Polynomial Time",
+      "def": "Classe de problemas de decisão para os quais uma solução candidata pode ser verificada em tempo polinomial por uma máquina determinística, usando um certificado apropriado. Equivalentemente, são problemas decidíveis em tempo polinomial por máquina não determinística. Ainda não se sabe se P = NP.",
+      "syn": ["tempo polinomial não determinístico", "classe NP"],
+      "lesson": "tc-07-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "NP-completo",
+      "full": "Problema NP-Completo",
+      "def": "Problema de decisão que pertence a NP e é NP-difícil por reduções polinomiais: todo problema de NP pode ser transformado nele em tempo polinomial. Se qualquer problema NP-completo tiver algoritmo polinomial, então P = NP; se P ≠ NP, nenhum terá tal algoritmo.",
+      "syn": ["NP-complete", "NP completo"],
+      "lesson": "tc-07-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "NP-difícil",
+      "full": "Problema NP-Difícil",
+      "def": "Problema pelo menos tão difícil quanto todos os problemas de NP sob uma redução polinomial adequada. Não é obrigatório que pertença a NP nem que seja problema de decisão; por isso, um problema NP-difícil pode ser um problema de otimização ou até indecidível. NP-completude acrescenta pertencimento a NP.",
+      "syn": ["NP-hard", "NP hard"],
+      "lesson": "tc-07-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "Heurística",
+      "full": "Heurística Computacional",
+      "def": "Estratégia que busca soluções boas ou úteis com custo prático menor, sem garantir sempre a solução ótima ou mesmo uma solução correta para toda instância, salvo quando isso for demonstrado. Heurísticas são comuns em problemas difíceis, como TSP, e devem declarar suas limitações e critérios de avaliação.",
+      "syn": ["heuristic", "método heurístico"],
+      "lesson": "tc-07-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "Certificado e redução",
+      "full": "Certificado Verificável e Redução Polinomial",
+      "def": "Certificado é uma evidência que permite verificar uma resposta afirmativa em tempo polinomial, como uma atribuição satisfatória ou um caminho. Redução transforma instâncias de um problema em outro preservando a resposta. Reduções polinomiais fundamentam comparações de dificuldade e provas de NP-completude.",
+      "syn": ["witness", "redução polinomial", "certificate"],
+      "lesson": "tc-07-complexidade",
+      "group": "complexidade"
+    },
+    {
+      "term": "Indecidibilidade e problema da parada",
+      "full": "Indecidibilidade e Problema da Parada",
+      "def": "Um problema é indecidível quando não existe algoritmo que termine e responda corretamente para todas as entradas. O problema da parada pergunta se uma máquina de Turing para diante de uma entrada; Turing demonstrou que não há decisor geral para essa pergunta, por argumento diagonal.",
+      "syn": ["halting problem", "indecidível", "problema de parada"],
+      "lesson": "tc-05-computabilidade",
+      "group": "automatos"
+    },
+    {
+      "term": "Máquina de Turing",
+      "full": "Máquina de Turing",
+      "def": "Modelo formal de computação composto por controle finito, fita potencialmente ilimitada dividida em células e cabeça que lê, escreve e se move. Apesar da simplicidade, pode expressar algoritmos gerais. Suas limitações fundamentam resultados de decidibilidade, computabilidade e complexidade.",
+      "syn": ["Turing machine", "MT"],
+      "lesson": "tc-06-turing",
+      "group": "automatos"
+    },
+    {
+      "term": "Autômato de pilha",
+      "full": "Autômato Finito com Pilha",
+      "def": "Modelo de reconhecimento que combina controle finito com uma pilha, permitindo memória LIFO potencialmente ilimitada. Autômatos de pilha reconhecem exatamente as linguagens livres de contexto quando usados no modelo não determinístico. A pilha do modelo é memória formal, não a pilha de execução de um programa.",
+      "syn": ["AP", "PDA", "pushdown automaton"],
+      "lesson": "tc-04-afn-pda",
+      "group": "automatos"
+    },
+    {
+      "term": "Linguagem regular",
+      "full": "Linguagem Regular",
+      "def": "Linguagem reconhecida por um autômato finito, determinístico ou não determinístico, e também descrita por uma expressão regular ou gramática regular. Ela não dispõe de memória não limitada para contar estruturas arbitrárias. Fechos sob união, concatenação e complemento caracterizam importantes propriedades da classe.",
+      "syn": ["regular language", "linguagem racional"],
+      "lesson": "tc-02-linguagens",
+      "group": "automatos"
+    },
+    {
+      "term": "Linguagem livre de contexto",
+      "full": "Linguagem Livre de Contexto",
+      "def": "Linguagem gerada por uma gramática cujas produções têm um único não terminal no lado esquerdo. Pode ser reconhecida por autômato de pilha não determinístico e descreve aninhamento, como parênteses balanceados. A classe é mais expressiva que as linguagens regulares e menos que as sensíveis ao contexto.",
+      "syn": ["LLC", "context-free language", "CFL"],
+      "lesson": "tc-02-linguagens",
+      "group": "automatos"
+    },
+    {
+      "term": "Linguagem sensível ao contexto",
+      "full": "Linguagem Sensível ao Contexto",
+      "def": "Linguagem gerada por gramática sensível ao contexto e reconhecida por um autômato linearmente limitado, sob as convenções formais usuais. Suas produções podem depender do contexto ao redor de um símbolo. A classe ocupa posição intermediária entre linguagens livres de contexto e linguagens decidíveis gerais.",
+      "syn": ["LSC", "context-sensitive language", "CSL"],
+      "lesson": "tc-02-linguagens",
+      "group": "automatos"
+    },
+    {
+      "term": "Hierarquia de Chomsky",
+      "full": "Hierarquia de Chomsky",
+      "def": "Classificação de gramáticas e linguagens em níveis crescentes de poder: regulares, livres de contexto, sensíveis ao contexto e irrestritas. Cada nível possui modelos de reconhecimento associados, como autômatos finitos, autômatos de pilha, autômatos linearmente limitados e máquinas de Turing.",
+      "syn": ["Chomsky hierarchy", "hierarquia formal"],
+      "lesson": "tc-03-chomsky-afd",
+      "group": "automatos"
+    },
+    {
+      "term": "Expressão regular e fecho de Kleene",
+      "full": "Expressão Regular e Fecho de Kleene",
+      "def": "Expressão regular é uma notação algébrica para descrever linguagens regulares por símbolos, união, concatenação e estrela. O fecho de Kleene, escrito `L*`, reúne zero ou mais concatenações de palavras de L, incluindo a palavra vazia. Em software, a sintaxe concreta pode acrescentar recursos além do formal.",
+      "syn": ["regex", "regular expression", "estrela de Kleene"],
+      "lesson": "tc-02-linguagens",
+      "group": "automatos"
+    },
+    {
+      "term": "Gramática e AST",
+      "full": "Gramática Formal e Árvore Sintática Abstrata",
+      "def": "Gramática formal define como símbolos podem ser combinados por produções para gerar palavras de uma linguagem. Uma AST representa a estrutura sintática essencial de uma expressão ou programa, omitindo detalhes superficiais como parênteses redundantes. Parsers normalmente constroem ASTs a partir de tokens conforme uma gramática.",
+      "syn": ["gramática formal", "árvore sintática", "abstract syntax tree"],
+      "lesson": "tc-02-linguagens",
+      "group": "automatos"
+    },
+    {
+      "term": "LBA",
+      "full": "Autômato Linearmente Limitado",
+      "def": "Modelo de máquina de Turing cuja área de fita utilizável é limitada linearmente pelo tamanho da entrada. Ele reconhece, sob definições formais apropriadas, linguagens sensíveis ao contexto. O limite espacial distingue o LBA da máquina de Turing geral e relaciona o modelo à hierarquia de Chomsky.",
+      "syn": ["autômato linearmente limitado", "linear bounded automaton"],
+      "lesson": "tc-06-turing",
+      "group": "automatos"
+    },
+    {
+      "term": "Church-Turing",
+      "full": "Tese de Church-Turing",
+      "def": "Tese segundo a qual toda função efetivamente calculável pode ser computada por uma máquina de Turing, ou por qualquer dos modelos equivalentes conhecidos. Ela conecta uma noção informal de algoritmo a modelos formais, mas é uma tese metodológica, não um teorema que defina sozinho o significado de computação.",
+      "syn": ["tese Church-Turing", "Church Turing thesis"],
+      "lesson": "tc-05-computabilidade",
+      "group": "automatos"
+    },
+    {
+      "term": "Completude de Turing",
+      "full": "Completude de Turing",
+      "def": "Propriedade de um sistema formal ou linguagem capaz de simular uma máquina de Turing, considerando memória e tempo suficientes. Ser Turing-completo indica poder computacional geral, não eficiência, decidibilidade ou facilidade de programação. Uma linguagem pode ser completa mesmo tendo restrições práticas de recursos.",
+      "syn": ["Turing-complete", "Turing completeness", "universalidade"],
+      "lesson": "tc-06-turing",
+      "group": "automatos"
+    },
+    {
+      "term": "List<T> no PI",
+      "full": "List<T> no Projeto Integrador",
+      "def": "`List<T>` é uma coleção genérica redimensionável da biblioteca .NET, com acesso indexado e operações de inserção, remoção e busca. Seu custo depende da operação e da posição. No PI: `List<T>` é usada em vários formulários, conforme a implementação C# do sistema Biblioteca do Tiro de Guerra de Americana.",
+      "syn": ["lista genérica", "List", "coleção .NET"],
+      "lesson": "ed-05-listas",
+      "group": "pi"
+    },
+    {
+      "term": "Dictionary<string, Image>",
+      "full": "Dicionário de Imagens do Projeto Integrador",
+      "def": "`Dictionary<string, Image>` associa chaves textuais a objetos de imagem por meio de uma tabela hash. A consulta média é constante quando a distribuição é adequada. No PI: essa estrutura aparece em `Form4.cs`, na linha 43, para relacionar identificadores textuais a imagens.",
+      "syn": ["dicionário de imagens", "Dictionary", "mapa string imagem"],
+      "lesson": "ed-08-hash",
+      "group": "pi"
+    },
+    {
+      "term": "ORDER BY",
+      "full": "Cláusula ORDER BY",
+      "def": "Cláusula SQL que ordena as linhas do resultado por uma ou mais expressões, em ordem ascendente (`ASC`) ou descendente (`DESC`). Ela atua na apresentação do conjunto retornado e não deve ser confundida com uma estrutura de ordenação em memória. No PI: `ORDER BY` é usado no SQL do sistema.",
+      "syn": ["ordenação SQL", "ORDER BY SQL"],
+      "lesson": "ed-06-ordenacao",
+      "group": "pi"
+    },
+    {
+      "term": "Transação",
+      "full": "Transação de Banco de Dados",
+      "def": "Unidade lógica de operações que deve respeitar propriedades como atomicidade, consistência, isolamento e durabilidade, conforme o sistema de banco de dados. O commit confirma alterações e o rollback desfaz a transação. No PI: há uso de transação em `FormDevolucao.cs`, relacionado ao fluxo de devolução.",
+      "syn": ["transaction", "ACID", "commit"],
+      "lesson": "ed-01-fundamentos",
+      "group": "pi"
+    },
+    {
+      "term": "LIKE",
+      "full": "Predicado SQL LIKE",
+      "def": "Predicado SQL para comparar texto com padrões, usando curingas como `%` para qualquer sequência e `_` para um caractere. O padrão deve ser interpretado conforme o banco e a collation. No PI: consultas em `Form2` e `Form3` usam `LIKE '%termo%'` para localizar ocorrências parciais.",
+      "syn": ["busca textual SQL", "LIKE SQL", "curinga"],
+      "lesson": "ed-07-merge-busca",
+      "group": "pi"
+    },
+    {
+      "term": "Gavetas 6×5",
+      "full": "Arranjo de 30 Gavetas",
+      "def": "Representação física ou visual de trinta posições organizadas em seis linhas por cinco colunas. O produto 6×5 determina a quantidade total, mas não define sozinho a política de endereçamento ou ocupação. No PI: a interface da Biblioteca do Tiro de Guerra de Americana trabalha com 30 gavetas nesse arranjo.",
+      "syn": ["30 gavetas", "6x5", "layout de gavetas"],
+      "lesson": "ed-01-fundamentos",
+      "group": "pi"
+    },
+    {
+      "term": "Gerador LIV",
+      "full": "Gerador de Identificadores LIV",
+      "def": "Procedimento que combina o prefixo textual `LIV` com um número pseudoaleatório para formar identificadores de livros. O intervalo e a possibilidade de repetição devem ser avaliados conforme o sistema. No PI: o gerador usa `LIV` + `Random.Next(100, 999)`, cujo limite superior do método é exclusivo.",
+      "syn": ["LIV", "identificador de livro", "Random.Next"],
+      "lesson": "ed-01-fundamentos",
+      "group": "pi"
+    }
+  ]
+}

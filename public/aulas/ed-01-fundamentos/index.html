@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fundamentos, memória e visão geral · Biblioteca em Movimento</title>
+<meta name="description" content="O que é estrutura de dados, por que bytes contíguos e encadeados custam diferente, como stack e heap se dividem e o que o TAD protege.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Fundamentos, memória e visão geral · Biblioteca em Movimento">
+<meta property="og:description" content="O que é estrutura de dados, por que bytes contíguos e encadeados custam diferente, como stack e heap se dividem e o que o TAD protege.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-01-fundamentos/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-01-fundamentos/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Estruturas de Dados</span><span>/</span><span>Aula 1</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--ed">Estruturas de Dados</span><span class="badge">pp. 2–18</span></div>
+    <h1>Fundamentos, memória e visão geral</h1>
+    <p class="page-head__lead">O que é estrutura de dados, por que bytes contíguos e encadeados custam diferente, como stack e heap se dividem e o que o TAD protege.</p>
+    <div class="page-head__meta"><span class="mono">aula1 (1).pdf — Fundamentos, Memória e Visão Geral da Disciplina</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/gaveteiro/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#28407F"><p>A biblioteca do Tiro de Guerra de Americana trabalha com objetos concretos: o livro LIV123, a etiqueta da gaveta 3C, a ficha do atirador e o prazo de devolução. O sistema é WinForms .NET 8 com MySQL local. Esta aula responde onde esses dados ficam na memória e que contrato liga quem guarda e quem consulta.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Definir estrutura de dados separando disposição física de regra lógica.</li><li>Comparar alocação contígua e encadeada por custo de acesso e memória.</li><li>Explicar stack frames, heap, overflow, leak e ponteiro pendente.</li><li>Diferenciar tipo de dado de TAD, com domínio e invariantes.</li></ul></div>
+<h2 id="engenharia-recursos-e-definicao-formal-de-estrutura-de-dados">Engenharia, recursos e definição formal de estrutura de dados</h2>
+<p>Estrutura de dados é uma coleção organizada na memória, com as regras e algoritmos que permitem armazenar, buscar e manipular com eficiência. Mil fichas soltas não formam estrutura; em ordem de código, sim.</p>
+<p>O custo aparece em CPU e memória: o cadastro responde bem com 200 livros e pode travar com 200 mil, porque poucas linhas escondem escolhas ruins.</p>
+<h2 id="representacao-fisica-contigua-e-encadeada-regras-logicas">Representação física contígua e encadeada; regras lógicas</h2>
+<p>No contíguo, o endereço sai de uma conta: base mais índice vezes tamanho. No encadeado, cada nó guarda o dado e o endereço do próximo, então chegar ao quinto exige passar pelos anteriores.</p>
+<p>Contíguo ganha em leitura por índice e perde ao inserir no meio; encadeado ganha na inserção e perde na travessia. A pilha continua pilha nos dois, porque LIFO é a regra.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form2.cs · ListaEmprestimos, linhas 241–249</span></div>
+  <p style="margin:0;font-size:.9rem">Item e _itens são privados; o formulário só usa métodos públicos.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Program.cs · Main</span></div>
+  <p style="margin:0;font-size:.9rem">Application.Run(new FormDashboard()) abre o painel, sem login.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula1 (1).pdf pp. 11–15</span></div>
+  <p style="margin:0;font-size:.9rem">Stack frames, overflow e leak vêm dos slides em C; a ponte é analogia.</p>
+</div></div></section><h2 id="armazenamento-busca-e-manipulacao-visao-ca1ca4">Armazenamento, busca e manipulação; visão CA1–CA4</h2>
+<p>No PI, guardar um empréstimo é um INSERT; buscar os abertos de um atirador é consulta filtrada; manipular é atualizar o status.</p>
+<p>O mapa da disciplina tem quatro componentes: CA1 trata memória e estruturas lineares, CA2 cobre acesso direto e ordenação, CA3 entra em hierarquia e CA4 fecha com grafos.</p>
+<h2 id="dados-informacao">Dados × informação</h2>
+<p>Dado é o valor bruto sem significado: 3C, 7, LIV123. Informação é o dado com contexto: o exemplar LIV123 está na gaveta 3C e volta em sete dias.</p>
+<p>Se a gaveta estivesse em texto livre, achar o LIV123 exigiria ler todos os registros; com a coluna, é uma igualdade.</p>
+<h2 id="arvores-bst-avl-travessias-heap-e-grafos-no-mapa-da-disciplina">Árvores, BST, AVL, travessias, heap e grafos no mapa da disciplina</h2>
+<p>Os slides anunciam o restante do curso: árvores genéricas, BST, AVL, travessias, heap e grafos com matriz ou lista de adjacência.</p>
+<p>Esse trecho é ementa, não implementação. O código revisado não tem classe de árvore nem de grafo; a hierarquia real está nos índices do InnoDB.</p>
+<h2 id="stack-de-execucao-e-stack-frames">Stack de execução e stack frames</h2>
+<p>Cada chamada empilha um quadro com parâmetros, variáveis locais e endereço de retorno; ao terminar, ele é desempilhado movendo o ponteiro. Recursão sem caso base estoura a região.</p>
+<p>No PI, <code>CarregarDadosBanco</code> mantém strings, offset e leitor no seu quadro, criados e destruídos a cada chamada.</p>
+<h2 id="heap-de-memoria-alocacao-estaticadinamica-overflow-leak-e-ponteiro-pendente">Heap de memória, alocação estática/dinâmica, overflow, leak e ponteiro pendente</h2>
+<p>O heap é alocação sob demanda: em C, <code>malloc</code> pede bytes; em C#, <code>new</code> pede ao runtime. O bloco tem tamanho definido em execução e sobrevive ao escopo.</p>
+<p>Esquecer o <code>free</code> vaza memória; liberar e continuar usando gera ponteiro pendente. O coletor do .NET não conhece recursos externos, por isso o cache do Form4 é limpo com <code>Dispose</code>.</p>
+<h2 id="td-tad-dominio-operacoes-encapsulamento-e-invariantes">TD × TAD, domínio, operações, encapsulamento e invariantes</h2>
+<p>Tipo de dado é a categoria que linguagem e hardware oferecem, com representação fixa; acessar o campo interno direto acopla todos os dependentes.</p>
+<p>TAD especifica comportamento por operações e esconde a representação. Domínio é a faixa válida, operações públicas são o contrato e invariantes valem sempre. No projeto, <code>Item</code> é privado e o formulário só chama <code>Adicionar</code> e <code>Limpar</code>.</p>
+<div class="code"><div class="code__bar"><span class="dot"></span><span>trecho do material</span><span class="lang">C#</span></div><pre><code><span class="k">internal</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ListaEmprestimos</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Control</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Item</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Id</span><span class="p">;</span>
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Titulo</span><span class="p">,</span><span class="w"> </span><span class="n">Atirador</span><span class="p">,</span><span class="w"> </span><span class="n">DataRetirada</span><span class="p">,</span><span class="w"> </span><span class="n">Vencimento</span><span class="p">,</span><span class="w"> </span><span class="n">Status</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_itens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="p">();</span>
+</code></pre></div>
+<p><code>Item</code> é inacessível fora da classe e <code>_itens</code> é somente leitura: ninguém troca a lista nem insere linha pela metade.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>O sistema é WinForms .NET 8 com MySQL local e abre direto no painel, sem login. A memória relevante está nos formulários vivos, nas listas das grades e no cache de imagens.</p>
+<p>Confirmado no código: <code>Program.cs</code> chama <code>Application.Run(new FormDashboard())</code>; <code>Form4.cs</code> declara <code>Dictionary&lt;string, Image&gt;</code> e limpa o cache antes de recarregar; <code>historico_devolucao.cs</code> mantém <code>_todos</code> e <code>_visiveis</code>.</p>
+<p>Modelo didático: stack frame, overflow e ponteiro pendente vêm dos slides em C; o PI não usa <code>unsafe</code>.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Vetor de 1.000 fichas de 120 bytes desde 0x1000, contra lista com 8 bytes de ponteiro por nó.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Cálculo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Índice 0</td>
+<td>0x1000 + 0 × 120</td>
+<td>0x1000</td>
+</tr>
+<tr>
+<td>Índice 999</td>
+<td>0x1000 + 119.880</td>
+<td>0x1E448</td>
+</tr>
+<tr>
+<td>Ler índice 999 no vetor</td>
+<td>multiplicação, soma, leitura</td>
+<td>3 passos</td>
+</tr>
+<tr>
+<td>Ler o 1.000º nó</td>
+<td>999 desvios de ponteiro</td>
+<td>999 passos</td>
+</tr>
+<tr>
+<td>Memória da lista</td>
+<td>1.000 × 128</td>
+<td>128.000 bytes</td>
+</tr>
+</tbody>
+</table></div>
+<p>O vetor responde em tempo constante e gasta 8.000 bytes menos; a lista chega ao fim devagar, mas insere no meio com dois ponteiros.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>Se o vetor é mais rápido e gasta menos, por que o projeto usa listas em memória?</strong></p>
+<p>Porque o padrão do PI é acrescentar e percorrer: as grades recebem registros na ordem do banco e são lidas de cima para baixo, então o deslocamento não aparece. Além disso, <code>List&lt;T&gt;</code> é um vetor com crescimento automático. Com milhões de linhas, valeria medir de novo.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Classifique como verdadeira ou falsa: (a) pilha em vetor deixa de ser TAD; (b) o heap libera no retorno da função; (c) acessar o índice 900 custa o mesmo que o 9; (d) objeto com handle de imagem é liberado sem <code>Dispose</code>.</p>
+<details><summary>Ver resposta</summary>
+
+(a) Falsa: LIFO é a regra; o arranjo é representação. (b) Falsa: o heap sobrevive ao escopo. (c) Verdadeira: base mais índice vezes tamanho, em passos fixos. (d) Falsa: o handle GDI+ exige `Dispose`.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="ed-01-fundamentos-0" data-track="ed">
+  <div class="quiz__q">1. O que define uma estrutura de dados?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-01-fundamentos-0" data-i="0" data-answer="0"><span class="mark">A</span><span>Uma coleção de dados e as regras que operam sobre ela</span></button><button class="quiz__opt" data-q="ed-01-fundamentos-0" data-i="1" data-answer="0"><span class="mark">B</span><span>Apenas o tipo primitivo dos campos</span></button><button class="quiz__opt" data-q="ed-01-fundamentos-0" data-i="2" data-answer="0"><span class="mark">C</span><span>Somente o total de bytes na RAM</span></button><button class="quiz__opt" data-q="ed-01-fundamentos-0" data-i="3" data-answer="0"><span class="mark">D</span><span>A linguagem de implementação</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A definição une disposição física e operações permitidas; tipo é só parte.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-01-fundamentos-1" data-track="ed">
+  <div class="quiz__q">2. Qual afirmação sobre stack e heap está correta?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-01-fundamentos-1" data-i="0" data-answer="0"><span class="mark">A</span><span>A stack é automática e presa ao escopo; o heap sobrevive</span></button><button class="quiz__opt" data-q="ed-01-fundamentos-1" data-i="1" data-answer="0"><span class="mark">B</span><span>O heap é sempre mais rápido porque vive em registradores</span></button><button class="quiz__opt" data-q="ed-01-fundamentos-1" data-i="2" data-answer="0"><span class="mark">C</span><span>A stack cresce sem limite e o heap é fixo</span></button><button class="quiz__opt" data-q="ed-01-fundamentos-1" data-i="3" data-answer="0"><span class="mark">D</span><span>Os dois são liberados no retorno da função</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A stack é limitada e some no retorno; o heap dura até a liberação.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-01-fundamentos-2" data-track="ed">
+  <div class="quiz__q">3. O que o TAD esconde de quem o consome?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-01-fundamentos-2" data-i="0" data-answer="0"><span class="mark">A</span><span>A representação interna e as validações, expondo operações públicas</span></button><button class="quiz__opt" data-q="ed-01-fundamentos-2" data-i="1" data-answer="0"><span class="mark">B</span><span>O nome da estrutura, irrelevante ao compilador</span></button><button class="quiz__opt" data-q="ed-01-fundamentos-2" data-i="2" data-answer="0"><span class="mark">C</span><span>O custo assintótico, que deixa de existir</span></button><button class="quiz__opt" data-q="ed-01-fundamentos-2" data-i="3" data-answer="0"><span class="mark">D</span><span>A necessidade de tratar erros, pois o encapsulamento basta</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O TAD publica contrato e esconde a representação; custo e erro continuam.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–18</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="ed-01-fundamentos" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#engenharia-recursos-e-definicao-formal-de-estrutura-de-dados">Engenharia, recursos e definição formal de estrutura de dados</a></li><li><a href="#representacao-fisica-contigua-e-encadeada-regras-logicas">Representação física contígua e encadeada; regras lógicas</a></li><li><a href="#armazenamento-busca-e-manipulacao-visao-ca1ca4">Armazenamento, busca e manipulação; visão CA1–CA4</a></li><li><a href="#dados-informacao">Dados × informação</a></li><li><a href="#arvores-bst-avl-travessias-heap-e-grafos-no-mapa-da-disciplina">Árvores, BST, AVL, travessias, heap e grafos no mapa da disciplina</a></li><li><a href="#stack-de-execucao-e-stack-frames">Stack de execução e stack frames</a></li><li><a href="#heap-de-memoria-alocacao-estaticadinamica-overflow-leak-e-ponteiro-pendente">Heap de memória, alocação estática/dinâmica, overflow, leak e ponteiro pendente</a></li><li><a href="#td-tad-dominio-operacoes-encapsulamento-e-invariantes">TD × TAD, domínio, operações, encapsulamento e invariantes</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

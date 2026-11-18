@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Listas dinâmicas e o List&lt;T&gt; do projeto · Biblioteca em Movimento</title>
+<meta name="description" content="Como o List&lt;T&gt; junta vetor e realocação, o que são Count e Capacity, por que o append é amortizado e por que inserir no início ainda custa caro.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Listas dinâmicas e o List&lt;T&gt; do projeto · Biblioteca em Movimento">
+<meta property="og:description" content="Como o List&lt;T&gt; junta vetor e realocação, o que são Count e Capacity, por que o append é amortizado e por que inserir no início ainda custa caro.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-05-listas/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-05-listas/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Estruturas de Dados</span><span>/</span><span>Aula 5</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--ed">Estruturas de Dados</span><span class="badge">aula5 (1) pp. 2–12; aula1 (1) pp. 15–18</span></div>
+    <h1>Listas dinâmicas e o List&lt;T&gt; do projeto</h1>
+    <p class="page-head__lead">Como o List&lt;T&gt; junta vetor e realocação, o que são Count e Capacity, por que o append é amortizado e por que inserir no início ainda custa caro.</p>
+    <div class="page-head__meta"><span class="mono">aula5 (1).pdf — Filas, Pilhas e Listas Lineares; aula1 (1).pdf — TAD</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/autores/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#28407F"><p>A tela de empréstimos da biblioteca precisa mostrar uma lista de linhas, cada uma com id, obra, atirador, datas e status. Essa lista muda de tamanho: nasce vazia, recebe as linhas do banco e é limpa quando o filtro muda. A estrutura escolhida no projeto é <code>List&lt;T&gt;</code>, que parece uma lista encadeada, mas é um vetor que cresce. Entender essa diferença evita erros de desempenho.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Diferenciar lista linear de vetor e de lista encadeada.</li><li>Explicar Count, Capacity e o crescimento por dobra no List<T>.</li><li>Calcular o custo amortizado de acrescentar no fim.</li><li>Justificar o custo linear de inserir ou remover no meio.</li></ul></div>
+<h2 id="lista-linear-nos-e-encadeamento">Lista linear, nós e encadeamento</h2>
+<p>Lista linear é uma sequência em que cada elemento tem um antecessor e um sucessor, exceto o primeiro e o último. A implementação encadeada representa isso com nós: cada nó guarda o valor e o endereço do próximo, e a sequência é mantida por ponteiros, não por posições vizinhas.</p>
+<p>O ponteiro <code>inicio</code> aponta para o primeiro nó, e o último aponta para NULL. A travessia segue os ponteiros até encontrar NULL. Inserir e remover exigem religar ponteiros, e a estrutura cresce nó a nó, sem capacidade prévia.</p>
+<h2 id="insercao-e-remocao-no-meio-deslocamento-e-religamento">Inserção e remoção no meio: deslocamento e religamento</h2>
+<p>Na lista encadeada, inserir no meio custa O(1) depois de localizar o ponto, mas localizar custa O(n). Na lista baseada em vetor, o custo está no deslocamento: abrir uma posição no índice k obriga a mover n − k elementos para a direita.</p>
+<p>Remover tem a mesma assimetria. No vetor, remover do início desloca todos os demais; no encadeado, basta ajustar um ponteiro depois de encontrar o anterior. Por isso a escolha depende do padrão de uso: muitas inserções no meio pedem encadeamento, muitos acessos por índice pedem vetor.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form2.cs · ListaEmprestimos, linha 249</span></div>
+  <p style="margin:0;font-size:.9rem">A grade mantém List<Item> privada e só acrescenta no fim com Add, o caso de custo amortizado.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">historico_devolucao.cs · linhas 373 e 396</span></div>
+  <p style="margin:0;font-size:.9rem">O filtro gera uma nova lista com ToList e a grade é pré-dimensionada com _visiveis.Count.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">FormDevolucao.cs · linhas 354 e 455</span></div>
+  <p style="margin:0;font-size:.9rem">Cada busca de atirador descarta a lista anterior e aloca outra; a lista de empréstimos abertos nasce vazia e recebe Add.</p>
+</div></div></section><h2 id="list-capacidade-count-e-redimensionamento">List<T>: capacidade, Count e redimensionamento</h2>
+<p><code>List&lt;T&gt;</code> no .NET é um vetor com dois números internos: <code>Count</code>, que conta os itens, e <code>Capacity</code>, que diz quantos cabem sem nova alocação. Quando <code>Count</code> alcança <code>Capacity</code>, o runtime aloca um vetor maior, copia os elementos e descarta o antigo.</p>
+<p>O crescimento é por dobra (ou fator próximo), o que mantém o número de cópias proporcional ao total. Declarar a capacidade inicial quando o tamanho é conhecido evita realocações; é o que o projeto faz ao criar a grade com <code>new List&lt;DataGridViewRow&gt;(_visiveis.Count)</code>.</p>
+<h2 id="acesso-por-indice-append-amortizado-e-busca-linear">Acesso por índice, append amortizado e busca linear</h2>
+<p>O acesso <code>lista[i]</code> é O(1), porque o endereço sai de base mais i vezes tamanho. <code>Add</code> no fim é amortizado O(1): a maioria das chamadas só escreve na posição livre. <code>Contains</code> e <code>IndexOf</code> são O(n), porque percorrem até achar.</p>
+<div class="code"><div class="code__bar"><span class="dot"></span><span>trecho do material</span><span class="lang">C#</span></div><pre><code><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Registro</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_todos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Registro</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Registro</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_visiveis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Registro</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">...</span>
+<span class="n">_visiveis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+</code></pre></div>
+<p>O trecho é de historico_devolucao.cs. <code>_todos</code> recebe a carga do banco e <code>_visiveis</code> é substituída a cada filtro por uma lista nova. Essa troca de lista é simples, mas aloca de novo a cada tecla digitada; o formulário usa um timer para adiar a execução e reduzir o número de alocações.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>O sistema é WinForms .NET 8 com MySQL local e abre direto no painel, sem login. <code>List&lt;T&gt;</code> aparece em cinco pontos confirmados: a grade de empréstimos em Form2.cs, os candidatos de atirador e os empréstimos abertos em FormDevolucao.cs, as listas de histórico e as tags de autor no cadastro de livros.</p>
+<p>O uso é uniforme e conservador: criar, acrescentar no fim, percorrer para desenhar e descartar. Não há inserção no meio nem ordenação em memória; quando a ordem importa, ela vem do <code>ORDER BY</code> da consulta. É a escolha correta para o volume do projeto.</p>
+<p>Modelo didático: nós, religamento de ponteiros e LSE vêm dos slides em C. O PI não tem classe de nó nem lista encadeada própria. A ponte é mostrar que <code>List&lt;T&gt;</code> resolve o crescimento automático, mas paga com deslocamento nas pontas erradas.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Acrescentando os números de 1 a 10 em um <code>List&lt;int&gt;</code> que começa vazio e dobra de capacidade.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Add</th>
+<th>Count</th>
+<th>Capacity</th>
+<th>Cópias nesta chamada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>8</td>
+<td>4</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>8</td>
+<td>0</td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td>16</td>
+<td>8</td>
+</tr>
+<tr>
+<td>10</td>
+<td>10</td>
+<td>16</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div>
+<p>Foram 12 cópias para 10 inserções, cerca de 1,2 por item. Em 1.000 inserções, o total de cópias fica abaixo de 2.000, o que confirma o comportamento amortizado.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>Se o List<T> é um vetor, por que não usar array desde o início?</strong></p>
+<p>Porque o array exige tamanho fixo no momento da criação, e o sistema não sabe quantos empréstimos ou devoluções virão. O <code>List&lt;T&gt;</code> resolve isso com crescimento por dobra e mantém o acesso por índice em O(1), que é o que as grades usam. Quando o tamanho é conhecido, como no caso das linhas do histórico, o projeto já passa a capacidade no construtor e evita realocações. Array puro só compensaria em estruturas de tamanho fixo, como as tabelas de títulos e estados do formulário.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Uma lista tem 1.000 elementos e capacidade 1.024. Você insere um elemento na posição 0 e depois acrescenta um no fim. Quantos deslocamentos e quantas cópias acontecem?</p>
+<details><summary>Ver resposta</summary>
+
+Inserir na posição 0 desloca os 1.000 elementos existentes uma casa à direita, custando O(n). Acrescentar no fim usa a capacidade livre: há espaço até 1.024, então não há cópia, apenas uma escrita. Se a capacidade estivesse cheia, haveria uma cópia de todos os elementos, e essa é a chamada O(n) que o custo amortizado dilui.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="ed-05-listas-0" data-track="ed">
+  <div class="quiz__q">1. O que significa dizer que acrescentar no fim de um List&lt;T&gt; é amortizado O(1)?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-05-listas-0" data-i="0" data-answer="0"><span class="mark">A</span><span>A maioria das inserções custa O(1), e as cópias ocasionais se diluem no total</span></button><button class="quiz__opt" data-q="ed-05-listas-0" data-i="1" data-answer="0"><span class="mark">B</span><span>Toda inserção custa exatamente uma operação</span></button><button class="quiz__opt" data-q="ed-05-listas-0" data-i="2" data-answer="0"><span class="mark">C</span><span>O custo é O(log n) porque a capacidade dobra</span></button><button class="quiz__opt" data-q="ed-05-listas-0" data-i="3" data-answer="0"><span class="mark">D</span><span>O custo é O(n) em todos os casos</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Quando a capacidade acaba, o vetor é copiado, custando O(n) naquele passo; somando, o custo por inserção fica constante. Não é sempre uma operação nem logarítmico.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-05-listas-1" data-track="ed">
+  <div class="quiz__q">2. Qual é a diferença entre Count e Capacity?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-05-listas-1" data-i="0" data-answer="0"><span class="mark">A</span><span>Count é quantos itens existem; Capacity é quantos cabem sem realocar</span></button><button class="quiz__opt" data-q="ed-05-listas-1" data-i="1" data-answer="0"><span class="mark">B</span><span>Count é o tamanho do vetor interno; Capacity é o número de itens</span></button><button class="quiz__opt" data-q="ed-05-listas-1" data-i="2" data-answer="0"><span class="mark">C</span><span>Os dois são sempre iguais no List&lt;T&gt;</span></button><button class="quiz__opt" data-q="ed-05-listas-1" data-i="3" data-answer="0"><span class="mark">D</span><span>Capacity conta apenas elementos nulos</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Count acompanha os itens efetivos; Capacity é o espaço reservado. Elas só coincidem quando a lista está cheia.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-05-listas-2" data-track="ed">
+  <div class="quiz__q">3. Por que inserir na posição 0 de uma lista de 10.000 itens é caro?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-05-listas-2" data-i="0" data-answer="0"><span class="mark">A</span><span>Porque todos os elementos precisam ser deslocados uma posição à direita</span></button><button class="quiz__opt" data-q="ed-05-listas-2" data-i="1" data-answer="0"><span class="mark">B</span><span>Porque a lista precisa ser recriada em outro endereço</span></button><button class="quiz__opt" data-q="ed-05-listas-2" data-i="2" data-answer="0"><span class="mark">C</span><span>Porque o índice 0 é reservado para o cabeçalho</span></button><button class="quiz__opt" data-q="ed-05-listas-2" data-i="3" data-answer="0"><span class="mark">D</span><span>Porque o acesso por índice deixa de ser possível</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O List&lt;T&gt; é um vetor: abrir espaço no início desloca n elementos. Não há recriação obrigatória, nem índice reservado, nem perda de acesso indexado.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>aula5 (1) pp. 2–12; aula1 (1) pp. 15–18</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="ed-05-listas" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#lista-linear-nos-e-encadeamento">Lista linear, nós e encadeamento</a></li><li><a href="#insercao-e-remocao-no-meio-deslocamento-e-religamento">Inserção e remoção no meio: deslocamento e religamento</a></li><li><a href="#list-capacidade-count-e-redimensionamento">List: capacidade, Count e redimensionamento</a></li><li><a href="#acesso-por-indice-append-amortizado-e-busca-linear">Acesso por índice, append amortizado e busca linear</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Computabilidade e a Máquina de Turing · Biblioteca em Movimento</title>
+<meta name="description" content="Computar é mapear entradas em saídas por um procedimento que sempre para. Quando a pilha não basta — como em aⁿbⁿcⁿ —, a fita infinita da Máquina de Turing resolve por marcação, e a tese de Church-Turing fixa esse modelo como régua do que é computável.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Computabilidade e a Máquina de Turing · Biblioteca em Movimento">
+<meta property="og:description" content="Computar é mapear entradas em saídas por um procedimento que sempre para. Quando a pilha não basta — como em aⁿbⁿcⁿ —, a fita infinita da Máquina de Turing resolve por marcação, e a tese de Church-Turing fixa esse modelo como régua do que é computável.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-05-computabilidade/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/tc-05-computabilidade/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Teoria da Computação</span><span>/</span><span>Aula 5</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--tc">Teoria da Computação</span><span class="badge">pp. 2–19</span></div>
+    <h1>Computabilidade e a Máquina de Turing</h1>
+    <p class="page-head__lead">Computar é mapear entradas em saídas por um procedimento que sempre para. Quando a pilha não basta — como em aⁿbⁿcⁿ —, a fita infinita da Máquina de Turing resolve por marcação, e a tese de Church-Turing fixa esse modelo como régua do que é computável.</p>
+    <div class="page-head__meta"><span class="mono">aula5.pdf — Computabilidade e a Máquina de Turing</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/lote/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#955300"><p>Um inventário da biblioteca é uma sequência de conferências: cada gaveta, cada código, cada ficha. Se o roteiro pede que três listas batam entre si — o que está na estante, o que o banco diz e o que o caderno registra —, o conferente precisa contar três vezes e comparar. A aula 5 formaliza por que esse tipo de conferência tripla escapa da pilha e exige um modelo com memória reescrevível.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Descrever um problema computacional como função f : D → C e distinguir decisão de avaliação.</li><li>Definir função computável pelas duas exigências: passos finitos e parada com o valor correto.</li><li>Explicar por que a pilha falha em aⁿbⁿcⁿ e o que o autômato linearmente limitado acrescenta.</li><li>Simular a marcação de aabbcc por uma Máquina de Turing e comparar o modelo ao AFD.</li></ul></div>
+<h2 id="computacao-como-mapeamento-entradasaida">Computação como mapeamento entrada–saída</h2>
+<p>Na engenharia, computar não é operar transistores; é o mapeamento matemático entre conjuntos de dados. Um problema computacional se escreve como f : D → C, com D sendo todas as instâncias possíveis e C as soluções esperadas. A consulta por gaveta, por exemplo, leva uma etiqueta de localização a um conjunto de obras — e é esse mapeamento, não o laço que o implementa, que define o problema.</p>
+<p>Essa mudança de ponto de vista é o que permite falar de limites. Enquanto o objeto é o código, a pergunta é “como fazer”; quando o objeto é a função, a pergunta é “existe procedimento que a calcule para toda entrada?”.</p>
+<h2 id="problemas-de-decisao-avaliacao-de-funcoes-funcoes-computaveis">Problemas de decisão × avaliação de funções; funções computáveis</h2>
+<p>Problemas de decisão exigem resposta binária: a máquina consome a entrada e atinge aceitação ou rejeição. Problemas de avaliação exigem transformação de dados: a máquina processa, encerra e deixa o resultado legível na memória. Validar se uma gaveta pertence à lista é decisão; calcular os dias de atraso é avaliação.</p>
+<p>Uma função é computável se existe procedimento mecânico que, para qualquer entrada, executa em número finito de passos, para e devolve o valor exato. As duas exigências são independentes: um procedimento pode calcular corretamente quando para e nunca parar em outras entradas. Resolver uma instância isolada não resolve o problema — a solução vale para todo o domínio, que costuma ser infinito.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">FormDevolucao.cs · linhas 544–547</span></div>
+  <p style="margin:0;font-size:.9rem">CalcularDiasAtraso é Math.Max(0, (devolucao.Date - vencimento.Date).Days): função total, com domínio de pares de datas e contradomínio nos inteiros não negativos.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form2.cs · linhas 40–60</span></div>
+  <p style="margin:0;font-size:.9rem">A busca pagina com LIMIT @offset, @limite e faz uma consulta COUNT(*) separada; cada consulta é um mapeamento de filtro para conjunto de linhas.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula5.pdf pp. 16–19</span></div>
+  <p style="margin:0;font-size:.9rem">A Máquina de Turing que valida aabbcc por marcações X, Y e Z é modelo didático, não rotina do sistema.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--future">Proposta / evolução</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula5.pdf pp. 6–9</span></div>
+  <p style="margin:0;font-size:.9rem">Provar equivalência entre versões do módulo de devolução exigiria decidir um problema indecidível; a prática usa testes, não prova automática.</p>
+</div></div></section><h2 id="indecidibilidade-e-tese-de-churchturing">Indecidibilidade e tese de Church–Turing</h2>
+<p>Se para certa função se prova que nenhum procedimento garante parada em todas as entradas, a função é não computável. Isso não depende de CPU ou RAM: é limite da lógica. Até 1936 não havia definição formal de algoritmo; Church, com o cálculo lambda, e Turing, com a máquina, chegaram à mesma classe.</p>
+<p>A tese de Church-Turing postula que todo problema resolvível por método mecânico e finito é resolvido por uma Máquina de Turing. Ela funciona como régua: se a máquina não resolve, nenhuma linguagem ou hardware resolve. No PI, a consequência é saber o que não prometer — comparar duas versões do sistema e garantir equivalência total não é tarefa automatizável.</p>
+<h2 id="limite-da-pilha-em-anbncn-sensiveis-ao-contexto-e-lba">Limite da pilha em aⁿbⁿcⁿ; sensíveis ao contexto e LBA</h2>
+<p>O autômato de pilha pareia aberturas e fechamentos, mas a política LIFO tem falha estrutural: para ler o fundo, é preciso desempilhar tudo. Em aⁿbⁿcⁿ, a máquina empilha os a's, desempilha ao ler os b's e, quando os c's chegam, a pilha está vazia e a referência de contagem foi destruída. Não há como comparar o terceiro grupo com os dois primeiros.</p>
+<p>O Nível 1 contorna isso com o autômato linearmente limitado: cabeçote móvel nos dois sentidos e espaço de rascunho proporcional ao tamanho da entrada. As regras passam a depender do contexto — símbolos vizinhos —, o que permite dependências que a pilha não expressa. O preço é que a garantia de terminação fica mais difícil: com fita limitada, o número de configurações é finito, mas cresce rápido.</p>
+<h2 id="nivel-0-fita-sem-limite-cabecote-leescrevedesloca">Nível 0, fita sem limite, cabeçote lê/escreve/desloca</h2>
+<p>O Nível 0 remove as duas restrições: não há limite de espaço nem disciplina de acesso. A Máquina de Turing opera sobre fita infinita, com controle finito e cabeçote que, em cada transição, faz três coisas ao mesmo tempo: muda de estado, grava um símbolo na célula atual e desloca o cabeçote um passo para a esquerda ou para a direita.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>AFD</th>
+<th>Máquina de Turing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memória</td>
+<td>Nenhuma</td>
+<td>Fita infinita, leitura e escrita</td>
+</tr>
+<tr>
+<td>Movimento</td>
+<td>Só para a direita, consumo único</td>
+<td>Esquerda e direita, livre</td>
+</tr>
+<tr>
+<td>Parada</td>
+<td>Ao consumir o último símbolo</td>
+<td>Só em estado explícito de parada</td>
+</tr>
+<tr>
+<td>Gravação</td>
+<td>Inexistente</td>
+<td>Sobrescreve qualquer célula</td>
+</tr>
+</tbody>
+</table></div>
+<p>A parada por estado, e não por fim de entrada, é o que permite laços e revisitas — e também o que cria a possibilidade de não parar.</p>
+<h2 id="comparacao-afdmt-marcacao-e-teste-de-mesa-aabbcc">Comparação AFD–MT, marcação e teste de mesa aabbcc</h2>
+<p>A Máquina de Turing valida igualdade sem contadores: usa marcações físicas na fita. O algoritmo lê o primeiro a e grava X, avança até o primeiro b e grava Y, avança até o primeiro c e grava Z, retrocede até o último X e recomeça. Quando não há mais a, uma varredura final confirma que restaram apenas marcadores.</p>
+<p>O custo é quadrático no número de trios: cada ciclo atravessa a fita inteira, e há n ciclos. O AFD não faz isso porque não tem onde marcar; o autômato de pilha não faz porque perderia a contagem ao desempilhar.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>Confirmado no código: <code>CalcularDiasAtraso</code> é função total sobre pares de datas, com truncamento em zero; a busca de empréstimos pagina com <code>LIMIT</code> e faz <code>COUNT(*)</code> separado, o que significa duas passagens pelo conjunto filtrado. Nada no sistema conta três grupos dependentes nem precisa de fita.</p>
+<p>Modelo didático: a Máquina de Turing de aⁿbⁿcⁿ, as marcações X, Y e Z e o quadro AFD–MT. Ementa/proposta: usar um modelo de fita para descrever a rotina de inventário em três vias, com conferência entre listas. O PI usa MySQL local; não há login, OCR, API pública nem banco em nuvem.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Fita inicial: a a b b c c, cabeçote no primeiro a.</p>
+<ol>
+<li>Grava X no primeiro a e avança à direita ignorando a. Fita: X a b b c c.</li>
+<li>Grava Y no primeiro b e avança ignorando b. Fita: X a Y b c c.</li>
+<li>Grava Z no primeiro c e recua até o último X. Fita: X a Y b Z c.</li>
+<li>Avança um passo e repete: grava X no a, Y no b, Z no c. Fita: X X Y Y Z Z.</li>
+<li>Recua, procura novo a, encontra Y: os a's acabaram.</li>
+<li>Varre à direita: só marcadores até o branco. Aceita.</li>
+</ol>
+<p>Se faltasse um c — a a b b c —, o passo 3 não encontraria c e a transição não teria destino previsto, levando à rejeição.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>“Por que a Máquina de Turing e não o autômato de pilha para validar três listas iguais?”</strong></p>
+<p>Porque a pilha só guarda o histórico em ordem inversa e o destrói ao desempilhar. Comparar três grupos exige voltar à fita e reler o que já foi marcado, e isso só a fita bidirecional com escrita permite. A Máquina de Turing paga em tempo — cada ciclo varre a fita inteira —, mas ganha em poder de expressão. No PI, a conferência de inventário é feita por consultas e comparações em memória, que é a versão prática da mesma ideia.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Explique por que o algoritmo de marcação continua correto se a cadeia tiver zero trios (cadeia vazia) e o que ele deve fazer nesse caso.</p>
+<details><summary>Ver resposta</summary>
+
+Com a fita vazia, o primeiro passo não encontra a para marcar. A máquina precisa de uma transição específica para o branco no estado inicial: se a célula já é branca, ela passa direto à varredura final, que também não encontra marcadores e atinge qaceita. A cadeia vazia pertence a aⁿbⁿcⁿ com n = 0, e o algoritmo correto precisa aceitá-la. Se essa transição não existir, a máquina fica sem destino e o comportamento passa a depender da implementação — o mesmo erro de totalização discutido no AFD.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="tc-05-computabilidade-0" data-track="tc">
+  <div class="quiz__q">1. Uma função é computável quando existe procedimento que:</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-05-computabilidade-0" data-i="0" data-answer="1"><span class="mark">A</span><span>Resolve a maioria das entradas rapidamente.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-0" data-i="1" data-answer="1"><span class="mark">B</span><span>Executa em passos finitos, para e devolve o valor exato para toda entrada.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-0" data-i="2" data-answer="1"><span class="mark">C</span><span>Usa memória limitada pela entrada.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-0" data-i="3" data-answer="1"><span class="mark">D</span><span>Pode ser escrito em qualquer linguagem.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="As duas exigências são independentes: terminar sempre e devolver o valor correto. Um procedimento que às vezes entra em laço não calcula a função.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-05-computabilidade-1" data-track="tc">
+  <div class="quiz__q">2. Por que o autômato de pilha falha em aⁿbⁿcⁿ?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-05-computabilidade-1" data-i="0" data-answer="1"><span class="mark">A</span><span>Porque não lê o símbolo c.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-1" data-i="1" data-answer="1"><span class="mark">B</span><span>Porque, ao desempilhar os a&#x27;s para parear com os b&#x27;s, perde a referência para comparar os c&#x27;s.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-1" data-i="2" data-answer="1"><span class="mark">C</span><span>Porque a pilha é infinita.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-1" data-i="3" data-answer="1"><span class="mark">D</span><span>Porque a entrada tem três símbolos.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A política LIFO destrói o histórico. Quando os c&#x27;s chegam, a pilha está vazia e não há como comparar o terceiro grupo.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-05-computabilidade-2" data-track="tc">
+  <div class="quiz__q">3. O que caracteriza o autômato linearmente limitado?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-05-computabilidade-2" data-i="0" data-answer="1"><span class="mark">A</span><span>Fita infinita em ambas as direções.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-2" data-i="1" data-answer="1"><span class="mark">B</span><span>Espaço de rascunho proporcional ao tamanho da entrada.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-2" data-i="2" data-answer="1"><span class="mark">C</span><span>Ausência de estados finais.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-2" data-i="3" data-answer="1"><span class="mark">D</span><span>Leitura apenas para a direita.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="O LBA tem cabeçote móvel, mas o espaço disponível é limitado pelo comprimento da cadeia de entrada.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="tc-05-computabilidade-3" data-track="tc">
+  <div class="quiz__q">4. Quando uma Máquina de Turing encerra a execução?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="tc-05-computabilidade-3" data-i="0" data-answer="1"><span class="mark">A</span><span>Ao consumir o último símbolo da entrada.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-3" data-i="1" data-answer="1"><span class="mark">B</span><span>Ao atingir um estado explícito de aceitação ou rejeição.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-3" data-i="2" data-answer="1"><span class="mark">C</span><span>Quando a fita fica toda em branco.</span></button><button class="quiz__opt" data-q="tc-05-computabilidade-3" data-i="3" data-answer="1"><span class="mark">D</span><span>Depois de um número fixo de passos.</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A parada é por estado, não por fim de fita. Sem transição prevista ou em ciclo, a máquina simplesmente não para.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–19</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="tc-05-computabilidade" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#computacao-como-mapeamento-entradasaida">Computação como mapeamento entrada–saída</a></li><li><a href="#problemas-de-decisao-avaliacao-de-funcoes-funcoes-computaveis">Problemas de decisão × avaliação de funções; funções computáveis</a></li><li><a href="#indecidibilidade-e-tese-de-churchturing">Indecidibilidade e tese de Church–Turing</a></li><li><a href="#limite-da-pilha-em-anbncn-sensiveis-ao-contexto-e-lba">Limite da pilha em aⁿbⁿcⁿ; sensíveis ao contexto e LBA</a></li><li><a href="#nivel-0-fita-sem-limite-cabecote-leescrevedesloca">Nível 0, fita sem limite, cabeçote lê/escreve/desloca</a></li><li><a href="#comparacao-afdmt-marcacao-e-teste-de-mesa-aabbcc">Comparação AFD–MT, marcação e teste de mesa aabbcc</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

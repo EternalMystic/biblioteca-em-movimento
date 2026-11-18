@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classes de complexidade e notação Big-O · Biblioteca em Movimento</title>
+<meta name="description" content="Por que contar operações em vez de segundos, as ordens de crescimento de 1 a n!, a estimativa com operações por segundo e o custo real da busca em um milhão de linhas.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Classes de complexidade e notação Big-O · Biblioteca em Movimento">
+<meta property="og:description" content="Por que contar operações em vez de segundos, as ordens de crescimento de 1 a n!, a estimativa com operações por segundo e o custo real da busca em um milhão de linhas.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-02-complexidade/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/ed-02-complexidade/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Estruturas de Dados</span><span>/</span><span>Aula 2</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--ed">Estruturas de Dados</span><span class="badge">pp. 2–12</span></div>
+    <h1>Classes de complexidade e notação Big-O</h1>
+    <p class="page-head__lead">Por que contar operações em vez de segundos, as ordens de crescimento de 1 a n!, a estimativa com operações por segundo e o custo real da busca em um milhão de linhas.</p>
+    <div class="page-head__meta"><span class="mono">aula2 (1).pdf — Classes de Complexidade e Notação Big-O</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/custo/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#28407F"><p>O histórico de devoluções da biblioteca tem uma caixa de busca que filtra por nome do atirador, título da obra, código do livro e responsável pelo recebimento. A cada tecla digitada, o programa precisa responder rápido. A pergunta desta aula é como prever esse custo antes de o sistema ficar lento em produção, e não depois.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Distinguir custo de um algoritmo de classe de viabilidade de um problema.</li><li>Identificar a ordem de crescimento de um trecho de código.</li><li>Estimar tempo de execução a partir de uma hipótese explícita de operações por segundo.</li><li>Comparar acesso por índice, busca linear e busca binária em volumes crescentes.</li></ul></div>
+<h2 id="custo-de-um-algoritmo-classeviabilidade-de-um-problema">Custo de um algoritmo × classe/viabilidade de um problema</h2>
+<p>Complexidade algorítmica olha para o código e para a máquina: quão rápido este algoritmo roda e quanta RAM consome quando a entrada cresce. O problema já tem solução; buscamos a via mais barata.</p>
+<p>Complexidade computacional olha para o problema matemático: existe algum algoritmo, em qualquer máquina, que o resolva em tempo viável? Ordenar está resolvido em n log n; o caixeiro viajante não tem solução exata viável para entradas grandes, e por isso se aceita aproximação.</p>
+<h2 id="tamanho-de-entrada-e-limites-de-crescimento">Tamanho de entrada e limites de crescimento</h2>
+<p>Antes de medir, é preciso definir o que é n. No PI, n pode ser o número de devoluções na lista, o número de atiradores cadastrados ou o comprimento do termo buscado. Cada escolha muda a conta.</p>
+<p>Contar operações elementares é mais estável que cronometrar, porque o cronômetro mistura hardware, compilador e processos em segundo plano. Constantes e termos menores desaparecem: 2n + 5 e 3n + 900 são ambos O(n), porque o que importa é a tendência quando n cresce.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form4.cs · CarregarDadosBanco, linhas 431–445</span></div>
+  <p style="margin:0;font-size:.9rem">A consulta pagina com LIMIT @offset, @limite, mas o COUNT(*) roda sobre o mesmo filtro LIKE antes de cada página.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">historico_devolucao.cs · AplicarFiltros, linha 337</span></div>
+  <p style="margin:0;font-size:.9rem">O filtro percorre a lista _todos inteira em memória a cada digitação, com um timer que adia a execução.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula2 (1).pdf pp. 5–6</span></div>
+  <p style="margin:0;font-size:.9rem">A hipótese de 10⁸ operações por segundo é didática; o tempo real depende de cache, I/O e do compilador.</p>
+</div></div></section><h2 id="ordens-1-log-n-n-n-log-n-n2-2n-n">Ordens 1, log n, n, n log n, n², 2ⁿ, n!</h2>
+<p>A tabela abaixo usa valores aproximados de operações para dar noção de escala.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>n</th>
+<th>log₂ n</th>
+<th>n</th>
+<th>n log₂ n</th>
+<th>n²</th>
+<th>2ⁿ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>3,3</td>
+<td>10</td>
+<td>33</td>
+<td>100</td>
+<td>1.024</td>
+</tr>
+<tr>
+<td>1.000</td>
+<td>10</td>
+<td>1.000</td>
+<td>10.000</td>
+<td>1.000.000</td>
+<td>impraticável</td>
+</tr>
+<tr>
+<td>1.000.000</td>
+<td>20</td>
+<td>1.000.000</td>
+<td>20.000.000</td>
+<td>10¹²</td>
+<td>impraticável</td>
+</tr>
+</tbody>
+</table></div>
+<p>Constante é o acesso por índice; logarítmica é a busca binária, que corta o espaço pela metade; linear é a varredura; n log n é o limite dos algoritmos de ordenação por comparação; quadrática vem de laços aninhados; exponencial e fatorial aparecem em força bruta e permutações.</p>
+<h2 id="operacoes-por-segundo-e-estimativa-de-tempo-com-hipotese-explicita">Operações por segundo e estimativa de tempo com hipótese explícita</h2>
+<p>A estimativa usa Tempo = T(n) / capacidade da CPU. Adotando 10⁸ operações por segundo, um lote de 10.000 registros custa 10⁴/10⁸ = 0,0001 s em O(n) e 10⁸/10⁸ = 1 s em O(n²).</p>
+<p>Com um milhão de registros, o linear leva 0,01 s e o quadrático leva 10¹²/10⁸ = 10.000 s, quase três horas. O ponto de engenharia é que os dois parecem equivalentes no teste pequeno; a diferença aparece só no volume de produção. A hipótese precisa ser declarada, porque 10⁸ é uma aproximação, não uma medida do seu computador.</p>
+<h2 id="acesso-por-indice-busca-linear-e-binaria">Acesso por índice, busca linear e binária</h2>
+<p>Acesso por índice é O(1): o endereço sai de base mais índice vezes tamanho, sem varredura. A busca linear é O(n), porque no pior caso visita todos os elementos. A busca binária é O(log n), mas exige vetor ordenado e acesso indexado.</p>
+<p>Em um milhão de registros, a linear faz até um milhão de comparações; a binária, cerca de vinte. O ganho é de cinco ordens de grandeza, e é isso que justifica ordenar antes de buscar quando há muitas consultas.</p>
+<h2 id="quick-sort-como-exemplo-de-caso-medio">Quick Sort como exemplo de caso médio</h2>
+<p>O Quick Sort escolhe um pivô, particiona e recorre. No caso médio fica em n log n; no pior caso, com pivô sempre extremo, degenera para n². É o exemplo clássico de que a classe de um algoritmo pode depender da entrada.</p>
+<p>Esse tópico é ementa: o PI não implementa Quick Sort. O código revisado não tem rotina de ordenação própria; a ordenação é delegada ao <code>ORDER BY</code> do MySQL.</p>
+<h2 id="fibonacci-recursivo-ingenuo-e-tsp-por-forca-bruta">Fibonacci recursivo ingênuo e TSP por força bruta</h2>
+<p>Fibonacci recursivo sem memorização refaz a mesma conta muitas vezes e cresce como 2ⁿ. O caixeiro viajante por força bruta testa todas as permutações e cresce como n!. Para n = 50, nenhum dos dois termina em tempo útil.</p>
+<p>A lição prática é reconhecer o padrão antes de escrever: dois laços aninhados sobre o mesmo conjunto já anunciam n²; recursão que se chama duas vezes sem guardar resultado anuncia exponencial.</p>
+<div class="code"><div class="code__bar"><span class="dot"></span><span>trecho do material</span><span class="lang">C#</span></div><pre><code><span class="kt">string</span><span class="w"> </span><span class="n">queryCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SELECT COUNT(*) FROM atiradores WHERE 1=1"</span><span class="p">;</span>
+<span class="kt">string</span><span class="w"> </span><span class="n">queryDados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SELECT numero, nome_guerra, email, foto, nome, pelotao, ano_instrucao, situacao FROM atiradores WHERE 1=1"</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">filtroBusca</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">condicao</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="s">" AND (numero LIKE @busca OR nome_guerra LIKE @busca OR nome LIKE @busca OR email LIKE @busca)"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">queryCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">condicao</span><span class="p">;</span>
+<span class="w">    </span><span class="n">queryDados</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">condicao</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">queryDados</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">" ORDER BY numero ASC LIMIT @offset, @limite;"</span><span class="p">;</span>
+</code></pre></div>
+<p>O trecho é de Form4.cs. A leitura da página custa O(10) porque o <code>LIMIT</code> corta a saída, mas o <code>COUNT(*)</code> com quatro <code>LIKE '%termo%'</code> percorre a tabela inteira para saber o total. Paginar reduz a transferência, não o custo da contagem.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>O sistema é WinForms .NET 8 com MySQL local e abre direto no painel, sem login. As telas trabalham com volumes modestos, o que esconde o custo: o cadastro de atiradores pagina de dez em dez e o histórico de devoluções carrega tudo para depois filtrar em memória.</p>
+<p>Confirmado no código: em <code>Form4.cs</code>, <code>_linhasPorPagina</code> vale 10 e a consulta usa <code>LIMIT @offset, @limite</code> com <code>COUNT(*)</code> separado; em <code>historico_devolucao.cs</code>, <code>AplicarFiltros</code> parte de <code>_todos</code> e aplica <code>Where</code> sucessivos, refazendo a varredura a cada mudança de filtro.</p>
+<p>Modelo didático: a hipótese de 10⁸ operações por segundo e os exemplos de Fibonacci e caixeiro viajante vêm dos slides. O PI não tem benchmark nem medição instrumentada; as estimativas servem para argumentar, não para afirmar números do sistema.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Suponha três algoritmos com T(n) = n, T(n) = n log₂ n e T(n) = n², em uma CPU de 10⁸ operações por segundo.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>n</th>
+<th>n operações</th>
+<th>n log₂ n</th>
+<th>n²</th>
+<th>Tempo linear</th>
+<th>Tempo n²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.000</td>
+<td>1.000</td>
+<td>10.000</td>
+<td>10⁶</td>
+<td>0,00001 s</td>
+<td>0,01 s</td>
+</tr>
+<tr>
+<td>2.000</td>
+<td>2.000</td>
+<td>22.000</td>
+<td>4×10⁶</td>
+<td>0,00002 s</td>
+<td>0,04 s</td>
+</tr>
+<tr>
+<td>4.000</td>
+<td>4.000</td>
+<td>48.000</td>
+<td>16×10⁶</td>
+<td>0,00004 s</td>
+<td>0,16 s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Dobrar n dobra o tempo linear, multiplica por pouco mais de dois o n log n e quadruplica o quadrático. É esse fator que estoura o orçamento de tempo quando o volume cresce.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p><strong>Se a tela pagina de dez em dez, por que ela ainda pode ficar lenta?</strong></p>
+<p>Porque a paginação limita o que é transferido, não o que é lido. O <code>COUNT(*)</code> roda sobre o mesmo filtro de quatro <code>LIKE</code> com curinga à esquerda, e curinga à esquerda impede o uso de índice de prefixo, então o banco varre a tabela. Com muitos atiradores, cada página custa uma varredura completa, e o custo cresce linearmente com o cadastro. A correção seria indexar os campos realmente consultados ou trocar a busca textual por uma estratégia de prefixo.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>Um algoritmo exponencial faz 2ⁿ operações. Com 10⁸ operações por segundo, quanto tempo ele leva para n = 50? Expresse em dias.</p>
+<details><summary>Ver resposta</summary>
+
+2⁵⁰ = 1.125.899.906.842.624 operações. Dividindo por 10⁸, dá 11.258.999 segundos, ou cerca de 130 dias. O cálculo mostra por que força bruta exponencial é inviável mesmo com n aparentemente pequeno.
+
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="ed-02-complexidade-0" data-track="ed">
+  <div class="quiz__q">1. O que a notação O(n) descreve?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-02-complexidade-0" data-i="0" data-answer="0"><span class="mark">A</span><span>O limite superior do crescimento do número de operações no pior caso</span></button><button class="quiz__opt" data-q="ed-02-complexidade-0" data-i="1" data-answer="0"><span class="mark">B</span><span>O tempo exato em segundos para qualquer máquina</span></button><button class="quiz__opt" data-q="ed-02-complexidade-0" data-i="2" data-answer="0"><span class="mark">C</span><span>A quantidade de memória RAM sempre necessária</span></button><button class="quiz__opt" data-q="ed-02-complexidade-0" data-i="3" data-answer="0"><span class="mark">D</span><span>A dificuldade matemática do problema resolvido</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Big-O descreve taxa de crescimento no pior caso. Segundos variam com hardware, memória é outro eixo e dificuldade do problema é complexidade computacional.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-02-complexidade-1" data-track="ed">
+  <div class="quiz__q">2. Um algoritmo faz 3n² + 40n + 7 operações. Qual é sua classe?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-02-complexidade-1" data-i="0" data-answer="0"><span class="mark">A</span><span>O(n²)</span></button><button class="quiz__opt" data-q="ed-02-complexidade-1" data-i="1" data-answer="0"><span class="mark">B</span><span>O(n)</span></button><button class="quiz__opt" data-q="ed-02-complexidade-1" data-i="2" data-answer="0"><span class="mark">C</span><span>O(n³)</span></button><button class="quiz__opt" data-q="ed-02-complexidade-1" data-i="3" data-answer="0"><span class="mark">D</span><span>O(3n²)</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Termos de menor grau e constantes são descartados, sobrando n². O(n) ignora o termo dominante e O(3n²) não é notação canônica.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="ed-02-complexidade-2" data-track="ed">
+  <div class="quiz__q">3. Por que a busca binária exige vetor ordenado?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="ed-02-complexidade-2" data-i="0" data-answer="0"><span class="mark">A</span><span>Porque o descarte de metade depende de saber que os menores estão à esquerda</span></button><button class="quiz__opt" data-q="ed-02-complexidade-2" data-i="1" data-answer="0"><span class="mark">B</span><span>Porque a ordenação deixa o vetor menor na memória</span></button><button class="quiz__opt" data-q="ed-02-complexidade-2" data-i="2" data-answer="0"><span class="mark">C</span><span>Porque sem ordenação o acesso por índice fica mais lento</span></button><button class="quiz__opt" data-q="ed-02-complexidade-2" data-i="3" data-answer="0"><span class="mark">D</span><span>Porque o algoritmo usa recursão obrigatoriamente</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="A comparação com o meio só permite descartar um lado se a ordem for garantida. Acesso por índice continua O(1) e a versão iterativa dispensa recursão.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 2–12</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="ed-02-complexidade" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#custo-de-um-algoritmo-classeviabilidade-de-um-problema">Custo de um algoritmo × classe/viabilidade de um problema</a></li><li><a href="#tamanho-de-entrada-e-limites-de-crescimento">Tamanho de entrada e limites de crescimento</a></li><li><a href="#ordens-1-log-n-n-n-log-n-n2-2n-n">Ordens 1, log n, n, n log n, n², 2ⁿ, n!</a></li><li><a href="#operacoes-por-segundo-e-estimativa-de-tempo-com-hipotese-explicita">Operações por segundo e estimativa de tempo com hipótese explícita</a></li><li><a href="#acesso-por-indice-busca-linear-e-binaria">Acesso por índice, busca linear e binária</a></li><li><a href="#quick-sort-como-exemplo-de-caso-medio">Quick Sort como exemplo de caso médio</a></li><li><a href="#fibonacci-recursivo-ingenuo-e-tsp-por-forca-bruta">Fibonacci recursivo ingênuo e TSP por força bruta</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

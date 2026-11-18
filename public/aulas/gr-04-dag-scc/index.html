@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ciclos, DAG e componentes fortemente conexas · Biblioteca em Movimento</title>
+<meta name="description" content="A DFS que encontra um vértice ativo prova ciclo; sem ciclo, a ordem inversa de finalização entrega a sequência de dependências, e o grafo transposto revela as ilhas de mão dupla.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Ciclos, DAG e componentes fortemente conexas · Biblioteca em Movimento">
+<meta property="og:description" content="A DFS que encontra um vértice ativo prova ciclo; sem ciclo, a ordem inversa de finalização entrega a sequência de dependências, e o grafo transposto revela as ilhas de mão dupla.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/gr-04-dag-scc/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/aulas/gr-04-dag-scc/">
+<link rel="icon" type="image/png" href="../../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../../assets/img/logo.png">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/search-index.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/lesson.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../../">Início</a><a href="../../mapa/" aria-current="page">Mapa de aulas</a><a href="../../jornada/">Jornada do PI</a><a href="../../rotinas/">Simuladores</a><a href="../../exercicios/">Exercícios</a><a href="../../revisao/">Revisão</a><a href="../../defesa/">Defesa</a><a href="../../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui">
+      <a href="../../">Início</a><span>/</span><a href="../../mapa/">Mapa de aulas</a><span>/</span>
+      <span>Grafos</span><span>/</span><span>Aula 4</span>
+    </nav>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem"><span class="badge badge--grafos">Grafos</span><span class="badge">pp. 10–15</span></div>
+    <h1>Ciclos, DAG e componentes fortemente conexas</h1>
+    <p class="page-head__lead">A DFS que encontra um vértice ativo prova ciclo; sem ciclo, a ordem inversa de finalização entrega a sequência de dependências, e o grafo transposto revela as ilhas de mão dupla.</p>
+    <div class="page-head__meta"><span class="mono">aula4 (1).pdf — Ciclos, DAG e SCC</span></div>
+    <div class="page-actions">
+      <a class="btn btn--sm" href="../../rotinas/devolucao/">Abrir simulador ligado</a>
+      <button class="btn btn--ghost btn--sm" data-tts-inline>Ler em voz alta</button>
+      <button class="btn btn--ghost btn--sm" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+</div><div class="wrap"><div class="layout">
+  <article class="prose" style="--track:#002F2D"><p>Um sistema de biblioteca é, antes de tudo, uma pilha de dependências: não se empresta o que não foi cadastrado, não se devolve o que não foi emprestado, não se apaga um livro que ainda tem vínculo de autoria. Quando essas relações viram arcos, surge a pergunta que decide a ordem das operações: o grafo tem ciclo? Se tiver, alguma etapa espera por si mesma e o fluxo trava.</p><div class="objectives"><h2>Objetivos desta aula</h2><ul><li>Identificar ciclo dirigido pela aresta de retorno a vértice ativo.</li><li>Produzir ordenação topológica pela ordem inversa de finalização.</li><li>Definir componente fortemente conexa e explicar a transposição.</li><li>Descrever as duas passagens de Kosaraju e seu custo.</li></ul></div>
+<h2 id="ciclos-dirigidos-e-estados-ativos-da-dfs">Ciclos dirigidos e estados ativos da DFS</h2>
+<p>Na DFS dirigida, cada vértice passa por três estados: não descoberto, ativo (na pilha de chamadas) e finalizado. Encontrar um vértice ativo a partir do vértice atual fecha um ciclo, porque existe caminho do ativo até o atual e o arco atual devolve ao início. Encontrar um vértice apenas finalizado não prova ciclo: pode ser aresta cruzada ou de avanço.</p>
+<p>Exemplo: A→B, B→C, C→A, C→D. A DFS parte de A, desce a B e a C; o arco C→A encontra A ativo, provando o ciclo A→B→C→A. Sem esse cuidado, quem testa apenas "já visitado" acusa ciclo em qualquer dígrafo com caminhos convergentes. O erro é comum e derruba a análise de dependências.</p>
+<h2 id="dag-e-ordenacao-topologica-por-ordem-inversa-de-finalizacao">DAG e ordenação topológica por ordem inversa de finalização</h2>
+<p>Um DAG é um dígrafo sem ciclos. Nele, a DFS sempre termina sem encontrar vértice ativo, e a ordem inversa de finalização produz uma sequência em que toda origem aparece antes do destino. Se A→B, então A vem antes de B.</p>
+<p>Considere o grafo de implantação do PI: L (tabela livros), A (tabela autores), LA (tabela livro_autores), C (cadastro de livro), E (empréstimo), D (devolução), com arcos L→LA, A→LA, LA→C, L→C, C→E, E→D. A DFS a partir de L finaliza D, E, C, LA e L; depois, a partir de A, finaliza A. Invertendo: A, L, LA, C, E, D. Outra ordem válida é L, A, LA, C, E, D, e a existência de duas respostas mostra que a ordenação topológica não é única.</p>
+<section aria-labelledby="evidencia"><h2 id="evidencia">Evidência no Projeto Integrador</h2>
+<p>Cada afirmação sobre o sistema vem marcada pela natureza da evidência. <strong>Confirmado no código</strong> tem arquivo e linha; <strong>modelo didático</strong> é uma ponte construída para ensinar; <strong>proposta</strong> é evolução, não funcionalidade.</p>
+<div class="grid grid--2" style="margin-top:1rem"><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">Form3.Designer.cs · ExcluirLivro (linhas 364–405)</span></div>
+  <p style="margin:0;font-size:.9rem">A transação apaga livro_autores e só depois livros: ordem de dependência respeitada, aresta antes do vértice.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--code">Confirmado no código</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">FormDevolucao.cs · BtnSalvar_Click (linhas 1400–1430)</span></div>
+  <p style="margin:0;font-size:.9rem">Insere a devolução e depois conclui o empréstimo, duas etapas sequenciais na mesma transação.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--model">Modelo didático</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">aula4 (1).pdf pp. 13–15</span></div>
+  <p style="margin:0;font-size:.9rem">Kosaraju e o grafo transposto aparecem como modelo; o sistema não calcula SCC.</p>
+</div><div class="card" style="padding:.9rem 1rem">
+  <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:.35rem"><span class="ev ev--future">Proposta / evolução</span><span class="mono" style="font-size:.7rem;color:var(--ink-3)">banco.sql · uq_devolucoes_emprestimo (linha 120)</span></div>
+  <p style="margin:0;font-size:.9rem">A unicidade por empréstimo impede duas devoluções; reabrir empréstimo concluído criaria ciclo de estados, e isso não existe.</p>
+</div></div></section><h2 id="scc-transposicao-de-grafo-e-kosaraju">SCC, transposição de grafo e Kosaraju</h2>
+<p>Em dígrafo geral, a comunicação não é uniforme. Uma componente fortemente conexa é um conjunto em que existe caminho dirigido de qualquer vértice para qualquer outro do conjunto. São ilhas de mão dupla em meio a arcos de sentido único.</p>
+<p>Kosaraju usa duas passagens de DFS. A primeira calcula a ordem de finalização no grafo original; a segunda percorre o grafo transposto, com todos os arcos invertidos, na ordem inversa de finalização. Cada árvore da segunda passagem é uma SCC. O custo é O(V + E) por passagem, portanto O(V + E) no total, mais o espaço do transposto. Exemplo: A↔B, B→C, C↔D, D→E produz as componentes {A, B}, {C, D} e {E}; a transposição impede que a segunda passagem escape para fora da componente.</p>
+<h2 id="no-projeto-integrador">No Projeto Integrador</h2>
+<p>O vínculo confirmado no código é a ordem de exclusão em <code>Form3.Designer.cs</code> (linhas 364–405): dentro de uma transação, o sistema apaga primeiro <code>livro_autores</code> e só então <code>livros</code>. Isso respeita a dependência aresta antes do vértice, exatamente o que a ordenação topológica formaliza. A devolução segue a mesma disciplina em <code>FormDevolucao.cs</code> (linhas 1400–1430), inserindo o registro de devolução e depois concluindo o empréstimo.</p>
+<p>O banco reforça a ordem com chaves estrangeiras e <code>ON DELETE CASCADE</code> (banco.sql, linhas 176–183), que apaga vínculos automaticamente; cascata não é percurso, é regra declarada. SCC e Kosaraju não aparecem no sistema: são modelo didático da aula. A unicidade <code>uq_devolucoes_emprestimo</code> (linha 120) impede devolver duas vezes o mesmo empréstimo, e um eventual "reabrir empréstimo concluído" criaria ciclo de estados — funcionalidade que não existe no código revisado.</p>
+<h2 id="teste-de-mesa">Teste de mesa</h2>
+<p>Dígrafo: A→B, B→A, B→C, C→D, D→C, D→E.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Passagem</th>
+<th>Ordem</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DFS no original, de A</td>
+<td>descoberta A, B, C, D, E</td>
+<td>finalização E, D, C, B, A</td>
+</tr>
+<tr>
+<td>Inversa da finalização</td>
+<td>A, B, C, D, E</td>
+<td>ordem de partida da 2ª passagem</td>
+</tr>
+<tr>
+<td>DFS no transposto, de A</td>
+<td>A e B</td>
+<td A_ B>SCC</td>
+</tr>
+<tr>
+<td>Próximo não visitado, C</td>
+<td>C e D</td>
+<td C_ D>SCC</td>
+</tr>
+<tr>
+<td>Restante, E</td>
+<td>E</td>
+<td E>SCC</td>
+</tr>
+</tbody>
+</table></div>
+<p>O transposto tem A→B, B→A, C→B, D→C, E→D. A partir de A só se alcança B, e a componente fecha em duas unidades.</p>
+<h2 id="pergunta-de-defesa">Pergunta de defesa</h2>
+<p>Por que a ordenação topológica exige DAG? Porque a regra é colocar a origem antes do destino de cada arco, e um ciclo gera exigência contraditória: A antes de B, B antes de C e C antes de A não cabem em nenhuma sequência. A DFS detecta essa contradição ao encontrar vértice ativo. No PI, a ordem de exclusão só funciona porque a dependência é acíclica: vínculo antes do livro, devolução depois do empréstimo.</p>
+<h2 id="exercicio">Exercício</h2>
+<p>No dígrafo T1→T2, T1→T3, T2→T4, T3→T4, T4→T5, produza uma ordenação topológica pela DFS, indique se há ciclo e diga quantas SCCs existem.</p>
+<details><summary>Ver resposta</summary>
+<p>DFS a partir de T1: T1→T2→T4→T5, finalizando T5, T4, T2; depois T3, que encontra T4 finalizado e finaliza. Ordem de finalização T5, T4, T2, T3, T1; invertendo, T1, T3, T2, T4, T5, que é válida, assim como T1, T2, T3, T4, T5. Não há ciclo, pois nenhum arco retorna a vértice ativo. Cada vértice é sua própria SCC, total de 5, porque nenhum par tem caminho de volta.</p>
+</details><section class="quiz-block" aria-labelledby="checagem"><h2 id="checagem">Checagem de compreensão</h2><p class="muted" style="font-size:.9rem">Responda sem consultar. O erro fica registrado no seu caderno de revisão.</p><div class="quiz" data-quiz="gr-04-dag-scc-0" data-track="grafos">
+  <div class="quiz__q">1. O que prova a existência de ciclo dirigido em uma DFS?</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-04-dag-scc-0" data-i="0" data-answer="1"><span class="mark">A</span><span>Encontrar vértice já finalizado</span></button><button class="quiz__opt" data-q="gr-04-dag-scc-0" data-i="1" data-answer="1"><span class="mark">B</span><span>Encontrar aresta para vértice ainda ativo na pilha</span></button><button class="quiz__opt" data-q="gr-04-dag-scc-0" data-i="2" data-answer="1"><span class="mark">C</span><span>Encontrar vértice com grau zero</span></button><button class="quiz__opt" data-q="gr-04-dag-scc-0" data-i="3" data-answer="1"><span class="mark">D</span><span>Visitar todos os vértices</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Vértice ativo está no caminho atual; voltar a ele fecha o ciclo. Vértice finalizado pode ser aresta cruzada.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="gr-04-dag-scc-1" data-track="grafos">
+  <div class="quiz__q">2. A ordenação topológica é obtida por...</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-04-dag-scc-1" data-i="0" data-answer="1"><span class="mark">A</span><span>ordem de descoberta da BFS</span></button><button class="quiz__opt" data-q="gr-04-dag-scc-1" data-i="1" data-answer="1"><span class="mark">B</span><span>ordem inversa de finalização da DFS</span></button><button class="quiz__opt" data-q="gr-04-dag-scc-1" data-i="2" data-answer="1"><span class="mark">C</span><span>ordem crescente de grau</span></button><button class="quiz__opt" data-q="gr-04-dag-scc-1" data-i="3" data-answer="1"><span class="mark">D</span><span>ordem de inserção na fila</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Quem termina primeiro é quem depende mais; inverter a lista de finalização respeita as arestas.">Ver explicação</button></div>
+</div><div class="quiz" data-quiz="gr-04-dag-scc-2" data-track="grafos">
+  <div class="quiz__q">3. Em um DAG, uma ordenação topológica...</div>
+  <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-q="gr-04-dag-scc-2" data-i="0" data-answer="1"><span class="mark">A</span><span>é única</span></button><button class="quiz__opt" data-q="gr-04-dag-scc-2" data-i="1" data-answer="1"><span class="mark">B</span><span>pode não ser única</span></button><button class="quiz__opt" data-q="gr-04-dag-scc-2" data-i="2" data-answer="1"><span class="mark">C</span><span>exige pesos</span></button><button class="quiz__opt" data-q="gr-04-dag-scc-2" data-i="3" data-answer="1"><span class="mark">D</span><span>só existe se o grafo for conexo</span></button></div>
+  <div class="quiz__fb" role="status"></div>
+  <div class="quiz__foot"><span>Marque uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="Vértices sem relação de dependência podem trocar de posição; a unicidade só vale se houver caminho entre todo par.">Ver explicação</button></div>
+</div></section></article>
+  <aside class="toc" aria-label="Nesta página">
+  <div class="toc__box">
+    <div class="toc__title">Progresso desta aula</div>
+    <div class="toc__progress"><i data-progress-fill style="width:0%"></i></div>
+    <div class="toc__meta"><span data-progress-label>0%</span><span>pp. 10–15</span></div>
+    <button class="btn btn--ghost btn--sm" style="width:100%;margin-top:.6rem" data-mark-lesson="gr-04-dag-scc" aria-pressed="false">Marcar como estudada</button>
+  </div>
+  <div class="toc__title">Nesta página</div>
+  <ol><li><a href="#ciclos-dirigidos-e-estados-ativos-da-dfs">Ciclos dirigidos e estados ativos da DFS</a></li><li><a href="#dag-e-ordenacao-topologica-por-ordem-inversa-de-finalizacao">DAG e ordenação topológica por ordem inversa de finalização</a></li><li><a href="#scc-transposicao-de-grafo-e-kosaraju">SCC, transposição de grafo e Kosaraju</a></li><li><a href="#no-projeto-integrador">No Projeto Integrador</a></li><li><a href="#teste-de-mesa">Teste de mesa</a></li><li><a href="#pergunta-de-defesa">Pergunta de defesa</a></li><li><a href="#exercicio">Exercício</a></li></ol>
+</aside>
+</div></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../../rotinas/">15 simuladores</a></li>
+          <li><a href="../../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../../jornada/">Jornada do PI</a></li>
+          <li><a href="../../defesa/">Modo defesa</a></li>
+          <li><a href="../../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>

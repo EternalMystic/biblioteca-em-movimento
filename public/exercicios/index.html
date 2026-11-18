@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exercícios · Biblioteca em Movimento</title>
+<meta name="description" content="Exercícios autorais por atividade do AVA, com pistas, teste de mesa, feedback e solução.">
+<meta name="theme-color" content="#002F2D">
+<meta property="og:title" content="Exercícios · Biblioteca em Movimento">
+<meta property="og:description" content="Exercícios autorais por atividade do AVA, com pistas, teste de mesa, feedback e solução.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Biblioteca em Movimento">
+<meta property="og:image" content="https://eternalmystic.github.io/biblioteca-em-movimento/assets/img/logo.png">
+<meta property="og:url" content="https://eternalmystic.github.io/biblioteca-em-movimento/exercicios/">
+<link rel="canonical" href="https://eternalmystic.github.io/biblioteca-em-movimento/exercicios/">
+<link rel="icon" type="image/png" href="../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../assets/img/logo.png">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script src="../assets/js/search-index.js" defer></script>
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/exercicios.js" defer></script>
+</head>
+<body class="">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="brand" href="../" aria-label="Biblioteca em Movimento — página inicial">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+      <span class="brand__text">
+        <span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+        <span class="brand__sub">PI · ED + TC · UNISAL 2026</span>
+      </span>
+    </a>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Navegação principal"><a href="../">Início</a><a href="../mapa/">Mapa de aulas</a><a href="../jornada/">Jornada do PI</a><a href="../rotinas/">Simuladores</a><a href="../exercicios/" aria-current="page">Exercícios</a><a href="../revisao/">Revisão</a><a href="../defesa/">Defesa</a><a href="../fontes/">Fontes</a></nav>
+    <div class="tools">
+      <button class="icon-btn" id="open-search" aria-label="Buscar no site (atalho: barra)" title="Buscar (/)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Reduzir movimento" title="Movimento: completo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0"/><path d="M3 17c2.5-4 5-4 7.5 0s5 4 7.5 0"/></svg></button>
+      <button class="icon-btn" id="tts-toggle" aria-pressed="false" aria-label="Ler esta página em voz alta" title="Leitura em voz alta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="">
+
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Você está aqui"><a href="../">Início</a><span>/</span><span>Exercícios</span></nav>
+    <div class="eyebrow">Prática com devolutiva</div>
+    <h1>Exercícios por atividade do AVA</h1>
+    <p class="page-head__lead">Doze conjuntos: oito atividades do índice, a lista de grafos e os três desafios de regex da aula 2. Cada exercício tem pistas progressivas, teste de mesa quando faz sentido, feedback por alternativa e solução revelável.</p>
+    <div class="callout callout--amber" style="margin-top:1rem">
+      <div class="callout__title">Autoria</div>
+      <p>O PDF do AVA lista apenas os títulos das atividades, sem os enunciados. Os exercícios deste site foram escritos para cobrir esses títulos e estão marcados como <strong>autorais</strong>. Os três desafios de regex foram reescritos a partir de <code>aula2.pdf</code>, pp. 27–29.</p>
+    </div>
+  </div>
+</div>
+<div class="wrap section--tight">
+  <div class="pill-list" style="margin-bottom:1.6rem" role="group" aria-label="Escolher conjunto"><button class="chip" data-ex-set="a1" aria-pressed="true">Atividade 1</button><button class="chip" data-ex-set="a2" aria-pressed="false">Atividade 2</button><button class="chip" data-ex-set="a3" aria-pressed="false">Atividade 3</button><button class="chip" data-ex-set="a4" aria-pressed="false">Atividade 4</button><button class="chip" data-ex-set="a5" aria-pressed="false">Atividade 5</button><button class="chip" data-ex-set="a6" aria-pressed="false">Atividade 6</button><button class="chip" data-ex-set="a7" aria-pressed="false">Atividade 7</button><button class="chip" data-ex-set="a8" aria-pressed="false">Atividade 8</button><button class="chip" data-ex-set="a9" aria-pressed="false">Lista de exercícios Grafo (10/11)</button><button class="chip" data-ex-set="r1" aria-pressed="false">Desafio de Regex 1</button><button class="chip" data-ex-set="r2" aria-pressed="false">Desafio de Regex 2</button><button class="chip" data-ex-set="r3" aria-pressed="false">Desafio de Regex 3</button></div>
+  <section class="ex-set" id="a1" data-set="a1" >
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Exercícios autorais</div>
+    <h2>Atividade 1 — Arquitetura de Dados e o Controle da Memória</h2><p class="muted" style="font-size:.85rem;margin:0">atividades de estrutura de dados.pdf, p. 3</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.</div>
+  
+<article class="exercise" data-ex-id="a1e1" data-lesson="ed-01-fundamentos">
+  <div class="exercise__head"><span class="mono">A1E1</span><span class="badge">Atividade 1</span></div>
+  <div class="exercise__prompt"><p>Em um modelo didático para uma rotina que recebe um termo e cria a variável local <code>tentativas</code>, qual associação entre memória e duração é adequada? Uma referência para um objeto <code>Livro</code> pode apontar para dados alocados dinamicamente.</p></div>
+  <div class="quiz" data-ex-quiz="a1e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a1e1" data-i="0" data-answer="0"><span class="mark">A</span><span>A pilha guarda variáveis locais; o objeto referenciado pode estar no heap e sobreviver à chamada enquanto houver referência.</span></button><button class="quiz__opt" data-ex="a1e1" data-i="1" data-answer="0"><span class="mark">B</span><span>A pilha só guarda objetos e o heap só guarda primitivos.</span></button><button class="quiz__opt" data-ex="a1e1" data-i="2" data-answer="0"><span class="mark">C</span><span>O heap é apagado ao retornar de toda função, mesmo com referência.</span></button><button class="quiz__opt" data-ex="a1e1" data-i="3" data-answer="0"><span class="mark">D</span><span>Stack e heap são sinônimos.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Escopo e vida são conceitos diferentes.</li><li>Pergunte onde fica o nome e onde fica o objeto.</li><li>Uma chamada termina, mas uma referência ainda pode permanecer.</li></ol></details>
+  <div class="ex-table"><div class="card__kicker">Teste de mesa</div><div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Modelo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>variável local</td>
+<td>stack</td>
+</tr>
+<tr>
+<td>objeto</td>
+<td>heap</td>
+</tr>
+</tbody>
+</table></div></div>
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A variável <code>tentativas</code> é local, portanto seu armazenamento acompanha a chamada na stack. O objeto <code>Livro</code>, criado com <code>new</code>, é modelado como alocado na heap. Se uma referência for devolvida ou guardada em outro lugar, o objeto pode continuar acessível depois do retorno. Assim, <strong>escopo</strong> diz onde um nome pode ser usado, e <strong>tempo de vida</strong> diz até quando o dado existe. Em C#, não se deve concluir que o objeto é destruído imediatamente ao sair da função: a coleta depende de alcançabilidade e do runtime.</p></details>
+</article>
+<article class="exercise" data-ex-id="a1e2" data-lesson="ed-01-fundamentos">
+  <div class="exercise__head"><span class="mono">A1E2</span><span class="badge">Atividade 1</span></div>
+  <div class="exercise__prompt"><p>Uma equipe quer esconder a representação interna de uma coleção e expor apenas <code>Adicionar</code>, <code>Remover</code> e <code>BuscarPorCodigo</code>. O que caracteriza melhor esse TAD?</p></div>
+  <div class="quiz" data-ex-quiz="a1e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a1e2" data-i="0" data-answer="0"><span class="mark">A</span><span>Definir operações e comportamento observável sem obrigar o cliente a conhecer a representação.</span></button><button class="quiz__opt" data-ex="a1e2" data-i="1" data-answer="0"><span class="mark">B</span><span>Exigir acesso direto ao vetor interno.</span></button><button class="quiz__opt" data-ex="a1e2" data-i="2" data-answer="0"><span class="mark">C</span><span>Definir apenas o tipo físico de memória.</span></button><button class="quiz__opt" data-ex="a1e2" data-i="3" data-answer="0"><span class="mark">D</span><span>Trocar toda busca por regex.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Pense no contrato visto pelo cliente.</li><li>A representação é detalhe interno.</li><li>Operações e invariantes formam a abstração.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>Um TAD descreve <strong>o que</strong> pode ser feito e quais resultados são esperados, não necessariamente <strong>como</strong> os dados são armazenados. A coleção pode trocar vetor por lista sem alterar o contrato, desde que <code>Adicionar</code>, <code>Remover</code> e <code>BuscarPorCodigo</code> continuem respeitando suas pré-condições e resultados. Encapsular a representação evita que o restante do sistema dependa de índices ou nós internos. Isso facilita manutenção e permite discutir complexidade separadamente: a interface continua a mesma, enquanto a implementação pode mudar de acordo com o custo desejado.</p></details>
+</article>
+</section><section class="ex-set" id="a2" data-set="a2" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Exercícios autorais</div>
+    <h2>Atividade 2 — Construção e Rastreamento de Algoritmos de Busca</h2><p class="muted" style="font-size:.85rem;margin:0">atividades de estrutura de dados.pdf, p. 3</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.</div>
+  
+<article class="exercise" data-ex-id="a2e1" data-lesson="ed-02-busca">
+  <div class="exercise__head"><span class="mono">A2E1</span><span class="badge">Atividade 2</span></div>
+  <div class="exercise__prompt"><p>Em uma busca linear por código, a lista é <code>[LIV101, LIV204, LIV330, LIV402, LIV510]</code> e o alvo é <code>LIV330</code>. Quantas comparações de igualdade ocorrem até encontrar o alvo?</p></div>
+  <div class="quiz" data-ex-quiz="a2e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a2e1" data-i="0" data-answer="2"><span class="mark">A</span><span>1</span></button><button class="quiz__opt" data-ex="a2e1" data-i="1" data-answer="2"><span class="mark">B</span><span>2</span></button><button class="quiz__opt" data-ex="a2e1" data-i="2" data-answer="2"><span class="mark">C</span><span>3</span></button><button class="quiz__opt" data-ex="a2e1" data-i="3" data-answer="2"><span class="mark">D</span><span>5</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Conte testes, não posições começando em zero.</li><li>Pare quando a igualdade for verdadeira.</li><li>A posição zero-based 2 corresponde ao terceiro teste.</li></ol></details>
+  <div class="ex-table"><div class="card__kicker">Teste de mesa</div><p>A sequência de resultados é F, F, V.</p></div>
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A busca linear examina <code>LIV101</code> (primeira comparação), depois <code>LIV204</code> (segunda) e então <code>LIV330</code> (terceira). Como a comparação com o terceiro elemento é verdadeira, o algoritmo termina nesse ponto. Logo, o número de comparações é <strong>3</strong>. A posição zero-based do item é 2, mas isso não é o mesmo que a quantidade de testes. No pior caso, quando o item está no fim ou ausente, a busca faria cinco comparações; no melhor, apenas uma. Essa distinção é útil para rastrear o algoritmo: registre o estado antes e depois de cada passo, conte apenas a operação pedida e confirme a condição de parada. O resultado numérico não deve ser confundido com posição, quantidade de dados ou custo assintótico. </p></details>
+</article>
+<article class="exercise" data-ex-id="a2e2" data-lesson="ed-02-busca">
+  <div class="exercise__head"><span class="mono">A2E2</span><span class="badge">Atividade 2</span></div>
+  <div class="exercise__prompt"><p>Uma coleção ordenada contém <code>2, 5, 9, 14, 21, 30, 44</code>. Para buscar <code>21</code> por busca binária, contando cada teste <code>valor == alvo</code>, quantas comparações são feitas usando o meio inteiro?</p></div>
+  <div class="quiz" data-ex-quiz="a2e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a2e2" data-i="0" data-answer="2"><span class="mark">A</span><span>1</span></button><button class="quiz__opt" data-ex="a2e2" data-i="1" data-answer="2"><span class="mark">B</span><span>2</span></button><button class="quiz__opt" data-ex="a2e2" data-i="2" data-answer="2"><span class="mark">C</span><span>3</span></button><button class="quiz__opt" data-ex="a2e2" data-i="3" data-answer="2"><span class="mark">D</span><span>4</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Calcule o meio de cada intervalo.</li><li>Após 14, descarte a metade esquerda.</li><li>Os testes são 14, 30 e 21.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A busca binária começa com o intervalo completo. O meio é <code>14</code>, menor que <code>21</code>; todos os itens à esquerda são descartados. No intervalo <code>[21,30,44]</code>, o meio é <code>30</code>, maior que o alvo, então resta <code>[21]</code>. O terceiro teste compara <code>21</code> com <code>21</code> e encerra. Assim, são <strong>3 comparações</strong>. A posição zero-based não deve ser confundida com a quantidade de testes, e a ordenação é uma pré-condição essencial para descartar metades com segurança. Essa distinção é útil para rastrear o algoritmo: registre o estado antes e depois de cada passo, conte apenas a operação pedida e confirme a condição de parada. O resultado numérico não deve ser confundido com posição, quantidade de dados ou custo assintótico. </p></details>
+</article>
+</section><section class="ex-set" id="a3" data-set="a3" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Exercícios autorais</div>
+    <h2>Atividade 3 — Arquitetura de Estruturas de Dados em Sistemas Reais</h2><p class="muted" style="font-size:.85rem;margin:0">atividades de estrutura de dados.pdf, p. 3</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.</div>
+  
+<article class="exercise" data-ex-id="a3e1" data-lesson="ed-03-sistemas-reais">
+  <div class="exercise__head"><span class="mono">A3E1</span><span class="badge">Atividade 3</span></div>
+  <div class="exercise__prompt"><p>Em um modelo didático inspirado no sistema, uma <code>List&lt;Livro&gt;</code> contém 120 livros e a aplicação precisa acessar repetidamente o item de índice 80. Qual é a propriedade relevante?</p></div>
+  <div class="quiz" data-ex-quiz="a3e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a3e1" data-i="0" data-answer="0"><span class="mark">A</span><span>Acesso por índice tende a ser direto, pois `List&lt;T&gt;` mantém uma sequência indexada.</span></button><button class="quiz__opt" data-ex="a3e1" data-i="1" data-answer="0"><span class="mark">B</span><span>Todo acesso exige percorrer 80 nós.</span></button><button class="quiz__opt" data-ex="a3e1" data-i="2" data-answer="0"><span class="mark">C</span><span>O índice é uma chave MySQL e dispensa a lista.</span></button><button class="quiz__opt" data-ex="a3e1" data-i="3" data-answer="0"><span class="mark">D</span><span>A lista garante busca por código em tempo constante.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Diferencie posição de chave.</li><li>Índice de lista e código `LIV...` não são a mesma coisa.</li><li>A pergunta trata de acesso posicional.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>No modelo didático, <code>List&lt;T&gt;</code> oferece acesso por posição e permite obter o elemento de índice 80 sem percorrer explicitamente todos os itens anteriores. Isso não significa que qualquer operação seja constante: localizar um livro pelo código pode exigir varredura, consulta indexada ao banco ou outra estrutura. Também não se deve atribuir ao código <code>LIV...</code> o significado de índice da lista. O sistema factual usa C#/.NET 8 e MySQL; esta questão abstrai o fluxo para destacar a escolha da estrutura em memória, sem afirmar um algoritmo não comprovado para cada tela.</p></details>
+</article>
+<article class="exercise" data-ex-id="a3e2" data-lesson="ed-03-sistemas-reais">
+  <div class="exercise__head"><span class="mono">A3E2</span><span class="badge">Atividade 3</span></div>
+  <div class="exercise__prompt"><p>No sistema real, qual afirmação está diretamente confirmada pelo contexto fornecido sobre consultas de livros?</p></div>
+  <div class="quiz" data-ex-quiz="a3e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a3e2" data-i="0" data-answer="0"><span class="mark">A</span><span>Há SQL com `LIKE`, `ORDER BY`, `LIMIT/OFFSET` e agregação `GROUP_CONCAT` em Form3/Form2.</span></button><button class="quiz__opt" data-ex="a3e2" data-i="1" data-answer="0"><span class="mark">B</span><span>Toda consulta usa busca binária em `List&lt;Livro&gt;`.</span></button><button class="quiz__opt" data-ex="a3e2" data-i="2" data-answer="0"><span class="mark">C</span><span>O cache de fotos é uma árvore AVL.</span></button><button class="quiz__opt" data-ex="a3e2" data-i="3" data-answer="0"><span class="mark">D</span><span>O código sempre carrega todos os livros e filtra apenas em memória.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Procure os operadores citados no código.</li><li>Não confunda cache de imagens com índice de livros.</li><li>Separe fato observado de hipótese arquitetural.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A alternativa correta repete apenas o que foi confirmado: <code>Form3.Designer.cs</code>/<code>Form2.cs</code> contêm SQL com <code>LIKE '%termo%'</code>, ordenação, paginação por <code>LIMIT/OFFSET</code>, agregação <code>GROUP_CONCAT</code> e uma subconsulta de empréstimo ativo. Isso é diferente de dizer que a aplicação usa busca binária em uma lista. Também foi confirmado um <code>Dictionary&lt;string, Image&gt;</code> como cache de fotos em <code>Form4.cs</code>, mas isso não transforma o cache em árvore nem prova a estratégia de consulta de livros. A resposta separa observação factual de hipótese arquitetural. Essa distinção é útil para rastrear o algoritmo: registre o estado antes e depois de cada passo, conte apenas a operação pedida e confirme a condição de parada. O resultado numérico não deve ser confundido com posição, quantidade de dados ou custo assintótico. </p></details>
+</article>
+</section><section class="ex-set" id="a4" data-set="a4" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Exercícios autorais</div>
+    <h2>Atividade 4 — Laboratório Prático / Pitch Arquitetural de Listas Lineares</h2><p class="muted" style="font-size:.85rem;margin:0">atividades de estrutura de dados.pdf, p. 3</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.</div>
+  
+<article class="exercise" data-ex-id="a4e1" data-lesson="ed-04-listas-lineares">
+  <div class="exercise__head"><span class="mono">A4E1</span><span class="badge">Atividade 4</span></div>
+  <div class="exercise__prompt"><p>Em um vetor com itens <code>[A,B,C,D]</code>, deseja-se inserir <code>X</code> na posição 1, deslocando os itens para a direita. Qual sequência resulta?</p></div>
+  <div class="quiz" data-ex-quiz="a4e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a4e1" data-i="0" data-answer="0"><span class="mark">A</span><span>[A,X,B,C,D]</span></button><button class="quiz__opt" data-ex="a4e1" data-i="1" data-answer="0"><span class="mark">B</span><span>[X,A,B,C,D]</span></button><button class="quiz__opt" data-ex="a4e1" data-i="2" data-answer="0"><span class="mark">C</span><span>[A,B,X,C,D]</span></button><button class="quiz__opt" data-ex="a4e1" data-i="3" data-answer="0"><span class="mark">D</span><span>[A,B,C,D,X]</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Numere posições a partir de zero.</li><li>Desloque de trás para frente para não sobrescrever dados.</li><li>A posição 1 é a segunda posição.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A posição 1 é a segunda posição, atualmente ocupada por <code>B</code>. Para preservar os dados, um algoritmo de vetor desloca <code>D</code> para a posição 4, <code>C</code> para 3 e <code>B</code> para 2; só então grava <code>X</code> na posição 1. O resultado é <code>[A,X,B,C,D]</code>. Em um vetor contíguo, essa inserção normalmente custa tempo proporcional ao número de itens deslocados. O deslocamento de trás para frente é importante quando se opera no mesmo vetor: mover da frente para trás poderia sobrescrever o valor que ainda seria necessário.</p></details>
+</article>
+<article class="exercise" data-ex-id="a4e2" data-lesson="ed-04-listas-lineares">
+  <div class="exercise__head"><span class="mono">A4E2</span><span class="badge">Atividade 4</span></div>
+  <div class="exercise__prompt"><p>Em uma lista simplesmente encadeada, já se possui uma referência ao nó anterior ao ponto de inserção. Qual é a operação central para inserir um novo nó depois dele?</p></div>
+  <div class="quiz" data-ex-quiz="a4e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a4e2" data-i="0" data-answer="0"><span class="mark">A</span><span>Atualizar os enlaces para que o novo nó aponte para o sucessor e o anterior aponte para o novo nó.</span></button><button class="quiz__opt" data-ex="a4e2" data-i="1" data-answer="0"><span class="mark">B</span><span>Reindexar todos os nós como em um vetor.</span></button><button class="quiz__opt" data-ex="a4e2" data-i="2" data-answer="0"><span class="mark">C</span><span>Ordenar a lista antes de cada inserção.</span></button><button class="quiz__opt" data-ex="a4e2" data-i="3" data-answer="0"><span class="mark">D</span><span>Copiar obrigatoriamente todos os valores para outro vetor.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Desenhe predecessor, novo nó e sucessor.</li><li>Faça duas atribuições de ponteiro na ordem segura.</li><li>A inserção local não elimina o custo de localizar.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>Considere o trecho <code>anterior -&gt; sucessor</code>. O novo nó deve receber <code>novo.proximo = anterior.proximo</code>; depois, <code>anterior.proximo = novo</code>. Assim a cadeia passa a ser <code>anterior -&gt; novo -&gt; sucessor</code>, sem perder a referência ao restante da lista. A inserção é local quando o predecessor já é conhecido. Isso não torna toda inserção constante: encontrar o ponto por posição ou valor pode exigir percorrer a lista. A vantagem em relação ao vetor é evitar deslocamento de vários elementos; a desvantagem é o custo de navegação e o armazenamento de enlaces.</p></details>
+</article>
+</section><section class="ex-set" id="a5" data-set="a5" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Exercícios autorais</div>
+    <h2>Atividade 5 — Algoritmos de Ordenação</h2><p class="muted" style="font-size:.85rem;margin:0">atividades de estrutura de dados.pdf, p. 3</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.</div>
+  
+<article class="exercise" data-ex-id="a5e1" data-lesson="ed-05-ordenacao">
+  <div class="exercise__head"><span class="mono">A5E1</span><span class="badge">Atividade 5</span></div>
+  <div class="exercise__prompt"><p>No Bubble Sort ascendente sobre <code>[3,1,2]</code>, contando apenas trocas de vizinhos, quantas trocas ocorrem?</p></div>
+  <div class="quiz" data-ex-quiz="a5e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a5e1" data-i="0" data-answer="1"><span class="mark">A</span><span>1</span></button><button class="quiz__opt" data-ex="a5e1" data-i="1" data-answer="1"><span class="mark">B</span><span>2</span></button><button class="quiz__opt" data-ex="a5e1" data-i="2" data-answer="1"><span class="mark">C</span><span>3</span></button><button class="quiz__opt" data-ex="a5e1" data-i="3" data-answer="1"><span class="mark">D</span><span>4</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Simule cada par adjacente.</li><li>Troca somente quando o da esquerda é maior.</li><li>A próxima passada pode parar sem trocas.</li></ol></details>
+  <div class="ex-table"><div class="card__kicker">Teste de mesa</div><div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Comparação</th>
+<th>Troca?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3,1</td>
+<td>sim</td>
+</tr>
+<tr>
+<td>3,2</td>
+<td>sim</td>
+</tr>
+</tbody>
+</table></div></div>
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>No primeiro passe, compara-se <code>3</code> com <code>1</code>: como <code>3 &gt; 1</code>, troca-se, produzindo <code>[1,3,2]</code>. Em seguida compara-se <code>3</code> com <code>2</code>, ocorre outra troca e chega-se a <code>[1,2,3]</code>. O próximo passe não encontra inversões e termina. Portanto, o contador de trocas vale <strong>2</strong>. A contagem de comparações seria diferente; a questão pede somente trocas. Em entradas já ordenadas, uma versão com sentinela pode encerrar cedo, enquanto o comportamento exato depende da implementação. Essa distinção é útil para rastrear o algoritmo: registre o estado antes e depois de cada passo, conte apenas a operação pedida e confirme a condição de parada. O resultado numérico não deve ser confundido com posição, quantidade de dados ou custo assintótico. </p></details>
+</article>
+<article class="exercise" data-ex-id="a5e2" data-lesson="ed-05-ordenacao">
+  <div class="exercise__head"><span class="mono">A5E2</span><span class="badge">Atividade 5</span></div>
+  <div class="exercise__prompt"><p>Qual afirmação compara corretamente Selection Sort e Insertion Sort quanto à estabilidade, assumindo implementações usuais e registros com chaves iguais?</p></div>
+  <div class="quiz" data-ex-quiz="a5e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a5e2" data-i="0" data-answer="0"><span class="mark">A</span><span>Insertion Sort pode ser estável se desloca apenas chaves maiores; Selection Sort usual pode trocar iguais e perder estabilidade.</span></button><button class="quiz__opt" data-ex="a5e2" data-i="1" data-answer="0"><span class="mark">B</span><span>Selection Sort é sempre estável e Insertion Sort nunca é.</span></button><button class="quiz__opt" data-ex="a5e2" data-i="2" data-answer="0"><span class="mark">C</span><span>Ambos são sempre estáveis, independentemente da implementação.</span></button><button class="quiz__opt" data-ex="a5e2" data-i="3" data-answer="0"><span class="mark">D</span><span>Estabilidade depende apenas de a entrada estar ordenada.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Acompanhe dois registros com a mesma chave.</li><li>Uma troca distante pode saltar sobre um igual.</li><li>Estabilidade é propriedade do algoritmo implementado.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>Estabilidade significa preservar a ordem relativa de registros que possuem chaves iguais. No Insertion Sort usual, o elemento é deslocado enquanto a chave anterior é <strong>maior</strong>, não quando é igual; por isso, registros equivalentes não se cruzam e o algoritmo pode ser estável. No Selection Sort, selecionar o mínimo restante e trocá-lo com a posição atual pode transportar um registro para longe e ultrapassar outro de mesma chave. Logo, a implementação usual pode não ser estável. A propriedade não depende apenas da entrada; depende das regras de comparação e movimentação.</p></details>
+</article>
+</section><section class="ex-set" id="a6" data-set="a6" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Exercícios autorais</div>
+    <h2>Atividade 6 — Ordenação e Busca</h2><p class="muted" style="font-size:.85rem;margin:0">atividades de estrutura de dados.pdf, p. 3</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.</div>
+  
+<article class="exercise" data-ex-id="a6e1" data-lesson="ed-06-ordenacao-busca">
+  <div class="exercise__head"><span class="mono">A6E1</span><span class="badge">Atividade 6</span></div>
+  <div class="exercise__prompt"><p>Por que Merge Sort costuma ser descrito com complexidade <code>O(n log n)</code> no pior caso?</p></div>
+  <div class="quiz" data-ex-quiz="a6e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a6e1" data-i="0" data-answer="0"><span class="mark">A</span><span>Ele divide em níveis logarítmicos e faz trabalho total proporcional a n em cada nível.</span></button><button class="quiz__opt" data-ex="a6e1" data-i="1" data-answer="0"><span class="mark">B</span><span>Ele compara cada item somente uma vez no total.</span></button><button class="quiz__opt" data-ex="a6e1" data-i="2" data-answer="0"><span class="mark">C</span><span>Ele usa busca binária para cada troca.</span></button><button class="quiz__opt" data-ex="a6e1" data-i="3" data-answer="0"><span class="mark">D</span><span>Ele sempre executa exatamente n trocas.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Pense em árvore de recursão.</li><li>Multiplique trabalho por nível pelo número de níveis.</li><li>A intercalação processa todos os itens do nível.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>Merge Sort divide a sequência até obter subproblemas unitários e depois intercala as partes ordenadas. A árvore de recursão possui aproximadamente <code>log n</code> níveis, porque o tamanho é reduzido pela metade a cada divisão. Em cada nível, as intercalações processam, em conjunto, os <code>n</code> elementos. O trabalho total é, portanto, <code>n</code> vezes <code>log n</code>, resultando em <code>O(n log n)</code> no pior caso. A intercalação não é uma troca isolada nem uma busca binária. O algoritmo normalmente requer espaço auxiliar proporcional a <code>n</code>, embora detalhes dependam da implementação.</p></details>
+</article>
+<article class="exercise" data-ex-id="a6e2" data-lesson="ed-06-ordenacao-busca">
+  <div class="exercise__head"><span class="mono">A6E2</span><span class="badge">Atividade 6</span></div>
+  <div class="exercise__prompt"><p>Uma busca binária recebe <code>[4,8,12,19,25]</code> em ordem decrescente. Qual decisão é correta antes de aplicá-la na versão que pressupõe ordem crescente?</p></div>
+  <div class="quiz" data-ex-quiz="a6e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a6e2" data-i="0" data-answer="0"><span class="mark">A</span><span>Rejeitar ou ordenar a entrada; a pré-condição de ordem crescente não foi satisfeita.</span></button><button class="quiz__opt" data-ex="a6e2" data-i="1" data-answer="0"><span class="mark">B</span><span>Aplicar normalmente, pois binária funciona em qualquer ordem.</span></button><button class="quiz__opt" data-ex="a6e2" data-i="2" data-answer="0"><span class="mark">C</span><span>Inverter apenas o alvo.</span></button><button class="quiz__opt" data-ex="a6e2" data-i="3" data-answer="0"><span class="mark">D</span><span>Usar `LIMIT/OFFSET` para corrigir a sequência.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>A eliminação de metade usa uma monotonicidade.</li><li>Pergunte qual lado contém valores maiores.</li><li>A pré-condição precisa estar explícita.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A busca binária depende de uma <strong>pré-condição</strong> de ordenação compatível com a regra de comparação. A sequência apresentada é decrescente, mas a versão assumida foi escrita para crescente. Nesse caso, deve-se ordenar a entrada, usar uma variante que raciocine em ordem decrescente ou rejeitar a chamada por contrato. Inverter somente o alvo não altera a ordem dos dados e não corrige a decisão sobre qual metade descartar. <code>LIMIT/OFFSET</code> são recursos de consulta SQL e não substituem a pré-condição do algoritmo.</p></details>
+</article>
+</section><section class="ex-set" id="a7" data-set="a7" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Exercícios autorais</div>
+    <h2>Atividade 7 — Tabelas Hash e Introdução a Árvores</h2><p class="muted" style="font-size:.85rem;margin:0">atividades de estrutura de dados.pdf, p. 4</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.</div>
+  
+<article class="exercise" data-ex-id="a7e1" data-lesson="ed-07-hash-arvores">
+  <div class="exercise__head"><span class="mono">A7E1</span><span class="badge">Atividade 7</span></div>
+  <div class="exercise__prompt"><p>Uma tabela hash tem 10 posições e armazena 7 chaves. Qual é o fator de carga e qual risco ele sinaliza?</p></div>
+  <div class="quiz" data-ex-quiz="a7e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a7e1" data-i="0" data-answer="0"><span class="mark">A</span><span>0,7; mais colisões e degradação podem ocorrer conforme a tabela se aproxima da lotação.</span></button><button class="quiz__opt" data-ex="a7e1" data-i="1" data-answer="0"><span class="mark">B</span><span>7; a tabela está 7 vezes maior que a capacidade.</span></button><button class="quiz__opt" data-ex="a7e1" data-i="2" data-answer="0"><span class="mark">C</span><span>10/7; colisões são impossíveis.</span></button><button class="quiz__opt" data-ex="a7e1" data-i="3" data-answer="0"><span class="mark">D</span><span>0,07; a função hash deixa de ser necessária.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Use itens divididos por posições.</li><li>O fator é uma razão, não o inverso.</li><li>Mais ocupação tende a exigir mais tratamento de colisões.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>Com <code>n = 7</code> elementos e <code>m = 10</code> posições, o fator de carga é <code>α = n/m = 7/10 = 0,7</code>. Ele representa a ocupação média da tabela. A função hash ainda pode produzir colisões mesmo com carga menor que 1, porque chaves diferentes podem cair no mesmo índice. À medida que <code>α</code> cresce, os métodos de endereçamento aberto ou encadeamento podem realizar mais sondagens ou percursos. Portanto, o fator não prova que haverá uma colisão específica; ele é um indicador para dimensionamento e análise de desempenho. A interpretação correta é a alternativa A.</p></details>
+</article>
+<article class="exercise" data-ex-id="a7e2" data-lesson="ed-07-hash-arvores">
+  <div class="exercise__head"><span class="mono">A7E2</span><span class="badge">Atividade 7</span></div>
+  <div class="exercise__prompt"><p>Em uma BST sem balanceamento, ao inserir em ordem crescente <code>10,20,30</code>, qual forma resulta e qual observação é correta?</p></div>
+  <div class="quiz" data-ex-quiz="a7e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a7e2" data-i="0" data-answer="0"><span class="mark">A</span><span>Uma cadeia inclinada para a direita; a altura pode chegar a n e a busca pode degradar para O(n).</span></button><button class="quiz__opt" data-ex="a7e2" data-i="1" data-answer="0"><span class="mark">B</span><span>Uma árvore perfeitamente balanceada; toda busca custa O(log n).</span></button><button class="quiz__opt" data-ex="a7e2" data-i="2" data-answer="0"><span class="mark">C</span><span>Uma lista circular; a raiz é sempre 30.</span></button><button class="quiz__opt" data-ex="a7e2" data-i="3" data-answer="0"><span class="mark">D</span><span>Uma heap mínima; o menor fica em cada folha.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Compare cada nova chave com a raiz.</li><li>Todos os valores seguintes são maiores.</li><li>BST não implica balanceamento.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A raiz é <code>10</code>. Como <code>20 &gt; 10</code>, ele entra à direita; como <code>30 &gt; 10</code> e <code>30 &gt; 20</code>, entra à direita de <code>20</code>. A árvore fica uma cadeia: <code>10 -&gt; 20 -&gt; 30</code>. Uma BST garante a propriedade de ordenação entre subárvores, mas não garante balanceamento. Nesse caso, a altura é proporcional a <code>n</code>, e uma busca pode visitar todos os nós, com custo <code>O(n)</code>. A complexidade <code>O(log n)</code> só é esperada quando a altura é mantida logarítmica por uma estratégia de balanceamento ou por uma entrada favorável.</p></details>
+</article>
+</section><section class="ex-set" id="a8" data-set="a8" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Exercícios autorais</div>
+    <h2>Atividade 8 — Aula Invertida: Percursos em Grafos</h2><p class="muted" style="font-size:.85rem;margin:0">atividades de estrutura de dados.pdf, p. 4</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.</div>
+  
+<article class="exercise" data-ex-id="a8e1" data-lesson="ed-08-grafos-percursos">
+  <div class="exercise__head"><span class="mono">A8E1</span><span class="badge">Atividade 8</span></div>
+  <div class="exercise__prompt"><p>Em um grafo não ponderado, qual estrutura apoia BFS para visitar primeiro os vértices por menor número de arestas a partir da origem?</p></div>
+  <div class="quiz" data-ex-quiz="a8e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a8e1" data-i="0" data-answer="0"><span class="mark">A</span><span>Fila FIFO.</span></button><button class="quiz__opt" data-ex="a8e1" data-i="1" data-answer="0"><span class="mark">B</span><span>Pilha LIFO.</span></button><button class="quiz__opt" data-ex="a8e1" data-i="2" data-answer="0"><span class="mark">C</span><span>Tabela hash sem marcação.</span></button><button class="quiz__opt" data-ex="a8e1" data-i="3" data-answer="0"><span class="mark">D</span><span>Vetor ordenado por código.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>FIFO significa primeiro a entrar, primeiro a sair.</li><li>A origem gera a primeira camada.</li><li>Marque ao enfileirar para evitar duplicatas.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>BFS usa uma <strong>fila FIFO</strong>. A origem é marcada e enfileirada; ao retirar o primeiro vértice, seus vizinhos ainda não visitados são marcados e colocados no fim da fila. Assim, todos os vértices a distância 1 tendem a ser processados antes dos de distância 2, e assim por diante. Essa propriedade permite obter menores distâncias em número de arestas quando o grafo não é ponderado. DFS, por contraste, usa a ideia de pilha ou recursão e prioriza aprofundar um ramo; não oferece automaticamente essas distâncias mínimas.</p></details>
+</article>
+<article class="exercise" data-ex-id="a8e2" data-lesson="ed-08-grafos-percursos">
+  <div class="exercise__head"><span class="mono">A8E2</span><span class="badge">Atividade 8</span></div>
+  <div class="exercise__prompt"><p>Para um grafo direcionado acíclico com dependências de disciplinas, qual procedimento produz uma ordem topológica?</p></div>
+  <div class="quiz" data-ex-quiz="a8e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a8e2" data-i="0" data-answer="0"><span class="mark">A</span><span>Remover iterativamente vértices de grau de entrada zero, atualizando os graus dos sucessores.</span></button><button class="quiz__opt" data-ex="a8e2" data-i="1" data-answer="0"><span class="mark">B</span><span>Executar Dijkstra e ordenar por peso.</span></button><button class="quiz__opt" data-ex="a8e2" data-i="2" data-answer="0"><span class="mark">C</span><span>Escolher sempre a aresta de maior peso.</span></button><button class="quiz__opt" data-ex="a8e2" data-i="3" data-answer="0"><span class="mark">D</span><span>Usar DFS sem marcar vértices.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Uma disciplina sem pré-requisitos é uma fonte.</li><li>Ao remover uma fonte, atualize seus sucessores.</li><li>Um ciclo impede remover todos os vértices.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>No algoritmo de Kahn, calcula-se o grau de entrada de cada vértice e coloca-se na fila cada vértice com grau zero. Retira-se uma fonte, adiciona-se ela à ordem e diminui-se o grau de entrada de seus sucessores; aqueles que chegam a zero entram na fila. O resultado respeita a regra de que todo pré-requisito aparece antes do dependente. Se restarem vértices com grau positivo, existe um ciclo e não há ordenação topológica completa. A técnica não depende de pesos e não deve ser substituída por Dijkstra, que resolve outro problema.</p></details>
+</article>
+</section><section class="ex-set" id="a9" data-set="a9" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Exercícios autorais</div>
+    <h2>Lista de exercícios Grafo (10/11)</h2><p class="muted" style="font-size:.85rem;margin:0">atividades de estrutura de dados.pdf, p. 4</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral: o PDF do AVA traz apenas o índice das atividades.</div>
+  
+<article class="exercise" data-ex-id="a9e1" data-lesson="ed-09-grafos-algoritmos">
+  <div class="exercise__head"><span class="mono">A9E1</span><span class="badge">Lista de exercícios Grafo (10/11)</span></div>
+  <div class="exercise__prompt"><p>Em um grafo ponderado com pesos não negativos, qual algoritmo é adequado para menores caminhos a partir de uma origem?</p></div>
+  <div class="quiz" data-ex-quiz="a9e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a9e1" data-i="0" data-answer="0"><span class="mark">A</span><span>Dijkstra, desde que não existam pesos negativos.</span></button><button class="quiz__opt" data-ex="a9e1" data-i="1" data-answer="0"><span class="mark">B</span><span>Bellman-Ford somente se todos os pesos forem positivos.</span></button><button class="quiz__opt" data-ex="a9e1" data-i="2" data-answer="0"><span class="mark">C</span><span>BFS sempre, ignorando os pesos.</span></button><button class="quiz__opt" data-ex="a9e1" data-i="3" data-answer="0"><span class="mark">D</span><span>Kruskal, pois MST é caminho entre origem e destino.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Verifique o sinal dos pesos.</li><li>Menor caminho e árvore geradora são problemas distintos.</li><li>BFS considera número de arestas, não peso geral.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>Dijkstra mantém estimativas e escolhe iterativamente o vértice não finalizado com menor distância provisória. A escolha é segura quando todos os pesos são não negativos: uma rota futura não consegue reduzir o rótulo já finalizado por meio de uma aresta negativa. Se houver pesos negativos, Bellman-Ford é a alternativa geral e também pode detectar ciclos negativos alcançáveis. BFS só é apropriado para arestas com mesmo custo, como o caso não ponderado. Kruskal e Prim constroem uma árvore geradora mínima, que não é automaticamente o caminho mínimo entre dois vértices.</p></details>
+</article>
+<article class="exercise" data-ex-id="a9e2" data-lesson="ed-09-grafos-algoritmos">
+  <div class="exercise__head"><span class="mono">A9E2</span><span class="badge">Lista de exercícios Grafo (10/11)</span></div>
+  <div class="exercise__prompt"><p>Qual associação está correta entre Bellman-Ford, MST e TSP?</p></div>
+  <div class="quiz" data-ex-quiz="a9e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="a9e2" data-i="0" data-answer="0"><span class="mark">A</span><span>Bellman-Ford trata menores caminhos mesmo com pesos negativos; MST conecta todos com custo mínimo; TSP busca um tour mínimo que visita cada cidade.</span></button><button class="quiz__opt" data-ex="a9e2" data-i="1" data-answer="0"><span class="mark">B</span><span>Bellman-Ford constrói sempre MST; TSP aceita qualquer passeio; MST exige ciclo hamiltoniano.</span></button><button class="quiz__opt" data-ex="a9e2" data-i="2" data-answer="0"><span class="mark">C</span><span>MST detecta todos os ciclos negativos; Bellman-Ford ordena vértices; TSP é BFS.</span></button><button class="quiz__opt" data-ex="a9e2" data-i="3" data-answer="0"><span class="mark">D</span><span>Os três algoritmos resolvem exatamente o mesmo problema.</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Leia o objetivo de cada sigla.</li><li>MST não precisa visitar vértices em um tour.</li><li>TSP impõe visita a cada cidade.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>Bellman-Ford relaxa as arestas repetidamente e pode lidar com pesos negativos, além de sinalizar ciclo negativo alcançável. Uma <strong>MST</strong> (árvore geradora mínima) conecta os vértices de um grafo ponderado com custo total mínimo, sem ciclos; ela não representa necessariamente o caminho mínimo entre qualquer par. O <strong>TSP</strong> procura um circuito de custo mínimo que visite cada cidade, normalmente uma vez e retornando à origem, sob a formulação clássica. Como os objetivos são diferentes, não se pode trocar um algoritmo pelo outro apenas porque todos usam grafos ponderados.</p></details>
+</article>
+</section><section class="ex-set" id="r1" data-set="r1" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Desafios da aula</div>
+    <h2>Desafio de Regex 1 — Cadeias binárias terminadas em 00</h2><p class="muted" style="font-size:.85rem;margin:0">aula2.pdf, pp. 27–29</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral baseado nos desafios de regex da aula; o PDF apresenta o desafio, não um exercício completo.</div>
+  
+<article class="exercise" data-ex-id="r1e1" data-lesson="tc-02-linguagens">
+  <div class="exercise__head"><span class="mono">R1E1</span><span class="badge">Desafio de Regex 1</span></div>
+  <div class="exercise__prompt"><p>Qual expressão exige que a cadeia inteira contenha apenas <code>0</code> e <code>1</code> e termine exatamente com <code>00</code>?</p></div>
+  <div class="quiz" data-ex-quiz="r1e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="r1e1" data-i="0" data-answer="0"><span class="mark">A</span><span>`^[01]*00$`</span></button><button class="quiz__opt" data-ex="r1e1" data-i="1" data-answer="0"><span class="mark">B</span><span>`[01]*00`</span></button><button class="quiz__opt" data-ex="r1e1" data-i="2" data-answer="0"><span class="mark">C</span><span>`^00[01]*$`</span></button><button class="quiz__opt" data-ex="r1e1" data-i="3" data-answer="0"><span class="mark">D</span><span>`^[01]+0$`</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Observe início e fim.</li><li>A classe limita o alfabeto.</li><li>O sufixo literal é `00`.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A expressão correta é <strong><code>^[01]*00$</code></strong>. A âncora <code>^</code> exige início da entrada e <code>$</code> exige fim; entre elas, <code>[01]*</code> aceita qualquer quantidade, inclusive zero, de bits. Os dois zeros finais são literais e obrigatórios. Assim, <code>00</code>, <code>100</code> e <code>1100</code> são aceitas, enquanto <code>001</code> falha porque não termina em <code>00</code>, e <code>10200</code> falha porque contém <code>2</code>. Sem as âncoras, uma busca poderia localizar apenas um trecho válido dentro de uma cadeia maior, o que não corresponde ao requisito de validar a cadeia completa.</p></details>
+</article>
+<article class="exercise" data-ex-id="r1e2" data-lesson="tc-02-linguagens">
+  <div class="exercise__head"><span class="mono">R1E2</span><span class="badge">Desafio de Regex 1</span></div>
+  <div class="exercise__prompt"><p>Qual cadeia é aceita por <code>^[01]*00$</code>?</p></div>
+  <div class="quiz" data-ex-quiz="r1e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="r1e2" data-i="0" data-answer="0"><span class="mark">A</span><span>`10100`</span></button><button class="quiz__opt" data-ex="r1e2" data-i="1" data-answer="0"><span class="mark">B</span><span>`1001`</span></button><button class="quiz__opt" data-ex="r1e2" data-i="2" data-answer="0"><span class="mark">C</span><span>`10A00`</span></button><button class="quiz__opt" data-ex="r1e2" data-i="3" data-answer="0"><span class="mark">D</span><span>`00 0`</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Confira todos os caracteres.</li><li>Verifique os dois últimos símbolos.</li><li>Âncoras impedem correspondência parcial.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A cadeia <code>10100</code> é aceita porque todos os símbolos pertencem à classe <code>[01]</code> e os dois últimos caracteres são <code>00</code>. A expressão começa com <code>^</code> e termina com <code>$</code>, portanto a correspondência precisa cobrir a cadeia inteira. <code>1001</code> falha porque termina em <code>01</code>; <code>10A00</code> contém <code>A</code>, que não pertence ao alfabeto binário; e <code>00 0</code> contém espaço. O quantificador <code>*</code> permite que o prefixo antes do sufixo tenha qualquer tamanho, inclusive zero. O requisito formal combina restrição de alfabeto, âncora inicial, âncora final e sufixo obrigatório.</p></details>
+</article>
+</section><section class="ex-set" id="r2" data-set="r2" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Desafios da aula</div>
+    <h2>Desafio de Regex 2 — Endereço MAC</h2><p class="muted" style="font-size:.85rem;margin:0">aula2.pdf, pp. 27–29</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral baseado nos desafios de regex da aula; o PDF apresenta o desafio, não um exercício completo.</div>
+  
+<article class="exercise" data-ex-id="r2e1" data-lesson="tc-02-linguagens">
+  <div class="exercise__head"><span class="mono">R2E1</span><span class="badge">Desafio de Regex 2</span></div>
+  <div class="exercise__prompt"><p>Qual padrão reconhece seis grupos hexadecimais de dois dígitos separados por cinco dois-pontos?</p></div>
+  <div class="quiz" data-ex-quiz="r2e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="r2e1" data-i="0" data-answer="0"><span class="mark">A</span><span>`([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})`</span></button><button class="quiz__opt" data-ex="r2e1" data-i="1" data-answer="0"><span class="mark">B</span><span>`([0-9A-Fa-f]:){6}`</span></button><button class="quiz__opt" data-ex="r2e1" data-i="2" data-answer="0"><span class="mark">C</span><span>`[0-9A-Fa-f]{12}`</span></button><button class="quiz__opt" data-ex="r2e1" data-i="3" data-answer="0"><span class="mark">D</span><span>`(00:){5}00`</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Seis grupos exigem cinco separadores.</li><li>Hexadecimal inclui 0–9 e A–F em ambos os casos.</li><li>Não deixe dois-pontos depois do sexto grupo.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>O padrão correto é <strong><code>([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})</code></strong>. A classe <code>[0-9A-Fa-f]</code> aceita um dígito hexadecimal em maiúscula ou minúscula; <code>{2}</code> exige exatamente dois por grupo. O primeiro grupo entre parênteses inclui o separador e repete cinco vezes, produzindo os cinco primeiros blocos com dois-pontos. O último grupo exige mais dois dígitos, mas não adiciona separador ao final. Para validação da entrada inteira, pode-se envolver o padrão com âncoras, conforme a API e o requisito de correspondência completa. Essa distinção é útil para rastrear o algoritmo: registre o estado antes e depois de cada passo, conte apenas a operação pedida e confirme a condição de parada. O resultado numérico não deve ser confundido com posição, quantidade de dados ou custo assintótico. </p></details>
+</article>
+<article class="exercise" data-ex-id="r2e2" data-lesson="tc-02-linguagens">
+  <div class="exercise__head"><span class="mono">R2E2</span><span class="badge">Desafio de Regex 2</span></div>
+  <div class="exercise__prompt"><p>Qual endereço corresponde ao formato hexadecimal de seis blocos exigido pelo padrão de MAC?</p></div>
+  <div class="quiz" data-ex-quiz="r2e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="r2e2" data-i="0" data-answer="0"><span class="mark">A</span><span>`0A:1b:2C:3d:4E:5f`</span></button><button class="quiz__opt" data-ex="r2e2" data-i="1" data-answer="0"><span class="mark">B</span><span>`0A:1b:2C:3d:4E`</span></button><button class="quiz__opt" data-ex="r2e2" data-i="2" data-answer="0"><span class="mark">C</span><span>`0A-1b-2C-3d-4E-5f`</span></button><button class="quiz__opt" data-ex="r2e2" data-i="3" data-answer="0"><span class="mark">D</span><span>`0A:1b:2C:3d:4E:5G`</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Conte blocos e separadores.</li><li>Hexadecimal termina em F/f.</li><li>O separador esperado é dois-pontos.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p><code>0A:1b:2C:3d:4E:5f</code> possui seis blocos: <code>0A</code>, <code>1b</code>, <code>2C</code>, <code>3d</code>, <code>4E</code> e <code>5f</code>. Cada bloco tem exatamente dois caracteres da classe hexadecimal, e os cinco intervalos são separados por <code>:</code>. A mistura de maiúsculas e minúsculas é permitida por <code>[0-9A-Fa-f]</code>. A segunda alternativa tem apenas cinco blocos; a terceira usa hífens; e a quarta termina em <code>G</code>, que não pertence ao conjunto hexadecimal. Se o sistema precisar validar somente o valor inteiro, âncoras ou uma API de correspondência completa devem ser usadas além do trecho-base.</p></details>
+</article>
+</section><section class="ex-set" id="r3" data-set="r3" hidden>
+  <div class="ex-set__head">
+    <div><div class="eyebrow">Desafios da aula</div>
+    <h2>Desafio de Regex 3 — Mensagens de Log</h2><p class="muted" style="font-size:.85rem;margin:0">aula2.pdf, pp. 27–29</p></div>
+    <span class="badge">2 exercícios</span>
+  </div>
+  <div class="note-strip" style="margin-bottom:1.2rem">Enunciado autoral baseado nos desafios de regex da aula; o PDF apresenta o desafio, não um exercício completo.</div>
+  
+<article class="exercise" data-ex-id="r3e1" data-lesson="tc-02-linguagens">
+  <div class="exercise__head"><span class="mono">R3E1</span><span class="badge">Desafio de Regex 3</span></div>
+  <div class="exercise__prompt"><p>Qual expressão procura uma linha que contenha <code>Error</code> ou <code>Failed</code>, seguida em algum ponto por <code>port</code> e um ou mais dígitos?</p></div>
+  <div class="quiz" data-ex-quiz="r3e1">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="r3e1" data-i="0" data-answer="0"><span class="mark">A</span><span>`(Error|Failed).*port \d+`</span></button><button class="quiz__opt" data-ex="r3e1" data-i="1" data-answer="0"><span class="mark">B</span><span>`(Error|Failed)port`</span></button><button class="quiz__opt" data-ex="r3e1" data-i="2" data-answer="0"><span class="mark">C</span><span>`Error|Failed.*port`</span></button><button class="quiz__opt" data-ex="r3e1" data-i="3" data-answer="0"><span class="mark">D</span><span>`(Error|Failed).*port [0-9]`</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Agrupe a alternativa.</li><li>Permita texto entre marcador e port.</li><li>Um ou mais dígitos é `\d+`.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A expressão correta é <strong><code>(Error|Failed).*port \d+</code></strong>. O grupo <code>(Error|Failed)</code> aceita um dos dois marcadores; <code>.*</code> permite qualquer sequência intermediária; <code>port</code> exige a palavra seguida de espaço; e <code>\d+</code> exige um ou mais dígitos. Assim, uma linha como <code>Error ao abrir port 8080</code> combina. O padrão apresentado procura o trecho dentro da linha. Se o requisito fosse validar a linha inteira, seria necessário acrescentar âncoras e definir o que pode aparecer antes ou depois. Também é importante lembrar que a forma de escapar a barra pode variar entre a regex e a string da linguagem.</p></details>
+</article>
+<article class="exercise" data-ex-id="r3e2" data-lesson="tc-02-linguagens">
+  <div class="exercise__head"><span class="mono">R3E2</span><span class="badge">Desafio de Regex 3</span></div>
+  <div class="exercise__prompt"><p>Qual linha contém um trecho compatível com <code>(Error|Failed).*port \d+</code>?</p></div>
+  <div class="quiz" data-ex-quiz="r3e2">
+    <div class="quiz__opts" role="group" aria-label="Alternativas"><button class="quiz__opt" data-ex="r3e2" data-i="0" data-answer="0"><span class="mark">A</span><span>`Failed: conexão em port 443`</span></button><button class="quiz__opt" data-ex="r3e2" data-i="1" data-answer="0"><span class="mark">B</span><span>`Warning em port 443`</span></button><button class="quiz__opt" data-ex="r3e2" data-i="2" data-answer="0"><span class="mark">C</span><span>`Error em port`</span></button><button class="quiz__opt" data-ex="r3e2" data-i="3" data-answer="0"><span class="mark">D</span><span>`Error em port X`</span></button></div>
+    <div class="quiz__fb" role="status"></div>
+    <div class="quiz__foot"><span>Escolha uma alternativa.</span><button class="btn btn--ghost btn--sm reveal-sol" data-sol="">Ver solução</button></div>
+  </div>
+  <details class="reveal"><summary>Pistas progressivas</summary><ol><li>Procure Error ou Failed.</li><li>Depois deve aparecer `port`.</li><li>`\d+` exige ao menos um dígito.</li></ol></details>
+  
+  <details class="reveal solution"><summary>Resolução comentada</summary><p>A linha <code>Failed: conexão em port 443</code> combina com o padrão. O grupo alternativo encontra <code>Failed</code>; <code>.*</code> absorve <code>: conexão em</code>; em seguida aparece <code>port</code> e <code>\d+</code> reconhece <code>443</code>. A linha com <code>Warning</code> não possui nenhum dos marcadores aceitos. A linha <code>Error em port</code> não apresenta dígitos depois de <code>port</code>, e <code>Error em port X</code> apresenta uma letra em vez de uma sequência numérica. Como o padrão não possui âncoras, ele procura um trecho compatível; para validar uma linha inteira, o enunciado teria de especificar também seus limites.</p></details>
+</article>
+</section>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="../" style="color:#e8f3ed">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#9ed6bd" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M12 4v16"/><circle cx="7.5" cy="6.5" r=".8" fill="#9ed6bd" stroke="none"/></svg></span>
+          <span class="brand__text"><span class="brand__name">Biblioteca em Movimento</span>
+        <span class="brand__short">Biblioteca</span>
+          <span class="brand__sub" style="color:#7fa295">documento técnico + apoio à defesa</span></span>
+        </a>
+        <p style="margin-top:.9rem;max-width:38ch">Site de estudo do Projeto Integrador da biblioteca do Tiro de Guerra de Americana, integrando Estruturas de Dados e Teoria da Computação. Todos os dados do sistema são fictícios.</p>
+      </div>
+      <div>
+        <h3>Estudar</h3>
+        <ul>
+          <li><a href="../mapa/">Mapa das 23 aulas</a></li>
+          <li><a href="../rotinas/">15 simuladores</a></li>
+          <li><a href="../exercicios/">Exercícios e desafios</a></li>
+          <li><a href="../revisao/">Revisão intercalada</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Apresentar</h3>
+        <ul>
+          <li><a href="../jornada/">Jornada do PI</a></li>
+          <li><a href="../defesa/">Modo defesa</a></li>
+          <li><a href="../fontes/">Fontes e matriz de cobertura</a></li>
+          <li><a href="../sobre/">Como usar e acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>UNISAL · Campus Maria Auxiliadora · Engenharia da Computação · 2026</span>
+      <span>Material de estudo do Projeto Integrador.</span>
+    </div>
+  </div>
+</footer>
+<div class="search-dialog" id="search-dialog" role="dialog" aria-modal="true" aria-label="Busca no site">
+  <div class="search-box">
+    <div class="search-box__in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="search-input" placeholder="Busque por tema, símbolo, aula ou rotina…" aria-label="Termo de busca" autocomplete="off">
+      <button class="icon-btn" id="close-search" aria-label="Fechar busca">✕</button>
+    </div>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+    <div class="search-hint"><span><kbd>↑</kbd> <kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> fechar</span><span>Busca sem acento: <code>theta</code> acha Θ</span></div>
+  </div>
+</div>
+</body>
+</html>
