@@ -68,6 +68,6 @@ O progresso das aulas, as respostas das checagens e a preferência de movimento 
 
 - **Conteúdo das aulas e atividades:** material da disciplina, citado por PDF e página na página *Fontes*.
 - **Sistema da biblioteca:** código do grupo do Projeto Integrador, usado aqui como objeto de estudo.
-- **Tipografia:** Fraunces, IBM Plex Sans e IBM Plex Mono, servidas pelo próprio site sob a SIL Open Font License.
+- **Tipografia:** Instrument Sans, Source Sans 3 e IBM Plex Mono, servidas pelo próprio site sob a SIL Open Font License.
 
 Material acadêmico, sem fins comerciais. As marcas e os textos de terceiros pertencem aos seus autores.

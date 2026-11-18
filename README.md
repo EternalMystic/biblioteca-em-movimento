@@ -56,5 +56,5 @@ Cada push na branch `main` publica a pasta `public/` no GitHub Pages pelo workfl
 ## Dados e créditos
 
 Livros, autores e empréstimos dos exemplos são fictícios. O progresso do estudante fica apenas no navegador (localStorage).
-Fontes tipográficas Fraunces, IBM Plex Sans e IBM Plex Mono servidas localmente sob a SIL Open Font License.
+Fontes tipográficas Instrument Sans, Source Sans 3 e IBM Plex Mono servidas localmente sob a SIL Open Font License.
 Material acadêmico, sem fins comerciais.
