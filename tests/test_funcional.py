@@ -99,7 +99,7 @@ with sync_playwright() as p:
     # 404: links absolutos à base
     pg.goto(f"{BASE}/404.html", wait_until="load")
     hrefs = pg.eval_on_selector_all("a.btn, nav.nav a", "els => els.map(e => e.getAttribute('href'))")
-    check(all(h.startswith("/biblioteca-em-movimento/") for h in hrefs), f"404 com links absolutos {hrefs[:3]}")
+    check(all(h.startswith(__import__('urllib.parse').parse.urlparse(BASE).path + "/") for h in hrefs), f"404 com links absolutos {hrefs[:3]}")
 
     # Ctrl+R / Ctrl+P não são sequestrados
     pg.goto(f"{BASE}/defesa/", wait_until="load")

@@ -21,7 +21,7 @@ import pages
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT.parent / "public"
 # Endereço público do site (usado em sitemap, canonical e na página 404).
-SITE_URL = os.environ.get("SITE_URL", "https://eternalmystic.github.io/biblioteca-em-movimento/")
+SITE_URL = os.environ.get("SITE_URL", "https://carlosnobuyasu.vercel.app/")
 SITE_BASE = urlparse(SITE_URL).path or "/"
 CONTENT = ROOT / "content"
 DATA = ROOT / "data"

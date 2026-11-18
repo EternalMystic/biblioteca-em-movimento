@@ -2,7 +2,7 @@
 
 Site de estudo do Projeto Integrador **Biblioteca do Tiro de Guerra de Americana** (UNISAL, Engenharia da Computação, 2026), integrando Estruturas de Dados, Grafos e Teoria da Computação.
 
-Site no ar: https://eternalmystic.github.io/biblioteca-em-movimento/
+Site no ar: https://carlosnobuyasu.vercel.app/ (cópia em https://eternalmystic.github.io/biblioteca-em-movimento/)
 
 ## Conteúdo
 
